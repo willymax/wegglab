@@ -1,205 +1,214 @@
 <template>
-  <div :class="layoutClass" class="auth-layout">
-    <base-nav
-      v-model="showMenu"
-      type="light"
-      :transparent="true"
-      menu-classes="justify-content-end"
-      class="navbar-horizontal navbar-main"
-      expand="lg"
-    >
-      <div slot="brand" class="navbar-wrapper">
-        <nuxt-link class="navbar-brand" to="/dashboard">
-          <img src="/img/brand/white.png" alt="Logo white" />
-        </nuxt-link>
-      </div>
+  <body class="antialiased h-screen">
+    <header class="text-gray-600 body-font">
+      <nav class="bg-white shadow dark:bg-gray-800">
+        <div class="container px-6 py-4 mx-auto">
+          <div class="md:flex md:items-center md:justify-between">
+            <div class="flex items-center justify-between">
+              <div class="text-xl font-semibold text-gray-700">
+                <a
+                  class="
+                    text-2xl
+                    font-bold
+                    text-gray-800
+                    dark:text-white
+                    lg:text-3xl
+                    hover:text-gray-700
+                    dark:hover:text-gray-300
+                  "
+                  href="#"
+                  >Brand</a
+                >
+              </div>
 
-      <template>
-        <div class="navbar-collapse-header">
-          <div class="row">
-            <div class="col-6 collapse-brand">
-              <nuxt-link to="/">
-                <img src="/img/brand/green.png" alt="Logo green" />
-              </nuxt-link>
+              <!-- Mobile menu button -->
+              <div class="flex md:hidden">
+                <button
+                  type="button"
+                  class="
+                    text-gray-500
+                    dark:text-gray-200
+                    hover:text-gray-600
+                    dark:hover:text-gray-400
+                    focus:outline-none focus:text-gray-600
+                    dark:focus:text-gray-400
+                  "
+                  aria-label="toggle menu"
+                >
+                  <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
+                    <path
+                      fill-rule="evenodd"
+                      d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
             </div>
-            <div class="col-6 collapse-close">
-              <button
-                type="button"
-                class="navbar-toggler"
-                @click="showMenu = false"
+
+            <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+            <div class="flex-1 md:flex md:items-center md:justify-between">
+              <div
+                class="flex flex-col -mx-4 md:flex-row md:items-center md:mx-8"
               >
-                <span></span>
-                <span></span>
-              </button>
+                <a
+                  href="#"
+                  class="
+                    px-2
+                    py-1
+                    mx-2
+                    mt-2
+                    text-sm
+                    font-medium
+                    text-gray-700
+                    transition-colors
+                    duration-200
+                    transform
+                    rounded-md
+                    md:mt-0
+                    dark:text-gray-200
+                    hover:bg-gray-300
+                    dark:hover:bg-gray-700
+                  "
+                  >Join Slack</a
+                >
+                <a
+                  href="#"
+                  class="
+                    px-2
+                    py-1
+                    mx-2
+                    mt-2
+                    text-sm
+                    font-medium
+                    text-gray-700
+                    transition-colors
+                    duration-200
+                    transform
+                    rounded-md
+                    md:mt-0
+                    dark:text-gray-200
+                    hover:bg-gray-300
+                    dark:hover:bg-gray-700
+                  "
+                  >Browse Topics</a
+                >
+                <a
+                  href="#"
+                  class="
+                    px-2
+                    py-1
+                    mx-2
+                    mt-2
+                    text-sm
+                    font-medium
+                    text-gray-700
+                    transition-colors
+                    duration-200
+                    transform
+                    rounded-md
+                    md:mt-0
+                    dark:text-gray-200
+                    hover:bg-gray-300
+                    dark:hover:bg-gray-700
+                  "
+                  >Random Item</a
+                >
+                <a
+                  href="#"
+                  class="
+                    px-2
+                    py-1
+                    mx-2
+                    mt-2
+                    text-sm
+                    font-medium
+                    text-gray-700
+                    transition-colors
+                    duration-200
+                    transform
+                    rounded-md
+                    md:mt-0
+                    dark:text-gray-200
+                    hover:bg-gray-300
+                    dark:hover:bg-gray-700
+                  "
+                  >Experts</a
+                >
+              </div>
+
+              <div class="flex items-center mt-4 md:mt-0">
+                <button
+                  class="
+                    hidden
+                    mx-4
+                    text-gray-600
+                    md:block
+                    dark:text-gray-200
+                    hover:text-gray-700
+                    dark:hover:text-gray-400
+                    focus:text-gray-700
+                    dark:focus:text-gray-400
+                    focus:outline-none
+                  "
+                  aria-label="show notifications"
+                >
+                  <svg
+                    class="w-6 h-6"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+
+                <button
+                  type="button"
+                  class="flex items-center focus:outline-none"
+                  aria-label="toggle profile dropdown"
+                >
+                  <div
+                    class="
+                      w-8
+                      h-8
+                      overflow-hidden
+                      border-2 border-gray-400
+                      rounded-full
+                    "
+                  >
+                    <img
+                      src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                      class="object-cover w-full h-full"
+                      alt="avatar"
+                    />
+                  </div>
+
+                  <h3
+                    class="
+                      mx-2
+                      text-sm
+                      font-medium
+                      text-gray-700
+                      dark:text-gray-200
+                      md:hidden
+                    "
+                  >
+                    Khatab wedaa
+                  </h3>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <nuxt-link to="/dashboard" class="nav-link">
-              <span class="nav-link-inner--text">Dashboard</span>
-            </nuxt-link>
-          </li>
-          <li class="nav-item">
-            <nuxt-link to="/login" class="nav-link">
-              <span class="nav-link-inner--text">Login</span>
-            </nuxt-link>
-          </li>
-          <li class="nav-item">
-            <nuxt-link to="/register" class="nav-link">
-              <span class="nav-link-inner--text">Register</span>
-            </nuxt-link>
-          </li>
-        </ul>
-        <hr class="d-lg-none" />
-        <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-          <li class="nav-item">
-            <a
-              class="nav-link nav-link-icon"
-              href="https://www.facebook.com/creativetim"
-              target="_blank"
-              rel="noopener"
-              aria-label="Facebook"
-            >
-              <i class="fab fa-facebook-square"></i>
-              <span class="nav-link-inner--text d-lg-none">Facebook</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link nav-link-icon"
-              href="https://www.instagram.com/creativetimofficial"
-              target="_blank"
-              rel="noopener"
-              aria-label="Instagram"
-            >
-              <i class="fab fa-instagram"></i>
-              <span class="nav-link-inner--text d-lg-none">Instagram</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link nav-link-icon"
-              href="https://twitter.com/creativetim"
-              target="_blank"
-              rel="noopener"
-              aria-label="Twitter"
-            >
-              <i class="fab fa-twitter-square"></i>
-              <span class="nav-link-inner--text d-lg-none">Twitter</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link nav-link-icon"
-              href="https://github.com/creativetimofficial"
-              target="_blank"
-              rel="noopener"
-              aria-label="Github"
-            >
-              <i class="fab fa-github"></i>
-              <span class="nav-link-inner--text d-lg-none">Github</span>
-            </a>
-          </li>
-          <li class="nav-item d-none d-lg-block ml-lg-4">
-            <a
-              href="https://www.creative-tim.com/product/nuxt-argon-dashboard-laravel"
-              target="_blank"
-              class="btn btn-neutral btn-icon"
-              rel="noopener"
-              aria-label="Purchase now"
-            >
-              <span class="btn-inner--icon">
-                <i class="fas fa-shopping-cart mr-2"></i>
-              </span>
-              <span class="nav-link-inner--text">DOWNLOAD NOW</span>
-            </a>
-          </li>
-        </ul>
-      </template>
-    </base-nav>
-
-    <div class="main-content">
-      <nuxt></nuxt>
-    </div>
-
-    <footer id="footer-main" class="py-5">
-      <div class="container">
-        <div class="row align-items-center justify-content-xl-between">
-          <div class="col-xl-6">
-            <ul class="nav nav-footer">
-              <li class="nav-item">
-                <a
-                  href="https://www.creative-tim.com"
-                  class="nav-link"
-                  target="_blank"
-                  rel="noopener"
-                  >CREATIVE TIM</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  href="https://www.updivision.com"
-                  class="nav-link"
-                  target="_blank"
-                  rel="noopener"
-                  >UPDIVISION</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  href="https://www.creative-tim.com/presentation"
-                  class="nav-link"
-                  target="_blank"
-                  rel="noopener"
-                  >ABOUT US</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  href="http://blog.creative-tim.com"
-                  class="nav-link"
-                  target="_blank"
-                  rel="noopener"
-                  >BLOG</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  href="https://www.creative-tim.com/license"
-                  class="nav-link"
-                  target="_blank"
-                  rel="noopener"
-                  >LICENSES</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="col-xl-6 pr-1">
-            <div class="copyright text-center text-lg-right text-muted">
-              © {{ year }}, made with <i class="fa fa-heart heart"></i> by<a
-                href="https://www.creative-tim.com"
-                class="font-weight-bold ml-1"
-                target="_blank"
-                rel="noopener"
-                >Creative Tim</a
-              >
-              and
-              <a
-                href="https://www.updivision.com"
-                class="font-weight-bold ml-1"
-                target="_blank"
-                rel="noopener"
-                >UPDIVISION</a
-              >
-              for a better web.
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </div>
+      </nav>
+    </header>
+  </body>
 </template>
 <script>
 import BaseNav from '~/components/argon-core/Navbar/BaseNav.vue'
