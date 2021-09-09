@@ -14,6 +14,7 @@ export default {
   router: {
     base: '/',
     linkExactActiveClass: 'active',
+    middleware: ['auth'],
   },
   meta: {
     ogType: false,
@@ -136,9 +137,6 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
-  router: {
-    middleware: ['auth'],
-  },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -271,5 +269,12 @@ export default {
         ],
       ],
     },
+  },
+  // Defaults options
+  tailwindcss: {
+    cssPath: '~/assets/css/tailwind.css',
+    configPath: 'tailwind.config.js',
+    exposeConfig: false,
+    config: {},
   },
 }
