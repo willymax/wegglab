@@ -113,24 +113,17 @@
               for="LoggingEmailAddress"
               >Email Address</label
             >
-            <input
+            <base-input
               id="LoggingEmailAddress"
-              class="
-                block
-                w-full
-                px-4
-                py-2
-                text-gray-700
-                bg-white
-                border border-gray-300
-                rounded-md
-                dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600
-                focus:border-blue-500
-                dark:focus:border-blue-500
-                focus:outline-none focus:ring
-              "
+              v-model="form.data.attributes.email"
+              alternative
+              name="Email"
+              prepend-icon="ni ni-lock-circle-open"
+              placeholder="Email"
               type="email"
-            />
+            >
+              <template #slotData> </template>
+            </base-input>
             <validation-error :errors="apiValidationErrors.email" />
           </div>
 
@@ -154,16 +147,6 @@
                 >Forget Password?</a
               >
             </div>
-            <base-input
-              v-model="form.data.attributes.password"
-              alternative
-              class="mb-3"
-              name="Password"
-              prepend-icon="ni ni-lock-circle-open"
-              type="password"
-              placeholder="Password"
-            >
-            </base-input>
             <base-input
               id="loggingPassword"
               v-model="form.data.attributes.password"
@@ -239,8 +222,8 @@ export default {
         data: {
           type: 'token',
           attributes: {
-            email: 'admin@jsonapi.com',
-            password: 'secret',
+            email: 'admin@example.com',
+            password: 'makau1993',
           },
         },
       },
@@ -249,21 +232,23 @@ export default {
   methods: {
     async handleSubmit() {
       try {
-        await this.$auth.loginWith('local', {
-          data: this.form,
+        const response = await this.$auth.loginWith('local', {
+          data: this.form.data.attributes,
         })
+        console.log('login was successful')
+        console.log(response)
         this.$axios.defaults.headers.common.Authorization = `${this.$auth.getToken(
           'local'
         )}`
+        console.log(`Hello the token local ${this.$auth.getToken('local')}`)
         this.$router.push('/dashboard')
       } catch (error) {
         await this.$notify({
           type: 'danger',
           message: 'Invalid credentials!',
         })
-        console.log('Hello how are you?')
-        console.log(error.response)
-        this.setApiValidation(error.response.data.errors)
+        console.log(`Login falled ${JSON.stringify(error)}`)
+        // this.setApiValidation(error.response.data.errors)
       }
     },
   },

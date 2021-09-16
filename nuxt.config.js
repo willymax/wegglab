@@ -183,10 +183,17 @@ export default {
           },
           logout: { url: '/logout', method: 'post' },
           user: {
-            url: '/me',
+            url: 'auth/user',
             method: 'get',
             propertyName: false,
           },
+        },
+        user: {
+          property: 'user',
+          autoFetch: false,
+        },
+        token: {
+          property: 'data.token',
         },
       },
       redirect: {
@@ -204,20 +211,21 @@ export default {
     baseURL: process.env.API_BASE_URL,
     headers: {
       common: {
-        Accept: 'application/vnd.api+json',
-        'content-type': 'application/vnd.api+json',
+        Accept: 'application/json',
+        'content-type': 'application/json',
         // 'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]'),
       },
       post: {
-        'content-type': 'application/vnd.api+json',
+        'content-type': 'application/json',
       },
       patch: {
-        'content-type': 'application/vnd.api+json',
+        'content-type': 'application/json',
       },
       delete: {
-        'content-type': 'application/vnd.api+json',
+        'content-type': 'application/json',
       },
     },
+    debug: true,
   },
   /*
    ** Notification toast module configuration
