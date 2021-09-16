@@ -67,55 +67,55 @@
                 @keydown.enter="handleRegister"
               >
                 <base-input
+                  v-model="form.data.attributes.name"
                   alternative
                   class="mb-3"
                   prepend-icon="ni ni-hat-3"
                   placeholder="Name"
                   name="Name"
-                  v-model="form.data.attributes.name"
                 >
                 </base-input>
                 <validation-error :errors="apiValidationErrors.name" />
 
                 <base-input
+                  v-model="form.data.attributes.email"
                   alternative
                   class="mb-3"
                   prepend-icon="ni ni-email-83"
                   placeholder="Email"
                   name="Email"
-                  v-model="form.data.attributes.email"
                 >
                 </base-input>
                 <validation-error :errors="apiValidationErrors.email" />
 
                 <base-input
+                  v-model="form.data.attributes.password"
                   alternative
                   class="mb-3"
                   prepend-icon="ni ni-lock-circle-open"
                   placeholder="Password"
                   type="password"
                   name="Password"
-                  v-model="form.data.attributes.password"
                 >
                 </base-input>
                 <password
-                  class="mb-3"
                   v-model="form.data.attributes.password"
+                  class="mb-3"
                   :strength-meter-only="true"
+                  :show-strength-meter="false"
                   @score="showScore"
-                  :showStrengthMeter="false"
                 />
 
                 <validation-error :errors="apiValidationErrors.password" />
 
                 <base-input
+                  v-model="form.data.attributes.password_confirmation"
                   alternative
                   class="mb-3"
                   prepend-icon="ni ni-lock-circle-open"
                   placeholder="Confirm Password"
                   type="password"
                   name="Password confirmation"
-                  v-model="form.data.attributes.password_confirmation"
                 >
                 </base-input>
 
@@ -174,8 +174,8 @@
                 <div class="text-center">
                   <base-button
                     type="primary"
-                    @click.prevent="handleRegister"
                     class="my-4"
+                    @click.prevent="handleRegister"
                     >Create account</base-button
                   >
                 </div>
@@ -188,16 +188,16 @@
   </div>
 </template>
 <script>
+import Password from 'vue-password-strength-meter'
 import ValidationError from "~/components/ValidationError.vue";
 import formMixin from "@/mixins/form-mixin";
-import Password from 'vue-password-strength-meter'
 import BaseCheckbox from '~/components/argon-core/Inputs/BaseCheckbox.vue'
 
   export default {
-    layout: 'AuthLayout',
-    name: 'register',
-    mixins: [formMixin],
+    name: 'Register',
     components: { ValidationError, Password, BaseCheckbox  },
+    mixins: [formMixin],
+    layout: 'AuthLayout',
     auth: "guest",
 
   data() {
@@ -233,7 +233,7 @@ import BaseCheckbox from '~/components/argon-core/Inputs/BaseCheckbox.vue'
       try {
         await this.$store.dispatch("register/create", this.form.data);
 
-        //log in the user after successful register
+        // log in the user after successful register
         await this.$auth.loginWith("local", {
           data: this.form,
         });

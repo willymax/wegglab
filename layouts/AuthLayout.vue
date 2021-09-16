@@ -22,7 +22,7 @@
               </div>
 
               <!-- Mobile menu button -->
-              <div class="flex md:hidden">
+              <div class="flex md:hidden" @click="toggleMenu">
                 <button
                   type="button"
                   class="
@@ -46,7 +46,14 @@
             </div>
 
             <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-            <div class="flex-1 md:flex md:items-center md:justify-between">
+            <div
+              class="
+                mobile-menu
+                flex-1
+                sm:hidden
+                md:flex md:items-center md:justify-between
+              "
+            >
               <div
                 class="flex flex-col -mx-4 md:flex-row md:items-center md:mx-8"
               >
@@ -208,14 +215,17 @@
         </div>
       </nav>
     </header>
+    <div class="main-content">
+      <nuxt></nuxt>
+    </div>
   </body>
 </template>
 <script>
-import BaseNav from '~/components/argon-core/Navbar/BaseNav.vue'
+// import BaseNav from '~/components/argon-core/Navbar/BaseNav.vue'
 
 export default {
   components: {
-    BaseNav,
+    // BaseNav,
   },
   props: {
     backgroundColor: {
@@ -225,7 +235,7 @@ export default {
   },
   data() {
     return {
-      showMenu: false,
+      showMenu: true,
       menuTransitionDuration: 250,
       year: new Date().getFullYear(),
       pageClass: 'login-page',
@@ -251,10 +261,14 @@ export default {
       }
     },
   },
+  mounted() {},
   methods: {
     closeMenu() {
       document.body.classList.remove('nav-open')
       this.showMenu = false
+    },
+    toggleMenu() {
+      this.$el.querySelector('.mobile-menu').classList.toggle('hidden')
     },
   },
 }

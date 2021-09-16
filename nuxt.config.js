@@ -177,7 +177,7 @@ export default {
         _scheme: '~/util/authCustomStrategy.js',
         endpoints: {
           login: {
-            url: 'login',
+            url: 'auth/login',
             method: 'post',
             propertyName: 'access_token',
           },
@@ -206,6 +206,7 @@ export default {
       common: {
         Accept: 'application/vnd.api+json',
         'content-type': 'application/vnd.api+json',
+        // 'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]'),
       },
       post: {
         'content-type': 'application/vnd.api+json',
