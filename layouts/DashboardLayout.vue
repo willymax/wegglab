@@ -1,662 +1,85 @@
 <template>
-  <body class="antialiased h-screen">
+  <div>
     <notifications></notifications>
-    <div class="flex">
-      <!-- Menu -->
-      <div class="w-1/4 border-r bg-white hidden md:block">
-        <div class="py-2 pl-28 space-y-3 sticky top-0">
-          <div class="block px-2 text-blue-400 text-3xl">
-            <span><i class="fa fa-twitter"></i></span>
-          </div>
-          <div class="block py-2 px-2 text-blue-400 text-2xl">
-            <i class="fa fa-home mr-2"></i
-            ><span class="font-extrabold"> Home</span>
-          </div>
-          <div
-            class="
-              block
-              group
-              py-2
-              px-2
-              text-gray-700
-              hover:bg-blue-100
-              rounded-3xl
-              hover:text-blue-400
-              text-2xl
-            "
+    <base-nav></base-nav>
+    <div class="main-content">
+      <div class="rounded-lg shadow bg-base-200 drawer drawer-mobile h-52">
+        <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+        <div class="flex flex-col items-center justify-center drawer-content">
+          <label
+            for="my-drawer-2"
+            class="mb-4 btn btn-primary drawer-button lg:hidden"
+            >open menu</label
           >
-            <i class="fa fa-hashtag mr-2"></i>
-            <span class="font-semibold group-hover:text-blue-400 text-black">
-              Explore</span
-            >
-          </div>
-          <div
-            class="
-              block
-              group
-              py-2
-              px-2
-              text-gray-700
-              hover:bg-blue-100
-              rounded-3xl
-              hover:text-blue-400
-              text-2xl
-            "
-          >
-            <i class="fa fa-bell-o mr-4"></i
-            ><span class="font-semibold group-hover:text-blue-400 text-black"
-              >Notifications</span
-            >
-          </div>
-          <div
-            class="
-              block
-              group
-              py-2
-              px-2
-              text-gray-700
-              hover:bg-blue-100
-              rounded-3xl
-              hover:text-blue-400
-              text-2xl
-            "
-          >
-            <i class="fa fa-envelope-o mr-4"></i>
-            <span class="font-semibold group-hover:text-blue-400 text-black">
-              Messages</span
-            >
-          </div>
-          <div
-            class="
-              block
-              group
-              py-2
-              px-2
-              text-gray-700
-              hover:bg-blue-100
-              rounded-3xl
-              hover:text-blue-400
-              text-2xl
-            "
-          >
-            <i class="fa fa-bookmark-o mr-4"></i>
-            <span class="font-semibold group-hover:text-blue-400 text-black">
-              Bookmark</span
-            >
-          </div>
-          <div
-            class="
-              block
-              group
-              py-2
-              px-2
-              text-gray-700
-              hover:bg-blue-100
-              rounded-3xl
-              hover:text-blue-400
-              text-2xl
-            "
-          >
-            <i class="fa fa-list-ol mr-4"></i>
-            <span class="font-semibold group-hover:text-blue-400 text-black">
-              Lists</span
-            >
-          </div>
-          <div
-            class="
-              block
-              group
-              py-2
-              px-2
-              text-gray-700
-              hover:bg-blue-100
-              rounded-3xl
-              hover:text-blue-400
-              text-2xl
-            "
-          >
-            <i class="fa fa-user-circle mr-4"></i>
-            <span class="font-semibold group-hover:text-blue-400 text-black">
-              Profile</span
-            >
-          </div>
-          <div
-            class="
-              block
-              group
-              py-2
-              px-2
-              text-gray-700
-              hover:bg-blue-100
-              rounded-3xl
-              hover:text-blue-400
-              text-2xl
-            "
-          >
-            <i class="fa fa-dot-circle-o mr-4"></i>
-            <span class="font-semibold group-hover:text-blue-400 text-black"
-              >More</span
-            >
-          </div>
-          <div
-            class="
-              block
-              py-3
-              px-2
-              bg-blue-400
-              shadow
-              text-white text-center
-              mr-6
-              font-bold
-              rounded-3xl
-            "
-          >
-            <a href="" class="inline-block">Tweet</a>
-          </div>
-          <div
-            class="
-              block
-              items-center
-              justify-between
-              flex
-              group
-              py-2
-              px-2
-              mr-6
-              text-gray-700
-              hover:bg-blue-100
-              rounded-full
-              hover:text-blue-400
-            "
-          >
-            <div class="flex space-x-1">
-              <img
-                class="rounded-full"
-                src="https://pbs.twimg.com/profile_images/1005827060617695233/XiH6yzF5_normal.jpg"
-                alt=""
-                srcset=""
-              />
-              <div>
-                <p class="font-semibold text-gray-800">MaseruMetro</p>
-                <span class="text-gray-600">@MaseruMetro</span>
-              </div>
-            </div>
-
-            <div class="text-lg">
-              <i class="fa fa-ellipsis-h"></i>
-            </div>
-          </div>
+          <nuxt></nuxt>
         </div>
-      </div>
-      <!-- News Content -->
-      <div class="md:w-2/5 border-r bg-gray-50">
-        <nav
-          class="
-            flex
-            py-4
-            px-4
-            sticky
-            top-0
-            border-b
-            bg-white
-            items-center
-            justify-between
-          "
-        >
-          <h1 class="font-extrabold tracking-wide text-lg">Home</h1>
-          <div class="text-blue-400">
-            <i class="fa fa-dot-circle-o"></i>
-          </div>
-        </nav>
-        <div class="overflow-hidden">
-          <div class="py-4 px-4 bg-white">
-            <div class="flex">
-              <div>
-                <img
-                  class="rounded-full border"
-                  src="https://pbs.twimg.com/profile_images/1005827060617695233/XiH6yzF5_normal.jpg"
-                  alt=""
-                  srcset=""
+        <div class="drawer-side">
+          <label for="my-drawer-2" class="drawer-overlay"></label>
+          <side-bar
+            class="p-4 overflow-y-auto w-80 bg-base-100 text-base-content w-80"
+          >
+            <template slot="links" slot-scope="props">
+              <sidebar-item
+                :link="{
+                  name: 'Dashboard',
+                  icon: 'ni ni-shop text-primary',
+                  path: '/dashboard',
+                }"
+              >
+              </sidebar-item>
+
+              <sidebar-item
+                opened
+                :link="{
+                  name: 'Examples (API)',
+                  icon: 'fab fa-vuejs',
+                }"
+              >
+                <sidebar-item
+                  opened
+                  :link="{
+                    name: 'User Profile',
+                    path: '/examples/user-profile',
+                  }"
                 />
-              </div>
-              <div class="flex-1 border-b">
-                <input
-                  type="text"
-                  class="block w-full p-3"
-                  name="fullname"
-                  placeholder="What's Happening ?"
-                />
-                <div
-                  class="
-                    block
-                    py-2
-                    px-2
-                    hover:bg-blue-100
-                    text-blue-500
-                    mb-10
-                    w-48
-                    rounded-3xl
-                  "
-                >
-                  <i class="fa fa-globe text-lg"></i>
-                  <span class="font-bold text-sm">Everyone can reply</span>
-                </div>
-              </div>
-            </div>
-            <div class="flex pl-14 py-3 items-center justify-between">
-              <div class="flex text-lg items-center space-x-4 text-blue-500">
-                <span><i class="fa fa-hand-grab-o"></i></span>
-                <span><i class="fa fa-hand-lizard-o"></i></span>
-                <span><i class="fa fa-hand-paper-o"></i></span>
-                <span><i class="fa fa-hand-spock-o"></i></span>
-                <span><i class="fa fa-headphones"></i></span>
-              </div>
-              <div>
-                <a
-                  href=""
-                  class="
-                    inline-block
-                    bg-blue-300
-                    px-6
-                    py-1
-                    rounded-2xl
-                    text-white
-                    font-bold
-                  "
-                  >Tweet</a
-                >
-              </div>
-            </div>
-          </div>
-          <div class="mt-4">
-            <div class="py-2 px-5 bg-white">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-1">
-                  <img
-                    class="rounded-full h-14 w-14 border"
-                    src="https://pbs.twimg.com/profile_images/1005827060617695233/XiH6yzF5_normal.jpg"
-                    alt=""
-                    srcset=""
-                  />
-                  <div class="flex items-center space-x-1">
-                    <div>
-                      <h1 class="font-bold">Economist Times</h1>
-                    </div>
-
-                    <p class="text-gray-600">@EconomistTimes</p>
-                    <span style="font-size: 6px"
-                      ><i class="fa fa-circle text-gray-600"></i
-                    ></span>
-                    <span class="text-gray-600">32s</span>
-                  </div>
-                </div>
-                <div>
-                  <span class="text-lg text-gray-600"
-                    ><i class="fa fa-ellipsis-h"></i
-                  ></span>
-                </div>
-              </div>
-              <div class="mt-10">
-                <div class="border rounded-2xl">
-                  <img
-                    class="w-full rounded-t-2xl"
-                    src="https://pbs.twimg.com/card_img/1382577985220349954/KsDkLkN8?format=jpg&name=small"
-                    alt=""
-                    srcset=""
-                  />
-                  <div class="p-4">
-                    <h1 class="font-medium">
-                      Steinhoff seeks lenders’ nod to list EU discount retailer
-                    </h1>
-                    <p class="text-sm font-medium text-gray-600">
-                      Mail, Business Times, RDM and more, plus live business,
-                      politics and markets news all day
-                    </p>
-                    <i class="text-gray-500 text-xs font-semibold"
-                      >economist.com</i
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="flex mt-2 space-x-10 text-gray-500 justify-evenly">
-                <span><i class="fa fa-comment-o"></i></span>
-                <span><i class="fa fa-recycle"></i>1</span>
-                <span><i class="fa fa-hand-paper-o"></i></span>
-                <span><i class="fa fa-hand-spock-o"></i></span>
-              </div>
-            </div>
-          </div>
-          <div class="mt-4">
-            <div class="py-2 px-5 bg-white">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-1">
-                  <img
-                    class="rounded-full h-14 w-14 border"
-                    src="https://pbs.twimg.com/profile_images/1005827060617695233/XiH6yzF5_normal.jpg"
-                    alt=""
-                    srcset=""
-                  />
-                  <div class="flex items-center space-x-1">
-                    <div>
-                      <h1 class="font-bold">Economist Times</h1>
-                    </div>
-
-                    <p class="text-gray-600">@EconomistTimes</p>
-                    <span style="font-size: 6px"
-                      ><i class="fa fa-circle text-gray-600"></i
-                    ></span>
-                    <span class="text-gray-600">32s</span>
-                  </div>
-                </div>
-                <div>
-                  <span class="text-lg text-gray-600"
-                    ><i class="fa fa-ellipsis-h"></i
-                  ></span>
-                </div>
-              </div>
-              <div class="mt-10">
-                <div class="border rounded-2xl">
-                  <img
-                    class="w-full rounded-t-2xl"
-                    src="https://pbs.twimg.com/card_img/1382577985220349954/KsDkLkN8?format=jpg&name=small"
-                    alt=""
-                    srcset=""
-                  />
-                  <div class="p-4">
-                    <h1 class="font-medium">
-                      Steinhoff seeks lenders’ nod to list EU discount retailer
-                    </h1>
-                    <p class="text-sm font-medium text-gray-600">
-                      Mail, Business Times, RDM and more, plus live business,
-                      politics and markets news all day
-                    </p>
-                    <i class="text-gray-500 text-xs font-semibold"
-                      >economist.com</i
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="flex mt-2 space-x-10 text-gray-500 justify-evenly">
-                <span><i class="fa fa-comment-o"></i></span>
-                <span><i class="fa fa-recycle"></i>1</span>
-                <span><i class="fa fa-hand-paper-o"></i></span>
-                <span><i class="fa fa-hand-spock-o"></i></span>
-              </div>
-            </div>
-          </div>
-          <div class="mt-4">
-            <div class="py-2 px-5 bg-white">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-1">
-                  <img
-                    class="rounded-full h-14 w-14 border"
-                    src="https://pbs.twimg.com/profile_images/1005827060617695233/XiH6yzF5_normal.jpg"
-                    alt=""
-                    srcset=""
-                  />
-                  <div class="flex items-center space-x-1">
-                    <div>
-                      <h1 class="font-bold">Economist Times</h1>
-                    </div>
-
-                    <p class="text-gray-600">@EconomistTimes</p>
-                    <span style="font-size: 6px"
-                      ><i class="fa fa-circle text-gray-600"></i
-                    ></span>
-                    <span class="text-gray-600">32s</span>
-                  </div>
-                </div>
-                <div>
-                  <span class="text-lg text-gray-600"
-                    ><i class="fa fa-ellipsis-h"></i
-                  ></span>
-                </div>
-              </div>
-              <div class="mt-10">
-                <div class="border rounded-2xl">
-                  <img
-                    class="w-full rounded-t-2xl"
-                    src="https://pbs.twimg.com/card_img/1382577985220349954/KsDkLkN8?format=jpg&name=small"
-                    alt=""
-                    srcset=""
-                  />
-                  <div class="p-4">
-                    <h1 class="font-medium">
-                      Steinhoff seeks lenders’ nod to list EU discount retailer
-                    </h1>
-                    <p class="text-sm font-medium text-gray-600">
-                      Mail, Business Times, RDM and more, plus live business,
-                      politics and markets news all day
-                    </p>
-                    <i class="text-gray-500 text-xs font-semibold"
-                      >economist.com</i
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="flex mt-2 space-x-10 text-gray-500 justify-evenly">
-                <span><i class="fa fa-comment-o"></i></span>
-                <span><i class="fa fa-recycle"></i>1</span>
-                <span><i class="fa fa-hand-paper-o"></i></span>
-                <span><i class="fa fa-hand-spock-o"></i></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Follow and trends -->
-      <div class="flex-1 py-4 pl-10 pr-28 space-y-4 bg-white hidden md:block">
-        <div class="sticky top-0 bg-white pb-2">
-          <input
-            type="text"
-            class="
-              block
-              text-black
-              border border-grey-light
-              bg-gray-200
-              w-full
-              py-2
-              pl-3
-              rounded-3xl
-            "
-            name="fullname"
-            placeholder="Search Twiiter"
-          />
-        </div>
-        <div class="">
-          <div class="block bg-gray-50 py-2 px-2 rounded-2xl shadow-sm">
-            <p class="font-extrabold text-lg">Trends for you</p>
-          </div>
-        </div>
-        <div
-          class="block bg-gray-50 py-2 sticky top-16 px-2 rounded-2xl shadow-sm"
-        >
-          <div class="border-b py-2">
-            <h1 class="font-extrabold text-lg">Who to follow</h1>
-          </div>
-          <div
-            class="
-              block
-              border-b
-              items-center
-              justify-between
-              flex
-              group
-              py-4
-              px-2
-              mr-6
-              text-gray-700
-              hover:text-blue-400
-            "
-          >
-            <div class="flex space-x-4">
-              <img
-                class="rounded-full"
-                src="https://pbs.twimg.com/profile_images/1005827060617695233/XiH6yzF5_normal.jpg"
-                alt=""
-                srcset=""
+                <!-- <sidebar-item
+                opened
+                :link="{
+                  name: 'User Management',
+                  path: '/examples/user-management',
+                }"
+              /> -->
+              </sidebar-item>
+              <sidebar-item
+                :link="{
+                  name: 'Icons',
+                  path: '/components/icons',
+                  icon: 'ni ni-planet',
+                }"
               />
-              <div>
-                <p class="font-semibold text-gray-800">MaseruMetro</p>
-                <span class="text-gray-600">@MaseruMetro</span>
-              </div>
-            </div>
-
-            <div>
-              <a
-                href=""
-                class="
-                  inline-block
-                  border border-blue-400
-                  text-blue-400
-                  py-1
-                  px-4
-                  rounded-full
-                  font-bold
-                "
-                >Follow</a
+              <sidebar-item
+                :link="{
+                  name: 'Tables',
+                  icon: 'ni ni-align-left-2 text-default',
+                  path: '/tables/regular',
+                }"
               >
-            </div>
-          </div>
-          <div
-            class="
-              block
-              border-b
-              items-center
-              justify-between
-              flex
-              group
-              py-4
-              px-2
-              mr-6
-              text-gray-700
-              hover:text-blue-400
-            "
-          >
-            <div class="flex space-x-4">
-              <img
-                class="rounded-full"
-                src="https://pbs.twimg.com/profile_images/1005827060617695233/XiH6yzF5_normal.jpg"
-                alt=""
-                srcset=""
-              />
-              <div>
-                <p class="font-semibold text-gray-800">MaseruMetro</p>
-                <span class="text-gray-600">@MaseruMetro</span>
-              </div>
-            </div>
+              </sidebar-item>
 
-            <div>
-              <a
-                href=""
-                class="
-                  inline-block
-                  border border-blue-400
-                  text-blue-400
-                  py-1
-                  px-4
-                  rounded-full
-                  font-bold
-                "
-                >Follow</a
+              <sidebar-item
+                :link="{
+                  name: 'Google',
+                  icon: 'ni ni-pin-3',
+                  path: '/maps/google',
+                }"
               >
-            </div>
-          </div>
-          <div
-            class="
-              block
-              border-b
-              items-center
-              justify-between
-              flex
-              group
-              py-4
-              px-2
-              mr-6
-              text-gray-700
-              hover:text-blue-400
-            "
-          >
-            <div class="flex space-x-4">
-              <img
-                class="rounded-full"
-                src="https://pbs.twimg.com/profile_images/1005827060617695233/XiH6yzF5_normal.jpg"
-                alt=""
-                srcset=""
-              />
-              <div>
-                <p class="font-semibold text-gray-800">MaseruMetro</p>
-                <span class="text-gray-600">@MaseruMetro</span>
-              </div>
-            </div>
-
-            <div>
-              <a
-                href=""
-                class="
-                  inline-block
-                  border border-blue-400
-                  text-blue-400
-                  py-1
-                  px-4
-                  rounded-full
-                  font-bold
-                "
-                >Follow</a
-              >
-            </div>
-          </div>
-          <div
-            class="
-              block
-              border-b
-              items-center
-              justify-between
-              flex
-              group
-              py-4
-              px-2
-              mr-6
-              text-gray-700
-              hover:text-blue-400
-            "
-          >
-            <div class="flex space-x-4">
-              <img
-                class="rounded-full"
-                src="https://pbs.twimg.com/profile_images/1005827060617695233/XiH6yzF5_normal.jpg"
-                alt=""
-                srcset=""
-              />
-              <div>
-                <p class="font-semibold text-gray-800">MaseruMetro</p>
-                <span class="text-gray-600">@MaseruMetro</span>
-              </div>
-            </div>
-
-            <div>
-              <a
-                href=""
-                class="
-                  inline-block
-                  border border-blue-400
-                  text-blue-400
-                  py-1
-                  px-4
-                  rounded-full
-                  font-bold
-                "
-                >Follow</a
-              >
-            </div>
-          </div>
-          <div class="px-2">
-            <p class="text-sm font-bold text-blue-400 py-3">See more</p>
-          </div>
+              </sidebar-item>
+            </template>
+          </side-bar>
         </div>
       </div>
     </div>
-  </body>
+  </div>
 </template>
 <script>
 /* eslint-disable no-new */

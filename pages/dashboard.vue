@@ -1,9 +1,17 @@
 <template>
-  <p>Hello</p>
+  <div>Hello dashboard</div>
 </template>
 
 <script>
-export default {}
+export default {
+  layout: 'DashboardLayout',
+  middleware({ store, redirect }) {
+    // If the user is not authenticated
+    if (!store.$auth.loggedIn) {
+      return redirect('/login')
+    }
+  },
+}
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>
