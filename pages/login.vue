@@ -229,27 +229,37 @@ export default {
       },
     }
   },
+  mounted() {
+    console.log(
+      'Logged is',
+      `${this.$auth.loggedIn} ${this.$auth.strategy.token}`
+    )
+  },
   methods: {
-    async handleSubmit() {
-      try {
-        const response = await this.$auth.loginWith('local', {
+    handleSubmit() {
+      this.$auth
+        .loginWith('local', {
           data: this.form.data.attributes,
         })
-        console.log('login was successful')
-        console.log(response)
-        this.$axios.defaults.headers.common.Authorization = `${this.$auth.getToken(
-          'local'
-        )}`
-        console.log(`Hello the token local ${this.$auth.getToken('local')}`)
-        this.$router.push('/dashboard')
-      } catch (error) {
-        await this.$notify({
-          type: 'danger',
-          message: 'Invalid credentials!',
+        .then((response) => {
+          console.log(JSON.stringify(response))
+          console.log('User is', `${this.$auth.user}`)
         })
-        console.log(`Login falled ${JSON.stringify(error)}`)
-        // this.setApiValidation(error.response.data.errors)
-      }
+      // try {
+      //   const response = await
+      //   this.$axios.defaults.headers.common.Authorization = `${this.$auth.getToken(
+      //     'local'
+      //   )}`
+      //   console.log(`${this.$auth.getToken('local')}`)
+      //   console.log('User is', `${this.$auth.user}`)
+      //   this.$router.push('/dashboard')
+      // } catch (error) {
+      //   await this.$notify({
+      //     type: 'danger',
+      //     message: 'Invalid credentials!',
+      //   })
+      //   // this.setApiValidation(error.response.data.errors)
+      // }
     },
   },
 }

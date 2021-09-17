@@ -28,9 +28,11 @@ export default class CustomScheme extends LocalScheme {
     )
 
     if (user) {
-      Promise.resolve(this.formatUser(user)).then((formattedUser) => {
-        this.$auth.setUser(formattedUser)
-      })
+      this.$auth.setUser(user)
+      // Promise.resolve(this.formatUser(user)).then((formattedUser) => {
+      //   console.log('user set ' + formattedUser)
+      //   this.$auth.setUser(formattedUser)
+      // })
     }
   }
 }

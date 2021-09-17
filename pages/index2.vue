@@ -1,9 +1,7 @@
 <template>
-  <p>Hello</p>
+  <Tutorial />
 </template>
 
 <script>
 export default {}
 </script>
-
-<style></style>

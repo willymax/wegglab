@@ -179,7 +179,7 @@ export default {
           login: {
             url: 'auth/login',
             method: 'post',
-            propertyName: 'access_token',
+            propertyName: 'data.token',
           },
           logout: { url: '/logout', method: 'post' },
           user: {
@@ -187,13 +187,6 @@ export default {
             method: 'get',
             propertyName: false,
           },
-        },
-        user: {
-          property: 'user',
-          autoFetch: false,
-        },
-        token: {
-          property: 'data.token',
         },
       },
       redirect: {
