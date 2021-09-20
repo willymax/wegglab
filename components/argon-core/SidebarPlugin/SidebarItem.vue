@@ -8,7 +8,16 @@
   >
     <a
       v-if="isMenu"
-      class=""
+      class="
+        flex
+        items-center
+        px-4
+        py-2
+        text-gray-700
+        bg-gray-200
+        rounded-md
+        dark:bg-gray-700 dark:text-gray-200
+      "
       :class="{ active: isActive }"
       :aria-expanded="!collapsed"
       data-toggle="collapse"
@@ -45,7 +54,22 @@
       <component
         :is="elementType(link, false)"
         :to="link.path"
-        class=""
+        class="
+          flex
+          items-center
+          px-4
+          py-2
+          mt-5
+          text-gray-600
+          transition-colors
+          duration-200
+          transform
+          rounded-md
+          dark:text-gray-400
+          hover:bg-gray-200
+          dark:hover:bg-gray-700 dark:hover:text-gray-200
+          hover:text-gray-700
+        "
         :class="{ active: link.active }"
         :target="link.target"
         :href="link.path"
@@ -116,11 +140,6 @@ export default {
   },
   computed: {
     baseComponent() {
-      console.log(
-        `base component ${
-          this.isMenu || this.link.isRoute ? 'li' : 'router-link'
-        }`
-      )
       return this.isMenu || this.link.isRoute ? 'li' : 'router-link'
     },
     linkPrefix() {

@@ -6,17 +6,17 @@
     <div class="card-body">
       <form ref="profile_form" @submit.prevent="handleProfileUpdate">
         <base-input
+          v-model="mutableUser.name"
           label="Name"
           prepend-icon="fas fa-user"
           placeholder="Your name"
-          v-model="user.name"
         />
         <validation-error :errors="apiValidationErrors.name" />
         <base-input
+          v-model="mutableUser.email"
           label="Email"
           prepend-icon="fas fa-envelope"
           placeholder="Email"
-          v-model="user.email"
         />
         <validation-error :errors="apiValidationErrors.email" />
         <div class="my-4">
@@ -33,13 +33,13 @@
   </div>
 </template>
 <script>
-import BaseInput from "~/components/argon-core/Inputs/BaseInput.vue";
-import BaseButton from "~/components/argon-core/BaseButton.vue";
-import formMixin from "@/mixins/form-mixin";
-import ValidationError from "~/components/ValidationError.vue";
+import BaseInput from '~/components/argon-core/Inputs/BaseInput.vue'
+import BaseButton from '~/components/argon-core/BaseButton.vue'
+import formMixin from '@/mixins/form-mixin'
+import ValidationError from '~/components/ValidationError.vue'
 
 export default {
-  name: "UserEditCard",
+  name: 'UserEditCard',
 
   components: {
     BaseInput,
@@ -50,35 +50,45 @@ export default {
   mixins: [formMixin],
 
   props: {
-    user: Object,
+    user: {
+      type: Object,
+      default() {
+        return {}
+      },
+    },
+  },
+  data() {
+    return {
+      mutableUser: JSON.parse(this.user),
+    }
   },
 
   methods: {
     async handleProfileUpdate() {
-      if (["1"].includes(this.user.id)) {
+      if (['1'].includes(this.mutableUser.id)) {
         await this.$notify({
-          type: "danger",
-          message: "You are not allowed not change data of default users.",
-        });
-        return;
+          type: 'danger',
+          message: 'You are not allowed not change data of default users.',
+        })
+        return
       }
       try {
-        await this.$store.dispatch("profile/update", this.user);
-        this.unsetApiValidationErrors();
+        await this.$store.dispatch('profile/update', this.mutableUser)
+        this.unsetApiValidationErrors()
 
         this.$notify({
-          type: "success",
-          message: "Profile updated successfully.",
-        });
-        await this.$store.getters["profile/me"];
+          type: 'success',
+          message: 'Profile updated successfully.',
+        })
+        await this.$store.getters['profile/me']
       } catch (error) {
         this.$notify({
-          type: "danger",
-          message: "Oops, something went wrong!",
-        });
-        this.setApiValidation(error.response.data.errors);
+          type: 'danger',
+          message: 'Oops, something went wrong!',
+        })
+        this.setApiValidation(error.response.data.errors)
       }
     },
   },
-};
+}
 </script>

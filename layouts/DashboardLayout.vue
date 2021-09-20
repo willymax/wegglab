@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="h-screen">
     <notifications></notifications>
     <base-nav></base-nav>
-    <div class="main-content">
-      <div class="rounded-lg shadow bg-base-200 drawer drawer-mobile h-52">
+    <div class="main-content h-screen">
+      <div class="rounded-lg shadow bg-base-200 drawer drawer-mobile h-screen">
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
         <div class="flex flex-col items-center justify-center drawer-content">
           <label

@@ -107,7 +107,7 @@
         >
       </template>
     </side-bar>
-    <div class="main-content">
+    <div class="main-content h-screen">
       <dashboard-navbar
         :type="$route.name === 'alternative' ? 'light' : 'default'"
       ></dashboard-navbar>

@@ -1,6 +1,6 @@
 <template>
   <!-- <body class="antialiased h-screen"> -->
-  <div>
+  <div class="h-screen">
     <base-nav></base-nav>
     <div class="main-content">
       <nuxt></nuxt>
