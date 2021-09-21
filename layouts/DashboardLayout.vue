@@ -5,18 +5,25 @@
     <div class="main-content h-screen">
       <div class="rounded-lg shadow bg-base-200 drawer drawer-mobile h-screen">
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-        <div class="flex flex-col items-center justify-center drawer-content">
-          <label
-            for="my-drawer-2"
-            class="mb-4 btn btn-primary drawer-button lg:hidden"
-            >open menu</label
-          >
-          <nuxt></nuxt>
-        </div>
+        <main role="main" class="flex flex-col drawer-content">
+          <div class="flex">
+            <section class="w-full md:w-4/5 border border-y-0 border-gray-800">
+              <label
+                for="my-drawer-2"
+                class="mb-4 btn btn-primary drawer-button lg:hidden"
+                >open menu</label
+              >
+              <nuxt></nuxt>
+            </section>
+            <aside class="md:w-1/5 h-12 position-relative hidden md:block">
+              <p>Hello sidebar</p>
+            </aside>
+          </div>
+        </main>
         <div class="drawer-side">
           <label for="my-drawer-2" class="drawer-overlay"></label>
           <side-bar
-            class="p-4 overflow-y-auto w-80 bg-base-100 text-base-content w-80"
+            class="p-4 overflow-y-auto w-80 bg-base-100 text-base-content"
           >
             <template slot="links" slot-scope="props">
               <sidebar-item

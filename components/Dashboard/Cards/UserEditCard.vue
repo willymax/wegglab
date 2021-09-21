@@ -59,7 +59,7 @@ export default {
   },
   data() {
     return {
-      mutableUser: JSON.parse(this.user),
+      mutableUser: JSON.parse(JSON.stringify(this.user)),
     }
   },
 

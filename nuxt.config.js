@@ -144,6 +144,7 @@ export default {
     { src: '~/plugins/dashboard/world-map', ssr: false },
     '~/plugins/dashboard/JsonApi.js',
     '~/plugins/isDemo.js',
+    '~/plugins/app.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
