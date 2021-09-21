@@ -30,7 +30,7 @@
             </div>
           </div>
           <!-- Follow Button -->
-          <div class="flex flex-col text-right">
+          <div class="flex flex-row flex-wrap text-right">
             <button
               class="
                 flex
@@ -83,17 +83,6 @@
             >
               Change Password
             </button>
-            <NuxtLink to="/examples/user-profile/change-password"
-              >Change Password</NuxtLink
-            >
-            <sidebar-item
-              :link="{
-                name: 'Change Password',
-                icon: 'ni ni-shop text-primary',
-                path: '/examples/user-profile/change-password',
-              }"
-            >
-            </sidebar-item>
           </div>
         </div>
 

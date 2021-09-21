@@ -1,14 +1,6 @@
 <template>
-  <div class="container-fluid mt-5">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-xl-6 order-xl-1">
-        <div>
-          <user-edit-card :user="user" />
-        </div>
-        <div class="mt-5">
-          <user-password-card :user="user" />
-        </div>
-      </div>
       <div class="col-xl-6 order-xl-2">
         <user-card />
       </div>

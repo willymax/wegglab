@@ -33,9 +33,9 @@
       >
         <div
           v-if="prependIcon || $slots.prepend"
-          class="flex -mr-px justify-center w-15 p-4"
+          class="flex -mr-px justify-center"
         >
-          <span class="input-group-text">
+          <span class="w-15 p-4">
             <slot name="prepend">
               <i :class="prependIcon"></i>
             </slot>
@@ -50,7 +50,6 @@
             class="
               flex-shrink flex-grow flex-auto
               leading-normal
-              w-px
               block
               px-4
               py-2

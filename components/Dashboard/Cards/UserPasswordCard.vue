@@ -72,8 +72,8 @@ export default {
         return
       }
 
-      // this.user.password = this.password
-      // this.user.password_confirmation = this.password_confirmation
+      this.user.password = this.password
+      this.user.password_confirmation = this.password_confirmation
       try {
         await this.$store.dispatch('users/update', this.user)
         this.$refs.password_form.reset()
@@ -88,7 +88,8 @@ export default {
           type: 'danger',
           message: 'Oops, something went wrong!',
         })
-        this.setApiValidation(error.response.data.errors)
+        console.log(JSON.stringify(error))
+        // this.setApiValidation(error.response.data.errors)
       }
     },
   },
