@@ -56,6 +56,44 @@
             >
               Edit Profile
             </button>
+            <button
+              class="
+                flex
+                justify-center
+                max-h-max
+                whitespace-nowrap
+                focus:outline-none focus:ring
+                max-w-max
+                border
+                bg-transparent
+                border-blue-500
+                text-blue-500
+                hover:border-blue-800
+                items-center
+                hover:shadow-lg
+                font-bold
+                py-2
+                px-4
+                rounded-full
+                mr-0
+                ml-auto
+              "
+              to="/"
+              @click="changePasswoordClicked()"
+            >
+              Change Password
+            </button>
+            <NuxtLink to="/examples/user-profile/change-password"
+              >Change Password</NuxtLink
+            >
+            <sidebar-item
+              :link="{
+                name: 'Change Password',
+                icon: 'ni ni-shop text-primary',
+                path: '/examples/user-profile/change-password',
+              }"
+            >
+            </sidebar-item>
           </div>
         </div>
 
@@ -146,6 +184,11 @@ export default {
     },
     user() {
       return this.$auth.user
+    },
+  },
+  methods: {
+    changePasswoordClicked() {
+      this.$router.push('/examples/user-profile/change-password')
     },
   },
 }

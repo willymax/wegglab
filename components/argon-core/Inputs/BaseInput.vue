@@ -12,6 +12,17 @@
         </label>
       </slot>
       <div
+        class="
+          flex flex-wrap
+          w-full
+          mb-4
+          relative
+          h-15
+          bg-white
+          items-center
+          rounded
+          pr-10
+        "
         :class="[
           { 'input-group': hasIcon },
           { focused: focused },
@@ -20,7 +31,10 @@
           inputGroupClasses,
         ]"
       >
-        <div v-if="prependIcon || $slots.prepend" class="input-group-prepend">
+        <div
+          v-if="prependIcon || $slots.prepend"
+          class="flex -mr-px justify-center w-15 p-4"
+        >
           <span class="input-group-text">
             <slot name="prepend">
               <i :class="prependIcon"></i>
@@ -34,14 +48,16 @@
             :valid="valid"
             :required="required"
             class="
+              flex-shrink flex-grow flex-auto
+              leading-normal
+              w-px
               block
-              w-full
               px-4
               py-2
+              rounded rounded-l-none
               text-gray-700
               bg-white
               border border-gray-300
-              rounded-md
               dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600
               focus:border-blue-500
               dark:focus:border-blue-500
@@ -65,12 +81,12 @@
         <slot name="infoBlock"></slot>
       </div>
       <slot name="success">
-        <div v-if="valid && validated" class="valid-feedback">
+        <div v-if="valid && validated" class="text-success">
           {{ successMessage }}
         </div>
       </slot>
       <slot name="error">
-        <div v-if="errors[0]" class="invalid-feedback" style="display: block">
+        <div v-if="errors[0]" class="text-error" style="display: block">
           {{ errors[0] }}
         </div>
       </slot>
@@ -97,10 +113,12 @@ export default {
     },
     label: {
       type: String,
+      default: '',
       description: 'Input label (text before input)',
     },
     error: {
       type: String,
+      default: '',
       description: 'Input error (below input)',
     },
     successMessage: {
@@ -115,10 +133,12 @@ export default {
     },
     inputClasses: {
       type: String,
+      default: '',
       description: 'Input css classes',
     },
     inputGroupClasses: {
       type: String,
+      default: '',
       description: 'Input group css classes',
     },
     type: {
@@ -128,10 +148,12 @@ export default {
     },
     appendIcon: {
       type: String,
+      default: '',
       description: 'Append icon (right)',
     },
     prependIcon: {
       type: String,
+      default: '',
       description: 'Prepend icon (left)',
     },
     rules: {

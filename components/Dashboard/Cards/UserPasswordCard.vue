@@ -15,7 +15,6 @@
           placeholder="New Password"
         />
         <validation-error :errors="apiValidationErrors.password" />
-
         <base-input
           v-model="password_confirmation"
           type="password"
@@ -25,7 +24,6 @@
           prepend-icon="fa fa-key"
           placeholder="Confirm Password"
         />
-
         <div class="my-4">
           <base-button
             type="button"
@@ -47,27 +45,23 @@ import ValidationError from '~/components/ValidationError.vue'
 
 export default {
   name: 'UserPasswordCard',
-
   components: {
     BaseInput,
     BaseButton,
     ValidationError,
   },
-
   mixins: [formMixin],
 
-  props: {
-    user: Object,
-  },
-
+  props: {},
   data() {
     return {
       password: null,
       password_new: null,
       password_confirmation: null,
+      user: Object.assign({}, this.$auth.user),
     }
   },
-
+  computed: {},
   methods: {
     async handleChangePassword() {
       if (['1'].includes(this.user.id)) {
@@ -80,7 +74,6 @@ export default {
 
       // this.user.password = this.password
       // this.user.password_confirmation = this.password_confirmation
-
       try {
         await this.$store.dispatch('users/update', this.user)
         this.$refs.password_form.reset()

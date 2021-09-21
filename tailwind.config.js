@@ -5,6 +5,8 @@ module.exports = {
     extend: {
       colors: {
         primary: defaultTheme.colors.green,
+        validfeedback: defaultTheme.colors.green,
+        invalidfeedback: defaultTheme.colors.green,
       },
     },
   },

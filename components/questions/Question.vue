@@ -64,7 +64,7 @@
           class="
             flex-1 flex
             items-center
-            text-white text-xs text-gray-400
+            text-xs text-gray-400
             hover:text-blue-400
             transition
             duration-350
@@ -84,7 +84,7 @@
           class="
             flex-1 flex
             items-center
-            text-white text-xs text-gray-400
+            text-xs text-gray-400
             hover:text-green-400
             transition
             duration-350
@@ -104,7 +104,7 @@
           class="
             flex-1 flex
             items-center
-            text-white text-xs text-gray-400
+            text-xs text-gray-400
             hover:text-red-600
             transition
             duration-350
@@ -124,7 +124,7 @@
           class="
             flex-1 flex
             items-center
-            text-white text-xs text-gray-400
+            text-xs text-gray-400
             hover:text-blue-400
             transition
             duration-350

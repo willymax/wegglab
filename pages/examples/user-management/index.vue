@@ -5,9 +5,9 @@
         >Add, Edit, Delete features are not functional. This is a PRO feature!
         Click
         <a
+          id="pro-feature"
           href="https://www.creative-tim.com/live/nuxt-argon-dashboard-pro-laravel"
           target="_blank"
-          id="pro-feature"
           >here</a
         >
         to see the PRO product.</strong
@@ -36,17 +36,23 @@
         </template>
         <div>
           <div
-            class="col-12 d-flex justify-content-center justify-content-sm-between flex-wrap mb-4"
+            class="
+              col-12
+              d-flex
+              justify-content-center justify-content-sm-between
+              flex-wrap
+              mb-4
+            "
           >
             <el-select
-              class="select-primary pagination-select"
               v-model="pagination.perPage"
+              class="select-primary pagination-select"
               placeholder="Per page"
             >
               <el-option
-                class="select-primary"
                 v-for="item in pagination.perPageOptions"
                 :key="item"
+                class="select-primary"
                 :label="item"
                 :value="item"
               />
@@ -81,10 +87,10 @@
                 <el-tooltip content="Edit" placement="top">
                   <a
                     type="text"
-                    @click="onProFeature"
                     class="table-action"
                     data-toggle="tooltip"
                     style="cursor: pointer"
+                    @click="onProFeature"
                   >
                     <i class="fas fa-user-edit"></i>
                   </a>
@@ -93,10 +99,10 @@
                 <el-tooltip content="Delete" placement="top">
                   <a
                     type="text"
-                    @click="onProFeature"
                     class="table-action table-action-delete"
                     data-toggle="tooltip"
                     style="cursor: pointer"
+                    @click="onProFeature"
                   >
                     <i class="fas fa-trash"></i>
                   </a>
@@ -107,7 +113,12 @@
         </div>
         <div
           slot="footer"
-          class="col-12 d-flex justify-content-center justify-content-sm-between flex-wrap"
+          class="
+            col-12
+            d-flex
+            justify-content-center justify-content-sm-between
+            flex-wrap
+          "
         >
           <div class="">
             <p class="card-category">
@@ -119,8 +130,8 @@
             </p>
           </div>
           <base-pagination
-            class="pagination-no-border"
             v-model="pagination.currentPage"
+            class="pagination-no-border"
             :per-page="pagination.perPage"
             :total="total"
           />
@@ -130,7 +141,6 @@
   </div>
 </template>
 <script>
-import { BasePagination } from "@/components/argon-core";
 import {
   Table,
   TableColumn,
@@ -141,11 +151,10 @@ import {
   Select,
   Option,
   Button,
-} from "element-ui";
+} from 'element-ui'
+import { BasePagination } from '@/components/argon-core'
 
 export default {
-  layout: "DashboardLayout",
-
   components: {
     BasePagination,
     [Tooltip.name]: Tooltip,
@@ -158,12 +167,13 @@ export default {
     [Option.name]: Option,
     [Button.name]: Button,
   },
+  layout: 'DashboardLayout',
 
   data() {
     return {
       selectedRows: [],
       users: [],
-      sort: "created_at",
+      sort: 'created_at',
 
       pagination: {
         perPage: 5,
@@ -172,52 +182,52 @@ export default {
       },
 
       total: 1,
-    };
+    }
   },
   computed: {
     from() {
-      return this.pagination.perPage * (this.pagination.currentPage - 1);
+      return this.pagination.perPage * (this.pagination.currentPage - 1)
     },
 
     to() {
-      let highBound = this.from + this.pagination.perPage;
+      let highBound = this.from + this.pagination.perPage
       if (this.total < highBound) {
-        highBound = this.total;
+        highBound = this.total
       }
-      return highBound;
+      return highBound
     },
   },
 
   created() {
-    this.getList();
+    this.getList()
   },
 
   methods: {
     getList() {
       this.users = [
         {
-          name: "Admin",
-          email: "admin@jsonapi.com",
-          created_at: "2020-01-01",
+          name: 'Admin',
+          email: 'admin@jsonapi.com',
+          created_at: '2020-01-01',
         },
-      ];
+      ]
     },
     onProFeature() {
       this.$notify({
-        type: "danger",
-        message: "This is a PRO feature.",
-      });
+        type: 'danger',
+        message: 'This is a PRO feature.',
+      })
     },
     sortChange({ prop, order }) {
-      if (order === "descending") {
-        this.sort = `-${prop}`;
+      if (order === 'descending') {
+        this.sort = `-${prop}`
       } else {
-        this.sort = `${prop}`;
+        this.sort = `${prop}`
       }
-      this.getList();
+      this.getList()
     },
   },
-};
+}
 </script>
 <style>
 #pro-feature {

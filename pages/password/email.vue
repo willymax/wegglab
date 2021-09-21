@@ -33,25 +33,25 @@
 
               <form class="needs-validation" @submit.prevent="handleSubmit()">
                 <base-input
+                  v-model="form.data.attributes.password"
                   alternative
                   class="mb-3"
                   prepend-icon="ni ni-lock-circle-open"
                   placeholder="Password"
                   type="password"
                   name="Password"
-                  v-model="form.data.attributes.password"
                 >
                 </base-input>
                 <validation-error :errors="apiValidationErrors.password" />
 
                 <base-input
+                  v-model="form.data.attributes.password_confirmation"
                   alternative
                   class="mb-3"
                   prepend-icon="ni ni-lock-circle-open"
                   placeholder="Confirm Password"
                   type="password"
                   name="Password confirmation"
-                  v-model="form.data.attributes.password_confirmation"
                 >
                 </base-input>
 
@@ -69,48 +69,48 @@
   </div>
 </template>
 <script>
-import ValidationError from "~/components/ValidationError.vue";
-import formMixin from "@/mixins/form-mixin";
+import ValidationError from '~/components/ValidationError.vue'
+import formMixin from '@/mixins/form-mixin'
 export default {
-  layout: "AuthLayout",
-  mixins: [formMixin],
   components: { ValidationError },
-  auth: "guest",
+  mixins: [formMixin],
+  layout: 'AuthLayout',
+  auth: 'guest',
 
   data() {
     return {
       form: {
         data: {
-          type: "password-reset",
+          type: 'password-reset',
           attributes: {
-            password: "",
-            password_confirmation: "",
-            token: "",
-            email: "",
+            password: '',
+            password_confirmation: '',
+            token: '',
+            email: '',
           },
         },
       },
-    };
+    }
   },
   mounted() {
-    this.form.data.attributes.email = this.$route.query.email;
-    this.form.data.attributes.token = this.$route.query.token;
+    this.form.data.attributes.email = this.$route.query.email
+    this.form.data.attributes.token = this.$route.query.token
   },
   beforeDestroy() {
-    this.$router.replace({ query: null });
+    this.$router.replace({ query: null })
   },
   methods: {
     async handleSubmit() {
       try {
-        await this.$store.dispatch("reset/createNewPassword", this.form.data);
+        await this.$store.dispatch('reset/createNewPassword', this.form.data)
       } catch (error) {
         await this.$notify({
-          type: "danger",
-          message: "The given data was invalid.",
-        });
-        this.setApiValidation(error.response.data.errors);
+          type: 'danger',
+          message: 'The given data was invalid.',
+        })
+        this.setApiValidation(error.response.data.errors)
       }
     },
   },
-};
+}
 </script>
