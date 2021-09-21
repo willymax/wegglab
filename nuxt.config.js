@@ -9,6 +9,7 @@ export default {
     baseUrl: process.env.BASE_URL,
     isDemo: process.env.IS_DEMO,
     apiKey: process.env.API_KEY,
+    baseStorageUrl: process.env.STORAGE_BASE_URL,
   },
   // mode: 'spa',
   router: {
