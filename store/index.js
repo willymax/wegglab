@@ -14,6 +14,6 @@ const store = new Vuex.Store({
     },
   },
   modules: {
-    questions,
+    questions: { ...questions, ...{ namespaced: true } },
   },
 })

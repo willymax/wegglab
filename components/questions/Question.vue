@@ -35,7 +35,7 @@
 
     <div class="pl-16">
       <p class="text-base width-auto font-medium text-white flex-shrink">
-        Day 07 of the challenge
+        {{ details.body }}
         <a href="#" class="text-blue-400">#100DaysOfCode</a> I was wondering
         what I can do with <a href="#" class="text-blue-400">#tailwindcss</a>,
         so just started building Twitter UI using Tailwind and so far it looks
@@ -151,6 +151,14 @@
 <script>
 export default {
   name: 'Question',
+  props: {
+    details: {
+      type: Object,
+      default: () => {
+        return {}
+      },
+    },
+  },
 }
 </script>
 

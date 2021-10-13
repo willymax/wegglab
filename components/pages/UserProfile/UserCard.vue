@@ -124,42 +124,10 @@
       </div>
       <hr class="border-gray-800" />
     </div>
-
-    <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-      <div class="d-flex justify-content-between">
-        <NuxtLink to="/questions/ask" class="btn btn-sm btn-info mr-4"
-          >Ask Your First Question</NuxtLink
-        >
-      </div>
-    </div>
-    <div class="bg-blue-300">
-      <ul class="list-none">
-        <li>
-          <!--second tweet-->
-          <question></question>
-        </li>
-        <li>
-          <!--second tweet-->
-          <question></question>
-        </li>
-        <li>
-          <!--second tweet-->
-          <question></question>
-        </li>
-        <li>
-          <!--second tweet-->
-          <question></question>
-        </li>
-      </ul>
-    </div>
   </div>
 </template>
 <script>
-import Question from '~/components/questions/Question.vue'
 export default {
-  components: {
-    Question,
-  },
   data() {
     return {
       key: '',
