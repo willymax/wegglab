@@ -17,7 +17,7 @@
             <ul class="list-none">
               <li v-for="(item, index) in questions" :key="item.id">
                 <!--second tweet-->
-                <question :details="question"></question>
+                <question :details="item"></question>
               </li>
             </ul>
             {{ questions }}

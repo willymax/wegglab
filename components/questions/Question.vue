@@ -46,16 +46,9 @@
       <div class="md:flex-shrink pr-6 pt-3">
         <div
           class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64"
-          style="
-            height: 200px;
-            background-image: url(https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80);
-          "
+          :style="{ 'background-image': `url('${details.image}')` }"
         >
-          <img
-            class="opacity-0 w-full h-full"
-            src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80"
-            alt=""
-          />
+          <img class="opacity-0 w-full h-full" :src="details.image" alt="" />
         </div>
       </div>
 
