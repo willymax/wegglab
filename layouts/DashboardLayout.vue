@@ -7,7 +7,7 @@
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
         <main role="main" class="flex flex-col drawer-content">
           <div class="flex">
-            <section class="w-full md:w-4/5 border-y-0 border-gray-800 p-1">
+            <section class="w-full md:w-4/5 border-y-0 border-gray-800 p-4">
               <label
                 for="my-drawer-2"
                 class="mb-4 btn btn-primary drawer-button lg:hidden"

@@ -118,7 +118,7 @@
               v-model="form.data.attributes.email"
               alternative
               name="Email"
-              prepend-icon="ni ni-lock-circle-open"
+              prepend-icon="fa fa-envelope"
               placeholder="Email"
               type="email"
             >
@@ -152,7 +152,7 @@
               v-model="form.data.attributes.password"
               alternative
               name="Password"
-              prepend-icon="ni ni-lock-circle-open"
+              prepend-icon="fa fa-lock"
               placeholder="Password"
               type="password"
             >
