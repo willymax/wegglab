@@ -38,8 +38,8 @@
   </div>
 </template>
 <script>
-import BaseInput from '~/components/argon-core/Inputs/BaseInput.vue'
-import BaseButton from '~/components/argon-core/BaseButton.vue'
+import BaseInput from '~/components/core-components/Inputs/BaseInput.vue'
+import BaseButton from '~/components/core-components/BaseButton.vue'
 import formMixin from '@/mixins/form-mixin'
 import ValidationError from '~/components/ValidationError.vue'
 

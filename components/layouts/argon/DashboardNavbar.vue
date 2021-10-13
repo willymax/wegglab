@@ -6,12 +6,12 @@
   >
     <!-- Search form -->
     <form
+      id="navbar-search-main"
       class="navbar-search form-inline mr-sm-3"
       :class="{
         'navbar-search-light': type === 'default',
         'navbar-search-dark': type === 'light',
       }"
-      id="navbar-search-main"
     >
       <div class="form-group mb-0">
         <div class="input-group input-group-alternative input-group-merge">
@@ -229,7 +229,7 @@
         title-tag="a"
         title-classes="nav-link pr-0"
       >
-        <a href="#" class="nav-link pr-0" @click.prevent slot="title-container">
+        <a slot="title-container" href="#" class="nav-link pr-0" @click.prevent>
           <div class="media align-items-center">
             <span
               class="avatar avatar-sm rounded-circle avatar-image"
@@ -258,7 +258,7 @@
             <span>My profile</span>
           </nuxt-link>
           <div class="dropdown-divider"></div>
-          <a @click.prevent="logout()" to="" class="dropdown-item">
+          <a to="" class="dropdown-item" @click.prevent="logout()">
             <i class="ni ni-user-run"></i>
             <span>Logout</span>
           </a>
@@ -268,10 +268,10 @@
   </base-nav>
 </template>
 <script>
-import { CollapseTransition } from "vue2-transitions";
-import BaseNav from "@/components/argon-core/Navbar/BaseNav.vue";
-import Modal from "@/components/argon-core/Modal.vue";
-import { pick, merge } from "lodash";
+import { CollapseTransition } from 'vue2-transitions'
+import { pick, merge } from 'lodash'
+import BaseNav from '@/components/core-components/Navbar/BaseNav.vue'
+import Modal from '@/components/core-components/Modal.vue'
 
 export default {
   components: {
@@ -282,20 +282,9 @@ export default {
   props: {
     type: {
       type: String,
-      default: "default", // default|light
+      default: 'default', // default|light
       description:
-        "Look of the dashboard navbar. Default (Green) or light (gray)",
-    },
-  },
-  computed: {
-    routeName() {
-      const { name } = this.$route;
-      return this.capitalizeFirstLetter(name);
-    },
-    profileImage() {
-      return this.$auth.user.profile_image
-        ? this.$auth.user.profile_image
-        : "/img/placeholder.jpg";
+        'Look of the dashboard navbar. Default (Green) or light (gray)',
     },
   },
   data() {
@@ -303,32 +292,43 @@ export default {
       activeNotifications: false,
       showMenu: false,
       searchModalVisible: false,
-      searchQuery: "",
-    };
+      searchQuery: '',
+    }
+  },
+  computed: {
+    routeName() {
+      const { name } = this.$route
+      return this.capitalizeFirstLetter(name)
+    },
+    profileImage() {
+      return this.$auth.user.profile_image
+        ? this.$auth.user.profile_image
+        : '/img/placeholder.jpg'
+    },
   },
   methods: {
     capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
+      return string.charAt(0).toUpperCase() + string.slice(1)
     },
     toggleNotificationDropDown() {
-      this.activeNotifications = !this.activeNotifications;
+      this.activeNotifications = !this.activeNotifications
     },
     closeDropDown() {
-      this.activeNotifications = false;
+      this.activeNotifications = false
     },
     toggleSidebar() {
-      this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
+      this.$sidebar.displaySidebar(!this.$sidebar.showSidebar)
     },
     hideSidebar() {
-      this.$sidebar.displaySidebar(false);
+      this.$sidebar.displaySidebar(false)
     },
     async logout() {
       try {
-        await this.$auth.logout();
+        await this.$auth.logout()
       } catch (error) {
-        this.$toast.error(error.response.message);
+        this.$toast.error(error.response.message)
       }
     },
   },
-};
+}
 </script>

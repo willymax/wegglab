@@ -152,7 +152,7 @@ import {
   Option,
   Button,
 } from 'element-ui'
-import { BasePagination } from '@/components/argon-core'
+import { BasePagination } from '@/components/core-components'
 
 export default {
   components: {

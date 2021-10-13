@@ -83,6 +83,7 @@
               </sidebar-item>
             </template>
           </side-bar>
+          <button class="btn btn-sm btn-info mr-4">Logout</button>
         </div>
       </div>
     </div>

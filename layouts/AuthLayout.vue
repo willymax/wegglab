@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import BaseNav from '~/components/argon-core/Navbar/BaseNav.vue'
+import BaseNav from '~/components/core-components/Navbar/BaseNav.vue'
 
 export default {
   components: {

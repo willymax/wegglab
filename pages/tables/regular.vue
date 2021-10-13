@@ -32,7 +32,7 @@ import {
   Table,
   TableColumn,
 } from 'element-ui'
-import RouteBreadCrumb from '@/components/argon-core/Breadcrumb/RouteBreadcrumb'
+import RouteBreadCrumb from '@/components/core-components/Breadcrumb/RouteBreadcrumb'
 import projects from '~/components/tables/projects'
 import users from '~/components/tables/users'
 import LightTable from '~/components/tables/RegularTables/LightTable'

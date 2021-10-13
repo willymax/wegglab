@@ -141,10 +141,10 @@
                 for="loggingPassword"
                 >Password</label
               >
-              <a
-                href="#"
+              <NuxtLink
+                to="/password/reset"
                 class="text-xs text-gray-500 dark:text-gray-300 hover:underline"
-                >Forget Password?</a
+                >Forget Password?</NuxtLink
               >
             </div>
             <base-input

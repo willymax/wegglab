@@ -189,65 +189,65 @@
 </template>
 <script>
 import Password from 'vue-password-strength-meter'
-import ValidationError from "~/components/ValidationError.vue";
-import formMixin from "@/mixins/form-mixin";
-import BaseCheckbox from '~/components/argon-core/Inputs/BaseCheckbox.vue'
+import ValidationError from '~/components/ValidationError.vue'
+import formMixin from '@/mixins/form-mixin'
+import BaseCheckbox from '~/components/core-components/Inputs/BaseCheckbox.vue'
 
-  export default {
-    name: 'Register',
-    components: { ValidationError, Password, BaseCheckbox  },
-    mixins: [formMixin],
-    layout: 'AuthLayout',
-    auth: "guest",
+export default {
+  name: 'Register',
+  components: { ValidationError, Password, BaseCheckbox },
+  mixins: [formMixin],
+  layout: 'AuthLayout',
+  auth: 'guest',
 
   data() {
     return {
       form: {
         data: {
-          type: "token",
+          type: 'token',
           attributes: {
-            name: "",
-            email: "",
-            password: "",
-            password_confirmation: "",
+            name: '',
+            email: '',
+            password: '',
+            password_confirmation: '',
             agree: false,
-            scors: "",
+            scors: '',
           },
         },
       },
-    };
+    }
   },
   methods: {
     showScore(score) {
-      this.form.data.attributes.scors = score;
+      this.form.data.attributes.scors = score
     },
     async handleRegister() {
       if (!this.form.data.attributes.agree) {
         this.$notify({
-          type: "danger",
-          message: "You need to agree with our terms and conditions.",
-        });
-        return;
+          type: 'danger',
+          message: 'You need to agree with our terms and conditions.',
+        })
+        return
       }
 
       try {
-        await this.$store.dispatch("register/create", this.form.data);
+        await this.$store.dispatch('register/create', this.form.data)
 
         // log in the user after successful register
-        await this.$auth.loginWith("local", {
+        await this.$auth.loginWith('local', {
           data: this.form,
-        });
-        this.$router.push("/dashboard");
+        })
+        this.$router.push('/dashboard')
       } catch (error) {
-        this.setApiValidation(error.response.data.errors);
+        this.setApiValidation(error.response.data.errors)
 
         this.$notify({
-          type: "danger",
-          message: "Oops, something went wrong!",
-        });
+          type: 'danger',
+          message: 'Oops, something went wrong!',
+        })
       }
     },
   },
-};
+}
 </script>
 <style></style>
