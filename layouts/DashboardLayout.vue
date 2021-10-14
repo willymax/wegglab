@@ -83,7 +83,7 @@
               </sidebar-item>
             </template>
           </side-bar>
-          <button class="btn btn-sm btn-info mr-4">Logout</button>
+          <logout></logout>
         </div>
       </div>
     </div>
@@ -98,7 +98,7 @@ import Vuex from 'vuex'
 import DashboardNavbar from '~/components/layouts/argon/DashboardNavbar.vue'
 import ContentFooter from '~/components/layouts/argon/ContentFooter.vue'
 import DashboardContent from '~/components/layouts/argon/Content.vue'
-
+import Logout from '~/components/widgets/Logout.vue'
 function hasElement(className) {
   return document.getElementsByClassName(className).length > 0
 }
@@ -119,6 +119,7 @@ export default {
     DashboardNavbar,
     ContentFooter,
     DashboardContent,
+    Logout,
   },
   mounted() {
     this.initScrollbar(), this.$store.dispatch('profile/me')
