@@ -1,13 +1,11 @@
 <template>
   <div class="notifications">
-    <slide-y-up-transition :duration="transitionDuration"
-                             group
-                             mode="out-in">
+    <slide-y-up-transition :duration="transitionDuration" group mode="out-in">
       <notification
         v-for="notification in notifications"
         v-bind="notification"
-        :clickHandler="notification.onClick"
         :key="notification.timestamp.getTime()"
+        :click-handler="notification.onClick"
         @close="removeNotification"
       >
       </notification>
@@ -15,41 +13,41 @@
   </div>
 </template>
 <script>
-  import Notification from './Notification.vue';
-  import { SlideYUpTransition } from 'vue2-transitions';
+import { SlideYUpTransition } from 'vue2-transitions'
+import Notification from './Notification.vue'
 
-  export default {
-    components: {
-      SlideYUpTransition,
-      Notification
+export default {
+  components: {
+    SlideYUpTransition,
+    Notification,
+  },
+  props: {
+    transitionDuration: {
+      type: Number,
+      default: 200,
     },
-    props: {
-      transitionDuration: {
-        type: Number,
-        default: 200
-      },
-      overlap: {
-        type: Boolean,
-        default: false
-      }
+    overlap: {
+      type: Boolean,
+      default: false,
     },
-    data() {
-      return {
-        notifications: this.$notifications.state
-      };
-    },
-    methods: {
-      removeNotification(timestamp) {
-        this.$notifications.removeNotification(timestamp);
-      }
-    },
-    created() {
-      this.$notifications.settings.overlap = this.overlap;
-    },
-    watch: {
-      overlap: function (newVal) {
-        this.$notifications.settings.overlap = newVal;
-      }
+  },
+  data() {
+    return {
+      notifications: this.$notifications.state,
     }
-  };
+  },
+  watch: {
+    overlap(newVal) {
+      this.$notifications.settings.overlap = newVal
+    },
+  },
+  created() {
+    this.$notifications.settings.overlap = this.overlap
+  },
+  methods: {
+    removeNotification(timestamp) {
+      this.$notifications.removeNotification(timestamp)
+    },
+  },
+}
 </script>

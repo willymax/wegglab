@@ -322,12 +322,13 @@ export default {
     hideSidebar() {
       this.$sidebar.displaySidebar(false)
     },
-    async logout() {
-      try {
-        await this.$auth.logout()
-      } catch (error) {
-        this.$toast.error(error.response.message)
-      }
+    logout() {
+      this.$toast.error('Error is')
+      // try {
+      //   await this.$auth.logout()
+      // } catch (error) {
+      //   this.$toast.error(error.response.message)
+      // }
     },
   },
 }
