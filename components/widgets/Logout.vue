@@ -5,6 +5,9 @@
     </button>
     <modal :show="showDialog" :show-close="true">
       <template #default> Do you want to logout? </template>
+      <template #footer>
+        <button @click="showDialog = !showDialog">Close</button>
+      </template>
     </modal>
   </div>
 </template>
