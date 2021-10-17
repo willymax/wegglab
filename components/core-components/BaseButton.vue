@@ -3,16 +3,24 @@
     :is="tag"
     :type="tag === 'button' ? nativeType : ''"
     :disabled="disabled || loading"
-    class="btn"
+    class="
+      btn
+      hover:bg-primary-700
+      text-blue-700
+      font-semibold
+      py-2
+      px-4
+      border-blue-500
+      hover:border-transparent
+    "
     :class="[
-      { 'rounded-circle': round },
-      { 'btn-block': block },
-      { 'btn-wd': wide },
-      { 'btn-icon btn-fab': icon },
-      { [`btn-${type}`]: type && !outline },
-      { [`btn-${size}`]: size },
-      { [`btn-outline-${type}`]: outline && type },
-      { 'btn-link': link },
+      { rounded: round },
+      { 'bg-transparent': transparent },
+      { border: border },
+      { block: block },
+      { [`w-${width}`]: width },
+      { [`w-${height}`]: height },
+      { [`hover:text-${hoverText}`]: hoverText },
       { disabled: disabled && tag !== 'button' },
     ]"
     @click="handleClick"
@@ -33,11 +41,13 @@ export default {
       description: 'Button html tag',
     },
     round: Boolean,
+    transparent: Boolean,
     icon: Boolean,
     block: Boolean,
     loading: Boolean,
     wide: Boolean,
     disabled: Boolean,
+    border: Boolean,
     type: {
       type: String,
       default: 'default',
@@ -52,6 +62,21 @@ export default {
       type: String,
       default: '',
       description: 'Button size (sm|lg)',
+    },
+    height: {
+      type: String,
+      default: '',
+      description: 'Button size (sm|lg)',
+    },
+    width: {
+      type: String,
+      default: '',
+      description: 'Button size (sm|md|lg)',
+    },
+    hoverText: {
+      type: String,
+      default: 'white',
+      description: 'text color on button hover (any valid color)',
     },
     outline: {
       type: Boolean,
@@ -69,13 +94,4 @@ export default {
   },
 }
 </script>
-<style scoped>
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  /deep/ i {
-    padding: 0 3px;
-  }
-}
-</style>
+<style scoped></style>
