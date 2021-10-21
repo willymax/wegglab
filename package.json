@@ -52,6 +52,7 @@
     "vue-password-strength-meter": "^1.7.2",
     "vue-toast-notification": "^0.5.0",
     "vue2-transitions": "^0.2.3",
+    "yup": "^0.32.11",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {

@@ -55,13 +55,18 @@ export default {
     },
   },
   props: {
-    message: String,
+    message: {
+      type: String,
+      default: '',
+    },
     title: {
       type: String,
+      default: '',
       description: 'Notification title',
     },
     icon: {
       type: String,
+      default: '',
       description: 'Notification icon',
     },
     verticalAlign: {
@@ -116,6 +121,7 @@ export default {
     },
     component: {
       type: [Object, Function],
+      default: null,
       description:
         'Custom content component. Cane be a `.vue` component or render function',
     },
@@ -131,6 +137,7 @@ export default {
     },
     clickHandler: {
       type: Function,
+      default: null,
       description: 'Custom notification click handler',
     },
   },

@@ -1,7 +1,6 @@
 <template>
   <div>
     <p>Hello dashboard</p>
-    <logout></logout>
   </div>
 </template>
 

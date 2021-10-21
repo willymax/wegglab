@@ -13,6 +13,7 @@
           class="mb-3"
           prepend-icon="fa fa-key"
           placeholder="New Password"
+          rules="required"
         />
         <validation-error :errors="apiValidationErrors.password" />
         <base-input
@@ -27,8 +28,9 @@
         <div class="my-4">
           <base-button
             type="button"
-            class="btn btn-sm btn-primary"
+            class="btn btn-md btn-secondary"
             native-type="submit"
+            :loading="loading"
           >
             Change Password
           </base-button>
@@ -55,6 +57,7 @@ export default {
   props: {},
   data() {
     return {
+      loading: false,
       password: null,
       password_new: null,
       password_confirmation: null,
@@ -78,14 +81,13 @@ export default {
         await this.$store.dispatch('users/update', this.user)
         this.$refs.password_form.reset()
         this.unsetApiValidationErrors()
-
         this.$notify({
           type: 'success',
           message: 'Password changed successfully.',
         })
       } catch (error) {
         this.$notify({
-          type: 'danger',
+          type: 'error',
           message: 'Oops, something went wrong!',
         })
         console.log(JSON.stringify(error))

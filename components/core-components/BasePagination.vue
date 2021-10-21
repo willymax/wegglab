@@ -1,9 +1,12 @@
 <template>
   <ul
-    class="pagination"
+    class="pagination flex pl-0"
     :class="[size && `pagination-${size}`, align && `justify-content-${align}`]"
   >
-    <li class="page-item prev-page" :class="{ disabled: value === 1 }">
+    <li
+      class="page-item prev-page rounded-full"
+      :class="{ disabled: value === 1 }"
+    >
       <a class="page-link" aria-label="Previous" @click="prevPage">
         <span aria-hidden="true"
           ><i class="fa fa-angle-left" aria-hidden="true"></i
@@ -142,3 +145,40 @@ export default {
   },
 }
 </script>
+<style scoped>
+.page-item .page-link,
+.page-item span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0 3px;
+  border-radius: 50% !important;
+  width: 36px;
+  height: 36px;
+  font-size: 0.875rem;
+}
+.page-item.disabled .page-link {
+  color: #8898aa;
+  pointer-events: none;
+  cursor: auto;
+  background-color: #fff;
+  border-color: #dee2e6;
+}
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #8898aa;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+</style>

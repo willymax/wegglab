@@ -1,18 +1,5 @@
 <template>
-  <div class="container-fluid mt-5">
-    <div class="alert alert-danger">
-      <strong
-        >Add, Edit, Delete features are not functional. This is a PRO feature!
-        Click
-        <a
-          id="pro-feature"
-          href="https://www.creative-tim.com/live/nuxt-argon-dashboard-pro-laravel"
-          target="_blank"
-          >here</a
-        >
-        to see the PRO product.</strong
-      >
-    </div>
+  <div class="container mt-5">
     <div>
       <card
         class="no-border-card"
@@ -113,12 +100,7 @@
         </div>
         <div
           slot="footer"
-          class="
-            col-12
-            d-flex
-            justify-content-center justify-content-sm-between
-            flex-wrap
-          "
+          class="flex flex-row justify-center sm:justify-between flex-wrap"
         >
           <div class="">
             <p class="card-category">
@@ -201,16 +183,34 @@ export default {
   created() {
     this.getList()
   },
+  mounted() {
+    // this.getUsers()
+  },
 
   methods: {
     getList() {
-      this.users = [
-        {
-          name: 'Admin',
-          email: 'admin@jsonapi.com',
-          created_at: '2020-01-01',
-        },
-      ]
+      const that = this
+      this.$axios
+        .get('users', {
+          params: {
+            perPage: this.pagination.perPage,
+            page: this.pagination.currentPage,
+          },
+        })
+        .then(function (response) {
+          // handle success
+          that.users = response.data.data
+          that.pagination.currentPage = response.data.paginator.current_page
+          that.pagination.perPage = response.data.paginator.per_page
+          that.total = response.data.paginator.total_count
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error)
+        })
+        .then(function () {
+          // always executed
+        })
     },
     onProFeature() {
       this.$notify({

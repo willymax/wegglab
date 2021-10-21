@@ -83,7 +83,7 @@
               </sidebar-item>
             </template>
           </side-bar>
-          <!-- <logout></logout> -->
+          <logout></logout>
         </div>
       </div>
     </div>
