@@ -151,6 +151,7 @@ export default {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  cursor: pointer;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;

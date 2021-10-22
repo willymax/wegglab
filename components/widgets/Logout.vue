@@ -1,6 +1,9 @@
 <template>
-  <div class="items-center">
-    <button class="btn btn-sm btn-info mr-4" @click="showDialog = !showDialog">
+  <div class="items-center m-2">
+    <button
+      class="btn btn-sm btn-info mr-4 w-full"
+      @click="showDialog = !showDialog"
+    >
       Logout
     </button>
     <modal :show.sync="showDialog" :show-close="true">

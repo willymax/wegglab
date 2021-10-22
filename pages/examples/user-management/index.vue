@@ -179,6 +179,18 @@ export default {
       return highBound
     },
   },
+  watch: {
+    'pagination.currentPage'(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.getList()
+      }
+    },
+    'pagination.perPage'(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.getList()
+      }
+    },
+  },
 
   created() {
     this.getList()
@@ -201,7 +213,7 @@ export default {
           // handle success
           that.users = response.data.data
           that.pagination.currentPage = response.data.paginator.current_page
-          that.pagination.perPage = response.data.paginator.per_page
+          that.pagination.perPage = parseInt(response.data.paginator.per_page)
           that.total = response.data.paginator.total_count
         })
         .catch(function (error) {

@@ -25,6 +25,9 @@
           <side-bar
             class="p-4 overflow-y-auto w-80 bg-base-100 text-base-content"
           >
+            <template slot="links-after" slot-scope="props">
+              <logout></logout>
+            </template>
             <template slot="links" slot-scope="props">
               <sidebar-item
                 :link="{
@@ -83,7 +86,6 @@
               </sidebar-item>
             </template>
           </side-bar>
-          <logout></logout>
         </div>
       </div>
     </div>
