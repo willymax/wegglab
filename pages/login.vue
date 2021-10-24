@@ -159,6 +159,7 @@
               <template #slotData> </template>
             </base-input>
             <validation-error :errors="apiValidationErrors.password" />
+            <validation-error :errors="apiValidationErrors.error" />
           </div>
 
           <div class="mt-8">
@@ -242,8 +243,22 @@ export default {
           data: this.form.data.attributes,
         })
         .then((response) => {
-          console.log(JSON.stringify(response))
-          console.log('User is', `${this.$auth.user}`)
+          this.$notify({
+            type: 'success',
+            message: 'Login successful.',
+          })
+          this.$router.push('/dashboard')
+        })
+        .catch((error) => {
+          // handle error
+          this.$notify({
+            type: 'danger',
+            message: 'Invalid credentials!',
+          })
+          this.setApiValidation(error.response.data.errors)
+        })
+        .then(function () {
+          // always executed
         })
       // try {
       //   const response = await

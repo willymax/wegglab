@@ -5,13 +5,14 @@
       <article
         aria-label="File Upload Modal"
         class="relative h-full flex flex-col bg-white shadow-xl rounded-md"
-        ondrop="dropHandler(event);"
-        ondragover="dragOverHandler(event);"
-        ondragleave="dragLeaveHandler(event);"
-        ondragenter="dragEnterHandler(event);"
+        @drop="dropHandler"
+        @dragover="dragOverHandler"
+        @dragleave="dragLeaveHandler"
+        @dragenter="dragEnterHandler"
       >
         <!-- overlay -->
         <div
+          id="overlay"
           ref="overlay"
           class="
             w-full
@@ -26,6 +27,7 @@
             justify-center
             rounded-md
           "
+          :class="{ draggedover: draggedover }"
         >
           <i>
             <svg
@@ -110,6 +112,7 @@
                 items-center
                 justify-center
               "
+              :class="{ hidden: objectList.length > 0 }"
             >
               <img
                 class="mx-auto w-32"
@@ -118,10 +121,19 @@
               />
               <span class="text-small text-gray-500">No files selected</span>
             </li>
-            <li v-for="item in objectList" :key="item.objectURL">
-              <ImagePreview v-if="item.isImage" :object-details="item"></ImagePreview>
-              {{ item.message }}
-            </li>
+            <template v-for="item in objectList">
+              <ImagePreview
+                v-if="item.isImage"
+                :key="item.objectURL"
+                :object-details="item"
+              ></ImagePreview>
+              <FilePreview
+                v-else
+                :key="item.objectURL"
+                :object-details="item"
+              ></FilePreview>
+              {{ item.fileName }}
+            </template>
           </ul>
         </section>
 
@@ -158,130 +170,37 @@
         </footer>
       </article>
     </div>
-
-    <!-- using two similar templates for simplicity in js code -->
-    <div ref="fileTemplate">
-      <li class="block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24">
-        <article
-          tabindex="0"
-          class="
-            group
-            w-full
-            h-full
-            rounded-md
-            focus:outline-none focus:shadow-outline
-            elative
-            bg-gray-100
-            cursor-pointer
-            relative
-            shadow-sm
-          "
-        >
-          <img
-            alt="upload preview"
-            class="
-              img-preview
-              hidden
-              w-full
-              h-full
-              sticky
-              object-cover
-              rounded-md
-              bg-fixed
-            "
-          />
-
-          <section
-            class="
-              flex flex-col
-              rounded-md
-              text-xs
-              break-words
-              w-full
-              h-full
-              z-20
-              absolute
-              top-0
-              py-2
-              px-3
-            "
-          >
-            <h1 class="flex-1 group-hover:text-blue-800"></h1>
-            <div class="flex">
-              <span class="p-1 text-blue-800">
-                <i>
-                  <svg
-                    class="fill-current w-4 h-4 ml-auto pt-1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M15 2v5h5v15h-16v-20h11zm1-2h-14v24h20v-18l-6-6z"
-                    />
-                  </svg>
-                </i>
-              </span>
-              <p class="p-1 size text-xs text-gray-700"></p>
-              <button
-                class="
-                  delete
-                  ml-auto
-                  focus:outline-none
-                  hover:bg-gray-300
-                  p-1
-                  rounded-md
-                  text-gray-800
-                "
-              >
-                <svg
-                  class="pointer-events-none fill-current w-4 h-4 ml-auto"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    class="pointer-events-none"
-                    d="M3 6l3 18h12l3-18h-18zm19-4v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711z"
-                  />
-                </svg>
-              </button>
-            </div>
-          </section>
-        </article>
-      </li>
-    </div>
   </div>
 </template>
 
 <script>
 import ImagePreview from '~/components/core-components/Uploads/ImagePreview.vue'
+import FilePreview from '~/components/core-components/Uploads/FilePreview.vue'
 export default {
   components: {
     ImagePreview,
+    FilePreview,
   },
   data() {
     return {
       empty: this.$refs.empty,
       gallery: this.$refs.gallery,
-      FILES: [],
+      FILES: {},
       objectList: [],
       counter: 0,
+      draggedover: false,
     }
+  },
+  watch: {
+    FILES: {
+      handler(val, oldVal) {},
+      deep: true,
+    },
   },
   methods: {
     addFile(target, file) {
-      const imageTemplate = this.$refs.imageTemplate
-      const fileTemplate = this.$refs.fileTemplate
       const isImage = file.type.match('image.*')
       const objectURL = URL.createObjectURL(file)
-
-      console.log(`The element is ${fileTemplate}`)
-      const clone = isImage
-        ? imageTemplate.content.cloneNode(true)
-        : fileTemplate.content.cloneNode(true)
 
       const fileDetails = {
         fileName: file.name,
@@ -295,26 +214,12 @@ export default {
             : file.size + 'b',
       }
       this.objectList.push(fileDetails)
-      clone.querySelector('h1').textContent = file.name
-      clone.querySelector('li').id = objectURL
-      clone.querySelector('.delete').dataset.target = objectURL
-      clone.querySelector('.size').textContent =
-        file.size > 1024
-          ? file.size > 1048576
-            ? Math.round(file.size / 1048576) + 'mb'
-            : Math.round(file.size / 1024) + 'kb'
-          : file.size + 'b'
-
-      isImage &&
-        Object.assign(clone.querySelector('img'), {
-          src: objectURL,
-          alt: file.name,
-        })
-
-      this.empty.classList.add('hidden')
-      target.prepend(clone)
+      // this.empty.classList.add('hidden')
+      // target.prepend(clone)
 
       this.FILES[objectURL] = file
+
+      this.$emit('input', this.FILES)
     },
     uploadAFile(event) {
       const hiddenInput = this.$refs.hiddenInput
@@ -325,15 +230,24 @@ export default {
         this.addFile(this.gallery, file)
       }
     },
-    hasFiles({ dataTransfer: { types = [] } }) {
-      types.includes('Files')
+    hasFiles(e) {
+      const dt = e.dataTransfer
+      if (
+        dt.types &&
+        (dt.types.indexOf
+          ? dt.types.includes('Files')
+          : dt.types.contains('Files'))
+      ) {
+        return true
+      }
+      return false
     },
     // reset counter and append file to gallery when file is dropped
     dropHandler(ev) {
       ev.preventDefault()
       for (const file of ev.dataTransfer.files) {
         this.addFile(this.gallery, file)
-        this.overlay.classList.remove('draggedover')
+        this.draggedover = false
         this.counter = 0
       }
     },
@@ -343,10 +257,14 @@ export default {
       if (!this.hasFiles(e)) {
         return
       }
-      ++this.counter && this.overlay.classList.add('draggedover')
+      if (++this.counter) {
+        this.draggedover = true
+      }
     },
     dragLeaveHandler(e) {
-      --this.counter < 1 && this.overlay.classList.remove('draggedover')
+      if (--this.counter < 1) {
+        this.draggedover = false
+      }
     },
     dragOverHandler(e) {
       if (this.hasFiles(e)) {
@@ -355,18 +273,18 @@ export default {
     },
     // event delegation to caputre delete events
     // fron the waste buckets in the file preview cards
-    galleryClick(target) {
-      if (target.classList.contains('delete')) {
-        const ou = target.dataset.target
-        document.getElementById(ou).remove(ou)
-        this.gallery.children.length === 1 &&
-          this.empty.classList.remove('hidden')
+    galleryClick(event) {
+      if (event.target.classList.contains('delete')) {
+        const ou = event.target.dataset.target
+        this.objectList = this.objectList.filter(function (el) {
+          return el.objectURL !== ou
+        })
         delete this.FILES[ou]
+        this.$emit('input', this.FILES)
       }
     },
     submit() {
       alert(`Submitted Files:\n${JSON.stringify(this.FILES)}`)
-      console.log(this.FILES)
     },
     // clear entire selection
     cancelClick() {

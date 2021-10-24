@@ -1,6 +1,6 @@
 <template>
   <li
-    :id="objectURL"
+    :id="objectDetails.objectURL"
     class="block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24"
   >
     <article
@@ -16,12 +16,12 @@
         cursor-pointer
         relative
         text-transparent
-        hover:text-white
+        hover:text-white hover:bg-blend-darken
         shadow-sm
       "
     >
       <img
-        :alt="fileName"
+        :alt="objectDetails.fileName"
         class="
           img-preview
           w-full
@@ -31,7 +31,7 @@
           rounded-md
           bg-fixed
         "
-        :src="objectURL"
+        :src="objectDetails.objectURL"
       />
 
       <section
@@ -49,7 +49,7 @@
           px-3
         "
       >
-        <h1 class="flex-1">{{ fileName }}</h1>
+        <h1 class="flex-1">{{ objectDetails.fileName }}</h1>
         <div class="flex">
           <span class="p-1">
             <i>
@@ -67,7 +67,7 @@
             </i>
           </span>
 
-          <p class="p-1 size text-xs">{{ size }}</p>
+          <p class="p-1 size text-xs">{{ objectDetails.size }}</p>
           <button
             class="
               delete
@@ -77,7 +77,7 @@
               p-1
               rounded-md
             "
-            :data-target="objectURL"
+            :data-target="objectDetails.objectURL"
           >
             <svg
               class="pointer-events-none fill-current w-4 h-4 ml-auto"
