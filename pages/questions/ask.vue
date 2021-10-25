@@ -18,7 +18,6 @@
       rows="3"
       placeholder="Enter the description of your question."
     ></textarea>
-    {{ input }}
     <validation-error :errors="apiValidationErrors.body" />
     <BaseFileUpload v-model="FILES"></BaseFileUpload>
     <validation-error :errors="apiValidationErrors.email" />

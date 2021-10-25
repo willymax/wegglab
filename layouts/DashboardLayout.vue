@@ -52,6 +52,7 @@
                     path: '/examples/user-profile',
                   }"
                 />
+
                 <!-- <sidebar-item
                 opened
                 :link="{
@@ -60,6 +61,14 @@
                 }"
               /> -->
               </sidebar-item>
+              <sidebar-item
+                opened
+                :link="{ name: 'Questions', path: '/questions' }"
+              />
+              <sidebar-item
+                opened
+                :link="{ name: 'Users', path: '/examples/user-management' }"
+              />
               <sidebar-item
                 :link="{
                   name: 'Icons',

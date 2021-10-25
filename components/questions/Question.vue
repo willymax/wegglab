@@ -1,5 +1,17 @@
 <template>
-  <article class="hover:bg-gray-800 transition duration-350 ease-in-out">
+  <article
+    class="
+      hover:bg-gray-900
+      bg-gray-400
+      transition
+      duration-350
+      ease-in-out
+      rounded
+      overflow-hidden
+      shadow-lg
+      m-2
+    "
+  >
     <div class="flex flex-shrink-0 p-4 pb-0">
       <a href="#" class="flex-shrink-0 group block">
         <div class="flex items-center">
@@ -12,7 +24,7 @@
           </div>
           <div class="ml-3">
             <p class="text-base leading-6 font-medium text-white">
-              Sonali Hirave
+              {{ details.user.name }}
               <span
                 class="
                   text-sm

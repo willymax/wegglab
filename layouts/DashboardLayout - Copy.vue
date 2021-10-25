@@ -25,6 +25,10 @@
           />
           <sidebar-item
             opened
+            :link="{ name: 'Questions', path: '/questions' }"
+          />
+          <sidebar-item
+            opened
             :link="{
               name: 'User Management',
               path: '/examples/user-management',

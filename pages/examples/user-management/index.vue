@@ -182,25 +182,25 @@ export default {
   watch: {
     'pagination.currentPage'(newValue, oldValue) {
       if (newValue !== oldValue) {
-        this.getList()
+        this.getItems()
       }
     },
     'pagination.perPage'(newValue, oldValue) {
       if (newValue !== oldValue) {
-        this.getList()
+        this.getItems()
       }
     },
   },
 
   created() {
-    this.getList()
+    this.getItems()
   },
   mounted() {
     // this.getUsers()
   },
 
   methods: {
-    getList() {
+    getItems() {
       const that = this
       this.$axios
         .get('users', {
@@ -236,7 +236,7 @@ export default {
       } else {
         this.sort = `${prop}`
       }
-      this.getList()
+      this.getItems()
     },
   },
 }

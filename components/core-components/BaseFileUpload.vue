@@ -138,36 +138,7 @@
         </section>
 
         <!-- sticky footer -->
-        <footer class="flex justify-end px-8 pb-8 pt-4">
-          <button
-            ref="submit"
-            class="
-              rounded-sm
-              px-3
-              py-1
-              bg-blue-700
-              hover:bg-blue-500
-              text-white
-              focus:shadow-outline focus:outline-none
-            "
-          >
-            Upload now
-          </button>
-          <button
-            ref="cancel"
-            class="
-              ml-3
-              rounded-sm
-              px-3
-              py-1
-              hover:bg-gray-300
-              focus:shadow-outline focus:outline-none
-            "
-            @click="cancelClick"
-          >
-            Cancel
-          </button>
-        </footer>
+        <footer class="flex justify-end px-8 pb-8 pt-4"></footer>
       </article>
     </div>
   </div>
