@@ -6,7 +6,7 @@ export default {
       sort: 'created_at',
 
       pagination: {
-        perPage: 5,
+        perPage: 10,
         currentPage: 1,
         perPageOptions: [5, 10, 25, 50],
       },

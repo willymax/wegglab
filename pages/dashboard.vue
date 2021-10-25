@@ -1,14 +1,16 @@
 <template>
   <div>
-    <p>Hello dashboard</p>
+    <questions></questions>
   </div>
 </template>
 
 <script>
 import Logout from '~/components/widgets/Logout.vue'
+import Questions from '~/pages/questions/'
 export default {
   components: {
     Logout,
+    Questions,
   },
   layout: 'DashboardLayout',
   middleware({ store, redirect }) {

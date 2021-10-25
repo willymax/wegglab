@@ -1,12 +1,12 @@
 <template>
   <article
     class="
-      hover:bg-gray-900
-      bg-gray-400
+      hover:bg-gray-100
+      bg-white
       transition
       duration-350
       ease-in-out
-      rounded
+      rounded-box
       overflow-hidden
       shadow-lg
       m-2
@@ -23,8 +23,8 @@
             />
           </div>
           <div class="ml-3">
-            <p class="text-base leading-6 font-medium text-white">
-              {{ details.user.name }}
+            <p class="text-base leading-6 font-medium">
+              <!-- {{ details.user.name }} -->
               <span
                 class="
                   text-sm
@@ -46,22 +46,32 @@
     </div>
 
     <div class="pl-16">
-      <p class="text-base width-auto font-medium text-white flex-shrink">
+      <h1 class="text-xl font-bold">{{ details.title }}</h1>
+      <p class="text-base width-auto font-medium flex-shrink">
         {{ details.body }}
-        <a href="#" class="text-blue-400">#100DaysOfCode</a> I was wondering
-        what I can do with <a href="#" class="text-blue-400">#tailwindcss</a>,
-        so just started building Twitter UI using Tailwind and so far it looks
-        so promising. I will post my code after completion. [07/100]
-        <a href="#" class="text-blue-400"> #WomenWhoCode #CodeNewbie</a>
       </p>
 
       <div class="md:flex-shrink pr-6 pt-3">
-        <div
+        <div>
+          <ul class="list-none">
+            <li v-for="(file, index) in details.files" :key="file.id">
+              <a
+                v-if="attachmentISImage(file.file_type)"
+                :href="$getImageUrl(file.file_url)"
+                target="_blank"
+                ><img
+                  class="object-contain h-48"
+                  :src="$getImageUrl(file.file_url)"
+              /></a>
+            </li>
+          </ul>
+        </div>
+        <!-- <div
           class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64"
           :style="{ 'background-image': `url('${details.image}')` }"
         >
           <img class="opacity-0 w-full h-full" :src="details.image" alt="" />
-        </div>
+        </div> -->
       </div>
 
       <div class="flex items-center py-4">
@@ -149,7 +159,6 @@
         </div>
       </div>
     </div>
-    <hr class="border-gray-800" />
   </article>
 </template>
 
@@ -162,6 +171,11 @@ export default {
       default: () => {
         return {}
       },
+    },
+  },
+  methods: {
+    attachmentISImage(fileType) {
+      return fileType != null
     },
   },
 }
