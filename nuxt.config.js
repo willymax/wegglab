@@ -146,6 +146,8 @@ export default {
     '~/plugins/dashboard/JsonApi.js',
     '~/plugins/isDemo.js',
     '~/plugins/app.js',
+    '~/plugins/vue-placeholders.js',
+    '~/plugins/vue-observe-visibility.client.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -190,6 +192,17 @@ export default {
             propertyName: false,
           },
         },
+      },
+      facebook: {
+        endpoints: {
+          userInfo:
+            'https://graph.facebook.com/v6.0/me?fields=id,name,picture{url}',
+        },
+        client_id: process.env.FACEBOOK_CLIENT_ID,
+        scope: ['public_profile', 'email'],
+      },
+      google: {
+        client_id: process.env.GOOGLE_CLIENT_ID,
       },
       redirect: {
         login: '/login',

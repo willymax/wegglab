@@ -24,7 +24,7 @@
           </div>
           <div class="ml-3">
             <p class="text-base leading-6 font-medium">
-              <!-- {{ details.user.name }} -->
+              {{ details.user ? details.user.name : '' }}
               <span
                 class="
                   text-sm
@@ -46,11 +46,14 @@
     </div>
 
     <div class="pl-16">
-      <h1 class="text-xl font-bold">{{ details.title }}</h1>
-      <p class="text-base width-auto font-medium flex-shrink">
-        {{ details.body }}
-      </p>
-
+      <nuxt-link :to="`questions/${details.slug}`">
+        <div>
+          <h1 class="text-xl font-bold">{{ details.title }}</h1>
+          <p class="text-base width-auto font-medium flex-shrink">
+            {{ details.body }}
+          </p>
+        </div>
+      </nuxt-link>
       <div class="md:flex-shrink pr-6 pt-3">
         <div>
           <ul class="list-none">
@@ -176,6 +179,9 @@ export default {
   methods: {
     attachmentISImage(fileType) {
       return fileType != null
+    },
+    getQuestionUrl(slug) {
+      //
     },
   },
 }

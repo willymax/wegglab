@@ -46,8 +46,7 @@
             Welcome back!
           </p>
 
-          <a
-            href="#"
+          <button
             class="
               flex
               items-center
@@ -56,10 +55,12 @@
               text-gray-600
               rounded-lg
               shadow-md
+              w-full
               dark:bg-gray-700 dark:text-gray-200
               hover:bg-gray-100
               dark:hover:bg-gray-600
             "
+            @click="loginWithGoogle"
           >
             <div class="px-4 py-3">
               <svg class="w-6 h-6" viewBox="0 0 40 40">
@@ -85,7 +86,61 @@
             <span class="w-5/6 px-4 py-3 font-bold text-center"
               >Sign in with Google</span
             >
-          </a>
+          </button>
+          <button
+            class="
+              flex
+              items-center
+              justify-center
+              mt-4
+              text-gray-600
+              rounded-lg
+              shadow-md
+              w-full
+              dark:bg-gray-700 dark:text-gray-200
+              hover:bg-gray-100
+              dark:hover:bg-gray-600
+            "
+            @click="loginWithFacebook"
+          >
+            <div class="px-4 py-3">
+              <img
+                class="w-6 h-6"
+                src="https://img.icons8.com/color/48/000000/facebook-new.png"
+              />
+            </div>
+
+            <span class="w-5/6 px-4 py-3 font-bold text-center"
+              >Sign in with Facebook</span
+            >
+          </button>
+
+          <button
+            class="
+              flex
+              items-center
+              justify-center
+              mt-4
+              text-gray-600
+              rounded-lg
+              w-full
+              shadow-md
+              dark:bg-gray-700 dark:text-gray-200
+              hover:bg-gray-100
+              dark:hover:bg-gray-600
+            "
+          >
+            <div class="px-4 py-3">
+              <img
+                class="w-6 h-6"
+                src="https://img.icons8.com/color/48/000000/twitter.png"
+              />
+            </div>
+
+            <span class="w-5/6 px-4 py-3 font-bold text-center"
+              >Sign in with Twiiter</span
+            >
+          </button>
 
           <div class="flex items-center justify-between mt-4">
             <span class="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
@@ -239,6 +294,12 @@ export default {
     )
   },
   methods: {
+    loginWithFacebook() {
+      this.$auth.loginWith('facebook')
+    },
+    loginWithGoogle() {
+      this.$auth.loginWith('google')
+    },
     handleSubmit() {
       this.$auth
         .loginWith('local', {

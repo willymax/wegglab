@@ -13,7 +13,7 @@
                 class="mb-4 btn btn-primary drawer-button lg:hidden"
                 >open menu</label
               >
-              <nuxt></nuxt>
+              <nuxt keep-alive></nuxt>
             </section>
             <aside class="md:w-1/5 h-12 position-relative hidden md:block">
               <p>Hello sidebar</p>
