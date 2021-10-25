@@ -5,8 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
   <style>
     body {
       font-family: Arial;
@@ -213,98 +219,87 @@
       <div class="row d-flex justify-content-center">
         <div class="col-12">
           <ul id="progressbar" class="text-center">
-            <li id="pickingStep" class="step0"></li>
-            <li id="processingStep" class="step0"></li>
-            <li id="confirmationStep" class="step0"></li>
-            <li id="enrouteStep" class="step0"></li>
-            <li id="deliveryStep" class="step0"></li>
+            <li id="pickingStep" class="step0">
+              <p class="font-weight-bold">Picking</p>
+            </li>
+            <li id="processingStep" class="step0">
+              <p class="font-weight-bold">Processing</p>
+            </li>
+            <li id="confirmationStep" class="step0">
+              <p class="font-weight-bold">Confirmation</p>
+            </li>
+            <li id="enrouteStep" class="step0">
+              <p class="font-weight-bold">Order En Route</p>
+            </li>
+            <li id="deliveryStep" class="step0">
+              <p class="font-weight-bold">Order Arrived</p>
+            </li>
           </ul>
         </div>
       </div>
-      <div class="row justify-content-between top">
-        <div class="row d-flex icon-content">
-          <img class="icon" src="https://i.imgur.com/9nnc9Et.png">
-          <div class="d-flex flex-column">
-            <p class="font-weight-bold">Picking</p>
-          </div>
-        </div>
-        <div class="row d-flex icon-content">
-          <img class="icon" src="https://i.imgur.com/u1AzR7w.png">
-          <div class="d-flex flex-column">
-            <p class="font-weight-bold">Processing</p>
-          </div>
-        </div>
-        <div class="row d-flex icon-content">
-          <img class="icon" src="https://i.imgur.com/TkPm63y.png">
-          <div class="d-flex flex-column">
-            <p class="font-weight-bold">Confirmation</p>
-          </div>
-        </div>
-        <div class="row d-flex icon-content">
-          <img class="icon" src="https://i.imgur.com/TkPm63y.png">
-          <div class="d-flex flex-column">
-            <p class="font-weight-bold">Order En Route</p>
-          </div>
-        </div>
-        <div class="row d-flex icon-content">
-          <img class="icon" src="https://i.imgur.com/HdsziHP.png">
-          <div class="d-flex flex-column">
-            <p class="font-weight-bold">Order Arrived</p>
-          </div>
+    </div>
+    <div class="tablediv card px-3 py-3" id="accordion">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+            aria-controls="collapseOne">
+            Order Details:
+          </button>
+        </h5>
+      </div>
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <table>
+            <tr>
+              <td colspan="2" id="statusMessage"></td>
+            </tr>
+            <tr>
+              <td id="shipmentDetails"></td>
+              <td id="referenceNumber"></td>
+            </tr>
+            <tr>
+              <td id="status"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td id="recipientName"></td>
+              <td id="phoneNumber"></td>
+            </tr>
+            <tr>
+              <td id="location"></td>
+              <td id="notes"></td>
+            </tr>
+            <tr>
+              <td id="deliveryDate"></td>
+              <td id="deliveryTime"></td>
+            </tr>
+            <tr>
+              <td id="sendingOrganization"></td>
+              <td id="orderDate"></td>
+            </tr>
+            <tr>
+              <td id="itemName"></td>
+              <td id="quantity"></td>
+            </tr>
+            <tr>
+              <td id="confirmedby"></td>
+              <td id="confirmationdate"></td>
+            </tr>
+            <tr>
+              <td id="confirmationtime"></td>
+              <td id="processingtime"></td>
+            </tr>
+            <tr>
+              <td id="assignedrider"></td>
+              <td id="deliverystartdate"></td>
+            </tr>
+            <tr>
+              <td id="deliverystarttime"></td>
+              <td id="orderdatetime"></td>
+            </tr>
+          </table>
         </div>
       </div>
-    </div>
-    <div class="tablediv card px-3 py-3">
-      <h2 class="text-center">Order Details:</h2>
-      <table>
-        <tr>
-          <td colspan="2" id="statusMessage"></td>
-        </tr>
-        <tr>
-          <td id="shipmentDetails"></td>
-          <td id="referenceNumber"></td>
-        </tr>
-        <tr>
-          <td id="status"></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td id="recipientName"></td>
-          <td id="phoneNumber"></td>
-        </tr>
-        <tr>
-          <td id="location"></td>
-          <td id="notes"></td>
-        </tr>
-        <tr>
-          <td id="deliveryDate"></td>
-          <td id="deliveryTime"></td>
-        </tr>
-        <tr>
-          <td id="sendingOrganization"></td>
-          <td id="orderDate"></td>
-        </tr>
-        <tr>
-          <td id="itemName"></td>
-          <td id="quantity"></td>
-        </tr>
-        <tr>
-          <td id="confirmedby"></td>
-          <td id="confirmationdate"></td>
-        </tr>
-        <tr>
-          <td id="confirmationtime"></td>
-          <td id="processingtime"></td>
-        </tr>
-        <tr>
-          <td id="assignedrider"></td>
-          <td id="deliverystartdate"></td>
-        </tr>
-        <tr>
-          <td id="deliverystarttime"></td>
-          <td id="orderdatetime"></td>
-        </tr>
-      </table>
     </div>
   </div>
   <script>
@@ -416,6 +411,17 @@
     function stopDefAction(evt) {
       evt.preventDefault();
     }
+  </script>
+  <script>
+    $(".btn-primary").click(function () {
+      $(".collapse").collapse('toggle');
+    });
+    $(".btn-success").click(function () {
+      $(".collapse").collapse('show');
+    });
+    $(".btn-warning").click(function () {
+      $(".collapse").collapse('hide');
+    });
   </script>
 </body>
 
