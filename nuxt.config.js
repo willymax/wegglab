@@ -203,6 +203,12 @@ export default {
       },
       google: {
         client_id: process.env.GOOGLE_CLIENT_ID,
+        codeChallengeMethod: '',
+        responseType: 'code',
+        endpoints: {
+          token: 'http://127.0.0.1:8000/api/v1/auth/social-login/google',
+          userInfo: 'http://127.0.0.1:8000/api/v1/auth/user',
+        },
       },
       redirect: {
         login: '/login',

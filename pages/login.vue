@@ -60,7 +60,7 @@
               hover:bg-gray-100
               dark:hover:bg-gray-600
             "
-            @click="loginWithGoogle"
+            @click="socialLogin('google')"
           >
             <div class="px-4 py-3">
               <svg class="w-6 h-6" viewBox="0 0 40 40">
@@ -261,6 +261,7 @@
   </div>
 </template>
 <script>
+import { error } from 'daisyui/colors/colorNames'
 import ValidationError from '~/components/ValidationError.vue'
 import AuthLayout from '~/layouts/AuthLayout.vue'
 import formMixin from '@/mixins/form-mixin'
@@ -292,10 +293,27 @@ export default {
       'Logged is',
       `${this.$auth.loggedIn} ${this.$auth.strategy.token}`
     )
+    // use route object
+    console.log(this.$route.query.fullPath)
+    // directly use params
+    console.log(this.$route.query.error)
+    console.log(this.$route.query.origin + 'token')
+    console.log(this.$route.query.token + 'token')
+    const origin = this.$route.query.origin
+    const token = this.$route.query.token
+    if (origin === 'login' && token) {
+      console.log('Called')
+      this.$auth
+        .setUserToken(token, '')
+        .then(() => this.$toast.success('User set!'))
+    }
   },
   methods: {
     loginWithFacebook() {
       this.$auth.loginWith('facebook')
+    },
+    socialLogin(service) {
+      window.location.href = `${process.env.apiUrl}/auth/login/${service}`
     },
     loginWithGoogle() {
       this.$auth.loginWith('google')
@@ -339,6 +357,7 @@ export default {
       //   // this.setApiValidation(error.response.data.errors)
       // }
     },
+    mounted() {},
   },
 }
 </script>
