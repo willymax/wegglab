@@ -1,11 +1,15 @@
 <template>
   <div class="p-2">
-    <select class="select select-bordered w-full max-w-xs">
-      <option disabled="disabled" selected="selected">Choose Category</option>
-      <option>Mathematics</option>
-      <option>Physcis</option>
-      <option>Science</option>
+    <select
+      v-model="input.subject_id"
+      class="select select-bordered w-full max-w-xs"
+    >
+      <option disabled="disabled" selected="selected">Choose Subject</option>
+      <option v-for="subject in subjects" :key="subject.id" :value="subject.id">
+        {{ subject.name }}
+      </option>
     </select>
+    <validation-error :errors="apiValidationErrors.subject_id" />
     <base-input
       v-model="input.title"
       label="Title"
@@ -42,8 +46,20 @@ export default {
       input: {
         title: 'The title',
         body: 'The body',
+        subject_id: null,
       },
     }
+  },
+  async fetch() {
+    const res = await this.$axios.get(`subjects`)
+    const subjects = res.data.data
+
+    await this.$store.dispatch('questions/SET_SUBJECTS', subjects)
+  },
+  computed: {
+    subjects() {
+      return this.$store.getters['questions/GET_SUBJECTS']
+    },
   },
   watch: {
     FILES(newValue, oldValue) {},
@@ -59,6 +75,7 @@ export default {
       }
       formData.append('title', this.input.title)
       formData.append('body', this.input.body)
+      formData.append('subject_id', this.input.subject_id)
       delete this.$axios.defaults.headers.common['content-type']
       delete this.$axios.defaults.headers.post['content-type']
       this.$axios({
@@ -75,6 +92,7 @@ export default {
             type: 'success',
             message: 'Question created successfully.',
           })
+          this.$router.push('questions')
         })
         .catch((error) => {
           this.setApiValidation(error.response.data.errors)

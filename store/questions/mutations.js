@@ -8,6 +8,9 @@ const mutations = {
   SET_CURRENT_QUESTION(state, question) {
     state.CURRENT_QUESTION = question
   },
+  SET_SUBJECTS(state, subjects) {
+    state.SUBJECTS = subjects
+  },
   remove(state, { todo }) {
     state.list.splice(state.list.indexOf(todo), 1)
   },

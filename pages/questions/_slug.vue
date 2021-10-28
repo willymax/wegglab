@@ -1,12 +1,17 @@
 <template>
   <div class="page-wrapper">
-    <div class="question-content-wrapper">
-      <question-block class="question-block" />
-      <div class="question-aside-wrapper">
-        <question-aside-block class="question-aside-block" />
+    <div v-if="$fetchState.pending">
+      <div class="question-content-wrapper">
+        <question-block class="question-block" />
+        <div class="question-aside-wrapper">
+          <question-aside-block class="question-aside-block" />
+        </div>
       </div>
+      <answers-block class="answers-block" />
     </div>
-    <answers-block class="answers-block" />
+    <template v-else-if="$fetchState.error">
+      <p>{{ $fetchState.error.message }}</p>
+    </template>
   </div>
 </template>
 

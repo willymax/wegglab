@@ -148,7 +148,9 @@
             </div>
 
             <div class="flex items-center mt-4 md:mt-0">
-              <base-button>Post A Question</base-button>
+              <base-nuxt-button-link to="questions/ask"
+                >Post A Question</base-nuxt-button-link
+              >
               <button
                 class="
                   hidden
@@ -255,9 +257,10 @@
 </template>
 <script>
 import BaseButton from '../BaseButton.vue'
+import BaseNuxtButtonLink from '../BaseNuxtButtonLink.vue'
 export default {
   name: 'BaseNav',
-  components: { BaseButton },
+  components: { BaseButton, BaseNuxtButtonLink },
   model: {
     prop: 'show',
     event: 'change',
