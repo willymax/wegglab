@@ -6,19 +6,7 @@
       <div class="rounded-lg shadow bg-base-200 drawer drawer-mobile h-screen">
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
         <main role="main" class="flex flex-col drawer-content">
-          <div class="flex">
-            <section class="w-full md:w-4/5 border-y-0 border-gray-800 p-4">
-              <label
-                for="my-drawer-2"
-                class="mb-4 btn btn-primary drawer-button lg:hidden"
-                >open menu</label
-              >
-              <nuxt keep-alive></nuxt>
-            </section>
-            <aside class="md:w-1/5 h-12 position-relative hidden md:block">
-              <p>Hello sidebar</p>
-            </aside>
-          </div>
+          <nuxt keep-alive></nuxt>
         </main>
         <div class="drawer-side">
           <label for="my-drawer-2" class="drawer-overlay"></label>
@@ -49,7 +37,7 @@
                   opened
                   :link="{
                     name: 'User Profile',
-                    path: '/examples/user-profile',
+                    path: '/user-profile',
                   }"
                 />
 
@@ -57,7 +45,7 @@
                 opened
                 :link="{
                   name: 'User Management',
-                  path: '/examples/user-management',
+                  path: '/user-management',
                 }"
               /> -->
               </sidebar-item>
@@ -67,7 +55,7 @@
               />
               <sidebar-item
                 opened
-                :link="{ name: 'Users', path: '/examples/user-management' }"
+                :link="{ name: 'Users', path: '/user-management' }"
               />
               <sidebar-item
                 :link="{
@@ -97,6 +85,7 @@
           </side-bar>
         </div>
       </div>
+      <content-footer v-if="!$route.meta.hideFooter"></content-footer>
     </div>
   </div>
 </template>

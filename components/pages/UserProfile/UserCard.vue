@@ -147,7 +147,7 @@ export default {
   },
   methods: {
     changePasswoordClicked() {
-      this.$router.push('/examples/user-profile/change-password')
+      this.$router.push('/user-profile/change-password')
     },
   },
 }

@@ -148,7 +148,7 @@
             </div>
 
             <div class="flex items-center mt-4 md:mt-0">
-              <base-nuxt-button-link to="questions/ask"
+              <base-nuxt-button-link to="/questions/ask"
                 >Post A Question</base-nuxt-button-link
               >
               <button

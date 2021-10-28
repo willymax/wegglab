@@ -21,7 +21,7 @@
         >
           <sidebar-item
             opened
-            :link="{ name: 'User Profile', path: '/examples/user-profile' }"
+            :link="{ name: 'User Profile', path: '/user-profile' }"
           />
           <sidebar-item
             opened
@@ -31,7 +31,7 @@
             opened
             :link="{
               name: 'User Management',
-              path: '/examples/user-management',
+              path: '/user-management',
             }"
           />
         </sidebar-item>
