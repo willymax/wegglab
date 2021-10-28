@@ -1,0 +1,55 @@
+<template>
+  <div>
+    <h1 class="text-2xl font-bold">{{ question.title }}</h1>
+    <p class="">{{ question.body }}</p>
+    <div class="tags">
+      <nuxt-link
+        v-for="tag in question.tag_list"
+        :key="tag"
+        :to="{ name: 't-tag', params: { tag } }"
+        class="tag"
+      >
+        #{{ tag }}
+      </nuxt-link>
+    </div>
+    <div class="md:flex-shrink pr-6 pt-3">
+      <div>
+        <ul class="list-none">
+          <li v-for="(file, index) in question.files" :key="file.id">
+            <a
+              v-if="attachmentISImage(file.file_type)"
+              :href="$getImageUrl(file.file_url)"
+              target="_blank"
+              ><img
+                class="object-contain h-48"
+                :src="$getImageUrl(file.file_url)"
+            /></a>
+          </li>
+        </ul>
+      </div>
+      <!-- <div
+          class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64"
+          :style="{ 'background-image': `url('${details.image}')` }"
+        >
+          <img class="opacity-0 w-full h-full" :src="details.image" alt="" />
+        </div> -->
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  computed: {
+    question() {
+      return this.$store.getters['questions/GET_CURRENT_QUESTION']
+    },
+  },
+  methods: {
+    attachmentISImage(fileType) {
+      return fileType != null
+    },
+  },
+}
+</script>
+
+<style lang="scss" scoped></style>

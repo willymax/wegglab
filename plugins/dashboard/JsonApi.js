@@ -12,7 +12,6 @@ export default function ({ $axios, store, redirect }) {
     }
   })
   $axios.interceptors.request.use((request) => {
-    console.log('Starting Request', JSON.stringify(request, null, 2))
     return request
   })
 }

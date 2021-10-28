@@ -10,11 +10,11 @@
         v-for="(route, index) in $route.matched.slice()"
         :key="route.name"
         :active="index === $route.matched.length - 1"
-        style="display:inline-block"
+        style="display: inline-block"
       >
         <nuxt-link
-          :to="{ name: route.name }"
           v-if="index < $route.matched.length - 1"
+          :to="{ name: route.name }"
         >
           {{ route.name }}
         </nuxt-link>
@@ -25,21 +25,21 @@
 </template>
 
 <script>
-  import BreadCrumb from './Breadcrumb';
-  import BreadCrumbItem from './BreadcrumbItem';
+import BreadCrumb from './Breadcrumb'
+import BreadCrumbItem from './BreadcrumbItem'
 
-  export default {
-    name: 'route-breadcrumb',
-    components: {
-      BreadCrumb,
-      BreadCrumbItem
+export default {
+  name: 'RouteBreadcrumb',
+  components: {
+    BreadCrumb,
+    BreadCrumbItem,
+  },
+  methods: {
+    getBreadName(route) {
+      return route.name
     },
-    methods: {
-      getBreadName(route) {
-        return route.name;
-      }
-    }
-  };
+  },
+}
 </script>
 
 <style scoped></style>

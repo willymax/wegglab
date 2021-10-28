@@ -3,16 +3,7 @@
     :is="tag"
     :type="tag === 'button' ? nativeType : ''"
     :disabled="disabled || loading"
-    class="
-      btn
-      hover:bg-primary-700
-      text-blue-700
-      font-semibold
-      py-2
-      px-4
-      border-blue-500
-      hover:border-transparent
-    "
+    class="btn font-semibold btn-primary py-2 px-4 hover:border-transparent"
     :class="[
       { rounded: round },
       { 'bg-transparent': transparent },

@@ -47,34 +47,17 @@
 
     <div class="pl-16">
       <nuxt-link :to="`questions/${details.slug}`">
-        <div>
-          <h1 class="text-xl font-bold">{{ details.title }}</h1>
-          <p class="text-base width-auto font-medium flex-shrink">
-            {{ details.body }}
-          </p>
-        </div>
+        <h1 class="text-xl font-bold">{{ details.title }}</h1>
       </nuxt-link>
-      <div class="md:flex-shrink pr-6 pt-3">
-        <div>
-          <ul class="list-none">
-            <li v-for="(file, index) in details.files" :key="file.id">
-              <a
-                v-if="attachmentISImage(file.file_type)"
-                :href="$getImageUrl(file.file_url)"
-                target="_blank"
-                ><img
-                  class="object-contain h-48"
-                  :src="$getImageUrl(file.file_url)"
-              /></a>
-            </li>
-          </ul>
-        </div>
-        <!-- <div
-          class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64"
-          :style="{ 'background-image': `url('${details.image}')` }"
+      <div class="tags">
+        <nuxt-link
+          v-for="tag in details.tag_list"
+          :key="tag"
+          :to="{ name: 't-tag', params: { tag } }"
+          class="tag"
         >
-          <img class="opacity-0 w-full h-full" :src="details.image" alt="" />
-        </div> -->
+          #{{ tag }}
+        </nuxt-link>
       </div>
 
       <div class="flex items-center py-4">
@@ -177,9 +160,6 @@ export default {
     },
   },
   methods: {
-    attachmentISImage(fileType) {
-      return fileType != null
-    },
     getQuestionUrl(slug) {
       //
     },

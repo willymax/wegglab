@@ -148,6 +148,7 @@
             </div>
 
             <div class="flex items-center mt-4 md:mt-0">
+              <base-button>Post A Question</base-button>
               <button
                 class="
                   hidden
@@ -253,8 +254,10 @@
   </nav> -->
 </template>
 <script>
+import BaseButton from '../BaseButton.vue'
 export default {
   name: 'BaseNav',
+  components: { BaseButton },
   model: {
     prop: 'show',
     event: 'change',

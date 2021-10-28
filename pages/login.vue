@@ -289,20 +289,11 @@ export default {
     }
   },
   mounted() {
-    console.log(
-      'Logged is',
-      `${this.$auth.loggedIn} ${this.$auth.strategy.token}`
-    )
     // use route object
-    console.log(this.$route.query.fullPath)
     // directly use params
-    console.log(this.$route.query.error)
-    console.log(this.$route.query.origin + 'token')
-    console.log(this.$route.query.token + 'token')
     const origin = this.$route.query.origin
     const token = this.$route.query.token
     if (origin === 'login' && token) {
-      console.log('Called')
       this.$auth
         .setUserToken(token, '')
         .then(() => this.$toast.success('User set!'))

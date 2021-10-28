@@ -52,19 +52,15 @@ export default {
       questions: [],
       relativeUrl: 'questions',
       currentPage: 1,
+      size: 5,
     }
   },
   async fetch() {
     const res = await this.$axios.get(
-      `questions?tag=nuxt&state=rising&page=${this.currentPage}`
+      `questions?tag=nuxt&state=rising&page=${this.currentPage}&size=${this.size}`
     )
 
-    // const articles = await fetch(
-    //   `https://dev.to/api/articles?tag=nuxt&state=rising&page=${this.currentPage}`
-    // ).then((res) => res.json())
-
-    this.questions = this.questions.concat(res.data)
-    console.log(JSON.stringify(this.questions))
+    this.questions = this.questions.concat(res.data.data)
   },
   methods: {
     lazyLoadQuestions(isVisible) {

@@ -1,5 +1,6 @@
 const state = () => ({
   list: [],
+  CURRENT_QUESTION: {},
   questions: [
     {
       id: 8,

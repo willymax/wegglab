@@ -1,18 +1,41 @@
 <template>
-  <article>
-    <!-- <h1>{{ article.title }}</h1>
-    <p>{{ article.description }}</p>
-    <nuxt-content :document="article" /> -->
-  </article>
+  <div class="page-wrapper">
+    <div class="question-content-wrapper">
+      <question-block class="question-block" />
+      <div class="question-aside-wrapper">
+        <question-aside-block class="question-aside-block" />
+      </div>
+    </div>
+    <answers-block class="answers-block" />
+  </div>
 </template>
 
 <script>
+import QuestionBlock from '~/components/questions/QuestionBlock.vue'
+import AnswersBlock from '~/components/questions/AnswersBlock.vue'
+import QuestionAsideBlock from '~/components/questions/QuestionAsideBlock.vue'
 export default {
+  components: {
+    QuestionBlock,
+    AnswersBlock,
+    QuestionAsideBlock,
+  },
   layout: 'DashboardLayout',
   asyncData({ params, redirect }) {
     const slug = params.slug
-    console.log(`slug = ${slug}`)
     // const response = await this.$axios.get(slug)
+  },
+  data() {
+    return {
+      question: {},
+    }
+  },
+  async fetch() {
+    let question = await this.$axios.get(`questions/${this.$route.params.slug}`)
+    question = question.data.data
+
+    await this.$store.dispatch('questions/SET_CURRENT_QUESTION', question)
+    this.question = question
   },
 }
 </script>

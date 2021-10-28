@@ -5,6 +5,9 @@ const mutations = {
       done: false,
     })
   },
+  SET_CURRENT_QUESTION(state, question) {
+    state.CURRENT_QUESTION = question
+  },
   remove(state, { todo }) {
     state.list.splice(state.list.indexOf(todo), 1)
   },

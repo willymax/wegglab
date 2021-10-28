@@ -77,7 +77,6 @@ export default {
           })
         })
         .catch((error) => {
-          console.log(JSON.stringify(error.response.data))
           this.setApiValidation(error.response.data.errors)
         })
         .then(function () {
