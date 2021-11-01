@@ -19,11 +19,14 @@
             <a
               v-if="attachmentISImage(file.file_type)"
               :href="$getImageUrl(file.file_url)"
-              target="_blank"
-              ><img
+              @click.prevent="downloadItem(file.file_url)"
+              v-text="file.name"
+            >
+              <!-- <img
                 class="object-contain h-48"
                 :src="$getImageUrl(file.file_url)"
-            /></a>
+            /> -->
+            </a>
           </li>
         </ul>
       </div>
@@ -47,6 +50,29 @@ export default {
   methods: {
     attachmentISImage(fileType) {
       return fileType != null
+    },
+    downloadItem(fileUrl) {
+      this.$axios(`files/download/?fileUrl=${fileUrl}`, {
+        responseType: 'blob',
+      })
+        .then((response) => {
+          const blob = new Blob([response.data], {
+            type: response.headers['content-type'],
+          })
+          const link = document.createElement('a')
+          link.href = URL.createObjectURL(blob)
+          link.download = fileUrl
+          link.click()
+          URL.revokeObjectURL(link.href)
+        })
+        .catch(console.error)
+      // try {
+      //   const question = await this.$axios.get(
+      //     `files/download/?fileUrl=${fileUrl}`
+      //   )
+      // } catch (ex) {
+      //   console.log(ex.message)
+      // }
     },
   },
 }

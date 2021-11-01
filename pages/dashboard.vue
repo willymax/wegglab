@@ -5,8 +5,8 @@
 </template>
 
 <script>
+import Questions from '~/components/questions/Questions.vue'
 import Logout from '~/components/widgets/Logout.vue'
-import Questions from '~/pages/questions/'
 export default {
   components: {
     Logout,

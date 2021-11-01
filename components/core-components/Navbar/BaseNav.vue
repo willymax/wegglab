@@ -26,7 +26,10 @@
             </div>
 
             <!-- Mobile menu button -->
-            <div class="flex md:hidden" @click="toggleMenu">
+            <div
+              class="flex md:hidden"
+              @click="showMobileMenu = !showMobileMenu"
+            >
               <button
                 type="button"
                 class="
@@ -50,19 +53,14 @@
           </div>
 
           <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-          <div
-            class="
-              mobile-menu
-              flex-1
-              sm:hidden
-              md:flex md:items-center md:justify-between
-            "
-          >
+          <div class="flex-1 md:flex md:items-center md:justify-between">
             <div
-              class="flex flex-col -mx-4 md:flex-row md:items-center md:mx-8"
+              class="-mx-4 md:flex-row md:items-center md:mx-8 hidden md:flex"
             >
-              <a
-                href="#"
+              <Nuxt-Link
+                v-for="item in menuItems"
+                :key="item.key"
+                :to="item.to"
                 class="
                   px-2
                   py-1
@@ -80,10 +78,21 @@
                   hover:bg-gray-300
                   dark:hover:bg-gray-700
                 "
-                >Join Slack</a
+                >{{ item.label }}</Nuxt-Link
               >
-              <a
-                href="#"
+            </div>
+            <div
+              v-if="showMobileMenu"
+              class="
+                flex flex-col
+                -mx-4
+                md:flex-row md:items-center md:mx-8 md:hidden
+              "
+            >
+              <Nuxt-Link
+                v-for="item in menuItems"
+                :key="item.key"
+                :to="item.to"
                 class="
                   px-2
                   py-1
@@ -101,53 +110,11 @@
                   hover:bg-gray-300
                   dark:hover:bg-gray-700
                 "
-                >Browse Topics</a
-              >
-              <a
-                href="#"
-                class="
-                  px-2
-                  py-1
-                  mx-2
-                  mt-2
-                  text-sm
-                  font-medium
-                  text-gray-700
-                  transition-colors
-                  duration-200
-                  transform
-                  rounded-md
-                  md:mt-0
-                  dark:text-gray-200
-                  hover:bg-gray-300
-                  dark:hover:bg-gray-700
-                "
-                >Random Item</a
-              >
-              <a
-                href="#"
-                class="
-                  px-2
-                  py-1
-                  mx-2
-                  mt-2
-                  text-sm
-                  font-medium
-                  text-gray-700
-                  transition-colors
-                  duration-200
-                  transform
-                  rounded-md
-                  md:mt-0
-                  dark:text-gray-200
-                  hover:bg-gray-300
-                  dark:hover:bg-gray-700
-                "
-                >Experts</a
+                >{{ item.label }}</Nuxt-Link
               >
             </div>
 
-            <div class="flex items-center mt-4 md:mt-0">
+            <div class="flex mt-4 md:mt-0 relative justify-between">
               <base-nuxt-button-link to="/questions/ask"
                 >Post A Question</base-nuxt-button-link
               >
@@ -181,41 +148,7 @@
                   />
                 </svg>
               </button>
-
-              <button
-                type="button"
-                class="flex items-center focus:outline-none"
-                aria-label="toggle profile dropdown"
-              >
-                <div
-                  class="
-                    w-8
-                    h-8
-                    overflow-hidden
-                    border-2 border-gray-400
-                    rounded-full
-                  "
-                >
-                  <img
-                    src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                    class="object-cover w-full h-full"
-                    alt="avatar"
-                  />
-                </div>
-
-                <h3
-                  class="
-                    mx-2
-                    text-sm
-                    font-medium
-                    text-gray-700
-                    dark:text-gray-200
-                    md:hidden
-                  "
-                >
-                  Khatab wedaa
-                </h3>
-              </button>
+              <user-with-menu color="blue"></user-with-menu>
             </div>
           </div>
         </div>
@@ -258,9 +191,10 @@
 <script>
 import BaseButton from '../BaseButton.vue'
 import BaseNuxtButtonLink from '../BaseNuxtButtonLink.vue'
+import UserWithMenu from '~/components/widgets/UserWithMenu.vue'
 export default {
   name: 'BaseNav',
-  components: { BaseButton, BaseNuxtButtonLink },
+  components: { BaseButton, BaseNuxtButtonLink, UserWithMenu },
   model: {
     prop: 'show',
     event: 'change',
@@ -314,6 +248,28 @@ export default {
       description: 'Navbar color type',
     },
   },
+  data() {
+    return {
+      showMobileMenu: false,
+      menuItems: [
+        {
+          label: 'Home',
+          to: '/',
+          key: 1,
+        },
+        {
+          label: 'About Us',
+          to: 'about-us',
+          key: 2,
+        },
+        {
+          label: 'Contact Us',
+          to: 'contact-us',
+          key: 3,
+        },
+      ],
+    }
+  },
   computed: {
     classes() {
       const color = `bg-${this.type}`
@@ -333,9 +289,10 @@ export default {
       return this.$slots.default
     },
   },
+  watch: {},
   methods: {
     toggleMenu() {
-      this.$emit('change', !this.show)
+      this.showMobileMenu = !this.showMobileMenu
     },
     closeMenu() {
       this.$emit('change', false)

@@ -46,7 +46,7 @@
     </div>
 
     <div class="pl-16">
-      <nuxt-link :to="`questions/${details.slug}`">
+      <nuxt-link :to="`/questions/${details.slug}`">
         <h1 class="text-xl font-bold">{{ details.title }}</h1>
       </nuxt-link>
       <div class="tags">

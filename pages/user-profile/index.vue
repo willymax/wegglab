@@ -13,15 +13,6 @@
               >
             </div>
           </div>
-          <div class="bg-blue-300">
-            <ul class="list-none">
-              <li v-for="(item, index) in questions" :key="item.id">
-                <!--second tweet-->
-                <question :details="item"></question>
-              </li>
-            </ul>
-            {{ questions }}
-          </div>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@
       <template v-if="$fetchState.pending">
         <div class="article-cards-wrapper">
           <content-placeholders
-            v-for="p in 30"
+            v-for="p in 5"
             :key="p"
             rounded
             class="article-card-block"

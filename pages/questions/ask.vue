@@ -100,7 +100,7 @@ export default {
             type: 'success',
             message: 'Question created successfully.',
           })
-          this.$router.push('questions')
+          this.$router.push('/questions')
         })
         .catch((error) => {
           this.setApiValidation(error.response.data.errors)

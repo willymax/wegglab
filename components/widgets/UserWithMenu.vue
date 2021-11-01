@@ -1,21 +1,13 @@
 <template>
-  <div class="dropdown-wrapper relative m-8">
-    <button
-      :class="'bg-' + color + '-500'"
-      class="
-        text-white
-        font-bold
-        py-2
-        px-4
-        whitespace-no-wrap
-        rounded
-        transition
-        duration-300
-      "
-      @click="show = !show"
-    >
-      Dropdown <i class="fas fa-chevron-down ml-2"></i>
-    </button>
+  <div class="dropdown-wrapper my-auto">
+    <div class="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+      <img
+        src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+        class="object-cover w-full h-full transition duration-300"
+        alt="avatar"
+        @click="show = !show"
+      />
+    </div>
     <transition :name="animation">
       <div
         v-if="show"
@@ -30,6 +22,7 @@
           shadow-lg
           w-40
           max-w-xs
+          right-0
         "
       >
         <ul class="list-none overflow-hidden rounded">
@@ -50,8 +43,14 @@
 <script>
 export default {
   props: {
-    color: String,
-    animation: String,
+    color: {
+      type: String,
+      default: '',
+    },
+    animation: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -65,9 +64,9 @@ export default {
 <style>
 button {
   cursor: pointer;
-  &:focus {
-    outline: none;
-  }
+}
+button:focus {
+  outline: none;
 }
 
 /* Animations */
