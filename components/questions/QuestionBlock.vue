@@ -20,8 +20,12 @@
               v-if="attachmentISImage(file.file_type)"
               :href="$getImageUrl(file.file_url)"
               @click.prevent="downloadItem(file.file_url)"
-              v-text="file.name"
             >
+              <span class="text-xl"
+                ><img src="~assets/document.svg" class="inline" />
+                {{ file.name }}</span
+              >
+
               <!-- <img
                 class="object-contain h-48"
                 :src="$getImageUrl(file.file_url)"
