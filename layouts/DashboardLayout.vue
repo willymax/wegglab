@@ -57,7 +57,7 @@
                 opened
                 :link="{ name: 'Users', path: '/user-management' }"
               />
-              <sidebar-item
+              <!-- <sidebar-item
                 :link="{
                   name: 'Icons',
                   path: '/components/icons',
@@ -80,7 +80,7 @@
                   path: '/maps/google',
                 }"
               >
-              </sidebar-item>
+              </sidebar-item> -->
             </template>
           </side-bar>
         </div>
