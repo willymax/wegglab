@@ -39,7 +39,7 @@
               dark:text-white
             "
           >
-            Brand
+            Wegglab
           </h2>
 
           <p class="text-xl text-center text-gray-600 dark:text-gray-200">

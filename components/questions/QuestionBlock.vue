@@ -34,12 +34,6 @@
           </li>
         </ul>
       </div>
-      <!-- <div
-          class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64"
-          :style="{ 'background-image': `url('${details.image}')` }"
-        >
-          <img class="opacity-0 w-full h-full" :src="details.image" alt="" />
-        </div> -->
     </div>
   </div>
 </template>

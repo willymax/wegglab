@@ -1,41 +1,34 @@
 <template>
-  <div class="md:flex">
-    <div class="md:flex-shrink-0">
-      <img
-        class="h-48 w-full object-cover md:w-48"
-        src="/img/store.jpg"
-        alt="Man looking at item at a store"
-      />
-    </div>
-    <div class="p-8">
-      <div
-        class="uppercase tracking-wide text-sm text-indigo-500 font-semibold"
-      >
-        Case study
-      </div>
-      <a
-        href="#"
+  <card class="ma-5">
+    <div class="text-center">
+      <h2>No Answers Yet</h2>
+      <button
         class="
-          block
-          mt-1
-          text-lg
-          leading-tight
-          font-medium
-          text-black
-          hover:underline
+          py-2
+          px-4
+          bg-green-500
+          text-white
+          font-semibold
+          rounded-lg
+          shadow-md
+          hover:bg-green-700
+          focus:outline-none
+          focus:ring-2
+          focus:ring-green-400
+          focus:ring-opacity-75
         "
-        >Finding customers for your new business</a
       >
-      <p class="mt-2 text-gray-500">
-        Getting a new business off the ground is a lot of hard work. Here are
-        five ideas you can use to find your first customers.
-      </p>
+        Be The First To Answer
+      </button>
     </div>
-  </div>
+  </card>
 </template>
 
 <script>
-export default {}
+import Card from '../core-components/Cards/Card.vue'
+export default {
+  components: { Card },
+}
 </script>
 
 <style lang="scss" scoped></style>

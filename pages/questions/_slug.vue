@@ -1,7 +1,7 @@
 <template>
   <with-right-side-bar>
     <template #sidebar>
-      <answers-block class="answers-block" />
+      <p>We will include the other related questions here</p>
     </template>
     <div class="page-wrapper">
       <template v-if="$fetchState.pending">

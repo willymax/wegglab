@@ -20,8 +20,8 @@
                   hover:text-gray-700
                   dark:hover:text-gray-300
                 "
-                href="#"
-                >Brand</a
+                href="/"
+                >Wegglab</a
               >
             </div>
 

@@ -18,6 +18,7 @@
         <p>{{ $fetchState.error.message }}</p>
       </template>
       <template v-else>
+        <h1 class="text-2xl">Questions</h1>
         <question
           v-for="(item, index) in questions"
           :key="item.id"
