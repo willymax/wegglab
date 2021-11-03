@@ -21,7 +21,6 @@
           bg-white
           items-center
           rounded
-          pr-10
         "
         :class="[
           { 'input-group': hasIcon },
@@ -60,7 +59,6 @@
               dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600
               focus:border-blue-500
               dark:focus:border-blue-500
-              focus:outline-none focus:ring
             "
             :class="[
               { 'is-valid': valid && validated && successMessage },
@@ -128,7 +126,7 @@ export default {
     labelClasses: {
       type: String,
       description: 'Input label css classes',
-      default: 'form-control-label',
+      default: 'block mb-2 text-sm font-bold text-gray-700',
     },
     inputClasses: {
       type: String,

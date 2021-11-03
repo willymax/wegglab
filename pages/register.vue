@@ -1,212 +1,183 @@
 <template>
-  <div>
-    <!-- Header -->
-    <div class="header bg-gradient-success py-7 py-lg-8 pt-lg-9">
-      <div class="container">
-        <notifications></notifications>
-        <div class="header-body text-center mb-7">
-          <div class="row justify-content-center">
-            <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-              <h1 class="text-white">Create an account</h1>
-              <p class="text-lead text-white">
-                Use these awesome forms to login or create new account in your
-                project for free.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="separator separator-bottom separator-skew zindex-100">
-        <svg
-          x="0"
-          y="0"
-          viewBox="0 0 2560 100"
-          preserveAspectRatio="none"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
+  <!-- Container -->
+  <div class="container mx-auto">
+    <div class="flex justify-center px-6 my-12">
+      <!-- Row -->
+      <div class="w-full xl:w-3/4 lg:w-11/12 flex">
+        <!-- Col -->
+        <div
+          class="
+            w-full
+            h-auto
+            bg-white
+            hidden
+            lg:block lg:w-5/12
+            bg-cover
+            rounded-l-lg
+          "
+          :style="{
+            backgroundImage: 'url(' + require('@/assets/login.svg') + ')',
+          }"
         >
-          <polygon
-            class="fill-default"
-            points="2560 0 2560 100 0 100"
-          ></polygon>
-        </svg>
-      </div>
-    </div>
-    <!-- Page content -->
-    <div class="container mt--8 pb-5">
-      <!-- Table -->
-      <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8">
-          <div class="card bg-secondary border-0">
-            <div class="card-header bg-transparent pb-5">
-              <div class="text-muted text-center mt-2 mb-4">
-                <small>Sign up with</small>
+          <!-- <img src="~assets/login.svg" class="inline" /> -->
+        </div>
+        <!-- Col -->
+        <div class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
+          <div>
+            <google-button @click="socialLogin('google')"></google-button>
+            <facebook-button @click="socialLogin('facebook')"></facebook-button>
+            <twitter-button @click="socialLogin('twitter')"></twitter-button>
+          </div>
+          <hr class="mb-6 border-t" />
+          <h3 class="pt-4 text-2xl text-center">Create an Account!</h3>
+          <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+            <div class="mb-4 md:flex md:justify-between">
+              <div class="mb-4 md:mr-2 md:mb-0">
+                <base-input
+                  v-model="form.data.attributes.firstName"
+                  alternative
+                  class="mb-3"
+                  placeholder="First Name"
+                  name="First Name"
+                  label="First Name"
+                ></base-input>
+                <validation-error :errors="apiValidationErrors.firstName" />
               </div>
-              <div class="text-center">
-                <a href="#" class="btn btn-neutral btn-icon mr-4">
-                  <span class="btn-inner--icon"
-                    ><img src="~/static/img/icons/common/github.svg"
-                  /></span>
-                  <span class="btn-inner--text">Github</span>
-                </a>
-                <a href="#" class="btn btn-neutral btn-icon">
-                  <span class="btn-inner--icon"
-                    ><img src="~/static/img/icons/common/google.svg"
-                  /></span>
-                  <span class="btn-inner--text">Google</span>
-                </a>
+              <div class="md:ml-2">
+                <base-input
+                  v-model="form.data.attributes.lastName"
+                  alternative
+                  class="mb-3"
+                  placeholder="Last Name"
+                  name="Last Name"
+                  label="Last Name"
+                ></base-input>
+                <validation-error :errors="apiValidationErrors.lastName" />
               </div>
             </div>
-            <div class="card-body px-lg-5 py-lg-5">
-              <div class="text-center text-muted mb-4">
-                <small>Or sign up with credentials</small>
-              </div>
-              <form
-                role="form"
-                @submit.prevent="handleRegister"
-                @keydown.enter="handleRegister"
-              >
-                <base-input
-                  v-model="form.data.attributes.name"
-                  alternative
-                  class="mb-3"
-                  prepend-icon="ni ni-hat-3"
-                  placeholder="Name"
-                  name="Name"
-                >
-                </base-input>
-                <validation-error :errors="apiValidationErrors.name" />
-
-                <base-input
-                  v-model="form.data.attributes.email"
-                  alternative
-                  class="mb-3"
-                  prepend-icon="ni ni-email-83"
-                  placeholder="Email"
-                  name="Email"
-                >
-                </base-input>
-                <validation-error :errors="apiValidationErrors.email" />
-
+            <div class="mb-4">
+              <base-input
+                v-model="form.data.attributes.email"
+                alternative
+                class="mb-3"
+                placeholder="Email"
+                name="Email"
+                label="Email"
+                type="email"
+              ></base-input>
+              <validation-error :errors="apiValidationErrors.email" />
+            </div>
+            <div class="mb-4 md:flex md:justify-between">
+              <div class="mb-4 md:mr-2 md:mb-0">
                 <base-input
                   v-model="form.data.attributes.password"
                   alternative
                   class="mb-3"
-                  prepend-icon="ni ni-lock-circle-open"
-                  placeholder="Password"
-                  type="password"
+                  placeholder="******************"
                   name="Password"
-                >
-                </base-input>
-                <password
-                  v-model="form.data.attributes.password"
-                  class="mb-3"
-                  :strength-meter-only="true"
-                  :show-strength-meter="false"
-                  @score="showScore"
-                />
-
+                  type="password"
+                  label="Password"
+                ></base-input>
                 <validation-error :errors="apiValidationErrors.password" />
-
+              </div>
+              <div class="md:ml-2">
                 <base-input
                   v-model="form.data.attributes.password_confirmation"
                   alternative
                   class="mb-3"
-                  prepend-icon="ni ni-lock-circle-open"
-                  placeholder="Confirm Password"
+                  placeholder="******************"
+                  name="password_confirmation"
                   type="password"
-                  name="Password confirmation"
-                >
-                </base-input>
-
-                <validation-error
-                  :errors="apiValidationErrors.password_confirmation"
-                />
-
-                <div class="text-muted font-italic">
-                  <small
-                    >password strength:
-
-                    <template v-if="form.data.attributes.scors === 0">
-                      <span class="text-danger font-weight-700">
-                        very weak
-                      </span>
-                    </template>
-
-                    <template v-if="form.data.attributes.scors === 1">
-                      <span class="text-danger font-weight-700"> weak </span>
-                    </template>
-
-                    <template v-if="form.data.attributes.scors === 2">
-                      <span class="text-warning font-weight-700"> medium </span>
-                    </template>
-
-                    <template v-if="form.data.attributes.scors === 3">
-                      <span class="text-success font-weight-700"> strong </span>
-                    </template>
-
-                    <template v-if="form.data.attributes.scors === 4">
-                      <span class="text-success font-weight-700">
-                        very strong
-                      </span>
-                    </template>
-                  </small>
-                </div>
-
-                <div class="row my-4">
-                  <div class="col-12">
-                    <base-input
-                      :rules="{ required: { allowFalse: false } }"
-                      name="Privacy Policy"
-                    >
-                      <base-checkbox
-                        v-model="form.data.attributes.agree"
-                        name="agree"
-                      >
-                        <span class="text-muted"
-                          >I agree with the
-                          <a href="#!">Terms and conditions</a></span
-                        >
-                      </base-checkbox>
-                    </base-input>
-                  </div>
-                </div>
-                <div class="text-center">
-                  <base-button
-                    type="primary"
-                    class="my-4"
-                    @click.prevent="handleRegister"
-                    >Create account</base-button
-                  >
-                </div>
-              </form>
+                  label="Confirm Password"
+                ></base-input>
+                <validation-error :errors="apiValidationErrors.password" />
+              </div>
             </div>
-          </div>
+            <div class="mb-6 text-center">
+              <button
+                class="
+                  w-full
+                  px-4
+                  py-2
+                  font-bold
+                  text-white
+                  bg-blue-500
+                  rounded-full
+                  hover:bg-blue-700
+                  focus:outline-none focus:shadow-outline
+                "
+                type="button"
+                @click="register"
+              >
+                Register Account
+              </button>
+            </div>
+            <hr class="mb-6 border-t" />
+            <div class="text-center">
+              <a
+                class="
+                  inline-block
+                  text-sm text-blue-500
+                  align-baseline
+                  hover:text-blue-800
+                "
+                href="#"
+              >
+                Forgot Password?
+              </a>
+            </div>
+            <div class="text-center">
+              <nuxt-link
+                class="
+                  inline-block
+                  text-sm text-blue-500
+                  align-baseline
+                  hover:text-blue-800
+                "
+                to="login"
+              >
+                Already have an account? Login!
+              </nuxt-link>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </template>
-<script>
-import Password from 'vue-password-strength-meter'
-import ValidationError from '~/components/ValidationError.vue'
-import formMixin from '@/mixins/form-mixin'
-import BaseCheckbox from '~/components/core-components/Inputs/BaseCheckbox.vue'
 
+<script>
+import ValidationError from '~/components/ValidationError.vue'
+import FacebookButton from '~/components/buttons/FacebookButton.vue'
+import GoogleButton from '~/components/buttons/GoogleButton.vue'
+import TwitterButton from '~/components/buttons/TwitterButton.vue'
+import BaseInput from '~/components/core-components/Inputs/BaseInput.vue'
+import formMixin from '@/mixins/form-mixin'
 export default {
-  name: 'Register',
-  components: { ValidationError, Password, BaseCheckbox },
+  auth: false,
+  components: {
+    BaseInput,
+    GoogleButton,
+    FacebookButton,
+    TwitterButton,
+    ValidationError,
+  },
   mixins: [formMixin],
   layout: 'AuthLayout',
-  auth: 'guest',
-
+  middleware({ store, redirect }) {
+    // If the user is authenticated
+    if (store.$auth.loggedIn) {
+      return redirect('/dashboard')
+    }
+  },
   data() {
     return {
       form: {
         data: {
           type: 'token',
           attributes: {
-            name: '',
+            firstName: '',
+            lastName: '',
             email: '',
             password: '',
             password_confirmation: '',
@@ -218,36 +189,33 @@ export default {
     }
   },
   methods: {
-    showScore(score) {
-      this.form.data.attributes.scors = score
+    socialLogin(service) {
+      window.location.href = `${process.env.apiUrl}/auth/login/${service}`
     },
-    async handleRegister() {
-      if (!this.form.data.attributes.agree) {
-        this.$notify({
-          type: 'danger',
-          message: 'You need to agree with our terms and conditions.',
-        })
-        return
-      }
-
+    async register() {
+      // this.$store.dispatch('register/create', this.form.data.attributes)
       try {
-        await this.$store.dispatch('register/create', this.form.data)
-
-        // log in the user after successful register
+        await this.$axios.post('auth/register', this.form.data.attributes)
         await this.$auth.loginWith('local', {
-          data: this.form,
+          data: {
+            password: this.form.data.attributes.password,
+            email: this.form.data.attributes.email,
+          },
         })
+        console.log('this.$router.push')
         this.$router.push('/dashboard')
-      } catch (error) {
-        this.setApiValidation(error.response.data.errors)
-
+      } catch (e) {
+        this.error = e.response.data.message
+        // handle error
         this.$notify({
           type: 'danger',
-          message: 'Oops, something went wrong!',
+          message: 'An error has occurred!',
         })
+        this.setApiValidation(e.response.data.errors)
       }
     },
   },
 }
 </script>
-<style></style>
+
+<style lang="scss" scoped></style>

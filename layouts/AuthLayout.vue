@@ -2,7 +2,7 @@
   <!-- <body class="antialiased h-screen"> -->
   <div class="h-screen">
     <base-nav></base-nav>
-    <div class="main-content">
+    <div class="main-content bg-gray-200">
       <nuxt></nuxt>
     </div>
   </div>

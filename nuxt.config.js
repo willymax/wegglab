@@ -220,6 +220,7 @@ export default {
       },
       redirect: {
         login: '/login',
+        register: '/register',
         logout: '/',
         callback: '/login',
         home: '/dashboard',

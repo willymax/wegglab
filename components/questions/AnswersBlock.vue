@@ -17,11 +17,10 @@ export default {
   },
   methods: {
     hasNoAnswers() {
-      console.log(
-        'this.question?.answers.length === 0' +
-          (this.question?.answers.length === 0)
-      )
-      return this.question?.answers.length === 0
+      if (this.question) {
+        return this.question?.answers.length === 0
+      }
+      return true
     },
   },
 }

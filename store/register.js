@@ -7,7 +7,7 @@ export const state = () => ({
 export const actions = {
   async create({ commit }, data) {
     /* send register action to API */
-    await this.$axios.post('/register', { data })
+    await this.$axios.post('/auth/register', { data })
 
     /* extract login data  */
     const loginData = {
