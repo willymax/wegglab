@@ -53,10 +53,7 @@
                 opened
                 :link="{ name: 'Questions', path: '/questions' }"
               />
-              <sidebar-item
-                opened
-                :link="{ name: 'Users', path: '/user-management' }"
-              />
+              <sidebar-item opened :link="{ name: 'Users', path: '/users' }" />
               <!-- <sidebar-item
                 :link="{
                   name: 'Icons',

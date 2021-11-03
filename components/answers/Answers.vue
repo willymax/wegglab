@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="">Answers</h2>
+    <h2 class="text-3xl font-normal leading-normal mt-0 mb-2">Answers</h2>
     <answer
       v-for="answer in question.answers"
       :key="answer.id"

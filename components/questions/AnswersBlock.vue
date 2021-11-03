@@ -1,6 +1,6 @@
 <template>
   <div>
-    <no-answers v-if="question.answers.length === 0"></no-answers>
+    <no-answers v-if="hasNoAnswers()"></no-answers>
     <answers v-else></answers>
   </div>
 </template>
@@ -13,6 +13,15 @@ export default {
   computed: {
     question() {
       return this.$store.getters['questions/GET_CURRENT_QUESTION']
+    },
+  },
+  methods: {
+    hasNoAnswers() {
+      console.log(
+        'this.question?.answers.length === 0' +
+          (this.question?.answers.length === 0)
+      )
+      return this.question?.answers.length === 0
     },
   },
 }

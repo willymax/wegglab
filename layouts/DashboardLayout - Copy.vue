@@ -30,8 +30,8 @@
           <sidebar-item
             opened
             :link="{
-              name: 'User Management',
-              path: '/user-management',
+              name: 'Users',
+              path: '/users',
             }"
           />
         </sidebar-item>
