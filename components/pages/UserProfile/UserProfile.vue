@@ -61,7 +61,7 @@
           <!-- User basic-->
           <div class="text-center">
             <h2 class="text-xl leading-6 font-bold">
-              {{ user.name }}
+              <span>{{ user.first_name }} {{ user.last_name }}</span>
             </h2>
             <p class="text-sm leading-5 font-medium text-gray-600">
               Student/Expert

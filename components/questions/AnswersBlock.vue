@@ -1,24 +1,30 @@
 <template>
   <div>
-    <no-answers v-if="hasNoAnswers()"></no-answers>
-    <answers v-else></answers>
+    <answers v-if="!hasNoAnswers()"></answers>
+    <post-answer v-if="addingAnswer"></post-answer>
+    <add-answers>Post Answer</add-answers>
   </div>
 </template>
 
 <script>
+import AddAnswers from '../answers/AddAnswers.vue'
 import Answers from '../answers/Answers.vue'
-import NoAnswers from '../answers/NoAnswers.vue'
+
+import PostAnswer from '../answers/PostAnswer.vue'
 export default {
-  components: { NoAnswers, Answers },
+  components: { Answers, PostAnswer, AddAnswers },
   computed: {
     question() {
       return this.$store.getters['questions/GET_CURRENT_QUESTION']
     },
+    addingAnswer() {
+      return this.$store.getters['answers/addingAnswer']
+    },
   },
   methods: {
     hasNoAnswers() {
-      if (this.question) {
-        return this.question?.answers.length === 0
+      if (this.question && this.question.answers) {
+        return this.question.answers.length === 0
       }
       return true
     },

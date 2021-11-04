@@ -17,5 +17,8 @@ const mutations = {
   toggle(state, todo) {
     todo.done = !todo.done
   },
+  ADD_QUESTION_ANSWERS(state, question) {
+    state.CURRENT_QUESTION.answers.unshift(question)
+  },
 }
 export default mutations

@@ -11,7 +11,7 @@
         </div>
         <div class="ml-3">
           <p class="text-base leading-6 font-medium">
-            {{ user.name }}
+            <span>{{ user.first_name }} {{ user.last_name }}</span>
           </p>
           <p>
             <span

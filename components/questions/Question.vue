@@ -24,7 +24,7 @@
           </div>
           <div class="ml-3">
             <p class="text-base leading-6 font-medium">
-              {{ details.user ? details.user.name : '' }}
+              {{ details.user ? details.user.first_name : '' }}
               <span
                 class="
                   text-sm

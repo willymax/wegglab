@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <card>
     <h1 class="text-2xl font-bold">{{ question.title }}</h1>
     <p class="">{{ question.body }}</p>
     <div class="tags">
@@ -35,11 +35,13 @@
         </ul>
       </div>
     </div>
-  </div>
+  </card>
 </template>
 
 <script>
+import Card from '../core-components/Cards/Card.vue'
 export default {
+  components: { Card },
   computed: {
     question() {
       return this.$store.getters['questions/GET_CURRENT_QUESTION']

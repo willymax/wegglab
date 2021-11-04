@@ -1,7 +1,6 @@
 <template>
-  <card class="ma-5">
+  <card v-if="!addingAnswer" class="ma-5">
     <div class="text-center">
-      <h2>No Answers Yet</h2>
       <button
         class="
           py-2
@@ -17,17 +16,28 @@
           focus:ring-green-400
           focus:ring-opacity-75
         "
+        @click="handleClick"
       >
-        Be The First To Answer
+        <slot></slot>
       </button>
     </div>
   </card>
 </template>
-
 <script>
+import BaseNuxtButtonLink from '../core-components/BaseNuxtButtonLink.vue'
 import Card from '../core-components/Cards/Card.vue'
 export default {
-  components: { Card },
+  components: { Card, BaseNuxtButtonLink },
+  computed: {
+    addingAnswer() {
+      return this.$store.getters['answers/addingAnswer']
+    },
+  },
+  methods: {
+    handleClick(evt) {
+      this.$store.dispatch('answers/updateAddingAnswer', !this.addingAnswer)
+    },
+  },
 }
 </script>
 
