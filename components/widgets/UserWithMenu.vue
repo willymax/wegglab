@@ -26,13 +26,16 @@
         "
       >
         <ul class="list-none overflow-hidden rounded">
-          <li v-for="car in cars" :key="car">
+          <li v-for="option in options" :key="option">
             <a
               href=""
               class="flex py-2 px-4 transition duration-300"
               :class="'theme-' + color"
-              >{{ car }}</a
+              >{{ option }}</a
             >
+            <li>
+              <logout></logout>
+            </li>
           </li>
         </ul>
       </div>
@@ -41,7 +44,9 @@
 </template>
 
 <script>
+import Logout from './Logout.vue'
 export default {
+  components: { Logout },
   props: {
     color: {
       type: String,
@@ -55,7 +60,7 @@ export default {
   data() {
     return {
       show: false,
-      cars: ['BMW', 'Mercedes', 'Audi', 'Volvo'],
+      options: ['Settings'],
     }
   },
 }

@@ -44,6 +44,11 @@ export default {
       },
     }
   },
+  async fetch() {
+    const res = await this.$axios.get(`users/${this.$route.params.id}`)
+
+    this.user = res.data.data
+  },
   computed: {
     ...mapState('questions', {
       questions: (state) => state.questions,
