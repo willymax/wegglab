@@ -31,6 +31,9 @@
           </div>
           <!-- Follow Button -->
           <div class="flex flex-row flex-wrap text-right">
+            <base-nuxt-button-link to="/billing/update"
+              >Update Billing</base-nuxt-button-link
+            >
             <button
               class="
                 flex
@@ -127,7 +130,9 @@
   </div>
 </template>
 <script>
+import BaseNuxtButtonLink from '~/components/core-components/BaseNuxtButtonLink.vue'
 export default {
+  components: { BaseNuxtButtonLink },
   data() {
     return {
       key: '',
@@ -146,6 +151,13 @@ export default {
     },
   },
   methods: {
+    async goToBilling() {
+      try {
+        const res = await this.$axios.get('billing/billing-portal')
+      } catch (error) {
+        console.log(error)
+      }
+    },
     changePasswoordClicked() {
       this.$router.push('/user-profile/change-password')
     },

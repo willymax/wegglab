@@ -10,6 +10,7 @@
         </main>
         <div class="drawer-side">
           <label for="my-drawer-2" class="drawer-overlay"></label>
+          <side-bar-menu></side-bar-menu>
           <side-bar
             class="p-4 overflow-y-auto w-80 bg-base-100 text-base-content"
           >
@@ -96,6 +97,7 @@ import DashboardNavbar from '~/components/layouts/argon/DashboardNavbar.vue'
 import ContentFooter from '~/components/layouts/argon/ContentFooter.vue'
 import DashboardContent from '~/components/layouts/argon/Content.vue'
 import Logout from '~/components/widgets/Logout.vue'
+import SideBarMenu from '~/components/layouts/argon/SideBarMenu.vue'
 function hasElement(className) {
   return document.getElementsByClassName(className).length > 0
 }
@@ -117,6 +119,7 @@ export default {
     ContentFooter,
     DashboardContent,
     Logout,
+    SideBarMenu,
   },
   mounted() {
     this.initScrollbar(), this.$store.dispatch('profile/me')
