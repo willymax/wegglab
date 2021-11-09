@@ -41,7 +41,7 @@
           </span>
         </div>
         <slot v-bind="slotData">
-          <textarea
+          <select
             :valid="valid"
             :required="required"
             v-bind="$attrs"
@@ -51,25 +51,24 @@
               inputClasses,
             ]"
             class="
-              form-textarea
-              mt-1
+              select select-bordered
               w-full
-              p-2
+              max-w-xs
               flex-shrink flex-grow flex-auto
-              leading-normal
               block
               px-4
               py-2
               rounded rounded-l-none
-              text-gray-700
-              bg-white
-              border border-gray-300
-              dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600
-              focus:border-blue-500
-              dark:focus:border-blue-500
             "
             v-on="listeners"
-          ></textarea>
+          >
+            <option disabled="disabled" selected="selected">
+              Choose Option
+            </option>
+            <option v-for="option in options" :key="option" :value="option">
+              {{ option }}
+            </option>
+          </select>
         </slot>
         <div v-if="appendIcon || $slots.append" class="input-group-append">
           <span class="input-group-text">
@@ -95,7 +94,7 @@
 </template>
 <script>
 export default {
-  name: 'BaseTextArea',
+  name: 'BaseSelect',
   inheritAttrs: false,
   props: {
     required: {
@@ -165,6 +164,12 @@ export default {
       type: String,
       description: 'Input name (used for validation)',
       default: '',
+    },
+    options: {
+      type: Array,
+      default() {
+        return []
+      },
     },
   },
   data() {
