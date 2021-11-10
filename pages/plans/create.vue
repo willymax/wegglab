@@ -23,7 +23,7 @@
       <div class="mb-4 md:mr-2 md:mb-0">
         <base-input
           v-model="
-            form.data.attributes.billing_cycle[0].pricing_scheme.fixed_price
+            form.data.attributes.billing_cycles[0].pricing_scheme.fixed_price
               .value
           "
           alternative
@@ -79,7 +79,7 @@
         </div>
       </div>
     </fieldset>
-    <base-button @click="createPlan">Submit</base-button>
+    <base-button @click="postData">Submit</base-button>
   </form>
 </template>
 
@@ -100,17 +100,17 @@ export default {
         data: {
           attributes: {
             // it will be rare to create plans at the same time
-            product_id: Date.now(),
-            name: '',
-            description: '',
-            billing_cycle: [
+            product_id: `PROD-8F8138281X6705217`,
+            name: 'Premium',
+            description: 'A premium plan',
+            billing_cycles: [
               {
                 frequency: {
                   interval_unit: 'MONTH',
                   interval_count: 1,
                 },
                 tenure_type: 'REGULAR',
-                sequence: 3,
+                sequence: 1,
                 total_cycles: 0,
                 pricing_scheme: {
                   fixed_price: {
@@ -143,26 +143,27 @@ export default {
     }
   },
   methods: {
-    createPlan() {
-      this.$axios
-        .post('https://api-m.sandbox.paypal.com/v1/billing/plans', {
-          data: this.form.data.attributes,
-          headers: {
-            Authorization: 'Bearer ' + '',
-            'Content-Type': 'application/json',
-            'PayPal-Request-Id': `PLAN-${this.form.data.attributes.product_id}`,
-          },
-        })
-        .then((response) => {
-          this.$router.push('/plans')
-        })
-        .catch((error) => {
-          // handle error
-          this.$notify({
-            type: 'danger',
-            message: 'An error occurred: !' + JSON.stringify(error.error),
-          })
-        })
+    async createPlan(url = '', data = {}) {
+      // Default options are marked with *
+      const response = await fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          Authorization:
+            'Bearer A21AAIT2KvcsVY7vfuhlqaf_QDgxxhpIdbJexwhWzyZf74-xkK-pRAtQgesPDJ5nOm2g53-Bgg3tNBZnYebYRzoqqlfOaNVwg',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
+      })
+      return response.json() // parses JSON response into native JavaScript objects
+    },
+    postData() {
+      const theData = this.form.data.attributes
+      this.createPlan(
+        'https://api-m.sandbox.paypal.com/v1/billing/plans',
+        theData
+      ).then((data) => {
+        console.log(data) // JSON data parsed by `data.json()` call
+      })
     },
   },
 }

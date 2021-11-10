@@ -10,6 +10,8 @@ export default {
     isDemo: process.env.IS_DEMO,
     apiKey: process.env.API_KEY,
     baseStorageUrl: process.env.STORAGE_BASE_URL,
+    paypalClient: process.env.PAYPAL_CLIENT_ID,
+    paypalSecret: process.env.PAYPAL_SECRET,
   },
   // mode: 'spa',
   router: {
@@ -235,17 +237,17 @@ export default {
     headers: {
       common: {
         Accept: 'application/json',
-        'content-type': 'application/json',
+        'Content-Type': 'application/json',
         // 'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]'),
       },
       post: {
-        'content-type': 'application/json',
+        'Content-Type': 'application/json',
       },
       patch: {
-        'content-type': 'application/json',
+        'Content-Type': 'application/json',
       },
       delete: {
-        'content-type': 'application/json',
+        'Content-Type': 'application/json',
       },
     },
     debug: true,

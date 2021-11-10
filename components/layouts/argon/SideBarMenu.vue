@@ -93,6 +93,7 @@
       <template #menus>
         <menu-item to="/plans">List Plans</menu-item>
         <menu-item to="/plans/create">Create Plan</menu-item>
+        <menu-item to="/products/create">Create Product</menu-item>
       </template>
     </side-bar-menu-link>
 
