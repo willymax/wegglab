@@ -1,13 +1,55 @@
 <template>
-  <div>Plans {{ plans }}</div>
+  <div>
+    <base-table :items="plans" :columns="columns"></base-table>
+  </div>
 </template>
 
 <script>
+import BaseTable from '~/components/tables/BaseTable.vue'
 export default {
+  components: { BaseTable },
   layout: 'DashboardLayout',
   data() {
     return {
       plans: [],
+      columns: [
+        {
+          label: 'Id',
+          'min-width': '310px',
+          prop: 'id',
+          sortable: 'custom',
+        },
+        {
+          label: 'Product ID',
+          'min-width': '310px',
+          prop: 'product_id',
+          sortable: 'custom',
+        },
+        {
+          label: 'Name',
+          'min-width': '310px',
+          prop: 'name',
+          sortable: 'custom',
+        },
+        {
+          label: 'Status',
+          'min-width': '310px',
+          prop: 'status',
+          sortable: 'custom',
+        },
+        {
+          label: 'Description',
+          'min-width': '310px',
+          prop: 'description',
+          sortable: 'custom',
+        },
+        {
+          label: 'Create time',
+          'min-width': '310px',
+          prop: 'create_time',
+          sortable: 'custom',
+        },
+      ],
     }
   },
   async fetch() {
