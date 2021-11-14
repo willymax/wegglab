@@ -1,8 +1,9 @@
 <template>
   <div>
     <!-- active & hover classes 'bg-indigo-100 dark:bg-indigo-600' -->
-    <a
-      href="#"
+    <nuxt-link
+      v-if="hasSubMenus"
+      to="#"
       class="
         flex
         items-center
@@ -47,7 +48,15 @@
           />
         </svg>
       </span>
-    </a>
+    </nuxt-link>
+    <sidebar-item
+      v-else
+      :link="{
+        name: 'Dashboard',
+        icon: 'ni ni-shop text-primary',
+        path: '/dashboard',
+      }"
+    ></sidebar-item>
     <div
       v-if="open"
       role="menu"
@@ -60,13 +69,22 @@
 </template>
 
 <script>
+import SidebarItem from '~/components/core-components/SidebarPlugin/SidebarItem.vue'
 export default {
+  components: { SidebarItem },
+  props: {
+    hasSubMenus: {
+      type: Boolean,
+      default: true,
+    },
+  },
   data() {
     return {
       isActive: false,
       open: false,
     }
   },
+  methods: {},
 }
 </script>
 
