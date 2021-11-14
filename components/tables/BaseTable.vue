@@ -9,7 +9,7 @@
         <template slot="header">
           <div class="row">
             <div class="col-6">
-              <h3 class="mb-0">items List</h3>
+              <h3 class="mb-0">Items List</h3>
             </div>
             <div class="col-6 text-right">
               <base-button type="primary" icon size="sm" @click="onProFeature">
@@ -85,6 +85,7 @@
                     <i class="fas fa-trash"></i>
                   </a>
                 </el-tooltip>
+                <slot name="actions"></slot>
               </div>
             </el-table-column>
           </el-table>

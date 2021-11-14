@@ -92,8 +92,11 @@
       Subscriptions
       <template #menus>
         <menu-item to="/plans">List Plans</menu-item>
+        <menu-item to="/products">List Products</menu-item>
         <menu-item to="/plans/create">Create Plan</menu-item>
         <menu-item to="/products/create">Create Product</menu-item>
+        <menu-item to="/subscriptions/create">Subscribe</menu-item>
+        <menu-item to="/subscriptions">Subscriptions</menu-item>
       </template>
     </side-bar-menu-link>
 

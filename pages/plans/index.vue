@@ -1,13 +1,18 @@
 <template>
   <div>
-    <base-table :items="plans" :columns="columns"></base-table>
+    <base-table :items="plans" :columns="columns">
+      <template #actions>
+        <base-button @click="subscribe">Subscribe</base-button>
+      </template></base-table
+    >
   </div>
 </template>
 
 <script>
+import BaseButton from '~/components/core-components/BaseButton.vue'
 import BaseTable from '~/components/tables/BaseTable.vue'
 export default {
-  components: { BaseTable },
+  components: { BaseTable, BaseButton },
   layout: 'DashboardLayout',
   data() {
     return {
@@ -53,13 +58,14 @@ export default {
     }
   },
   async fetch() {
+    const res = await this.$store.dispatch('paypal/getAccessToken')
+    const accessToken = res.access_token
     const response = await fetch(
       'https://api-m.sandbox.paypal.com/v1/billing/plans',
       {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         headers: {
-          Authorization:
-            'Bearer A21AAI_TD--qn_fJ8HlHhhR2ilmscVo1fahfCmAQ2U1DepetJgm1rF0HbhBmKE4ANyVMMAb52KkHmfivq1T5bg5YXHf9b-Kyw',
+          Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
         },
       }
@@ -67,19 +73,7 @@ export default {
     this.plans = this.plans.concat(response.plans)
   },
   methods: {
-    async getPlans(url = '', data = {}) {
-      // Default options are marked with *
-      const response = await fetch(url, {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        headers: {
-          Authorization:
-            'Bearer A21AAIT2KvcsVY7vfuhlqaf_QDgxxhpIdbJexwhWzyZf74-xkK-pRAtQgesPDJ5nOm2g53-Bgg3tNBZnYebYRzoqqlfOaNVwg',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
-      })
-      return response.json() // parses JSON response into native JavaScript objects
-    },
+    subscribe() {},
   },
 }
 </script>

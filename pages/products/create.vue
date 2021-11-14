@@ -89,12 +89,13 @@ export default {
   },
   methods: {
     async createProduct(url = '', data = {}) {
+      const res = await this.$store.dispatch('paypal/getAccessToken')
+      const accessToken = res.access_token
       // Default options are marked with *
       const response = await fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         headers: {
-          Authorization:
-            'Bearer A21AAIT2KvcsVY7vfuhlqaf_QDgxxhpIdbJexwhWzyZf74-xkK-pRAtQgesPDJ5nOm2g53-Bgg3tNBZnYebYRzoqqlfOaNVwg',
+          Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data), // body data type must match "Content-Type" header

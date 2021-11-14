@@ -3,6 +3,9 @@ export default (context, inject) => {
     'getImageUrl',
     (relativePath) => `${process.env.baseStorageUrl}${relativePath}`
   )
+  inject('getInternetDateTimeFormat', () => {
+    return ''
+  })
   inject('processTime', (datetimestamp) => {
     const theDate = new Date(datetimestamp)
     const month = [

@@ -139,6 +139,12 @@ export default {
         crossorigin: 'anonymous',
       },
     ],
+    script: [
+      {
+        src: `https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}&vault=true&intent=subscription`,
+        body: true,
+      },
+    ],
   },
   /*
    ** Customize the progress-bar color
