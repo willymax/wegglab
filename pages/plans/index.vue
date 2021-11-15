@@ -60,17 +60,19 @@ export default {
   async fetch() {
     const res = await this.$store.dispatch('paypal/getAccessToken')
     const accessToken = res.access_token
-    const response = await fetch(
-      'https://api-m.sandbox.paypal.com/v1/billing/plans',
-      {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    ).then((res) => res.json())
-    this.plans = this.plans.concat(response.plans)
+    try {
+      const response = await fetch(
+        'https://api-m.sandbox.paypal.com/v1/billing/plans',
+        {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      ).then((res) => res.json())
+      this.plans = response.plans
+    } catch ($ex) {}
   },
   methods: {
     subscribe() {},

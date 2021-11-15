@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- active & hover classes 'bg-indigo-100 dark:bg-indigo-600' -->
-    <nuxt-link
+    <a
       v-if="hasSubMenus"
       to="#"
       class="
@@ -48,15 +48,7 @@
           />
         </svg>
       </span>
-    </nuxt-link>
-    <sidebar-item
-      v-else
-      :link="{
-        name: 'Dashboard',
-        icon: 'ni ni-shop text-primary',
-        path: '/dashboard',
-      }"
-    ></sidebar-item>
+    </a>
     <div
       v-if="open"
       role="menu"

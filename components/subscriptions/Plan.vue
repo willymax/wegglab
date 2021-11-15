@@ -84,8 +84,8 @@ export default {
       default: 0,
     },
     planId: {
-      type: Number,
-      default: 0,
+      type: String,
+      default: '',
     },
   },
 }

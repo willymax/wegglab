@@ -6,7 +6,8 @@
       <div class="rounded-lg shadow bg-base-200 drawer drawer-mobile h-screen">
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
         <main role="main" class="flex flex-col drawer-content">
-          <nuxt keep-alive></nuxt>
+          <!-- keep-alive -->
+          <nuxt></nuxt>
         </main>
         <div class="drawer-side">
           <label for="my-drawer-2" class="drawer-overlay"></label>

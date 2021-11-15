@@ -1,6 +1,9 @@
 <template>
   <div>
-    <el-table
+    <base-table :items="products" :columns="columns">
+      <template #actions> </template
+    ></base-table>
+    <!-- <el-table
       class="table-responsive align-products-center table-flush"
       header-row-class-name="thead-light"
       :data="products"
@@ -55,7 +58,7 @@
           </el-tooltip>
         </div>
       </el-table-column>
-    </el-table>
+    </el-table> -->
   </div>
 </template>
 
@@ -71,8 +74,10 @@ import {
   Option,
   Button,
 } from 'element-ui'
+import BaseTable from '~/components/tables/BaseTable.vue'
 export default {
   components: {
+    BaseTable,
     [Tooltip.name]: Tooltip,
     [Table.name]: Table,
     [TableColumn.name]: TableColumn,
@@ -89,6 +94,32 @@ export default {
       selectedRows: [],
       products: [],
       sort: 'created_at',
+      columns: [
+        {
+          label: 'Id',
+          'min-width': '310px',
+          prop: 'id',
+          sortable: 'custom',
+        },
+        {
+          label: 'Name',
+          'min-width': '310px',
+          prop: 'name',
+          sortable: 'custom',
+        },
+        {
+          label: 'Description',
+          'min-width': '310px',
+          prop: 'description',
+          sortable: 'custom',
+        },
+        {
+          label: 'Create Time',
+          'min-width': '310px',
+          prop: 'create_time',
+          sortable: 'custom',
+        },
+      ],
     }
   },
   async fetch() {

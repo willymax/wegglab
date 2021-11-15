@@ -29,6 +29,8 @@
         <menu-item to="/subscriptions">Subscriptions</menu-item>
       </template>
     </side-bar-menu-link>
+    <menu-item to="/subscriptions">Subscriptions</menu-item>
+    <menu-item to="/questions">Questions</menu-item>
     <side-bar-menu-link :has-sub-menus="false">
       <template #link-icon>
         <img class="w-5 h-5" src="~assets/wallet.svg" />
