@@ -1,6 +1,7 @@
 export const actions = {
   getAccessToken(context, data) {
     return new Promise((resolve, reject) => {
+      console.log('getAccessToken')
       fetch('https://api-m.sandbox.paypal.com/v1/oauth2/token', {
         method: 'POST',
         body: new URLSearchParams({ grant_type: 'client_credentials' }),

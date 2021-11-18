@@ -15,22 +15,33 @@ export default {
   },
   methods: {
     renderButtons() {
-      this.sleep().then(() => {
+      const that = this
+
+      this.sleep(100).then(() => {
         const paypalButtonContainer = this.$refs.paypalButtonContainer
         // eslint-disable-next-line no-undef
         paypal
           .Buttons({
             createSubscription(data, actions) {
               return actions.subscription.create({
-                plan_id: `${this.planId}`,
+                plan_id: `${that.planId}`,
               })
             },
 
             onApprove(data, actions) {
-              alert(
-                'You have successfully created subscription ' +
-                  data.subscriptionID
-              )
+              that.$axios
+                .post('/subscriptions/subscribeUser', {
+                  subscription_id: data.subscriptionID,
+                  // status: data.status,
+                  // start_time: data.start_time,
+                })
+                .then((res) => {
+                  this.$auth.setUser(res.data)
+                  this.$router.back()
+                })
+                .catch((error) => {
+                  console.log(JSON.stringify(error.response.data))
+                })
             },
           })
           .render(paypalButtonContainer)

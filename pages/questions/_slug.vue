@@ -26,7 +26,9 @@
           <question-aside-block class="question-aside-block" />
         </div>
       </div>
-      <answers-block class="answers-block" />
+      <div>
+        <answers-block class="answers-block" />
+      </div>
     </div>
   </with-right-side-bar>
 </template>
@@ -36,12 +38,14 @@ import QuestionBlock from '~/components/questions/QuestionBlock.vue'
 import AnswersBlock from '~/components/questions/AnswersBlock.vue'
 import QuestionAsideBlock from '~/components/questions/QuestionAsideBlock.vue'
 import WithRightSideBar from '~/components/Dashboard/WithRightSideBar.vue'
+import BlurredAnswer from '~/components/answers/BlurredAnswer.vue'
 export default {
   components: {
     QuestionBlock,
     AnswersBlock,
     QuestionAsideBlock,
     WithRightSideBar,
+    BlurredAnswer,
   },
   layout: 'DashboardLayout',
   asyncData({ params, redirect }) {
@@ -60,6 +64,7 @@ export default {
     await this.$store.dispatch('questions/SET_CURRENT_QUESTION', question)
     this.question = question
   },
+  computed: {},
 }
 </script>
 

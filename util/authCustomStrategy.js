@@ -28,8 +28,8 @@ export default class CustomScheme extends LocalScheme {
     )
 
     if (user) {
+      this.$auth.setUser(user)
       if (user.subscription_id) {
-        //
         const res = await this.$store.dispatch('paypal/getAccessToken')
         const accessToken = res.access_token
         const response = await fetch(

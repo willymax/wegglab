@@ -1,14 +1,16 @@
 <template>
   <div>
     <h2 class="text-3xl font-normal leading-normal mt-0 mb-2">Answers</h2>
-    <div v-if="user.subscribed">
+    <div v-if="subscribed">
       <answer
         v-for="answer in question.answers"
         :key="answer.id"
         :answer="answer"
       ></answer>
     </div>
-    <blurred-answer v-else class="w-full"></blurred-answer>
+    <blurred-answer v-else></blurred-answer>
+    {{ subscribed }}
+    {{ user }}
   </div>
 </template>
 
@@ -24,7 +26,13 @@ export default {
     user() {
       return this.$auth.user
     },
+    subscribed() {
+      return this.user.pay_pal_subscription
+        ? this.user.pay_pal_subscription.status === 'ACTIVE'
+        : false
+    },
   },
+  methods: {},
 }
 </script>
 
