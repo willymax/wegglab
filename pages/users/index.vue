@@ -52,9 +52,15 @@
             @sort-change="sortChange"
           >
             <el-table-column
-              label="Name"
+              label="First Name"
               min-width="310px"
-              prop="name"
+              prop="first_name"
+              sortable="custom"
+            />
+            <el-table-column
+              label="Last Name"
+              min-width="310px"
+              prop="last_name"
               sortable="custom"
             />
             <el-table-column

@@ -27,11 +27,11 @@
       >
         <ul class="list-none overflow-hidden rounded">
           <li v-for="option in options" :key="option">
-            <a
-              href=""
+            <nuxt-link
+              :to="option.url"
               class="flex py-2 px-4 transition duration-300"
               :class="'theme-' + color"
-              >{{ option }}</a
+              >{{ option.name }}</nuxt-link
             >
             <li>
               <logout></logout>
@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       show: false,
-      options: ['Settings'],
+      options: [{name: 'Account settings', url: '/user'}],
     }
   },
 }

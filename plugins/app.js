@@ -6,6 +6,9 @@ export default (context, inject) => {
   inject('getInternetDateTimeFormat', () => {
     return ''
   })
+  inject('sleep', (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms))
+  })
   inject('processTime', (datetimestamp) => {
     const theDate = new Date(datetimestamp)
     const month = [

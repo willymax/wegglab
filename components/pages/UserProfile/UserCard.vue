@@ -159,7 +159,7 @@ export default {
       }
     },
     changePasswoordClicked() {
-      this.$router.push('/user-profile/change-password')
+      this.$router.push('/settings/password')
     },
   },
 }

@@ -231,7 +231,16 @@ export default {
       this.$auth.loginWith('facebook')
     },
     socialLogin(service) {
-      window.location.href = `${process.env.apiUrl}/auth/login/${service}`
+      console.log('socialLogin.....')
+      this.$auth
+        .loginWith(`${service}`)
+        .then(() => {
+          alert(JSON.stringify(this.$auth.strategy.token))
+        })
+        .catch((err) => {
+          alert(JSON.stringify(err.message))
+        })
+      // window.location.href = `${process.env.apiUrl}/auth/login/${service}`
     },
     loginWithGoogle() {
       this.$auth.loginWith('google')

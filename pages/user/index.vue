@@ -31,7 +31,7 @@ export default {
     UserCard,
     Question,
   },
-  layout: 'DashboardLayout',
+  layout: 'AccountSettings',
 
   data() {
     return {

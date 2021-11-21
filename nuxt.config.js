@@ -12,6 +12,7 @@ export default {
     baseStorageUrl: process.env.STORAGE_BASE_URL,
     paypalClient: process.env.PAYPAL_CLIENT_ID,
     paypalSecret: process.env.PAYPAL_SECRET,
+    googleClientId: process.env.GOOGLE_CLIENT_ID,
   },
   // mode: 'spa',
   router: {
@@ -48,6 +49,11 @@ export default {
           'Nuxt Argon Dashboard Laravel comes with an API-powered Laravel backend, a Nuxt frontend and an awesome-looking Argon design.',
       },
       { name: 'format-detection', content: 'telephone=no' },
+      // {
+      //   name: 'google-signin-client_id',
+      //   content: process.env.GOOGLE_CLIENT_ID + '.apps.googleusercontent.com',
+      //   ssr: false,
+      // },
       {
         name: 'keywords',
         content:
@@ -218,13 +224,13 @@ export default {
         scope: ['public_profile', 'email'],
       },
       google: {
-        client_id: process.env.GOOGLE_CLIENT_ID,
-        codeChallengeMethod: '',
-        responseType: 'code',
-        endpoints: {
-          token: 'http://127.0.0.1:8000/api/v1/auth/social-login/google',
-          userInfo: 'http://127.0.0.1:8000/api/v1/auth/user',
-        },
+        // client_id: process.env.GOOGLE_CLIENT_ID,
+        // codeChallengeMethod: '',
+        // responseType: 'code',
+        // // endpoints: {
+        // //   token: 'http://127.0.0.1:8000/api/v1/auth/social-login/google',
+        // //   userInfo: 'http://127.0.0.1:8000/api/v1/auth/user',
+        // // },
       },
       redirect: {
         login: '/login',

@@ -8,7 +8,7 @@ export default {
   components: {
     ChangePassword,
   },
-  layout: 'DashboardLayout',
+  layout: 'AccountSettings',
 }
 </script>
 

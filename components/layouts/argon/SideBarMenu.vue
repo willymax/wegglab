@@ -15,29 +15,7 @@
     "
   >
     <!-- Test Sidebar Menu links -->
-    <side-bar-menu-link>
-      <template #link-icon>
-        <img class="w-5 h-5" src="~assets/wallet.svg" />
-      </template>
-      Subscriptions
-      <template #menus>
-        <menu-item to="/plans">List Plans</menu-item>
-        <menu-item to="/products">List Products</menu-item>
-        <menu-item to="/plans/create">Create Plan</menu-item>
-        <menu-item to="/products/create">Create Product</menu-item>
-        <menu-item to="/subscriptions/create">Subscribe</menu-item>
-        <menu-item to="/subscriptions">Subscriptions</menu-item>
-      </template>
-    </side-bar-menu-link>
-    <menu-item to="/subscriptions">Subscriptions</menu-item>
-    <menu-item to="/questions">Questions</menu-item>
-    <side-bar-menu-link :has-sub-menus="false">
-      <template #link-icon>
-        <img class="w-5 h-5" src="~assets/wallet.svg" />
-      </template>
-      Items
-      <template #menus> </template>
-    </side-bar-menu-link>
+    <slot></slot>
   </nav>
 </template>
 

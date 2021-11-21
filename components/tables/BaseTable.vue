@@ -155,6 +155,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    resource: {
+      type: String,
+      default: 'student',
+    },
     items: {
       type: Array,
       default() {
@@ -201,6 +205,9 @@ export default {
   watch: {
     pagination(newValue, oldValue) {
       this.tablePaginations = { ...this.newValue }
+    },
+    tablePaginations(newValue, oldValue) {
+      console.log(JSON.stringify(newValue))
     },
     'tablePaginations.currentPage'(newValue, oldValue) {
       if (newValue !== oldValue) {

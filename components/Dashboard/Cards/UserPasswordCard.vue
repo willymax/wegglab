@@ -1,49 +1,58 @@
 <template>
-  <div class="card">
-    <div class="card-header">
+  <card>
+    <template #header>
       <h1>Change Password</h1>
-    </div>
-    <div class="card-body">
-      <form ref="password_form" @submit.prevent="handleChangePassword">
-        <base-input
-          v-model="password"
-          type="password"
-          name="new_password"
-          autocomplete="on"
-          class="mb-3"
-          prepend-icon="fa fa-key"
-          placeholder="New Password"
-          rules="required"
-        />
-        <validation-error :errors="apiValidationErrors.password" />
-        <base-input
-          v-model="password_confirmation"
-          type="password"
-          name="confirm_password"
-          autocomplete="on"
-          class="mb-3"
-          prepend-icon="fa fa-key"
-          placeholder="Confirm Password"
-        />
-        <div class="my-4">
-          <base-button
-            type="button"
-            class="btn btn-md btn-secondary"
-            native-type="submit"
-            :loading="loading"
-          >
-            Change Password
-          </base-button>
-        </div>
-      </form>
-    </div>
-  </div>
+    </template>
+    <form ref="password_form" @submit.prevent="handleChangePassword">
+      <base-input
+        v-model="form.current_password"
+        type="password"
+        name="current_password"
+        autocomplete="on"
+        class="mb-3"
+        prepend-icon="fa fa-key"
+        placeholder="Current Password"
+        rules="required"
+      />
+      <base-input
+        v-model="form.password"
+        type="password"
+        name="new_password"
+        autocomplete="on"
+        class="mb-3"
+        prepend-icon="fa fa-key"
+        placeholder="New Password"
+        rules="required"
+      />
+      <validation-error :errors="apiValidationErrors.password" />
+      <base-input
+        v-model="form.password_confirmation"
+        type="password"
+        name="confirm_password"
+        autocomplete="on"
+        class="mb-3"
+        prepend-icon="fa fa-key"
+        placeholder="Confirm Password"
+      />
+      <div class="my-4">
+        <base-button
+          type="button"
+          class="btn btn-md btn-secondary"
+          native-type="submit"
+          :loading="loading"
+        >
+          Change Password
+        </base-button>
+      </div>
+    </form>
+  </card>
 </template>
 <script>
 import BaseInput from '~/components/core-components/Inputs/BaseInput.vue'
 import BaseButton from '~/components/core-components/BaseButton.vue'
 import formMixin from '@/mixins/form-mixin'
 import ValidationError from '~/components/ValidationError.vue'
+import Card from '~/components/core-components/Cards/Card.vue'
 
 export default {
   name: 'UserPasswordCard',
@@ -51,6 +60,7 @@ export default {
     BaseInput,
     BaseButton,
     ValidationError,
+    Card,
   },
   mixins: [formMixin],
 
@@ -58,9 +68,11 @@ export default {
   data() {
     return {
       loading: false,
-      password: null,
-      password_new: null,
-      password_confirmation: null,
+      form: {
+        current_password: null,
+        password_new: null,
+        password_confirmation: null,
+      },
       user: Object.assign({}, this.$auth.user),
     }
   },

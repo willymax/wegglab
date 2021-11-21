@@ -16,7 +16,6 @@ export default {
   methods: {
     renderButtons() {
       const that = this
-
       this.sleep(100).then(() => {
         const paypalButtonContainer = this.$refs.paypalButtonContainer
         // eslint-disable-next-line no-undef
