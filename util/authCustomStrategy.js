@@ -30,22 +30,10 @@ export default class CustomScheme extends LocalScheme {
     if (user) {
       this.$auth.setUser(user)
       if (user.subscription_id) {
-        const res = await this.$store.dispatch('paypal/getAccessToken')
-        const accessToken = res.access_token
-        const response = await fetch(
-          `https://api-m.paypal.com/v1/billing/subscriptions/${user.subscription_id}`,
-          {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              'Content-Type': 'application/json',
-            },
-          }
-        ).then((res) => res.json())
-        user.subscribed = response.status === 'ACTIVE'
+        //
       } else {
         //
-        user.subscribed = false
+        // user.subscribed = false
       }
       this.$auth.setUser(user)
       // Promise.resolve(this.formatUser(user)).then((formattedUser) => {

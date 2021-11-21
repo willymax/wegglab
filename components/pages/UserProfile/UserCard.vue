@@ -12,23 +12,10 @@
       <div class="p-4">
         <div class="relative flex w-full">
           <!-- Avatar -->
-          <div class="flex flex-1">
-            <div style="margin-top: -6rem">
-              <div
-                style="height: 9rem; width: 9rem"
-                class="md rounded-full relative avatar"
-              >
-                <img
-                  style="height: 9rem; width: 9rem"
-                  class="md rounded-full relative border-4 border-gray-900"
-                  :src="userAvatar || require('~/assets/img/avatar.png')"
-                  alt=""
-                  @error="errorLoadingAvatar == true"
-                />
-                <div class="absolute"></div>
-              </div>
-            </div>
-          </div>
+          <base-avatar
+            :user-avatar="userAvatar"
+            class="flex flex-1"
+          ></base-avatar>
           <!-- Follow Button -->
           <div class="flex flex-row flex-wrap text-right">
             <base-nuxt-button-link to="/billing/update"
@@ -130,9 +117,10 @@
   </div>
 </template>
 <script>
+import BaseAvatar from '~/components/core-components/BaseAvatar.vue'
 import BaseNuxtButtonLink from '~/components/core-components/BaseNuxtButtonLink.vue'
 export default {
-  components: { BaseNuxtButtonLink },
+  components: { BaseNuxtButtonLink, BaseAvatar },
   data() {
     return {
       key: '',
@@ -159,7 +147,7 @@ export default {
       }
     },
     changePasswoordClicked() {
-      this.$router.push('/settings/password')
+      this.$router.push('/profile/password')
     },
   },
 }

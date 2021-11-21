@@ -13,23 +13,11 @@
         <div class="relative w-full">
           <div class="flex w-full">
             <!-- Avatar -->
-            <div class="flex flex-1 justify-center">
-              <div style="margin-top: -6rem">
-                <div
-                  style="height: 9rem; width: 9rem"
-                  class="md rounded-full relative avatar"
-                >
-                  <img
-                    style="height: 9rem; width: 9rem"
-                    class="md rounded-full relative border-4 border-gray-900"
-                    :src="userAvatar || require('~/assets/img/avatar.png')"
-                    alt=""
-                    @error="errorLoadingAvatar == true"
-                  />
-                  <div class="absolute"></div>
-                </div>
-              </div>
-            </div>
+            <base-avatar
+              :user-avatar="userAvatar"
+              margin-top="-mt-24"
+              class="flex flex-1"
+            ></base-avatar>
             <!-- Follow Button -->
             <div class="flex flex-row flex-wrap text-right"></div>
           </div>
@@ -97,7 +85,9 @@
   </div>
 </template>
 <script>
+import BaseAvatar from '~/components/core-components/BaseAvatar.vue'
 export default {
+  components: { BaseAvatar },
   data() {
     return {
       key: '',
@@ -117,7 +107,7 @@ export default {
   },
   methods: {
     changePasswoordClicked() {
-      this.$router.push('/settings/password')
+      this.$router.push('/profile/password')
     },
   },
 }

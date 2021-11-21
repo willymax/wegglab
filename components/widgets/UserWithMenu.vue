@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       show: false,
-      options: [{name: 'Account settings', url: '/user'}],
+      options: [{name: 'Account settings', url: '/profile'}],
     }
   },
 }

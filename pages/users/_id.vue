@@ -33,6 +33,7 @@ export default {
     Question,
     UserProfile,
   },
+  layout: 'DashboardLayout',
 
   data() {
     return {

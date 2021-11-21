@@ -11,7 +11,7 @@
         autocomplete="on"
         class="mb-3"
         prepend-icon="fa fa-key"
-        placeholder="Current Password"
+        label="Current Password"
         rules="required"
       />
       <base-input
@@ -21,7 +21,7 @@
         autocomplete="on"
         class="mb-3"
         prepend-icon="fa fa-key"
-        placeholder="New Password"
+        label="New Password"
         rules="required"
       />
       <validation-error :errors="apiValidationErrors.password" />
@@ -32,8 +32,9 @@
         autocomplete="on"
         class="mb-3"
         prepend-icon="fa fa-key"
-        placeholder="Confirm Password"
+        label="Confirm Password"
       />
+      <validation-error :errors="apiValidationErrors.confirm_password" />
       <div class="my-4">
         <base-button
           type="button"
