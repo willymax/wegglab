@@ -22,19 +22,16 @@
         It is a long established fact that a reader will be distracted by the
         readable content of a page when looking at its layout.
       </p>
-      <div class="flex flex-wrap items-center justify-center py-4 pt-0">
-        <plan :price="10" plan-id="P-3M2534737G635851KMGHHR2A">Basic</plan>
-        <plan :price="25" plan-id="P-3M2534737G635851KMGHHR2A">Standard</plan>
-        <plan :price="50" plan-id="P-3M2534737G635851KMGHHR2A">Premium</plan>
-      </div>
+      <plans></plans>
     </div>
   </div>
 </template>
 
 <script>
 import Plan from '~/components/subscriptions/Plan.vue'
+import Plans from '~/components/subscriptions/Plans.vue'
 export default {
-  components: { Plan },
+  components: { Plan, Plans },
   layout: 'DashboardLayout',
   data() {
     return {

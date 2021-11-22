@@ -14,10 +14,11 @@
         label="Current Password"
         rules="required"
       />
+      <validation-error :errors="apiValidationErrors.current_password" />
       <base-input
         v-model="form.password"
         type="password"
-        name="new_password"
+        name="password"
         autocomplete="on"
         class="mb-3"
         prepend-icon="fa fa-key"
@@ -33,6 +34,7 @@
         class="mb-3"
         prepend-icon="fa fa-key"
         label="Confirm Password"
+        rules="required"
       />
       <validation-error :errors="apiValidationErrors.confirm_password" />
       <div class="my-4">
@@ -87,9 +89,9 @@ export default {
         })
         return
       }
-
-      this.user.password = this.password
-      this.user.password_confirmation = this.password_confirmation
+      this.user.current_password = this.form.current_password
+      this.user.password = this.form.password
+      this.user.password_confirmation = this.form.password_confirmation
       try {
         await this.$store.dispatch('users/update', this.user)
         this.$refs.password_form.reset()
@@ -100,10 +102,11 @@ export default {
         })
       } catch (error) {
         this.$notify({
-          type: 'error',
+          type: 'danger',
           message: 'Oops, something went wrong!',
         })
-        // this.setApiValidation(error.response.data.errors)
+        console.log(JSON.stringify(error.response))
+        this.setApiValidation(error.response.data.errors)
       }
     },
   },

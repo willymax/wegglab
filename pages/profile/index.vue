@@ -9,7 +9,7 @@
         <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
           <div class="mb-4 md:flex md:justify-between">
             <base-input
-              v-model="form.data.attributes.firstName"
+              v-model="form.data.attributes.first_name"
               alternative
               class="mb-3"
               placeholder="First Name"
@@ -17,7 +17,7 @@
               label="First Name"
             ></base-input>
             <base-input
-              v-model="form.data.attributes.lastName"
+              v-model="form.data.attributes.last_name"
               alternative
               class="mb-3"
               placeholder="First Name"
@@ -47,7 +47,7 @@
             </div>
           </div>
           <div>
-            <base-button>Save</base-button>
+            <base-button @click="update">Save</base-button>
           </div>
         </form>
       </div>
@@ -71,8 +71,8 @@ export default {
       form: {
         data: {
           attributes: {
-            firstName: this.$auth.user.first_name,
-            lastName: this.$auth.user.last_name,
+            first_name: this.$auth.user.first_name,
+            last_name: this.$auth.user.last_name,
             email: this.$auth.user.email,
             userProfileImage: {},
           },
@@ -86,6 +86,20 @@ export default {
     },
   },
   methods: {
+    update() {
+      this.$axios
+        .put(`users/${this.$auth.user.id}`, { ...this.form.data.attributes })
+        .then((response) => {
+          this.$notify({
+            type: 'success',
+            message: 'Information updated successfully.',
+          })
+          this.$auth.setUser(response.data.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     uploadFile() {
       if (this.FILE) {
         this.loading = true

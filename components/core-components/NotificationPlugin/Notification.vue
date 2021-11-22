@@ -198,22 +198,23 @@ export default {
 }
 </script>
 <style>
+.notifications .alert[data-notify='container'] {
+  max-width: 500px;
+}
+.notifications .alert.center {
+  margin: 0 auto;
+}
+.notifications .alert.left {
+  left: 20px;
+}
+.notifications .alert.left {
+  left: 20px;
+}
+.notifications .alert.right {
+  right: 20px;
+}
 .notifications .alert {
   position: fixed;
   z-index: 10000;
-
-  &[data-notify='container'] {
-    max-width: 500px;
-  }
-
-  &.center {
-    margin: 0 auto;
-  }
-  &.left {
-    left: 20px;
-  }
-  &.right {
-    right: 20px;
-  }
 }
 </style>

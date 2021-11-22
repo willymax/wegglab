@@ -41,12 +41,13 @@ function add(user, axios) {
 }
 
 function update(user, axios) {
-  const payload = jsona.serialize({
-    stuff: user,
-    includeNames: [],
-  })
+  const payload = user
+  // const payload = jsona.serialize({
+  //   stuff: user,
+  //   includeNames: [],
+  // })
 
-  return axios.patch(`${url}/users/${user.id}`, payload).then((response) => {
+  return axios.put(`${url}/auth/password`, payload).then((response) => {
     return jsona.deserialize(response.data)
   })
 }
