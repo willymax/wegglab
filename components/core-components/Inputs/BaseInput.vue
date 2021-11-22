@@ -34,7 +34,7 @@
           v-if="prependIcon || $slots.prepend"
           class="flex -mr-px justify-center"
         >
-          <span class="w-15 p-4">
+          <span class="w-15 p-4 bg-transparent">
             <slot name="prepend">
               <i :class="prependIcon"></i>
             </slot>
@@ -69,7 +69,7 @@
           />
         </slot>
         <div v-if="appendIcon || $slots.append" class="input-group-append">
-          <span class="input-group-text">
+          <span class="input-group-text bg-transparent">
             <slot name="append">
               <i :class="appendIcon"></i>
             </slot>
