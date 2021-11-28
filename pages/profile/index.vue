@@ -1,58 +1,58 @@
 <template>
-  <card>
-    <div class="flex flex-row">
-      <div>
-        <h2 class="bold blur-lg">Personal info</h2>
-        <p>Tell us about yourself</p>
-      </div>
-      <div class="flex-1">
-        <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
-          <div class="mb-4 md:flex md:justify-between">
-            <base-input
-              v-model="form.data.attributes.first_name"
-              alternative
-              class="mb-3"
-              placeholder="First Name"
-              name="First Name"
-              label="First Name"
-            ></base-input>
-            <base-input
-              v-model="form.data.attributes.last_name"
-              alternative
-              class="mb-3"
-              placeholder="First Name"
-              name="First Name"
-              label="First Name"
-            ></base-input>
-          </div>
-          <div class="flex">
-            <base-input
-              v-model="form.data.attributes.email"
-              alternative
-              class="mb-3"
-              placeholder="Email"
-              type="email"
-              name="email"
-              label="Email"
-            ></base-input>
-          </div>
-          <div>
-            <label for="">Profile Image</label>
-            <div class="flex flex-row items-center">
-              <base-avatar
-                :user-avatar="userAvatar"
-                :loading="loading"
-              ></base-avatar>
-              <avatar-upload v-model="FILE" @input="uploadFile"></avatar-upload>
-            </div>
-          </div>
-          <div>
-            <base-button @click="update">Save</base-button>
-          </div>
-        </form>
-      </div>
+  <div class="md:flex flex-row">
+    <div>
+      <h2 class="bold blur-lg">Personal info</h2>
+      <p>Tell us about yourself</p>
     </div>
-  </card>
+    <div class="flex-1">
+      <form class="p-2 mb-4 rounded">
+        <div class="mb-4 space-x-4 md:flex">
+          <base-input
+            v-model="form.data.attributes.first_name"
+            alternative
+            class="mb-3"
+            placeholder="First Name"
+            name="First Name"
+            label="First Name"
+          ></base-input>
+          <base-input
+            v-model="form.data.attributes.last_name"
+            alternative
+            class="mb-3"
+            placeholder="First Name"
+            name="First Name"
+            label="First Name"
+          ></base-input>
+        </div>
+        <div class="mb-4 space-x-4 md:flex">
+          <base-input
+            v-model="form.data.attributes.email"
+            alternative
+            class="mb-3"
+            placeholder="Email"
+            type="email"
+            name="email"
+            label="Email"
+          ></base-input>
+        </div>
+        <div class="w-full">
+          <base-label>Profile Image</base-label>
+          <div class="flex flex-row items-center md:space-x-4 flex-wrap mb-2">
+            <base-avatar
+              :user-avatar="userAvatar"
+              :loading="loading"
+            ></base-avatar>
+            <avatar-upload v-model="FILE" @input="uploadFile"></avatar-upload>
+          </div>
+        </div>
+        <div>
+          <base-button class="w-full md:w-1/3" @click="update"
+            >Save</base-button
+          >
+        </div>
+      </form>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -60,9 +60,17 @@ import AvatarUpload from '~/components/core-components/AvatarUpload.vue'
 import BaseAvatar from '~/components/core-components/BaseAvatar.vue'
 import BaseButton from '~/components/core-components/BaseButton.vue'
 import BaseFileUpload from '~/components/core-components/BaseFileUpload.vue'
+import BaseLabel from '~/components/core-components/BaseLabel.vue'
 import Card from '~/components/core-components/Cards/Card.vue'
 export default {
-  components: { BaseButton, Card, BaseFileUpload, BaseAvatar, AvatarUpload },
+  components: {
+    BaseButton,
+    Card,
+    BaseFileUpload,
+    BaseAvatar,
+    AvatarUpload,
+    BaseLabel,
+  },
   // layout: 'AccountSettings',
   data() {
     return {

@@ -53,7 +53,6 @@
             class="
               select select-bordered
               w-full
-              max-w-xs
               flex-shrink flex-grow flex-auto
               block
               px-4

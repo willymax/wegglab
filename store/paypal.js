@@ -1,7 +1,10 @@
 export const actions = {
-  getAccessToken(context, data) {
+  getAccessToken({ commit, getters }, payload) {
     return new Promise((resolve, reject) => {
-      console.log('getAccessToken')
+      const token = getters.getAccessToken
+      if (token) {
+        return resolve(token)
+      }
       fetch('https://api-m.sandbox.paypal.com/v1/oauth2/token', {
         method: 'POST',
         body: new URLSearchParams({ grant_type: 'client_credentials' }),
@@ -23,6 +26,7 @@ export const actions = {
         .then((res) => res.json())
         .then(
           (response) => {
+            commit('setAccessToken', response)
             resolve(response)
           },
           (error) => {
@@ -34,15 +38,27 @@ export const actions = {
 }
 
 export const state = () => ({
-  accessToken: '',
+  accessToken: null,
 })
 
 export const mutations = {
-  getAccessToken: (state, accessToken) => {
-    state.accessToken = accessToken
+  setAccessToken: (state, payload) => {
+    // expires_in in seconds, change to milliseconds
+    state.accessToken = {
+      ...payload,
+      expires_on: Date.now() + payload.expires_in * 1000,
+    }
   },
 }
 
 export const getters = {
-  getAccessToken: (state) => state.accessToken,
+  getAccessToken: (state) => {
+    if (state.accessToken) {
+      if (Date.now() > state.accessToken.expires_on) {
+        return null
+      } else {
+        return state.accessToken
+      }
+    }
+  },
 }

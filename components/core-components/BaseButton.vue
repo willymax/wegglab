@@ -10,7 +10,7 @@
       { border: border },
       { block: block },
       { [`w-${width}`]: width },
-      { [`w-${height}`]: height },
+      { [`h-${height}`]: height },
       { [`hover:text-${hoverText}`]: hoverText },
       { disabled: disabled && tag !== 'button' },
     ]"

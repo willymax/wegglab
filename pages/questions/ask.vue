@@ -1,10 +1,8 @@
 <template>
   <with-right-side-bar>
     <div class="p-2">
-      <select
-        v-model="input.subject_id"
-        class="select select-bordered w-full max-w-xs"
-      >
+      <!-- <base-select v-model="input.subject_id"></base-select> -->
+      <select class="select select-bordered w-full max-w-xs">
         <option disabled="disabled" selected="selected">Choose Subject</option>
         <option
           v-for="subject in subjects"
@@ -21,12 +19,10 @@
         placeholder="Enter Question Title"
       />
       <validation-error :errors="apiValidationErrors.title" />
-      <textarea
+      <base-text-area
         v-model="input.body"
-        class="form-textarea mt-1 block w-full p-2"
-        rows="3"
         placeholder="Enter the description of your question."
-      ></textarea>
+      ></base-text-area>
       <validation-error :errors="apiValidationErrors.body" />
       <BaseFileUpload v-model="FILES"></BaseFileUpload>
       <validation-error :errors="apiValidationErrors.email" />
@@ -40,11 +36,15 @@ import BaseButton from '~/components/core-components/BaseButton.vue'
 import BaseFileUpload from '~/components/core-components/BaseFileUpload.vue'
 import formMixin from '@/mixins/form-mixin'
 import WithRightSideBar from '~/components/Dashboard/WithRightSideBar.vue'
+import BaseTextArea from '~/components/core-components/Inputs/BaseTextArea.vue'
+import BaseSelect from '~/components/core-components/Inputs/BaseSelect.vue'
 export default {
   components: {
     BaseFileUpload,
     BaseButton,
     WithRightSideBar,
+    BaseTextArea,
+    BaseSelect,
   },
   mixins: [formMixin],
   layout: 'DashboardLayout',

@@ -1,54 +1,56 @@
 <template>
-  <card>
-    <template #header>
-      <h1>Change Password</h1>
-    </template>
-    <form ref="password_form" @submit.prevent="handleChangePassword">
-      <base-input
-        v-model="form.current_password"
-        type="password"
-        name="current_password"
-        autocomplete="on"
-        class="mb-3"
-        prepend-icon="fa fa-key"
-        label="Current Password"
-        rules="required"
-      />
-      <validation-error :errors="apiValidationErrors.current_password" />
-      <base-input
-        v-model="form.password"
-        type="password"
-        name="password"
-        autocomplete="on"
-        class="mb-3"
-        prepend-icon="fa fa-key"
-        label="New Password"
-        rules="required"
-      />
-      <validation-error :errors="apiValidationErrors.password" />
-      <base-input
-        v-model="form.password_confirmation"
-        type="password"
-        name="confirm_password"
-        autocomplete="on"
-        class="mb-3"
-        prepend-icon="fa fa-key"
-        label="Confirm Password"
-        rules="required"
-      />
-      <validation-error :errors="apiValidationErrors.confirm_password" />
-      <div class="my-4">
-        <base-button
-          type="button"
-          class="btn btn-md btn-secondary"
-          native-type="submit"
-          :loading="loading"
-        >
-          Change Password
-        </base-button>
-      </div>
-    </form>
-  </card>
+  <div>
+    <h1>Change Password</h1>
+    <div class="md:w-1/2">
+      <form ref="password_form" @submit.prevent="handleChangePassword">
+        <div class="mb-4 md:mr-2 md:mb-0">
+          <base-input
+            v-model="form.current_password"
+            type="password"
+            name="current_password"
+            autocomplete="on"
+            class="mb-3"
+            prepend-icon="fa fa-key"
+            label="Current Password"
+            rules="required"
+          />
+          <validation-error :errors="apiValidationErrors.current_password" />
+        </div>
+        <base-input
+          v-model="form.password"
+          type="password"
+          name="password"
+          autocomplete="on"
+          class="mb-3"
+          prepend-icon="fa fa-key"
+          label="New Password"
+          rules="required"
+        />
+        <validation-error :errors="apiValidationErrors.password" />
+        <base-input
+          v-model="form.password_confirmation"
+          type="password"
+          name="confirm_password"
+          autocomplete="on"
+          class="mb-3"
+          prepend-icon="fa fa-key"
+          label="Confirm Password"
+          rules="required"
+        />
+        <validation-error :errors="apiValidationErrors.confirm_password" />
+        <div class="my-4">
+          <base-button
+            type="button"
+            class="btn btn-md btn-secondary"
+            native-type="submit"
+            :loading="loading"
+          >
+            Change Password
+          </base-button>
+        </div>
+      </form>
+    </div>
+  </div>
 </template>
 <script>
 import BaseInput from '~/components/core-components/Inputs/BaseInput.vue'

@@ -12,16 +12,7 @@
         </label>
       </slot>
       <div
-        class="
-          flex flex-wrap
-          w-full
-          mb-4
-          relative
-          h-15
-          bg-white
-          items-center
-          rounded
-        "
+        class="flex flex-wrap w-full mb-4 relative h-15 items-center rounded"
         :class="[
           { 'input-group': hasIcon },
           { focused: focused },
@@ -45,6 +36,7 @@
             :valid="valid"
             :required="required"
             v-bind="$attrs"
+            :rows="rows"
             :class="[
               { 'is-valid': valid && validated && successMessage },
               { 'is-invalid': invalid && validated },
@@ -52,7 +44,6 @@
             ]"
             class="
               form-textarea
-              mt-1
               w-full
               p-2
               flex-shrink flex-grow flex-auto
@@ -94,10 +85,15 @@
   </validation-provider>
 </template>
 <script>
+import { integer } from 'vee-validate/dist/rules'
 export default {
   name: 'BaseTextArea',
   inheritAttrs: false,
   props: {
+    rows: {
+      type: Number,
+      default: 3,
+    },
     required: {
       type: Boolean,
       description: 'Whether input is required (adds an asterix *)',

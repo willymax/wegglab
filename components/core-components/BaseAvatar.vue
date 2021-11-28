@@ -1,12 +1,12 @@
 <template>
   <div :class="marginTop">
     <div
-      style="height: 9rem; width: 9rem"
+      style="height: 5rem; width: 5rem"
       class="md rounded-full relative avatar"
     >
       <img
-        style="height: 9rem; width: 9rem"
-        class="md rounded-full relative border-4 border-gray-900"
+        style="height: 5rem; width: 5rem"
+        class="md rounded-full relative border-2 border-gray-900"
         :src="userAvatar || require('~/assets/img/avatar.png')"
         alt=""
         @load="imageLoaded"

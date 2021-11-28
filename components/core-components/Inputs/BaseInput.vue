@@ -12,16 +12,7 @@
         </label>
       </slot>
       <div
-        class="
-          flex flex-wrap
-          w-full
-          mb-4
-          relative
-          h-15
-          bg-white
-          items-center
-          rounded
-        "
+        class="flex w-full mb-4 relative h-15 items-center rounded"
         :class="[
           { 'input-group': hasIcon },
           { focused: focused },

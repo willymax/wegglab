@@ -1,12 +1,9 @@
 <template>
   <div>
-    <input
-      ref="hiddenInput"
-      type="file"
-      class="hidden"
-      @change="fileSelection"
-    />
-    <base-button @click="uploadAFile">Upload New Avatar</base-button>
+    <input ref="hiddenInput" type="file" @change="fileSelection" />
+    <!-- <base-button class="bg-gray-300 w-2/3 md:w-1/3" @click="uploadAFile"
+      >Upload New Avatar</base-button
+    > -->
   </div>
 </template>
 
