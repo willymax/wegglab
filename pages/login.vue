@@ -96,6 +96,7 @@
               prepend-icon="fa fa-envelope"
               placeholder="Email"
               type="email"
+              @keyup.enter="setPasswordFocus()"
             >
               <template #slotData> </template>
             </base-input>
@@ -124,12 +125,14 @@
             </div>
             <base-input
               id="loggingPassword"
+              ref="password"
               v-model="form.data.attributes.password"
               alternative
               name="Password"
               prepend-icon="fa fa-lock"
               placeholder="Password"
               type="password"
+              @keyup.enter="handleSubmit()"
             >
               <template #slotData> </template>
             </base-input>
@@ -209,7 +212,7 @@ export default {
           type: 'token',
           attributes: {
             email: 'admin@example.com',
-            password: 'makau1993',
+            password: '@#Ma0706',
           },
         },
       },
@@ -227,6 +230,9 @@ export default {
     }
   },
   methods: {
+    setPasswordFocus() {
+      this.$refs.password.$el.focus()
+    },
     loginWithFacebook() {
       this.$auth.loginWith('facebook')
     },

@@ -101,8 +101,8 @@ export default {
           attributes: {
             // it will be rare to create plans at the same time
             product_id: `PROD-8F8138281X6705217`,
-            name: 'Premium',
-            description: 'A premium plan',
+            name: 'Another Plan',
+            description: 'Another plan created created with local db',
             billing_cycles: [
               {
                 frequency: {
@@ -163,7 +163,18 @@ export default {
         'https://api-m.sandbox.paypal.com/v1/billing/plans',
         theData
       ).then((data) => {
-        this.$router.push('/plans')
+        console.log(`The data is: ${JSON.stringify(data)}`)
+        this.$axios
+          .post('plans', {
+            planId: data.id,
+            planDetails: JSON.stringify(data),
+          })
+          .then((res) => {
+            this.$router.push('/plans')
+          })
+          .catch((err) => {
+            console.log(err)
+          })
       })
     },
   },

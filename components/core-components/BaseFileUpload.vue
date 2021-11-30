@@ -92,11 +92,9 @@
               Upload a file
             </button>
           </header>
-
           <h1 class="pt-8 pb-3 font-semibold sm:text-lg text-gray-900">
             To Upload
           </h1>
-
           <ul
             ref="gallery"
             class="flex flex-1 flex-wrap -m-1"

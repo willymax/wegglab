@@ -76,15 +76,14 @@ export default {
               },
             }
           ).then((res) => res.json())
-          console.log(`The plans are ${JSON.stringify(response.plans)}`)
           this.plans = response.plans
-        } catch ($ex) {
-          tries++
-          if (tries >= 3) {
-            retry = false
-          }
+        } catch ($ex) {}
+      } catch (error) {
+        tries++
+        if (tries >= 3) {
+          retry = false
         }
-      } catch (error) {}
+      }
     }
   },
   methods: {
