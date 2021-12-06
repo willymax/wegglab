@@ -1,8 +1,8 @@
 <template>
-  <!-- <div id="paypal-button-container" ref="paypalButtonContainer"></div> -->
-  <div>
+  <div id="paypal-button-container" ref="paypalButtonContainer"></div>
+  <!-- <div>
     <base-button @click="createBillingAgreement()">Subscribe</base-button>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -26,84 +26,99 @@ export default {
     },
     agreement() {
       return {
-        name: 'Override Agreement',
-        description:
-          'PayPal payment agreement that overrides merchant preferences and shipping fee and tax information.',
-        start_date: this.internetDate,
-        payer: {
-          payment_method: 'paypal',
-          // payer_info: {
-          //   email: 'payer@example.com',
-          // },
+        plan_id: 'P-65544420LN928152WMGSJ5ZQ',
+        start_time: '2021-12-18T09:13:49Z',
+        quantity: '1',
+        shipping_amount: {
+          currency_code: 'USD',
+          value: '10.00',
         },
-        plan: {
-          id: this.planId,
-        },
-        // shipping_address: {
-        //   line1: 'Hotel Staybridge',
-        //   line2: 'Crooke Street',
-        //   city: 'San Jose',
-        //   state: 'CA',
-        //   postal_code: '95112',
-        //   country_code: 'US',
-        // },
-        override_merchant_preferences: {
-          setup_fee: {
-            value: '0',
-            currency: 'USD',
+        subscriber: {
+          name: {
+            given_name: 'John',
+            surname: 'Doe',
           },
-          return_url: 'http://localhost:3000/subscriptions/create',
-          cancel_url: 'http://localhost:3000/subscriptions/create',
-          auto_bill_amount: 'YES',
-          initial_fail_amount_action: 'CONTINUE',
-          max_fail_attempts: '11',
+          email_address: 'customer@example.com',
+          shipping_address: {
+            name: {
+              full_name: 'John Doe',
+            },
+            address: {
+              address_line_1: '2211 N First Street',
+              address_line_2: 'Building 17',
+              admin_area_2: 'San Jose',
+              admin_area_1: 'CA',
+              postal_code: '95131',
+              country_code: 'US',
+            },
+          },
         },
-        // override_charge_models: [
-        //   {
-        //     charge_id: 'CHM-8373958130821962WUTENA2Q',
-        //     amount: {
-        //       value: '1',
-        //       currency: 'GBP',
-        //     },
-        //   },
-        // ],
+        application_context: {
+          brand_name: 'walmart',
+          locale: 'en-US',
+          shipping_preference: 'SET_PROVIDED_ADDRESS',
+          user_action: 'SUBSCRIBE_NOW',
+          payment_method: {
+            payer_selected: 'PAYPAL',
+            payee_preferred: 'IMMEDIATE_PAYMENT_REQUIRED',
+          },
+          return_url: 'https://example.com/returnUrl',
+          cancel_url: 'https://example.com/cancelUrl',
+        },
       }
     },
   },
   mounted() {
-    // this.renderButtons()
+    this.renderButtons()
   },
   methods: {
     async createBillingAgreement() {
+      console.log('createBillingAgreement')
       //
+      console.log(JSON.stringify(this.agreement))
       const res = await this.$store.dispatch('paypal/getAccessToken')
       const accessToken = res.access_token
-      try {
-        const response = await fetch(
-          'https://api-m.sandbox.paypal.com/v1/payments/billing-agreements/',
-          {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(this.agreement),
+      console.log(`${accessToken}`)
+      fetch('https://api-m.sandbox.paypal.com/v1/billing/subscriptions', {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(this.agreement),
+      })
+        .then((res) => res.json())
+        .then((response) => {
+          console.log(JSON.stringify(response))
+          const MyWindow = window.open(
+            response.links[0].href,
+            'MyWindow',
+            'width=600,height=300'
+          )
+          // top.window.opener.location =
+          // fetch(response.links[0].href, {
+          //   method: 'POST',
+          //   redirect: 'follow',
+          // }).then((response) => {
+          //   if (response.redirected) {
+          //     //
+          //   }
+          // })
+          if (response.status === 201) {
+            top.window.opener.location = response.links[0].href
+            fetch(response.links[0].href, {
+              method: 'POST',
+              redirect: 'follow',
+            }).then((response) => {
+              if (response.redirected) {
+                //
+              }
+            })
           }
-        ).then((res) => res.json())
-        if (response.status === 201) {
-          console.log(`url ${response.links[0].href}`)
-          fetch(response.links[0].href, {
-            method: 'POST',
-            redirect: 'follow',
-          }).then((response) => {
-            if (response.redirected) {
-              //
-            }
-          })
-        }
-      } catch (error) {
-        console.log(error)
-      }
+        })
+        .catch(function (err) {
+          console.log('Fetch Error :-S', err)
+        })
     },
     renderButtons() {
       const that = this
@@ -112,6 +127,12 @@ export default {
         // eslint-disable-next-line no-undef
         paypal
           .Buttons({
+            style: {
+              size: 'responsive',
+              tagline: 'false',
+              color: 'blue',
+              shape: 'pill',
+            },
             createSubscription(data, actions) {
               return actions.subscription.create({
                 plan_id: `${that.planId}`,

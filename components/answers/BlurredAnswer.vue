@@ -6,7 +6,7 @@
     <div class="top-0 left-0 z-10 absolute w-full h-full">
       <card class="w-1/3 text-center m-auto bg-gray-300">
         <h2>Subscribe to access answers</h2>
-        <base-nuxt-button-link to="/subscriptions/create"
+        <base-nuxt-button-link to="/subscription/plans"
           >Subscribe</base-nuxt-button-link
         >
       </card>

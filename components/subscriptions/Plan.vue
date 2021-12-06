@@ -63,9 +63,7 @@
           rounded
           text-blue-500
         "
-      >
-        <paypal-button :plan-id="planId"></paypal-button>
-      </div>
+      ></div>
     </div>
   </div>
 </template>
