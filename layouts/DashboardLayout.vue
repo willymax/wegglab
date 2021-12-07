@@ -11,7 +11,7 @@
         </main>
         <div class="drawer-side">
           <label for="my-drawer-2" class="drawer-overlay"></label>
-          <side-bar-menu>
+          <side-bar-menu class="z-0">
             <side-bar-menu-link>
               <template #link-icon>
                 <img class="w-5 h-5" src="~assets/wallet.svg" />
@@ -39,7 +39,9 @@
                 <menu-item to="/students">Students</menu-item>
               </template>
             </side-bar-menu-link>
+            <nuxt-link to="/">Hello 2</nuxt-link>
           </side-bar-menu>
+          <nuxt-link to="/">Hello</nuxt-link>
         </div>
       </div>
       <content-footer v-if="!$route.meta.hideFooter"></content-footer>

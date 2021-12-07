@@ -10,7 +10,6 @@
       overflow-y-hidden
       hover:overflow-y-auto
       w-80
-      bg-base-100
       text-base-content
     "
   >
@@ -32,5 +31,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped></style>

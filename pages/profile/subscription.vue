@@ -14,11 +14,11 @@
           <div>
             <div>
               <base-label>Plan</base-label>
-              {{ subscription.plan.name }}
+              {{ plan.name }}
             </div>
             <div>
               <base-label>Plan</base-label>
-              {{ subscription.plan.name }}
+              {{ plan.name }}
             </div>
             <div>
               <base-label>Start Date</base-label>
@@ -26,7 +26,7 @@
             </div>
             <div>
               <base-label>Next Billing</base-label>
-              {{ subscription.agreement_details.next_billing_date }}
+              {{ agreement_details.next_billing_date }}
             </div>
           </div>
         </card>
@@ -57,8 +57,9 @@ export default {
     if (this.subscribed) {
       const res = await this.$store.dispatch('paypal/getAccessToken')
       const accessToken = res.access_token
+      console.log(`${this.user.pay_pal_subscription.subscription_id}`)
       const response = await fetch(
-        `https://api-m.sandbox.paypal.com/v1/payments/billing-agreements/${this.user.pay_pal_subscription.subscription_id}`,
+        `https://api-m.sandbox.paypal.com/v1/billing/subscriptions/${this.user.pay_pal_subscription.subscription_id}`,
         {
           method: 'GET', // *GET, POST, PUT, DELETE, etc.
           headers: {
@@ -67,10 +68,17 @@ export default {
           },
         }
       ).then((res) => res.json())
+      console.log(JSON.stringify(response))
       this.subscription = response
     }
   },
   computed: {
+    agreement_details() {
+      if (this.subscription.agreement_details) {
+        return this.subscription.agreement_details
+      }
+      return {}
+    },
     user() {
       return this.$auth.user
     },
@@ -80,9 +88,7 @@ export default {
         : false
     },
     plan() {
-      return this.subscription.plan
-        ? JSON.parse(this.subscription.plan.planDetails)
-        : {}
+      return this.subscription.plan ? JSON.parse(this.subscription.plan) : {}
     },
   },
   mounted() {

@@ -5,23 +5,23 @@
     <nav-bar></nav-bar>
     <div class="h-screen container mx-auto md:px-10">
       <div class="rounded-lg shadow bg-base-200 drawer drawer-mobile h-screen">
-        <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
         <main role="main" class="flex flex-col drawer-content">
           <!-- keep-alive -->
           <nuxt></nuxt>
         </main>
-        <div class="drawer-side">
-          <div>
-            <label for="my-drawer-2" class="drawer-overlay"></label>
-            <h3 class="font-bold">Account Settings</h3>
-            <side-bar-menu>
-              <menu-item to="/profile">Profile</menu-item>
-              <menu-item to="/profile/password">Change Passoword</menu-item>
-              <menu-item to="/profile/payments">Payments</menu-item>
-              <menu-item to="/profile/subscription"
-                >Your Subscription</menu-item
-              >
-            </side-bar-menu>
+        <div>
+          <div class="drawer-side">
+            <div>
+              <h3 class="font-bold">Account Settings</h3>
+              <side-bar-menu>
+                <menu-item to="/profile">Profile</menu-item>
+                <menu-item to="/profile/password">Change Passoword</menu-item>
+                <menu-item to="/profile/payments">Payments</menu-item>
+                <menu-item to="/profile/subscription"
+                  >Your Subscription</menu-item
+                >
+              </side-bar-menu>
+            </div>
           </div>
         </div>
       </div>
