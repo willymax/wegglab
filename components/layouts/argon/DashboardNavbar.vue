@@ -271,13 +271,11 @@
 import { CollapseTransition } from 'vue2-transitions'
 import { pick, merge } from 'lodash'
 import BaseNav from '@/components/core-components/Navbar/BaseNav.vue'
-import Modal from '@/components/core-components/Modal.vue'
 
 export default {
   components: {
     CollapseTransition,
     BaseNav,
-    Modal,
   },
   props: {
     type: {

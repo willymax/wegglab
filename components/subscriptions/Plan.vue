@@ -63,15 +63,25 @@
           rounded
           text-blue-500
         "
-      ></div>
+      >
+        <base-button @click="show = !show">Start Plan</base-button>
+      </div>
     </div>
+    <app-modal :show.sync="show">
+      <Checkout :price="price" :plan-id="planId" :name="name"></Checkout>
+      <template #footer>
+        <base-button @click="show = !show">Close Dialog</base-button>
+      </template>
+    </app-modal>
   </div>
 </template>
 
 <script>
+import BaseButton from '../core-components/BaseButton.vue'
 import PaypalButton from './PaypalButton.vue'
+import Checkout from '~/components/subscriptions/Checkout.vue'
 export default {
-  components: { PaypalButton },
+  components: { PaypalButton, BaseButton, Checkout },
   props: {
     price: {
       type: Number,
@@ -81,6 +91,15 @@ export default {
       type: String,
       default: '',
     },
+    name: {
+      type: String,
+      default: '',
+    },
+  },
+  data() {
+    return {
+      show: false,
+    }
   },
 }
 </script>

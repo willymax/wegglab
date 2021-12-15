@@ -1,88 +1,83 @@
 <template>
-  <SlideYUpTransition :duration="animationDuration">
-    <!--Overlay Effect-->
-    <div
-      v-show="show"
-      id="my-modal"
-      class="
-        fixed
-        inset-0
-        bg-gray-600 bg-opacity-50
-        overflow-y-auto
-        h-full
-        w-full
-      "
-      :class="[
-        { 'show d-block': show },
-        { 'd-none': !show },
-        { 'modal-mini': type === 'mini' },
-      ]"
-      role="dialog"
-      tabindex="-1"
-      :aria-hidden="!show"
-      style="display: none"
-      @mousedown.self="closeModal"
-    >
+  <div class="z-50 relative">
+    <SlideYUpTransition :duration="animationDuration">
+      <!--Overlay Effect-->
       <div
+        v-show="show"
+        id="my-modal"
         class="
-          relative
-          top-20
-          mx-auto
-          p-5
-          border
-          w-2/4
-          shadow-lg
-          rounded-md
-          bg-white
+          fixed
+          inset-0
+          bg-gray-600 bg-opacity-50
+          overflow-y-auto overflow-x-auto
+          h-full
+          w-full
         "
         :class="[
-          { 'modal-notice': type === 'notice', [`modal-${size}`]: size },
-          modalClasses,
+          { 'show d-block': show },
+          { 'd-none': !show },
+          { 'modal-mini': type === 'mini' },
         ]"
+        role="dialog"
+        tabindex="-1"
+        :aria-hidden="!show"
+        @mousedown.self="closeModal"
       >
         <div
-          class="mt-3 text-center"
+          class="top-20 mx-auto p-5 border w-4/5 shadow-lg rounded-md bg-white"
           :class="[
-            gradient ? `bg-gradient-${gradient}` : '',
-            modalContentClasses,
+            { 'modal-notice': type === 'notice', [`modal-${size}`]: size },
+            modalClasses,
           ]"
         >
           <div
-            v-if="$slots.header"
-            class="modal-header"
-            :class="[headerClasses]"
+            class="mt-3 text-center"
+            :class="[
+              gradient ? `bg-gradient-${gradient}` : '',
+              modalContentClasses,
+            ]"
           >
-            <slot name="header"></slot>
-            <slot name="close-button">
-              <button
-                v-if="showClose"
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-                @click="closeModal"
-              >
-                <span :aria-hidden="!show">×</span>
-              </button>
-            </slot>
-          </div>
+            <div
+              v-if="$slots.header"
+              class="modal-header"
+              :class="[headerClasses]"
+            >
+              <slot name="header"></slot>
+              <slot name="close-button">
+                <button
+                  v-if="showClose"
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  @click="closeModal"
+                >
+                  <span :aria-hidden="!show">×</span>
+                </button>
+              </slot>
+            </div>
 
-          <div class="modal-body" :class="bodyClasses">
-            <slot></slot>
-          </div>
-          <div v-if="$slots.footer" class="modal-footer" :class="footerClasses">
-            <slot name="footer"></slot>
+            <div class="modal-body" :class="bodyClasses">
+              <slot></slot>
+            </div>
+            <div
+              v-if="$slots.footer"
+              class="modal-footer"
+              :class="footerClasses"
+            >
+              <slot name="footer"></slot>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </SlideYUpTransition>
+    </SlideYUpTransition>
+  </div>
 </template>
 <script>
 import { SlideYUpTransition } from 'vue2-transitions'
 
 export default {
-  name: 'Modal',
+  name: 'BaseModal',
   components: {
     SlideYUpTransition,
   },
@@ -169,7 +164,7 @@ export default {
   methods: {
     closeModal() {
       this.$emit('update:show', false)
-      this.$emit('close')
+      // this.$emit('close')
     },
   },
 }

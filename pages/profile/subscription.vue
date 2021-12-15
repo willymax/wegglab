@@ -22,11 +22,11 @@
             </div>
             <div>
               <base-label>Start Date</base-label>
-              {{ subscription.start_date }}
+              {{ subscription.start_time }}
             </div>
             <div>
               <base-label>Next Billing</base-label>
-              {{ agreement_details.next_billing_date }}
+              {{ billing_info.next_billing_time }}
             </div>
           </div>
         </card>
@@ -73,9 +73,9 @@ export default {
     }
   },
   computed: {
-    agreement_details() {
-      if (this.subscription.agreement_details) {
-        return this.subscription.agreement_details
+    billing_info() {
+      if (this.subscription.billing_info) {
+        return this.subscription.billing_info
       }
       return {}
     },

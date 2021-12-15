@@ -12,6 +12,14 @@ export default {
       type: String,
       default: '',
     },
+    price: {
+      type: Number,
+      default: 0,
+    },
+    name: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {}
@@ -26,35 +34,35 @@ export default {
     },
     agreement() {
       return {
-        plan_id: 'P-65544420LN928152WMGSJ5ZQ',
-        start_time: '2021-12-18T09:13:49Z',
+        plan_id: this.planId,
+        start_time: this.internetDate,
         quantity: '1',
         shipping_amount: {
           currency_code: 'USD',
-          value: '10.00',
+          value: '0',
         },
-        subscriber: {
-          name: {
-            given_name: 'John',
-            surname: 'Doe',
-          },
-          email_address: 'customer@example.com',
-          shipping_address: {
-            name: {
-              full_name: 'John Doe',
-            },
-            address: {
-              address_line_1: '2211 N First Street',
-              address_line_2: 'Building 17',
-              admin_area_2: 'San Jose',
-              admin_area_1: 'CA',
-              postal_code: '95131',
-              country_code: 'US',
-            },
-          },
-        },
+        // subscriber: {
+        //   name: {
+        //     given_name: 'John',
+        //     surname: 'Doe',
+        //   },
+        //   email_address: 'customer@example.com',
+        //   shipping_address: {
+        //     name: {
+        //       full_name: 'John Doe',
+        //     },
+        //     address: {
+        //       address_line_1: '2211 N First Street',
+        //       address_line_2: 'Building 17',
+        //       admin_area_2: 'San Jose',
+        //       admin_area_1: 'CA',
+        //       postal_code: '95131',
+        //       country_code: 'US',
+        //     },
+        //   },
+        // },
         application_context: {
-          brand_name: 'walmart',
+          brand_name: 'Wegglab',
           locale: 'en-US',
           shipping_preference: 'SET_PROVIDED_ADDRESS',
           user_action: 'SUBSCRIBE_NOW',
@@ -146,7 +154,7 @@ export default {
                   subscription_id: data.subscriptionID,
                   paypal_plan_id: `${that.planId}`,
                   // status: data.status,
-                  // start_time: data.start_time,
+                  // start_time: that.internetDate,
                 })
                 .then((res) => {
                   that.$auth.setUser(res.data.data)

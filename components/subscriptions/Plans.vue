@@ -1,32 +1,25 @@
 <template>
   <div>
     <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
-      <plan :price="10" plan-id="P-3M2534737G635851KMGHHR2A">Basic</plan>
-      <plan :price="25" plan-id="P-3M2534737G635851KMGHHR2A">Standard</plan>
-      <plan :price="50" plan-id="P-3M2534737G635851KMGHHR2A">Premium</plan>
+      <plan :price="10" plan-id="P-65544420LN928152WMGSJ5ZQ" name="Basic"
+        >Basic</plan
+      >
+      <plan :price="25" plan-id="P-3M2534737G635851KMGHHR2A" name="Standard"
+        >Standard</plan
+      >
+      <plan :price="50" plan-id="P-24517945X9691760EMGSJ3DQ" name="Premium"
+        >Premium</plan
+      >
     </div>
-    <button @click="show = !show">Open Dialog</button>
-    <modal :show="show" class="z-30">
-      <Checkout></Checkout>
-      <template #footer>
-        <button @click="show = !show">Close Dialog</button>
-      </template>
-    </modal>
-    <br />
-    <nuxt-link to="/">Hello 2</nuxt-link>
   </div>
 </template>
 
 <script>
-import Modal from '../core-components/Modal.vue'
 import Plan from './Plan.vue'
-import Checkout from '~/components/subscriptions/Checkout.vue'
 export default {
-  components: { Plan, Checkout, Modal },
+  components: { Plan },
   data() {
-    return {
-      show: false,
-    }
+    return {}
   },
 }
 </script>

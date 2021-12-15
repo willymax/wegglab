@@ -1,6 +1,8 @@
 <template>
   <div class="pt-12">
-    <footer id="footer" class="relative z-50 dark:bg-gray-900 pt-24">
+    <base-nuxt-button-link>Click</base-nuxt-button-link>
+    <footer id="footer" class="dark:bg-gray-900 pt-24 z-0">
+      <base-nuxt-button-link>Click2</base-nuxt-button-link>
       <div class="border-t border-b border-gray-200 dark:border-gray-700 py-16">
         <div class="mx-auto container px-4 xl:px-12 2xl:px-4">
           <div class="lg:flex">
@@ -228,142 +230,144 @@
                     </div>
                   </a>
                 </div>
-                <div class="relative w-36">
-                  <svg
-                    v-if="auto"
-                    id="auto"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="
-                      absolute
-                      inset-0
-                      m-auto
-                      ml-3
-                      text-gray-700
-                      dark:text-gray-50
-                      icon icon-tabler icon-tabler-device-laptop
-                    "
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <line x1="3" y1="19" x2="21" y2="19" />
-                    <rect x="5" y="6" width="14" height="10" rx="1" />
-                  </svg>
-                  <svg
-                    v-if="light"
-                    id="light"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="
-                      absolute
-                      inset-0
-                      m-auto
-                      ml-3
-                      text-gray-700
-                      dark:text-gray-50
-                      icon icon-tabler icon-tabler-brightness-up
-                    "
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <circle cx="12" cy="12" r="3" />
-                    <line x1="12" y1="5" x2="12" y2="3" />
-                    <line x1="17" y1="7" x2="18.4" y2="5.6" />
-                    <line x1="19" y1="12" x2="21" y2="12" />
-                    <line x1="17" y1="17" x2="18.4" y2="18.4" />
-                    <line x1="12" y1="19" x2="12" y2="21" />
-                    <line x1="7" y1="17" x2="5.6" y2="18.4" />
-                    <line x1="6" y1="12" x2="4" y2="12" />
-                    <line x1="7" y1="7" x2="5.6" y2="5.6" />
-                  </svg>
-                  <svg
-                    v-if="dark"
-                    id="dark"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="
-                      absolute
-                      inset-0
-                      m-auto
-                      ml-3
-                      text-gray-700
-                      dark:text-gray-50
-                      icon icon-tabler icon-tabler-moon
-                    "
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path
-                      d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"
-                    />
-                  </svg>
+                <div class="static w-36">
+                  <div class="relative z-0">
+                    <svg
+                      v-if="auto"
+                      id="auto"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="
+                        absolute
+                        inset-0
+                        m-auto
+                        ml-3
+                        text-gray-700
+                        dark:text-gray-50
+                        icon icon-tabler icon-tabler-device-laptop
+                      "
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <line x1="3" y1="19" x2="21" y2="19" />
+                      <rect x="5" y="6" width="14" height="10" rx="1" />
+                    </svg>
+                    <svg
+                      v-if="light"
+                      id="light"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="
+                        absolute
+                        inset-0
+                        m-auto
+                        ml-3
+                        text-gray-700
+                        dark:text-gray-50
+                        icon icon-tabler icon-tabler-brightness-up
+                      "
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <circle cx="12" cy="12" r="3" />
+                      <line x1="12" y1="5" x2="12" y2="3" />
+                      <line x1="17" y1="7" x2="18.4" y2="5.6" />
+                      <line x1="19" y1="12" x2="21" y2="12" />
+                      <line x1="17" y1="17" x2="18.4" y2="18.4" />
+                      <line x1="12" y1="19" x2="12" y2="21" />
+                      <line x1="7" y1="17" x2="5.6" y2="18.4" />
+                      <line x1="6" y1="12" x2="4" y2="12" />
+                      <line x1="7" y1="7" x2="5.6" y2="5.6" />
+                    </svg>
+                    <svg
+                      v-if="dark"
+                      id="dark"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="
+                        absolute
+                        inset-0
+                        m-auto
+                        ml-3
+                        text-gray-700
+                        dark:text-gray-50
+                        icon icon-tabler icon-tabler-moon
+                      "
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path
+                        d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"
+                      />
+                    </svg>
 
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="
-                      pointer-events-none
-                      absolute
-                      inset-0
-                      m-auto
-                      mr-3
-                      text-gray-700
-                      dark:text-gray-50
-                      icon icon-tabler icon-tabler-chevron-down
-                    "
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>
-                  <select
-                    class="
-                      w-full
-                      focus:outline-none
-                      pl-10
-                      py-2
-                      appearance-none
-                      flex
-                      items-center
-                      h-12
-                      border
-                      rounded
-                      border-gray-700
-                      dark:border-gray-50
-                      text-sm
-                      leading-5
-                      dark:bg-gray-900 dark:text-gray-50
-                    "
-                    @change="toggle($event)"
-                  >
-                    <option value="auto">Auto</option>
-                    <option value="light">Light</option>
-                    <option value="dark">Dark</option>
-                  </select>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="
+                        pointer-events-none
+                        absolute
+                        inset-0
+                        m-auto
+                        mr-3
+                        text-gray-700
+                        dark:text-gray-50
+                        icon icon-tabler icon-tabler-chevron-down
+                      "
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                    <select
+                      class="
+                        w-full
+                        focus:outline-none
+                        pl-10
+                        py-2
+                        appearance-none
+                        flex
+                        items-center
+                        h-12
+                        border
+                        rounded
+                        border-gray-700
+                        dark:border-gray-50
+                        text-sm
+                        leading-5
+                        dark:bg-gray-900 dark:text-gray-50
+                      "
+                      @change="toggle($event)"
+                    >
+                      <option value="auto">Auto</option>
+                      <option value="light">Light</option>
+                      <option value="dark">Dark</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -446,8 +450,10 @@
 </template>
 
 <script>
+import BaseNuxtButtonLink from '~/components/core-components/BaseNuxtButtonLink.vue'
 export default {
   name: 'Index',
+  components: { BaseNuxtButtonLink },
   data() {
     return {
       auto: true,
