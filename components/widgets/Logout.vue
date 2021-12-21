@@ -6,22 +6,19 @@
     >
       Logout
     </button>
-    <modal :show.sync="showDialog" :show-close="true">
-      <template #default> You are about to logout </template>
+    <app-modal v-if="showDialog" :show.sync="showDialog" :show-close="true">
+      <template #default>
+        <p>You are about to logout</p>
+      </template>
       <template #footer>
         <div class="flex flex-row justify-center space-x-4 m-2">
           <button @click="showDialog = !showDialog">Close</button>
-          <base-button
-            width="md"
-            :loading="loading"
-            round
-            transparent
-            @click="logout"
+          <base-button width="md" :loading="loading" round @click="logout"
             >Continue</base-button
           >
         </div>
       </template>
-    </modal>
+    </app-modal>
   </div>
 </template>
 

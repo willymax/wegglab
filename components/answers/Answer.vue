@@ -19,11 +19,6 @@
                 ><img src="~assets/document.svg" class="inline" />
                 {{ file.name }}</span
               >
-
-              <!-- <img
-                class="object-contain h-48"
-                :src="$getImageUrl(file.file_url)"
-            /> -->
             </a>
           </li>
         </ul>

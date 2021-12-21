@@ -130,9 +130,6 @@ export default {
   computed: {
     userAvatar() {
       return this.user.avatar
-      // return this.user.avatar
-      //   ? this.$getImageUrl(this.user.avatar)
-      //   : '~/assets/img/avatar.png'
     },
     user() {
       return this.$auth.user

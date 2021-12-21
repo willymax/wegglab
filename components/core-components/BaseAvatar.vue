@@ -1,16 +1,14 @@
 <template>
   <div :class="marginTop">
-    <div
-      style="height: 5rem; width: 5rem"
-      class="md rounded-full relative avatar"
-    >
+    <div class="md rounded-full relative avatar" :class="dimensionsClasses">
       <img
-        style="height: 5rem; width: 5rem"
-        class="md rounded-full relative border-2 border-gray-900"
-        :src="userAvatar || require('~/assets/img/avatar.png')"
+        ref="avatar"
+        :class="[imgClasses, dimensionsClasses]"
+        class="h-10 w-10 md rounded-full relative"
+        :src="$getImageUrl(userAvatar) || require('~/assets/img/avatar.png')"
         alt=""
         @load="imageLoaded"
-        @error="errorLoadingAvatar == true"
+        @error="errorLoadingAvatar()"
       />
       <span
         v-if="imageLoading"
@@ -34,10 +32,19 @@ export default {
       type: String,
       default: 'margin-top: 0rem',
     },
+    imgClasses: {
+      type: String,
+      default: '',
+      description: 'Input css classes',
+    },
+    dimensionsClasses: {
+      type: String,
+      default: '',
+      description: 'Input css classes',
+    },
   },
   data() {
     return {
-      errorLoadingAvatar: false,
       loaded: false,
     }
   },
@@ -49,6 +56,9 @@ export default {
   methods: {
     imageLoaded() {
       this.loaded = true
+    },
+    errorLoadingAvatar() {
+      this.$refs.avatar.src = require('~/assets/img/avatar.png')
     },
   },
 }

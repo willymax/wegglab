@@ -16,11 +16,11 @@
       <a href="#" class="flex-shrink-0 group block">
         <div class="flex items-center">
           <div>
-            <img
-              class="inline-block h-10 w-10 rounded-full"
-              src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-              alt=""
-            />
+            <base-avatar
+              :user-avatar="details.user.avatar"
+              dimensions-classes="h-10 w-10"
+              img-classes="rounded-full"
+            ></base-avatar>
           </div>
           <div class="ml-3">
             <p class="text-base leading-6 font-medium">
@@ -37,7 +37,23 @@
                   duration-150
                 "
               >
-                @ShonaDesign . 16 April
+                {{ details.user ? details.user.username : '' }}
+              </span>
+            </p>
+            <p>
+              <span
+                class="
+                  text-sm
+                  leading-5
+                  font-medium
+                  text-gray-400
+                  group-hover:text-gray-300
+                  transition
+                  ease-in-out
+                  duration-150
+                "
+              >
+                {{ $processTime(details.created_at) }}
               </span>
             </p>
           </div>
@@ -149,8 +165,10 @@
 </template>
 
 <script>
+import BaseAvatar from '../core-components/BaseAvatar.vue'
 export default {
   name: 'Question',
+  components: { BaseAvatar },
   props: {
     details: {
       type: Object,

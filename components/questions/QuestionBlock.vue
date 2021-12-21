@@ -1,5 +1,9 @@
 <template>
   <card>
+    <answer-user
+      :user="question.user"
+      :timestamp="question.created_at"
+    ></answer-user>
     <h1 class="text-2xl font-bold">{{ question.title }}</h1>
     <p class="">{{ question.body }}</p>
     <div class="tags">
@@ -25,11 +29,6 @@
                 ><img src="~assets/document.svg" class="inline" />
                 {{ file.name }}</span
               >
-
-              <!-- <img
-                class="object-contain h-48"
-                :src="$getImageUrl(file.file_url)"
-            /> -->
             </a>
           </li>
         </ul>
@@ -39,9 +38,10 @@
 </template>
 
 <script>
+import AnswerUser from '../answers/AnswerUser.vue'
 import Card from '../core-components/Cards/Card.vue'
 export default {
-  components: { Card },
+  components: { Card, AnswerUser },
   computed: {
     question() {
       return this.$store.getters['questions/GET_CURRENT_QUESTION']

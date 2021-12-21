@@ -1,5 +1,5 @@
 <template>
-  <div class="dropdown-wrapper my-auto">
+  <div tabindex="0" class="dropdown-wrapper my-auto" @focusout="hideMenu">
     <div class="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
       <img
         src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
@@ -12,9 +12,9 @@
       <div
         v-if="show"
         :class="'bg-' + color + '-500'"
+        tabindex="0"
         class="
           dropdown-menu
-          text-white
           mt-1
           rounded
           absolute
@@ -26,16 +26,16 @@
         "
       >
         <ul class="list-none overflow-hidden rounded">
-          <li v-for="option in options" :key="option">
+          <li v-for="option in options" :key="option.id" class="text-white">
             <nuxt-link
               :to="option.url"
               class="flex py-2 px-4 transition duration-300"
               :class="'theme-' + color"
               >{{ option.name }}</nuxt-link
             >
-            <li>
-              <logout></logout>
-            </li>
+          </li>
+          <li>
+            <logout></logout>
           </li>
         </ul>
       </div>
@@ -60,8 +60,15 @@ export default {
   data() {
     return {
       show: false,
-      options: [{name: 'Account settings', url: '/profile'}],
+      options: [{ name: 'Account settings', url: '/profile', id: 1 }],
     }
+  },
+  methods: {
+    hideMenu() {
+      if (this.show) {
+        // this.show = false
+      }
+    },
   },
 }
 </script>

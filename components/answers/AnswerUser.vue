@@ -2,12 +2,12 @@
   <div class="flex flex-shrink-0 p-4 pb-0 pl-0">
     <nuxt-link :to="`/users/${user.id}`" class="flex-shrink-0 group block">
       <div class="flex items-center">
-        <div>
-          <img
-            class="inline-block h-10 w-10 rounded-full"
-            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-            alt=""
-          />
+        <div class="h-10 w-10">
+          <base-avatar
+            :user-avatar="user.avatar"
+            dimensions-classes="h-10 w-10"
+            img-classes="rounded-full"
+          ></base-avatar>
         </div>
         <div class="ml-3">
           <p class="text-base leading-6 font-medium">
@@ -36,7 +36,9 @@
 </template>
 
 <script>
+import BaseAvatar from '../core-components/BaseAvatar.vue'
 export default {
+  components: { BaseAvatar },
   props: {
     user: {
       type: Object,

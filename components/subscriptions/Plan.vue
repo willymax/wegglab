@@ -67,7 +67,7 @@
         <base-button @click="show = !show">Start Plan</base-button>
       </div>
     </div>
-    <app-modal :show.sync="show">
+    <app-modal v-if="show" :show.sync="show">
       <Checkout :price="price" :plan-id="planId" :name="name"></Checkout>
       <template #footer>
         <base-button @click="show = !show">Close Dialog</base-button>

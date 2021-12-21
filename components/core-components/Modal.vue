@@ -1,28 +1,25 @@
 <template>
-  <div class="z-50 relative">
-    <SlideYUpTransition :duration="animationDuration">
-      <!--Overlay Effect-->
-      <div
-        v-show="show"
-        id="my-modal"
-        class="
-          fixed
-          inset-0
-          bg-gray-600 bg-opacity-50
-          overflow-y-auto overflow-x-auto
-          h-full
-          w-full
-        "
-        :class="[
-          { 'show d-block': show },
-          { 'd-none': !show },
-          { 'modal-mini': type === 'mini' },
-        ]"
-        role="dialog"
-        tabindex="-1"
-        :aria-hidden="!show"
-        @mousedown.self="closeModal"
-      >
+  <SlideYUpTransition :duration="animationDuration">
+    <!--Overlay Effect-->
+    <div
+      id="my-modal"
+      style="z-index: 9998"
+      class="
+        fixed
+        inset-0
+        h-full
+        w-full
+        bg-gray-600 bg-opacity-50
+        overflow-y-auto overflow-x-auto
+        table
+      "
+      :class="[{ 'modal-mini': type === 'mini' }]"
+      role="dialog"
+      tabindex="-1"
+      :aria-hidden="!show"
+      @mousedown.self="closeModal"
+    >
+      <div class="table-cell align-middle">
         <div
           class="top-20 mx-auto p-5 border w-4/5 shadow-lg rounded-md bg-white"
           :class="[
@@ -70,8 +67,8 @@
           </div>
         </div>
       </div>
-    </SlideYUpTransition>
-  </div>
+    </div>
+  </SlideYUpTransition>
 </template>
 <script>
 import { SlideYUpTransition } from 'vue2-transitions'

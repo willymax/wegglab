@@ -231,6 +231,7 @@
                   </a>
                 </div>
                 <div class="static w-36">
+                  <base-nuxt-button-link>Hello</base-nuxt-button-link>
                   <div class="relative z-0">
                     <svg
                       v-if="auto"
@@ -241,6 +242,7 @@
                         inset-0
                         m-auto
                         ml-3
+                        z-0
                         text-gray-700
                         dark:text-gray-50
                         icon icon-tabler icon-tabler-device-laptop
@@ -267,6 +269,7 @@
                         inset-0
                         m-auto
                         ml-3
+                        z-0
                         text-gray-700
                         dark:text-gray-50
                         icon icon-tabler icon-tabler-brightness-up
@@ -299,6 +302,7 @@
                         absolute
                         inset-0
                         m-auto
+                        z-0
                         ml-3
                         text-gray-700
                         dark:text-gray-50
@@ -318,7 +322,6 @@
                         d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"
                       />
                     </svg>
-
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       class="
@@ -327,6 +330,7 @@
                         inset-0
                         m-auto
                         mr-3
+                        z-0
                         text-gray-700
                         dark:text-gray-50
                         icon icon-tabler icon-tabler-chevron-down
@@ -345,6 +349,7 @@
                     </svg>
                     <select
                       class="
+                        z-0
                         w-full
                         focus:outline-none
                         pl-10
