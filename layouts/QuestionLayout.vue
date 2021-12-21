@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
 }
 </script>
 

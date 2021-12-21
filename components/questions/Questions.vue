@@ -51,7 +51,7 @@ export default {
     WithRightSideBar,
   },
   // mixins: [questionsMixin],
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
   data() {
     return {
       items: [],

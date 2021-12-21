@@ -12,7 +12,7 @@ export default {
     Logout,
     Questions,
   },
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
   middleware({ store, redirect }) {
     // If the user is not authenticated
     if (!store.$auth.loggedIn) {

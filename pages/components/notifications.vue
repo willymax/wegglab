@@ -259,7 +259,7 @@ export default {
     BaseHeader,
     RouteBreadcrumb,
   },
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
   data() {
     return {
       notifications: {

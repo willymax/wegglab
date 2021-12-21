@@ -16,7 +16,7 @@ import Card from '~/components/core-components/Cards/Card.vue'
 import NavBar from '~/components/settings/NavBar.vue'
 export default {
   components: { NavBar, Card },
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
 }
 </script>
 

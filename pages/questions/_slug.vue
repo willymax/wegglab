@@ -47,7 +47,7 @@ export default {
     WithRightSideBar,
     BlurredAnswer,
   },
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
   asyncData({ params, redirect }) {
     const slug = params.slug
     // const response = await this.$axios.get(slug)

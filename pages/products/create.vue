@@ -69,7 +69,7 @@ import BaseButton from '~/components/core-components/BaseButton.vue'
 export default {
   components: { BaseTextArea, BaseSelect, BaseButton },
   mixins: [formMixin],
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
   data() {
     return {
       types: ['PHYSICAL', 'DIGITAL', 'SERVICE'],

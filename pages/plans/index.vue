@@ -13,7 +13,7 @@ import BaseButton from '~/components/core-components/BaseButton.vue'
 import BaseTable from '~/components/tables/BaseTable.vue'
 export default {
   components: { BaseTable, BaseButton },
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
   data() {
     return {
       plans: [],

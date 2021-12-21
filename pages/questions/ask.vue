@@ -47,7 +47,7 @@ export default {
     BaseSelect,
   },
   mixins: [formMixin],
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
   data() {
     return {
       FILES: {},

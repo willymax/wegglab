@@ -65,7 +65,7 @@ export default {
     MenuItem,
     NavBar,
   },
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
   mounted() {
     this.initScrollbar(), this.$store.dispatch('profile/me')
   },

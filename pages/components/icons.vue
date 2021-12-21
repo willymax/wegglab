@@ -1556,7 +1556,7 @@ export default {
     BaseHeader,
     RouteBreadcrumb,
   },
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
   methods: {
     onCopy() {
       this.$notify({

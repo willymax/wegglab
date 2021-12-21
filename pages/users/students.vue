@@ -18,7 +18,7 @@
 import BaseTable from '~/components/tables/BaseTable.vue'
 export default {
   components: { BaseTable },
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
   data() {
     return {
       students: [],

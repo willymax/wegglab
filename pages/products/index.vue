@@ -88,7 +88,7 @@ export default {
     [Option.name]: Option,
     [Button.name]: Button,
   },
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
   data() {
     return {
       selectedRows: [],

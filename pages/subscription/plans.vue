@@ -32,7 +32,7 @@ import Plan from '~/components/subscriptions/Plan.vue'
 import Plans from '~/components/subscriptions/Plans.vue'
 export default {
   components: { Plan, Plans },
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
   data() {
     return {
       plans: [],

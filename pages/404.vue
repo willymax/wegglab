@@ -10,7 +10,7 @@ import BaseButton from '~/components/core-components/BaseButton.vue'
 import BaseNuxtButtonLink from '~/components/core-components/BaseNuxtButtonLink.vue'
 export default {
   components: { BaseButton, BaseNuxtButtonLink },
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
 }
 </script>
 

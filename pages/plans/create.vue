@@ -92,7 +92,7 @@ import BaseButton from '~/components/core-components/BaseButton.vue'
 export default {
   components: { BaseTextArea, BaseSelect, BaseInput, BaseButton },
   mixins: [formMixin],
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
   data() {
     return {
       statuses: ['CREATED', 'INACTIVE', 'ACTIVE'],

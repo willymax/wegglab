@@ -143,7 +143,7 @@ export default {
     [Option.name]: Option,
     [Button.name]: Button,
   },
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
   props: {
     columns: {
       type: Array,

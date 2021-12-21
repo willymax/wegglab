@@ -9,10 +9,36 @@
       space-y-2
       overflow-y-hidden
       hover:overflow-y-auto
-      w-80
       text-base-content
     "
   >
+    <side-bar-menu-link>
+      <template #link-icon>
+        <img class="w-5 h-5" src="~assets/wallet.svg" />
+      </template>
+      Subscriptions
+      <template #menus>
+        <menu-item to="/plans">List Plans</menu-item>
+        <menu-item to="/products">List Products</menu-item>
+        <menu-item to="/plans/create">Create Plan</menu-item>
+        <menu-item to="/products/create">Create Product</menu-item>
+        <menu-item to="/subscription/plans">Subscribe</menu-item>
+        <menu-item to="/subscriptions">Subscriptions</menu-item>
+      </template>
+    </side-bar-menu-link>
+    <menu-item to="/subscriptions">Subscriptions</menu-item>
+    <menu-item to="/questions">Questions</menu-item>
+    <side-bar-menu-link>
+      <template #link-icon>
+        <img class="w-5 h-5" src="~assets/img/user.png" />
+      </template>
+      Users
+      <template #menus>
+        <menu-item to="/users">Admins</menu-item>
+        <menu-item to="/experts">Experts</menu-item>
+        <menu-item to="/students">Students</menu-item>
+      </template>
+    </side-bar-menu-link>
     <!-- Test Sidebar Menu links -->
     <slot></slot>
   </nav>

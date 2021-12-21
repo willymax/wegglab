@@ -49,7 +49,7 @@ export default {
     [Table.name]: Table,
     [TableColumn.name]: TableColumn,
   },
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
   data() {
     return {
       projects,

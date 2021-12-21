@@ -33,7 +33,7 @@ export default {
     Question,
     UserProfile,
   },
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
 
   data() {
     return {

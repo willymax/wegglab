@@ -30,7 +30,7 @@
 import { API_KEY } from '@/util/API_KEY'
 
 export default {
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
   async mounted() {
     let GoogleMapsLoader = await import('google-maps')
     GoogleMapsLoader = GoogleMapsLoader.default || GoogleMapsLoader
