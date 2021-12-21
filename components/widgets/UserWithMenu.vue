@@ -1,52 +1,96 @@
 <template>
-  <div tabindex="0" class="dropdown-wrapper my-auto" @focusout="hideMenu">
-    <div class="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-      <img
-        src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-        class="object-cover w-full h-full transition duration-300"
-        alt="avatar"
-        @click="show = !show"
-      />
-    </div>
-    <transition :name="animation">
-      <div
-        v-if="show"
-        :class="'bg-' + color + '-500'"
-        tabindex="0"
-        class="
-          dropdown-menu
-          mt-1
-          rounded
-          absolute
-          z-10
-          shadow-lg
-          w-40
-          max-w-xs
-          right-0
-        "
+  <div v-if="$auth.loggedIn">
+    <div class="relative">
+      <button
+        ref="userButton"
+        class="flex items-center space-x-2 relative focus:outline-none"
+        @click="dropdownOpen = !dropdownOpen"
       >
-        <ul class="list-none overflow-hidden rounded">
-          <li v-for="option in options" :key="option.id" class="text-white">
-            <nuxt-link
-              :to="option.url"
-              class="flex py-2 px-4 transition duration-300"
-              :class="'theme-' + color"
-              >{{ option.name }}</nuxt-link
-            >
-          </li>
-          <li>
-            <logout></logout>
-          </li>
-        </ul>
+        <h2 class="text-gray-700 dark:text-gray-300 text-sm hidden sm:block">
+          {{ $auth.user.first_name }} {{ $auth.user.last_name }}
+        </h2>
+        <base-avatar :user-avatar="$auth.user.avatar"></base-avatar>
+      </button>
+
+      <div
+        v-show="dropdownOpen"
+        v-closable="{
+          exclude: ['userButton'],
+          handler: 'closeDropDown',
+        }"
+        class="
+          absolute
+          right-0
+          mt-2
+          w-48
+          bg-white
+          rounded-md
+          overflow-hidden
+          shadow-xl
+          z-10
+        "
+        x-transition:enter="transition ease-out duration-100 transform"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-75 transform"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95"
+      >
+        <template v-for="option in options" class="text-white">
+          <nuxt-link
+            :key="option.id"
+            :to="option.url"
+            class="
+              block
+              px-4
+              py-2
+              text-sm text-gray-700
+              hover:bg-purple-600 hover:text-white
+            "
+            :class="'theme-' + color"
+            >{{ option.name }}</nuxt-link
+          >
+        </template>
+        <a
+          href="javascript:;"
+          class="
+            block
+            px-4
+            py-2
+            text-sm text-gray-700
+            hover:bg-purple-600 hover:text-white
+          "
+          @click="showLogoutDialog = true"
+          >Logout</a
+        >
       </div>
-    </transition>
+    </div>
+    <app-modal
+      v-if="showLogoutDialog"
+      :show.sync="showLogoutDialog"
+      :show-close="true"
+    >
+      <template #default>
+        <p>You are about to logout</p>
+      </template>
+      <template #footer>
+        <div class="flex flex-row justify-center space-x-4 m-2">
+          <button @click="showLogoutDialog = !showLogoutDialog">Close</button>
+          <base-button width="md" :loading="loading" round @click="logout"
+            >Continue</base-button
+          >
+        </div>
+      </template>
+    </app-modal>
   </div>
 </template>
 
 <script>
+import BaseAvatar from '../core-components/BaseAvatar.vue'
+import BaseButton from '../core-components/BaseButton.vue'
 import Logout from './Logout.vue'
 export default {
-  components: { Logout },
+  components: { Logout, BaseAvatar, BaseButton },
   props: {
     color: {
       type: String,
@@ -60,6 +104,9 @@ export default {
   data() {
     return {
       show: false,
+      loading: false,
+      showLogoutDialog: false,
+      dropdownOpen: false,
       options: [{ name: 'Account settings', url: '/profile', id: 1 }],
     }
   },
@@ -67,6 +114,18 @@ export default {
     hideMenu() {
       if (this.show) {
         // this.show = false
+      }
+    },
+    closeDropDown(event) {
+      this.dropdownOpen = false
+    },
+    async logout() {
+      this.loading = true
+      try {
+        await this.$auth.logout()
+      } catch (error) {
+        this.loading = false
+        this.$toast.error(error.response.message)
       }
     },
   },

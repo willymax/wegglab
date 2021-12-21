@@ -41,6 +41,9 @@
           </div>
 
           <div class="flex items-center space-x-4">
+            <base-nuxt-button-link to="/questions/ask"
+              >Post A Question</base-nuxt-button-link
+            >
             <button
               class="flex text-gray-600 dark:text-gray-300 focus:outline-none"
               aria-label="Color Mode"
@@ -102,96 +105,7 @@
               </svg>
             </button>
 
-            <div class="relative">
-              <button
-                ref="button"
-                class="flex items-center space-x-2 relative focus:outline-none"
-                @click="dropdownOpen = !dropdownOpen"
-              >
-                <h2
-                  class="
-                    text-gray-700
-                    dark:text-gray-300
-                    text-sm
-                    hidden
-                    sm:block
-                  "
-                >
-                  Jones Ferdinand
-                </h2>
-                <img
-                  class="
-                    h-9
-                    w-9
-                    rounded-full
-                    border-2 border-purple-500
-                    object-cover
-                  "
-                  src="https://images.unsplash.com/photo-1553267751-1c148a7280a1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-                  alt="Your avatar"
-                />
-              </button>
-
-              <div
-                v-show="dropdownOpen"
-                v-closable="{
-                  exclude: ['button'],
-                  handler: 'closeDropDown',
-                }"
-                class="
-                  absolute
-                  right-0
-                  mt-2
-                  w-48
-                  bg-white
-                  rounded-md
-                  overflow-hidden
-                  shadow-xl
-                  z-10
-                "
-                x-transition:enter="transition ease-out duration-100 transform"
-                x-transition:enter-start="opacity-0 scale-95"
-                x-transition:enter-end="opacity-100 scale-100"
-                x-transition:leave="transition ease-in duration-75 transform"
-                x-transition:leave-start="opacity-100 scale-100"
-                x-transition:leave-end="opacity-0 scale-95"
-              >
-                <a
-                  href="#"
-                  class="
-                    block
-                    px-4
-                    py-2
-                    text-sm text-gray-700
-                    hover:bg-purple-600 hover:text-white
-                  "
-                  >Profile</a
-                >
-                <a
-                  href="#"
-                  class="
-                    block
-                    px-4
-                    py-2
-                    text-sm text-gray-700
-                    hover:bg-purple-600 hover:text-white
-                  "
-                  >Tickets</a
-                >
-                <a
-                  href="javascript:;"
-                  class="
-                    block
-                    px-4
-                    py-2
-                    text-sm text-gray-700
-                    hover:bg-purple-600 hover:text-white
-                  "
-                  @click="showLogoutDialog = true"
-                  >Logout</a
-                >
-              </div>
-            </div>
+            <user-with-menu v-if="$auth.loggedIn"></user-with-menu>
           </div>
         </header>
         <div class="flex">
@@ -260,81 +174,6 @@
               </button>
             </div>
             <side-bar-menu> </side-bar-menu>
-
-            <nav class="flex flex-col mt-10 px-4 text-center">
-              <a
-                href="#"
-                class="
-                  py-2
-                  text-sm text-gray-700
-                  dark:text-gray-100
-                  bg-gray-200
-                  dark:bg-gray-800
-                  rounded
-                "
-                >Overview</a
-              >
-              <a
-                href="#"
-                class="
-                  mt-3
-                  py-2
-                  text-sm text-gray-600
-                  dark:text-gray-400
-                  hover:text-gray-700
-                  dark:hover:text-gray-100
-                  hover:bg-gray-200
-                  dark:hover:bg-gray-800
-                  rounded
-                "
-                >Tickets</a
-              >
-              <a
-                href="#"
-                class="
-                  mt-3
-                  py-2
-                  text-sm text-gray-600
-                  dark:text-gray-400
-                  hover:text-gray-700
-                  dark:hover:text-gray-100
-                  hover:bg-gray-200
-                  dark:hover:bg-gray-800
-                  rounded
-                "
-                >Ideas</a
-              >
-              <a
-                href="#"
-                class="
-                  mt-3
-                  py-2
-                  text-sm text-gray-600
-                  dark:text-gray-400
-                  hover:text-gray-700
-                  dark:hover:text-gray-100
-                  hover:bg-gray-200
-                  dark:hover:bg-gray-800
-                  rounded
-                "
-                >Contacts</a
-              >
-              <a
-                href="#"
-                class="
-                  mt-3
-                  py-2
-                  text-sm text-gray-600
-                  dark:text-gray-400
-                  hover:text-gray-700
-                  dark:hover:text-gray-100
-                  hover:bg-gray-200
-                  dark:hover:bg-gray-800
-                  rounded
-                "
-                >Settings</a
-              >
-            </nav>
           </div>
           <div class="flex-1 flex flex-col overflow-hidden">
             <main class="flex-1 overflow-x-hidden overflow-y-auto">
@@ -514,32 +353,17 @@
           </div>
         </div>
       </div>
-      <app-modal
-        v-if="showLogoutDialog"
-        :show.sync="showLogoutDialog"
-        :show-close="true"
-      >
-        <template #default>
-          <p>You are about to logout</p>
-        </template>
-        <template #footer>
-          <div class="flex flex-row justify-center space-x-4 m-2">
-            <button @click="showLogoutDialog = !showLogoutDialog">Close</button>
-            <base-button width="md" :loading="loading" round @click="logout"
-              >Continue</base-button
-            >
-          </div>
-        </template>
-      </app-modal>
     </div>
   </div>
 </template>
 
 <script>
 import BaseButton from '~/components/core-components/BaseButton.vue'
+import BaseNuxtButtonLink from '~/components/core-components/BaseNuxtButtonLink.vue'
 import SideBarMenu from '~/components/layouts/argon/SideBarMenu.vue'
+import UserWithMenu from '~/components/widgets/UserWithMenu.vue'
 export default {
-  components: { BaseButton, SideBarMenu },
+  components: { BaseButton, SideBarMenu, BaseNuxtButtonLink, UserWithMenu },
   data() {
     return {
       sidebarOpen: false,

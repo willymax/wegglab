@@ -181,6 +181,7 @@
     </div>
   </div>
 </template>
+<script>
 import ValidationError from '~/components/ValidationError.vue'
 import AuthLayout from '~/layouts/AuthLayout.vue'
 import formMixin from '@/mixins/form-mixin'

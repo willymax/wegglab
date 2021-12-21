@@ -11,6 +11,7 @@
         @error="errorLoadingAvatar()"
       />
       <span
+        v-if="!loaded"
         class="text-green-500 opacity-75 block absolute h-5 w-5 inset-0 m-auto"
       >
         <i class="fas fa-circle-notch fa-spin"></i>

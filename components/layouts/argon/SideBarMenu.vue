@@ -1,7 +1,7 @@
 <template>
   <!-- Sidebar links -->
   <nav
-    aria-label="Main"
+    aria-label="Sidebar"
     class="
       flex-1
       px-2
@@ -26,8 +26,12 @@
         <menu-item to="/subscriptions">Subscriptions</menu-item>
       </template>
     </side-bar-menu-link>
-    <menu-item to="/subscriptions">Subscriptions</menu-item>
-    <menu-item to="/questions">Questions</menu-item>
+    <menu-item to="/questions">
+      <template #link-icon>
+        <i class="fa fa-question fa-lg" aria-hidden="true"></i>
+      </template>
+      Questions</menu-item
+    >
     <side-bar-menu-link>
       <template #link-icon>
         <img class="w-5 h-5" src="~assets/img/user.png" />
