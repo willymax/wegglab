@@ -1,8 +1,6 @@
 <template>
   <div class="pt-12">
-    <base-nuxt-button-link>Click</base-nuxt-button-link>
     <footer id="footer" class="dark:bg-gray-900 pt-24 z-0">
-      <base-nuxt-button-link>Click2</base-nuxt-button-link>
       <div class="border-t border-b border-gray-200 dark:border-gray-700 py-16">
         <div class="mx-auto container px-4 xl:px-12 2xl:px-4">
           <div class="lg:flex">
@@ -231,7 +229,6 @@
                   </a>
                 </div>
                 <div class="static w-36">
-                  <base-nuxt-button-link>Hello</base-nuxt-button-link>
                   <div class="relative z-0">
                     <svg
                       v-if="auto"

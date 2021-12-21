@@ -11,10 +11,9 @@
         @error="errorLoadingAvatar()"
       />
       <span
-        v-if="imageLoading"
         class="text-green-500 opacity-75 block absolute h-5 w-5 inset-0 m-auto"
       >
-        <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+        <i class="fas fa-circle-notch fa-spin"></i>
       </span>
     </div>
   </div>
@@ -58,7 +57,9 @@ export default {
       this.loaded = true
     },
     errorLoadingAvatar() {
-      this.$refs.avatar.src = require('~/assets/img/avatar.png')
+      if (this.$refs.avatar) {
+        this.$refs.avatar.src = require('~/assets/img/avatar.png')
+      }
     },
   },
 }

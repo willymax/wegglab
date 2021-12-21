@@ -39,9 +39,7 @@
                 <menu-item to="/students">Students</menu-item>
               </template>
             </side-bar-menu-link>
-            <nuxt-link to="/">Hello 2</nuxt-link>
           </side-bar-menu>
-          <nuxt-link to="/">Hello</nuxt-link>
         </div>
       </div>
     </div>

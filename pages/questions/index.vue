@@ -8,7 +8,7 @@
 import Questions from '~/components/questions/Questions.vue'
 export default {
   components: { Questions },
-  layout: 'DashboardLayout',
+  layout: 'ResponsiveDashboard',
 }
 </script>
 

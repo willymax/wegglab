@@ -1,16 +1,10 @@
 <template>
   <div>
     <h2 class="text-3xl font-normal leading-normal mt-0 mb-2">Answers</h2>
-    <div v-if="subscribed">
-      <answer
-        v-for="answer in question.answers"
-        :key="answer.id"
-        :answer="answer"
-      ></answer>
+    <div v-for="answer in question.answers" :key="answer.id">
+      <answer v-if="subscribed" :answer="answer"></answer>
+      <blurred-answer v-else></blurred-answer>
     </div>
-    <blurred-answer v-else></blurred-answer>
-    {{ subscribed }}
-    {{ user }}
   </div>
 </template>
 
@@ -18,6 +12,7 @@
 import Answer from './Answer.vue'
 import BlurredAnswer from './BlurredAnswer.vue'
 export default {
+  // ownAnswer(answer)
   components: { Answer, BlurredAnswer },
   computed: {
     question() {
@@ -32,7 +27,12 @@ export default {
         : false
     },
   },
-  methods: {},
+  methods: {
+    ownAnswer(answer) {
+      return answer.user.id === this.user.id
+      //
+    },
+  },
 }
 </script>
 
