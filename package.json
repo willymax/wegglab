@@ -17,7 +17,7 @@
     "@fullcalendar/interaction": "^4.0.2",
     "@fullcalendar/timegrid": "^4.0.1",
     "@fullcalendar/vue": "^4.0.2-beta",
-    "@nuxtjs/auth": "^4.9.1",
+    "@nuxtjs/auth-next": "5.0.0-1640716105.da0587d",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/toast": "^3.3.1",

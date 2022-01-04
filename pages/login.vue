@@ -236,7 +236,6 @@ export default {
       this.$auth.loginWith('facebook')
     },
     socialLogin(service) {
-      console.log('socialLogin.....')
       this.$auth
         .loginWith(`${service}`)
         .then(() => {
@@ -245,7 +244,7 @@ export default {
         .catch((err) => {
           alert(JSON.stringify(err.message))
         })
-      // window.location.href = `${process.env.apiUrl}/auth/login/${service}`
+      window.location.href = `${process.env.apiUrl}/auth/login/${service}`
     },
     loginWithGoogle() {
       this.$auth.loginWith('google')

@@ -190,7 +190,7 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    '@nuxtjs/auth',
+    '@nuxtjs/auth-next',
     '@nuxtjs/toast',
   ],
 
@@ -221,25 +221,30 @@ export default {
           userInfo:
             'https://graph.facebook.com/v6.0/me?fields=id,name,picture{url}',
         },
-        client_id: process.env.FACEBOOK_CLIENT_ID,
+        clientId: '787086745566299',
         scope: ['public_profile', 'email'],
       },
+      github: {
+        clientId: 'c07a3b3527198cc225bb',
+        clientSecret: 'c09058ea5f9401ef94d703778a4a13df8fc66180',
+      },
       google: {
-        // client_id: process.env.GOOGLE_CLIENT_ID,
-        // codeChallengeMethod: '',
-        // responseType: 'code',
-        // // endpoints: {
-        // //   token: 'http://127.0.0.1:8000/api/v1/auth/social-login/google',
-        // //   userInfo: 'http://127.0.0.1:8000/api/v1/auth/user',
-        // // },
+        clientId:
+          '190444057795-mesq3ca9gv7b45ae07e9l7g560iobio8.apps.googleusercontent.com',
+        codeChallengeMethod: '',
+        responseType: 'code',
+        endpoints: {
+          token: 'http://127.0.0.1:8000/api/v1/auth/social-login/google',
+          userInfo: 'http://127.0.0.1:8000/api/v1/auth/user',
+        },
       },
-      redirect: {
-        login: '/login',
-        register: '/register',
-        logout: '/',
-        callback: '/login',
-        home: '/dashboard',
-      },
+      // redirect: {
+      //   login: '/login',
+      //   register: '/register',
+      //   logout: '/',
+      //   callback: '/login',
+      //   home: '/dashboard',
+      // },
     },
   },
 
