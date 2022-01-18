@@ -9,17 +9,7 @@
     <!-- Page content -->
     <div class="container">
       <div
-        class="
-          flex
-          max-w-sm
-          mx-auto
-          overflow-hidden
-          bg-white
-          rounded-lg
-          shadow-lg
-          dark:bg-gray-800
-          lg:max-w-4xl
-        "
+        class="flex max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl"
       >
         <!-- prettier-ignore -->
         <div
@@ -42,12 +32,7 @@
 
         <div class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
           <h2
-            class="
-              text-2xl
-              font-semibold
-              text-center text-gray-700
-              dark:text-white
-            "
+            class="text-2xl font-semibold text-center text-gray-700 dark:text-white"
           >
             Wegglab
           </h2>
@@ -64,12 +49,7 @@
             <span class="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
             <a
               href="#"
-              class="
-                text-xs text-center text-gray-500
-                uppercase
-                dark:text-gray-400
-                hover:underline
-              "
+              class="text-xs text-center text-gray-500 uppercase dark:text-gray-400 hover:underline"
               >or login with email</a
             >
             <span class="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
@@ -77,14 +57,7 @@
 
           <div class="mt-4">
             <label
-              class="
-                block
-                mb-2
-                text-sm
-                font-medium
-                text-gray-600
-                dark:text-gray-200
-              "
+              class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
               for="LoggingEmailAddress"
               >Email Address</label
             >
@@ -106,14 +79,7 @@
           <div class="mt-4">
             <div class="flex justify-between">
               <label
-                class="
-                  block
-                  mb-2
-                  text-sm
-                  font-medium
-                  text-gray-600
-                  dark:text-gray-200
-                "
+                class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
                 for="loggingPassword"
                 >Password</label
               >
@@ -142,20 +108,7 @@
 
           <div class="mt-8">
             <button
-              class="
-                w-full
-                px-4
-                py-2
-                tracking-wide
-                text-white
-                transition-colors
-                duration-200
-                transform
-                bg-gray-700
-                rounded
-                hover:bg-gray-600
-                focus:outline-none focus:bg-gray-600
-              "
+              class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-gray-700 rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
               @click="handleSubmit()"
             >
               Login
@@ -166,12 +119,7 @@
             <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
             <nuxt-link
               to="register"
-              class="
-                text-xs text-gray-500
-                uppercase
-                dark:text-gray-400
-                hover:underline
-              "
+              class="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
               >or sign up</nuxt-link
             >
             <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
@@ -244,10 +192,7 @@ export default {
         .catch((err) => {
           alert(JSON.stringify(err.message))
         })
-      window.location.href = `${process.env.apiUrl}/auth/login/${service}`
-    },
-    loginWithGoogle() {
-      this.$auth.loginWith('google')
+      // window.location.href = `${process.env.apiUrl}/auth/login/${service}`
     },
     handleSubmit() {
       this.$auth
@@ -259,7 +204,10 @@ export default {
             type: 'success',
             message: 'Login successful.',
           })
+          console.log(JSON.stringify(response))
+          console.log(this.$auth.user)
           this.$router.push('/dashboard')
+          console.log('pushing to dashboard')
         })
         .catch((error) => {
           // handle error

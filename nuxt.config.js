@@ -182,7 +182,6 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/svg',
-    // 'nuxt-vite',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -203,18 +202,20 @@ export default {
     strategies: {
       local: {
         _scheme: '~/util/authCustomStrategy.js',
+        token: {
+          property: 'data.token',
+          global: true,
+          required: true,
+          type: 'Bearer',
+        },
+        user: {
+          property: '',
+          autoFetch: true,
+        },
         endpoints: {
-          login: {
-            url: 'auth/login',
-            method: 'post',
-            propertyName: 'data.token',
-          },
+          login: { url: '/auth/login', method: 'post' },
           logout: { url: '/logout', method: 'post' },
-          user: {
-            url: 'auth/user',
-            method: 'get',
-            propertyName: false,
-          },
+          user: { url: '/auth/user', method: 'get' },
         },
       },
       facebook: {
@@ -239,13 +240,13 @@ export default {
           userInfo: 'http://127.0.0.1:8000/api/v1/auth/user',
         },
       },
-      // redirect: {
-      //   login: '/login',
-      //   register: '/register',
-      //   logout: '/',
-      //   callback: '/login',
-      //   home: '/dashboard',
-      // },
+    },
+    redirect: {
+      login: '/login',
+      register: '/register',
+      logout: '/',
+      callback: '/login',
+      home: '/dashboard',
     },
   },
 
