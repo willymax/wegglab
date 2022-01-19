@@ -236,8 +236,8 @@ export default {
         codeChallengeMethod: '',
         responseType: 'code',
         endpoints: {
-          token: 'http://127.0.0.1:8000/api/v1/auth/social-login/google',
-          userInfo: 'http://127.0.0.1:8000/api/v1/auth/user',
+          token: `${process.env.API_BASE_URL}/auth/social-login/google`,
+          userInfo: `${process.env.API_BASE_URL}/auth/user`,
         },
       },
     },
