@@ -34,25 +34,25 @@
             <div class="mb-4 md:flex md:justify-between">
               <div class="mb-4 md:mr-2 md:mb-0">
                 <base-input
-                  v-model="form.data.attributes.firstName"
+                  v-model="form.data.attributes.first_name"
                   alternative
                   class="mb-3"
                   placeholder="First Name"
                   name="First Name"
                   label="First Name"
                 ></base-input>
-                <validation-error :errors="apiValidationErrors.firstName" />
+                <validation-error :errors="apiValidationErrors.first_name" />
               </div>
               <div class="md:ml-2">
                 <base-input
-                  v-model="form.data.attributes.lastName"
+                  v-model="form.data.attributes.last_name"
                   alternative
                   class="mb-3"
                   placeholder="Last Name"
                   name="Last Name"
                   label="Last Name"
                 ></base-input>
-                <validation-error :errors="apiValidationErrors.lastName" />
+                <validation-error :errors="apiValidationErrors.last_name" />
               </div>
             </div>
             <div class="mb-4">
@@ -60,9 +60,9 @@
                 v-model="form.data.attributes.email"
                 alternative
                 class="mb-3"
-                placeholder="Email"
-                name="Email"
-                label="Email"
+                placeholder="email"
+                name="email"
+                label="email"
                 type="email"
               ></base-input>
               <validation-error :errors="apiValidationErrors.email" />
@@ -74,9 +74,9 @@
                   alternative
                   class="mb-3"
                   placeholder="******************"
-                  name="Password"
+                  name="password"
                   type="password"
-                  label="Password"
+                  label="password"
                 ></base-input>
                 <validation-error :errors="apiValidationErrors.password" />
               </div>
@@ -88,9 +88,9 @@
                   placeholder="******************"
                   name="password_confirmation"
                   type="password"
-                  label="Confirm Password"
+                  label="Confirm password"
                 ></base-input>
-                <validation-error :errors="apiValidationErrors.password" />
+                <validation-error :errors="apiValidationErrors.password_confirmation" />
               </div>
             </div>
             <div class="mb-6 text-center">
@@ -123,7 +123,7 @@
                 "
                 href="#"
               >
-                Forgot Password?
+                Forgot password?
               </a>
             </div>
             <div class="text-center">
@@ -176,8 +176,8 @@ export default {
         data: {
           type: 'token',
           attributes: {
-            firstName: '',
-            lastName: '',
+            first_name: '',
+            last_name: '',
             email: '',
             password: '',
             password_confirmation: '',
@@ -205,6 +205,7 @@ export default {
         console.log('this.$router.push')
         this.$router.push('/dashboard')
       } catch (e) {
+        console.log("An error has occurred" + JSON.stringify(e.response.data));
         this.error = e.response.data.message
         // handle error
         this.$notify({

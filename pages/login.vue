@@ -158,8 +158,8 @@ export default {
         data: {
           type: 'token',
           attributes: {
-            email: 'admin@example.com',
-            password: '@#Ma0706',
+            email: 'williammakau070@gmail.com',
+            password: 'makau1993',
           },
         },
       },
@@ -204,10 +204,7 @@ export default {
             type: 'success',
             message: 'Login successful.',
           })
-          console.log(JSON.stringify(response))
-          console.log(this.$auth.user)
           this.$router.push('/dashboard')
-          console.log('pushing to dashboard')
         })
         .catch((error) => {
           // handle error

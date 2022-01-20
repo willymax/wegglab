@@ -12,12 +12,12 @@ export default {
     setApiValidation(serverErrors, refs = null) {
       this.apiValidationErrors = serverErrors.reduce(
         (accumulator, errorObject) => {
-          if (typeof errorObject.source === 'undefined') return false
+          if (typeof errorObject.field === 'undefined') return false
 
-          // const errorFieldName = errorObject.source.pointer.split('/')[3]
-          const errorFieldName = errorObject.source
+          // const errorFieldName = errorObject.field.pointer.split('/')[3]
+          const errorFieldName = errorObject.field
           const errorDetail = (accumulator[errorFieldName] || []).concat(
-            errorObject.detail
+            errorObject.messages
           )
 
           return {

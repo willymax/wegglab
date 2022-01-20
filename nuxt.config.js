@@ -203,10 +203,15 @@ export default {
       local: {
         _scheme: '~/util/authCustomStrategy.js',
         token: {
-          property: 'data.token',
+          property: 'token.accessToken',
           global: true,
           required: true,
           type: 'Bearer',
+        },
+        refreshToken: {
+          property: 'token.refreshToken',
+          data: 'refreshToken',
+          maxAge: 60 * 60 * 24 * 30,
         },
         user: {
           property: '',
@@ -215,7 +220,8 @@ export default {
         endpoints: {
           login: { url: '/auth/login', method: 'post' },
           logout: { url: '/logout', method: 'post' },
-          user: { url: '/auth/user', method: 'get' },
+          user: { url: '/users/profile', method: 'get' },
+          refresh: { url: '/auth/refresh', method: 'post' },
         },
       },
       facebook: {
