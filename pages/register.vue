@@ -6,15 +6,7 @@
       <div class="w-full xl:w-3/4 lg:w-11/12 flex">
         <!-- Col -->
         <div
-          class="
-            w-full
-            h-auto
-            bg-white
-            hidden
-            lg:block lg:w-5/12
-            bg-cover
-            rounded-l-lg
-          "
+          class="w-full h-auto bg-white hidden lg:block lg:w-5/12 bg-cover rounded-l-lg"
           :style="{
             backgroundImage: 'url(' + require('@/assets/login.svg') + ')',
           }"
@@ -90,22 +82,14 @@
                   type="password"
                   label="Confirm password"
                 ></base-input>
-                <validation-error :errors="apiValidationErrors.password_confirmation" />
+                <validation-error
+                  :errors="apiValidationErrors.password_confirmation"
+                />
               </div>
             </div>
             <div class="mb-6 text-center">
               <button
-                class="
-                  w-full
-                  px-4
-                  py-2
-                  font-bold
-                  text-white
-                  bg-blue-500
-                  rounded-full
-                  hover:bg-blue-700
-                  focus:outline-none focus:shadow-outline
-                "
+                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                 type="button"
                 @click="register"
               >
@@ -114,26 +98,16 @@
             </div>
             <hr class="mb-6 border-t" />
             <div class="text-center">
-              <a
-                class="
-                  inline-block
-                  text-sm text-blue-500
-                  align-baseline
-                  hover:text-blue-800
-                "
-                href="#"
+              <nuxt-link
+                to="/password/reset"
+                class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
               >
                 Forgot password?
-              </a>
+              </nuxt-link>
             </div>
             <div class="text-center">
               <nuxt-link
-                class="
-                  inline-block
-                  text-sm text-blue-500
-                  align-baseline
-                  hover:text-blue-800
-                "
+                class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
                 to="login"
               >
                 Already have an account? Login!
@@ -205,7 +179,7 @@ export default {
         console.log('this.$router.push')
         this.$router.push('/dashboard')
       } catch (e) {
-        console.log("An error has occurred" + JSON.stringify(e.response.data));
+        console.log('An error has occurred' + JSON.stringify(e.response.data))
         this.error = e.response.data.message
         // handle error
         this.$notify({
