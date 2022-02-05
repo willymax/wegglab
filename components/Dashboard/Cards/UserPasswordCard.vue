@@ -40,63 +40,63 @@
   </div>
 </template>
 <script>
-import BaseInput from "~/components/argon-core/Inputs/BaseInput.vue";
-import BaseButton from "~/components/argon-core/BaseButton.vue";
-import formMixin from "@/mixins/form-mixin";
-import ValidationError from "~/components/ValidationError.vue";
+import BaseInput from '~/components/argon-core/Inputs/BaseInput.vue'
+import BaseButton from '~/components/argon-core/BaseButton.vue'
+import formMixin from '@/mixins/form-mixin'
+import ValidationError from '~/components/ValidationError.vue'
 
 export default {
-  name: "UserPasswordCard",
+  name: 'UserPasswordCard',
 
   components: {
     BaseInput,
     BaseButton,
-    ValidationError,
+    ValidationError
   },
 
   mixins: [formMixin],
 
   props: {
-    user: Object,
+    user: Object
   },
 
   data() {
     return {
       password: null,
       password_new: null,
-      password_confirmation: null,
-    };
+      password_confirmation: null
+    }
   },
 
   methods: {
     async handleChangePassword() {
-      if (["1"].includes(this.user.id)) {
+      if (['1'].includes(this.user.id)) {
         await this.$notify({
-          type: "danger",
-          message: "You are not allowed not change data of default users.",
-        });
-        return;
+          type: 'danger',
+          message: 'You are not allowed not change data of default users.'
+        })
+        return
       }
 
-      this.user.password = this.password;
-      this.user.password_confirmation = this.password_confirmation;
+      this.user.password = this.password
+      this.user.password_confirmation = this.password_confirmation
       try {
-        await this.$store.dispatch("users/update", this.user);
-        this.$refs["password_form"].reset();
-        this.unsetApiValidationErrors();
+        await this.$store.dispatch('users/update', this.user)
+        this.$refs['password_form'].reset()
+        this.unsetApiValidationErrors()
 
         this.$notify({
-          type: "success",
-          message: "Password changed successfully.",
-        });
+          type: 'success',
+          message: 'Password changed successfully.'
+        })
       } catch (error) {
         this.$notify({
-          type: "danger",
-          message: "Oops, something went wrong!",
-        });
-        this.setApiValidation(error.response.data.errors);
+          type: 'danger',
+          message: 'Oops, something went wrong!'
+        })
+        this.setApiValidation(error.response.data.errors)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

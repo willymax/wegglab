@@ -115,49 +115,49 @@
   </div>
 </template>
 <script>
-import ValidationError from "~/components/ValidationError.vue";
-import formMixin from "@/mixins/form-mixin";
+import ValidationError from '~/components/ValidationError.vue'
+import formMixin from '@/mixins/form-mixin'
 export default {
-  layout: "AuthLayout",
+  layout: 'AuthLayout',
   mixins: [formMixin],
   components: { ValidationError },
   middleware({ store, redirect }) {
     // If the user is authenticated
     if (store.$auth.loggedIn) {
-      return redirect("/dashboard");
+      return redirect('/dashboard')
     }
   },
   data() {
     return {
       form: {
         data: {
-          type: "token",
+          type: 'token',
           attributes: {
-            email: "admin@jsonapi.com",
-            password: "secret",
-          },
-        },
-      },
-    };
+            email: 'admin@jsonapi.com',
+            password: 'secret'
+          }
+        }
+      }
+    }
   },
   methods: {
     async handleSubmit() {
       try {
-        await this.$auth.loginWith("local", {
-          data: this.form,
-        });
+        await this.$auth.loginWith('local', {
+          data: this.form
+        })
         this.$axios.defaults.headers.common.Authorization = `${this.$auth.getToken(
-          "local"
-        )}`;
-        this.$router.push("/dashboard");
+          'local'
+        )}`
+        this.$router.push('/dashboard')
       } catch (error) {
         await this.$notify({
-          type: "danger",
-          message: "Invalid credentials!",
-        });
-        this.setApiValidation(error.response.data.errors);
+          type: 'danger',
+          message: 'Invalid credentials!'
+        })
+        this.setApiValidation(error.response.data.errors)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

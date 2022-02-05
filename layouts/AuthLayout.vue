@@ -202,53 +202,53 @@
   </div>
 </template>
 <script>
-import BaseNav from "~/components/argon-core/Navbar/BaseNav.vue";
+import BaseNav from '~/components/argon-core/Navbar/BaseNav.vue'
 
 export default {
   components: {
-    BaseNav,
+    BaseNav
   },
   props: {
     backgroundColor: {
       type: String,
-      default: "black",
-    },
+      default: 'black'
+    }
   },
   data() {
     return {
       showMenu: false,
       menuTransitionDuration: 250,
       year: new Date().getFullYear(),
-      pageClass: "login-page",
-    };
+      pageClass: 'login-page'
+    }
   },
   computed: {
     title() {
-      return `${this.$route.name} Page`;
+      return `${this.$route.name} Page`
     },
     layoutClass() {
-      let exceptions = ["index", "home"];
+      let exceptions = ['index', 'home']
       if (!exceptions.includes(this.$route.name)) {
-        return "bg-default";
+        return 'bg-default'
       } else {
-        return "";
+        return ''
       }
-    },
+    }
   },
   methods: {
     closeMenu() {
-      document.body.classList.remove("nav-open");
-      this.showMenu = false;
-    },
+      document.body.classList.remove('nav-open')
+      this.showMenu = false
+    }
   },
   watch: {
-    "$route.path"() {
+    '$route.path'() {
       if (this.showMenu) {
-        this.closeMenu();
+        this.closeMenu()
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 <style lang="scss">
 .auth-layout {
