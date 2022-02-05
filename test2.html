@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: Arial;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    form.trackid input[type=text] {
+      padding: 10px;
+      font-size: 17px;
+      border: 1px solid grey;
+      float: left;
+      width: 80%;
+      background: #f1f1f1;
+    }
+
+    form.trackid button {
+      float: left;
+      width: 20%;
+      padding: 10px;
+      background: #2196F3;
+      color: white;
+      font-size: 17px;
+      border: 1px solid grey;
+      border-left: none;
+      cursor: pointer;
+    }
+
+    form.trackid button:hover {
+      background: #0b7dda;
+    }
+
+    form.trackid::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    table {
+      width: 70%;
+      margin: auto;
+    }
+
+    table td {
+      padding: 10px;
+    }
+
+    form {
+      width: 70%;
+      margin: auto;
+    }
+
+    body {
+      color: #000;
+      overflow-x: hidden;
+      height: 100%;
+      background-color: #8C9EFF;
+      background-repeat: no-repeat
+    }
+
+    .card {
+      z-index: 0;
+      background-color: #ECEFF1;
+      padding-bottom: 20px;
+      margin-top: 90px;
+      margin-bottom: 90px;
+      border-radius: 10px
+    }
+
+    .top {
+      padding-top: 40px;
+      padding-left: 13% !important;
+      padding-right: 13% !important
+    }
+
+    #progressbar {
+      margin-bottom: 30px;
+      overflow: hidden;
+      color: #455A64;
+      padding-left: 0px;
+      margin-top: 30px
+    }
+
+    #progressbar li {
+      list-style-type: none;
+      font-size: 13px;
+      width: 20%;
+      float: left;
+      position: relative;
+      font-weight: 400
+    }
+
+    #progressbar .step0:before {
+      font-family: FontAwesome;
+      content: "\f10c";
+      color: #fff
+    }
+
+    #progressbar li:before {
+      width: 40px;
+      height: 40px;
+      line-height: 45px;
+      display: block;
+      font-size: 20px;
+      background: #C5CAE9;
+      border-radius: 50%;
+      margin: auto;
+      padding: 0px
+    }
+
+    #progressbar li:after {
+      content: '';
+      width: 100%;
+      height: 12px;
+      background: #C5CAE9;
+      position: absolute;
+      left: 0;
+      top: 16px;
+      z-index: -1
+    }
+
+    #progressbar li:last-child:after {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      position: absolute;
+      left: -50%
+    }
+
+    #progressbar li:nth-child(2):after,
+    #progressbar li:nth-child(3):after,
+    #progressbar li:nth-child(4):after {
+      left: -50%
+    }
+
+    #progressbar li:first-child:after {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      position: absolute;
+      left: 50%
+    }
+
+    #progressbar li:last-child:after {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px
+    }
+
+    #progressbar li:first-child:after {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px
+    }
+
+    #progressbar li.active:before,
+    #progressbar li.active:after {
+      background: #651FFF
+    }
+
+    #progressbar li.active:before {
+      font-family: FontAwesome;
+      content: "\f00c"
+    }
+
+    .icon {
+      width: 60px;
+      height: 60px;
+      margin-right: 15px
+    }
+
+    .icon-content {
+      padding-bottom: 20px
+    }
+
+    .row:before {
+      content: none !important;
+    }
+
+    @media screen and (max-width: 992px) {
+      .icon-content {
+        width: 50%
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container px-1 px-md-4 py-5 mx-auto">
+    <div class="card py-3">
+      <div>
+        <form class="trackid" method="get">
+          <input type="text" id="search" placeholder="Enter order number..." value="">
+          <button id="trackSearchButton" type="submit"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+      <div class="row d-flex justify-content-between px-3 top">
+        <div class="d-flex">
+          <h5>ORDER <span class="text-primary font-weight-bold" id="orderno">#</span></h5>
+        </div>
+        <div class="d-flex flex-column text-sm-right">
+          <!-- <p class="mb-0">Expected Arrival <span>01/12/19</span></p>
+          <p>USPS <span class="font-weight-bold">234094567242423422898</span></p> -->
+        </div>
+      </div> <!-- Add class 'active' to progress -->
+      <div class="row d-flex justify-content-center">
+        <div class="col-12">
+          <ul id="progressbar" class="text-center">
+            <li id="pickingStep" class="step0">
+              <p class="font-weight-bold">Picking</p>
+            </li>
+            <li id="processingStep" class="step0">
+              <p class="font-weight-bold">Processing</p>
+            </li>
+            <li id="confirmationStep" class="step0">
+              <p class="font-weight-bold">Confirmation</p>
+            </li>
+            <li id="enrouteStep" class="step0">
+              <p class="font-weight-bold">Order En Route</p>
+            </li>
+            <li id="deliveryStep" class="step0">
+              <p class="font-weight-bold">Order Arrived</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="tablediv card px-3 py-3" id="accordion">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+            aria-controls="collapseOne">
+            Order Details:
+          </button>
+        </h5>
+      </div>
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <table>
+            <tr>
+              <td colspan="2" id="statusMessage"></td>
+            </tr>
+            <tr>
+              <td id="shipmentDetails"></td>
+              <td id="referenceNumber"></td>
+            </tr>
+            <tr>
+              <td id="status"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td id="recipientName"></td>
+              <td id="phoneNumber"></td>
+            </tr>
+            <tr>
+              <td id="location"></td>
+              <td id="notes"></td>
+            </tr>
+            <tr>
+              <td id="deliveryDate"></td>
+              <td id="deliveryTime"></td>
+            </tr>
+            <tr>
+              <td id="sendingOrganization"></td>
+              <td id="orderDate"></td>
+            </tr>
+            <tr>
+              <td id="itemName"></td>
+              <td id="quantity"></td>
+            </tr>
+            <tr>
+              <td id="confirmedby"></td>
+              <td id="confirmationdate"></td>
+            </tr>
+            <tr>
+              <td id="confirmationtime"></td>
+              <td id="processingtime"></td>
+            </tr>
+            <tr>
+              <td id="assignedrider"></td>
+              <td id="deliverystartdate"></td>
+            </tr>
+            <tr>
+              <td id="deliverystarttime"></td>
+              <td id="orderdatetime"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function () {
+      var status = $('#status');
+      var orderno = $('#orderno');
+      var statusMessage = $('#statusMessage');
+      var shipmentDetails = $('#shipmentDetails');
+      var referenceNumber = $('#referenceNumber');
+      var recipientName = $('#recipientName');
+      var phoneNumber = $('#phoneNumber');
+      var location = $('#location');
+      var notes = $('#notes');
+      var deliveryDate = $('#deliveryDate');
+      var deliveryTime = $('#deliveryTime');
+      var sendingOrganization = $('#sendingOrganization');
+      var orderDate = $('#orderDate');
+      var itemName = $('#itemName');
+      var quantity = $('#quantity');
+      var confirmedby = $('#confirmedby');
+      var confirmationdate = $('#confirmationdate');
+      var confirmationtime = $('#confirmationtime');
+      var processingtime = $('#processingtime');
+      var assignedrider = $('#assignedrider');
+      var deliverystartdate = $('#deliverystartdate');
+      var deliverystarttime = $('#deliverystarttime');
+      var orderdatetime = $('#orderdatetime');
+      var pickingStep = $('#pickingStep');
+      var processingStep = $('#processingStep');
+      var confirmationStep = $('#confirmationStep');
+      var enrouteStep = $('#enrouteStep');
+      var deliveryStep = $('#deliveryStep');
+
+
+      $('#trackSearchButton').click(function (event) {
+        var url = "https://globeflight.thinksynergyltd.com/api1/rest/get_orderdetails.php?orderno=" + $("#search").val() + "&api_key=8d29430ba38327d91303a935520e7b95";
+        $.ajax({
+          url: url,
+          type: 'GET',
+          success: function (data) {
+            data = data[0];
+            statusMessage.html('');
+            status.html('<span><b>Status: </b></span>' + data.status);
+            referenceNumber.html(data.referencenumber);
+            shipmentDetails.html('SHIPMENT DETAILS');
+            recipientName.html('<span><b>Recipient Name: </b></span>' + data.recipientname);
+            phoneNumber.html('<span><b>Phone Number: </b></span>' + data.phonenumber);
+            location.html('<span><b>Location: </b></span>' + data.recipientlocation);
+            notes.html('<span><b>Notes: </b></span>' + data.notes);
+            deliveryDate.html('<span><b>Delivery Date: </b></span>' + data.deliverydate);
+            deliveryTime.html('<span><b>Delivery Time: </b></span>' + data.deliverytime);
+            sendingOrganization.html('<span><b>Sending Organization Name: </b></span>' + data.organizationname);
+            orderDate.html('<span><b>Order Date: </b></span>' + data.orderdatetime);
+            itemName.html('<span><b>Item Name: </b></span>' + data.itemname);
+            quantity.html('<span><b>Quantity: </b></span>' + data.quantity);
+            confirmedby.html('<span><b>Confirmed by: </b></span>' + data.confirmedby);
+            confirmationdate.html('<span><b>Confirmation Date: </b></span>' + data.confirmationdate);
+            confirmationtime.html('<span><b>Confirmation Time: </b></span>' + data.confirmationtime);
+            processingtime.html('<span><b>Processing Time: </b></span>' + data.processingtime);
+            assignedrider.html('<span><b>Assigned Rider: </b></span>' + data.assignedrider);
+            deliverystartdate.html('<span><b>Delivery Start Date: </b></span>' + data.deliverystartdate);
+            deliverystarttime.html('<span><b>Delivery Start Time: </b></span>' + data.deliverystarttime);
+            orderdatetime.html('<span><b>Order Date Time: </b></span>' + data.orderdatetime);
+            orderno.html(`#${data.orderno}`);
+            if (data.pickingdate) {
+              pickingStep.addClass('active');
+            }
+            if (data.processingdate) {
+              processingStep.addClass('active');
+            }
+            if (data.confirmationdate) {
+              confirmationStep.addClass('active');
+            }
+            if (data.deliverystartdate) {
+              enrouteStep.addClass('active');
+            }
+            if (data.deliverydate) {
+              deliveryStep.addClass('active');
+            }
+          },
+          error: function (data) {
+            status.html('');
+            referenceNumber.html('');
+            shipmentDetails.html('');
+            recipientName.html('');
+            phoneNumber.html('');
+            location.html('');
+            notes.html('');
+            deliveryDate.html('');
+            sendingOrganization.html('');
+            orderDate.html('');
+            itemName.html('');
+            quantity.html('');
+            deliveryTime.html('');
+            confirmationdate.html('');
+            confirmationtime.html('');
+            processingtime.html('');
+            assignedrider.html('');
+            deliverystartdate.html('');
+            deliverystarttime.html('');
+            orderdatetime.html('');
+            statusMessage.html('Sorry, order details not found. Please check the order number and try again.');
+          }
+        });
+        event.preventDefault();
+      })
+    });
+
+    function stopDefAction(evt) {
+      evt.preventDefault();
+    }
+  </script>
+  <script>
+    $(".btn-primary").click(function () {
+      $(".collapse").collapse('toggle');
+    });
+    $(".btn-success").click(function () {
+      $(".collapse").collapse('show');
+    });
+    $(".btn-warning").click(function () {
+      $(".collapse").collapse('hide');
+    });
+  </script>
+</body>
+
+</html>
