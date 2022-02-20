@@ -15,18 +15,10 @@
           </p>
           <p>
             <span
-              class="
-                text-sm
-                leading-5
-                font-medium
-                text-gray-400
-                group-hover:text-gray-300
-                transition
-                ease-in-out
-                duration-150
-              "
+              class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150"
             >
               {{ $processTime(timestamp) }}
+              {{ timestamp }}
             </span>
           </p>
         </div>

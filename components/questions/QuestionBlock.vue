@@ -2,7 +2,7 @@
   <card>
     <answer-user
       :user="question.user"
-      :timestamp="question.created_at"
+      :timestamp="question.createdAt"
     ></answer-user>
     <h1 class="text-2xl font-bold">{{ question.title }}</h1>
     <p class="">{{ question.body }}</p>

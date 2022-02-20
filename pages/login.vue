@@ -187,7 +187,7 @@ export default {
       this.$auth
         .loginWith(`${service}`)
         .then((res) => {
-          console.log(JSON.stringify(res));
+          console.log(JSON.stringify(res))
         })
         .catch((err) => {
           alert(JSON.stringify(err.message))
@@ -204,7 +204,7 @@ export default {
             type: 'success',
             message: 'Login successful.',
           })
-          this.$router.push('/dashboard')
+          // this.$router.push('/dashboard')
         })
         .catch((error) => {
           // handle error
