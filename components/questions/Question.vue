@@ -1,16 +1,6 @@
 <template>
   <article
-    class="
-      hover:bg-gray-100
-      bg-white
-      transition
-      duration-350
-      ease-in-out
-      rounded-box
-      overflow-hidden
-      shadow-lg
-      m-2
-    "
+    class="hover:bg-gray-100 bg-white transition duration-350 ease-in-out rounded-box overflow-hidden shadow-lg m-2"
   >
     <div class="flex flex-shrink-0 p-4 pb-0">
       <a href="#" class="flex-shrink-0 group block">
@@ -26,34 +16,16 @@
             <p class="text-base leading-6 font-medium">
               {{ details.user ? details.user.first_name : '' }}
               <span
-                class="
-                  text-sm
-                  leading-5
-                  font-medium
-                  text-gray-400
-                  group-hover:text-gray-300
-                  transition
-                  ease-in-out
-                  duration-150
-                "
+                class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150"
               >
                 {{ details.user ? details.user.username : '' }}
               </span>
             </p>
             <p>
               <span
-                class="
-                  text-sm
-                  leading-5
-                  font-medium
-                  text-gray-400
-                  group-hover:text-gray-300
-                  transition
-                  ease-in-out
-                  duration-150
-                "
+                class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150"
               >
-                {{ $processTime(details.created_at) }}
+                {{ $processTime(details.createdAt) }}
               </span>
             </p>
           </div>
@@ -78,15 +50,7 @@
 
       <div class="flex items-center py-4">
         <div
-          class="
-            flex-1 flex
-            items-center
-            text-xs text-gray-400
-            hover:text-blue-400
-            transition
-            duration-350
-            ease-in-out
-          "
+          class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out"
         >
           <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
             <g>
@@ -98,15 +62,7 @@
           12.3 k
         </div>
         <div
-          class="
-            flex-1 flex
-            items-center
-            text-xs text-gray-400
-            hover:text-green-400
-            transition
-            duration-350
-            ease-in-out
-          "
+          class="flex-1 flex items-center text-xs text-gray-400 hover:text-green-400 transition duration-350 ease-in-out"
         >
           <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
             <g>
@@ -118,15 +74,7 @@
           14 k
         </div>
         <div
-          class="
-            flex-1 flex
-            items-center
-            text-xs text-gray-400
-            hover:text-red-600
-            transition
-            duration-350
-            ease-in-out
-          "
+          class="flex-1 flex items-center text-xs text-gray-400 hover:text-red-600 transition duration-350 ease-in-out"
         >
           <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
             <g>
@@ -138,15 +86,7 @@
           14 k
         </div>
         <div
-          class="
-            flex-1 flex
-            items-center
-            text-xs text-gray-400
-            hover:text-blue-400
-            transition
-            duration-350
-            ease-in-out
-          "
+          class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out"
         >
           <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
             <g>
