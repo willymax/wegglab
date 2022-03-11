@@ -107,7 +107,6 @@ export default {
           type: 'danger',
           message: 'Oops, something went wrong!',
         })
-        console.log(JSON.stringify(error.response))
         this.setApiValidation(error.response.data.errors)
       }
     },
