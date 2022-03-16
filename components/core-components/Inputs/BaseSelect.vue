@@ -47,8 +47,12 @@
             <option disabled="disabled" selected="selected">
               Choose Option
             </option>
-            <option v-for="option in options" :key="option" :value="option">
-              {{ option }}
+            <option
+              v-for="option in options"
+              :key="getKey(option)"
+              :value="getValue(option)"
+            >
+              {{ getText(option) }}
             </option>
           </select>
         </slot>
@@ -147,6 +151,16 @@ export default {
       description: 'Input name (used for validation)',
       default: '',
     },
+    valueKey: {
+      type: String,
+      description: 'key containing value incase of an object',
+      default: '_id',
+    },
+    textKey: {
+      type: String,
+      description: 'key containing text incase of a object',
+      default: 'name',
+    },
     options: {
       type: Array,
       default() {
@@ -187,6 +201,21 @@ export default {
     },
   },
   methods: {
+    getValue(option) {
+      return typeof option === 'object' && option != null
+        ? option[this.valueKey]
+        : option
+    },
+    getKey(option) {
+      return typeof option === 'object' && option != null
+        ? option[this.valueKey]
+        : option
+    },
+    getText(option) {
+      return typeof option === 'object' && option != null
+        ? option[this.textKey]
+        : option
+    },
     updateValue(evt) {
       const value = evt.target.value
       this.$emit('input', value)

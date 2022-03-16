@@ -1,7 +1,12 @@
 <template>
   <with-right-side-bar>
     <div class="p-2">
-      <!-- <base-select v-model="input.subject_id"></base-select> -->
+      <base-select
+        v-model="input.subject_id"
+        :options="subjects"
+        value-key="_id"
+        text-key="name"
+      ></base-select>
       <select class="select select-bordered w-full max-w-xs">
         <option disabled="disabled" selected="selected">Choose Subject</option>
         <option
