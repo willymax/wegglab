@@ -46,7 +46,7 @@ export default {
     }
   },
   async fetch() {
-    const res = await this.$axios.get(`users/${this.$route.params.id}`)
+    const res = await this.$axios.get(`users/${this.$route.params._id}`)
 
     this.user = res.data.data
   },

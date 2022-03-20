@@ -3,7 +3,7 @@ export const state = () => ({
 })
 
 export const getters = {
-  isSubscribed: (state) => state.addingAnswer,
+  isSubscribed: (state) => state.subscribed,
 }
 
 export const actions = {

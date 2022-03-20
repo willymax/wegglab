@@ -2,7 +2,7 @@
   <ul class="list-group list-group-flush list my--3">
     <li
       v-for="item in items.slice(0, itemLimit)"
-      :key="item.id"
+      :key="item._id"
       class="list-group-item px-0"
     >
       <div class="row align-items-center">

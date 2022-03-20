@@ -11,8 +11,8 @@
         <option disabled="disabled" selected="selected">Choose Subject</option>
         <option
           v-for="subject in subjects"
-          :key="subject.id"
-          :value="subject.id"
+          :key="subject._id"
+          :value="subject._id"
         >
           {{ subject.name }}
         </option>

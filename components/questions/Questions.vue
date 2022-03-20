@@ -21,7 +21,7 @@
         <h1 class="text-2xl">Questions</h1>
         <question
           v-for="(item, index) in questions"
-          :key="item.id"
+          :key="item._id"
           v-observe-visibility="
             index === questions.length - 1 ? lazyLoadQuestions : false
           "

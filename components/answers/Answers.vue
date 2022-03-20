@@ -1,10 +1,10 @@
 <template>
   <div>
     <h2 class="text-3xl font-normal leading-normal mt-0 mb-2">Answers</h2>
-    <div v-for="answer in question.answers" :key="answer.id">
+    <div v-for="answer in question.answers" :key="answer._id">
       <answer v-if="subscribed" :answer="answer"></answer>
-      <blurred-answer v-else></blurred-answer>
     </div>
+    <blurred-answer v-if="!subscribed"></blurred-answer>
   </div>
 </template>
 
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     ownAnswer(answer) {
-      return answer.user.id === this.user.id
+      return answer.user._id === this.user._id
       //
     },
   },

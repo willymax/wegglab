@@ -63,15 +63,7 @@
           <label class="inline-flex items-center">
             <input
               v-model="form.data.attributes.taxes.inclusive"
-              class="
-                text-indigo-500
-                w-8
-                h-8
-                mr-2
-                focus:ring-indigo-400 focus:ring-opacity-25
-                border border-gray-300
-                rounded
-              "
+              class="text-indigo-500 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
               type="checkbox"
             />
             Inclusive
@@ -166,7 +158,7 @@ export default {
         console.log(`The data is: ${JSON.stringify(data)}`)
         this.$axios
           .post('plans', {
-            planId: data.id,
+            planId: data._id,
             planDetails: JSON.stringify(data),
           })
           .then((res) => {
