@@ -96,7 +96,7 @@ export default {
   methods: {
     update() {
       this.$axios
-        .put(`users/${this.$auth.user.id}`, { ...this.form.data.attributes })
+        .put(`users/${this.$auth.user._id}`, { ...this.form.data.attributes })
         .then((response) => {
           this.$notify({
             type: 'success',

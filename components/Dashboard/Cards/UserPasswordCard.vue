@@ -84,7 +84,7 @@ export default {
   computed: {},
   methods: {
     async handleChangePassword() {
-      if (['1'].includes(this.user.id)) {
+      if (['1'].includes(this.user._id)) {
         await this.$notify({
           type: 'danger',
           message: 'You are not allowed not change data of default users.',

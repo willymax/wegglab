@@ -42,7 +42,7 @@ export const Forms = {
       if (this.form.data.hasOwnProperty('relationships')) {
         for (const key in this.form.data.relationships) {
           if (this.form.data.relationships.hasOwnProperty(key)) {
-            this.form.data.relationships[key].data.id = null
+            this.form.data.relationships[key].data._id = null
           }
         }
       }
@@ -58,7 +58,7 @@ export const Forms = {
 
         if (newData.hasOwnProperty('relationshipNames')) {
           const relationships = pick(newData, newData.relationshipNames)
-          relationshipIds = Object.values(relationships).map((i) => i.id)
+          relationshipIds = Object.values(relationships).map((i) => i._id)
           newData = omit(newData, [
             ...Object.keys(relationships),
             'relationshipNames',

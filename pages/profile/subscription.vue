@@ -139,7 +139,7 @@ export default {
       try {
         await this.$axios
           .put('subscriptions/unsubscribeUser', {
-            subscription_id: this.subscription.id,
+            subscription_id: this.subscription._id,
           })
           .then((res) => {})
       } catch (error) {}
@@ -150,7 +150,7 @@ export default {
         // const res = await this.$store.dispatch('paypal/getAccessToken')
         this.$axios
           .get(
-            `subscriptions/paypalSubscriptions/${this.$auth.user.pay_pal_subscription.id}`
+            `subscriptions/paypalSubscriptions/${this.$auth.user.pay_pal_subscription._id}`
           )
           .then((res) => {
             this.subscription = res.data.data

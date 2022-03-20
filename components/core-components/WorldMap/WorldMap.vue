@@ -68,7 +68,7 @@ export default {
       const { fills, mapData } = this.generateMapColors()
       const worldMap = new DataMap({
         scope: 'world',
-        element: document.getElementById(this.id),
+        element: document.getElementById(this._id),
         fills,
         data: mapData,
         responsive: true,

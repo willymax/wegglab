@@ -68,7 +68,7 @@ function upload(user, image, nuxt_axios) {
 
   return axios({
     method: 'POST',
-    url: `/uploads/users/${user.id}/profile-image`,
+    url: `/uploads/users/${user._id}/profile-image`,
     data: payload,
     headers: {
       Accept: 'application/vnd.api+json',
