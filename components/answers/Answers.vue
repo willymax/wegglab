@@ -7,6 +7,7 @@
     <div v-if="question.answers.length > 0 && !subscribed">
       <blurred-answer></blurred-answer>
     </div>
+    <blurred-answer v-if="!subscribed"></blurred-answer>
   </div>
 </template>
 
