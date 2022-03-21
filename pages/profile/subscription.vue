@@ -12,7 +12,7 @@
         <template #header>Your Subscription</template>
         <div>
           <div>
-            <base-label>Plan</base-label>
+            <base-label>Subscription Plan</base-label>
             {{ plan.name }}
           </div>
           <div>
@@ -22,6 +22,10 @@
           <div>
             <base-label>Next Billing</base-label>
             {{ billing_info.next_billing_time }}
+          </div>
+          <div>
+            <base-label>Package Price</base-label>
+            {{ price }}
           </div>
           <base-button @click="cancelSubscription()"
             >Cancel Subscription</base-button
@@ -57,7 +61,7 @@ export default {
       const res = await this.$store.dispatch('paypal/getAccessToken')
       const accessToken = res.access_token
       const response = await fetch(
-        `https://api-m.sandbox.paypal.com/v1/billing/subscriptions/${this.user.pay_pal_subscription.subscription_id}`,
+        `https://api-m.sandbox.paypal.com/v1/billing/subscriptions/${this.user.subscription.subscription_id}`,
         {
           method: 'GET', // *GET, POST, PUT, DELETE, etc.
           headers: {
@@ -67,8 +71,9 @@ export default {
         }
       ).then((res) => res.json())
       this.subscription = response
+      console.log('this.subscription', this.subscription)
       const planResponse = await fetch(
-        `https://api.sandbox.paypal.com/v1/billing/plans/${this.user.pay_pal_subscription.paypal_plan_id}`,
+        `https://api.sandbox.paypal.com/v1/billing/plans/${this.user.subscription.paypal_plan_id}`,
         {
           method: 'GET', // *GET, POST, PUT, DELETE, etc.
           headers: {
@@ -77,6 +82,7 @@ export default {
           },
         }
       ).then((res) => res.json())
+      console.log('planResponse', planResponse)
       this.plan = planResponse
     }
   },
@@ -91,13 +97,13 @@ export default {
       return this.$auth.user
     },
     subscribed() {
-      return this.user.pay_pal_subscription
-        ? this.user.pay_pal_subscription.status === 'ACTIVE'
+      return this.user.subscription
+        ? this.user.subscription.status === 'Active'
         : false
     },
     price() {
       if (this.plan.billing_cycles) {
-        return this.plan.billing_cycles.pricing_scheme.fixed_price.value
+        return this.plan.billing_cycles[0].pricing_scheme.fixed_price.value
       }
       return null
     },
