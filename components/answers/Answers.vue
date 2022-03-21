@@ -22,8 +22,8 @@ export default {
       return this.$auth.user
     },
     subscribed() {
-      return this.user.pay_pal_subscription
-        ? this.user.pay_pal_subscription.status === 'ACTIVE'
+      return this.user.subscription
+        ? this.user.subscription.status === 'ACTIVE'
         : false
     },
   },
