@@ -93,7 +93,7 @@ export default {
     return {
       selectedRows: [],
       products: [],
-      sort: 'created_at',
+      sort: 'createdAt',
       columns: [
         {
           label: 'Id',

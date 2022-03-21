@@ -71,7 +71,7 @@
             />
             <el-table-column
               label="Created At"
-              prop="created_at"
+              prop="createdAt"
               min-width="140px"
               sortable="custom"
             />
@@ -161,7 +161,7 @@ export default {
     return {
       selectedRows: [],
       users: [],
-      sort: 'created_at',
+      sort: 'createdAt',
 
       pagination: {
         perPage: 5,

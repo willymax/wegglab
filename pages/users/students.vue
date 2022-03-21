@@ -53,7 +53,7 @@ export default {
         {
           label: 'Created At',
           'min-width': '310px',
-          prop: 'created_at',
+          prop: 'createdAt',
           sortable: 'custom',
         },
       ],
