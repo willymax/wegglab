@@ -1,5 +1,5 @@
 export const state = () => ({
-  subscribed: false,
+  subscribed: true,
 })
 
 export const getters = {

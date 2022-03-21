@@ -24,13 +24,7 @@
         <div>
           <div
             v-if="paginated"
-            class="
-              col-12
-              d-flex
-              justify-content-center justify-content-sm-between
-              flex-wrap
-              mb-4
-            "
+            class="col-12 d-flex justify-content-center justify-content-sm-between flex-wrap mb-4"
           >
             <el-select
               v-model="tablePaginations.perPage"
@@ -183,7 +177,7 @@ export default {
   data() {
     return {
       selectedRows: [],
-      sort: 'created_at',
+      sort: 'createdAt',
       tablePaginations: { ...this.pagination },
     }
   },

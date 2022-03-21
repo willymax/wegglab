@@ -66,13 +66,6 @@ export default {
           URL.revokeObjectURL(link.href)
         })
         .catch(console.error)
-      // try {
-      //   const question = await this.$axios.get(
-      //     `files/download/?fileUrl=${fileUrl}`
-      //   )
-      // } catch (ex) {
-      //   console.log(ex.message)
-      // }
     },
   },
 }

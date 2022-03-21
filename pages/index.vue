@@ -36,14 +36,7 @@
                   <div class="card">
                     <div class="card-body">
                       <div
-                        class="
-                          icon icon-shape
-                          bg-gradient-red
-                          text-white
-                          rounded-circle
-                          shadow
-                          mb-4
-                        "
+                        class="icon icon-shape bg-gradient-red text-white rounded-circle shadow mb-4"
                       >
                         <i class="ni ni-active-40"></i>
                       </div>
@@ -54,14 +47,7 @@
                   <div class="card">
                     <div class="card-body">
                       <div
-                        class="
-                          icon icon-shape
-                          bg-gradient-info
-                          text-white
-                          rounded-circle
-                          shadow
-                          mb-4
-                        "
+                        class="icon icon-shape bg-gradient-info text-white rounded-circle shadow mb-4"
                       >
                         <i class="ni ni-active-40"></i>
                       </div>
@@ -77,14 +63,7 @@
                   <div class="card mb-4">
                     <div class="card-body">
                       <div
-                        class="
-                          icon icon-shape
-                          bg-gradient-success
-                          text-white
-                          rounded-circle
-                          shadow
-                          mb-4
-                        "
+                        class="icon icon-shape bg-gradient-success text-white rounded-circle shadow mb-4"
                       >
                         <i class="ni ni-active-40"></i>
                       </div>
@@ -98,14 +77,7 @@
                   <div class="card mb-4">
                     <div class="card-body">
                       <div
-                        class="
-                          icon icon-shape
-                          bg-gradient-warning
-                          text-white
-                          rounded-circle
-                          shadow
-                          mb-4
-                        "
+                        class="icon icon-shape bg-gradient-warning text-white rounded-circle shadow mb-4"
                       >
                         <i class="ni ni-active-40"></i>
                       </div>
@@ -159,13 +131,7 @@
                 <div class="card card-lift--hover shadow border-0">
                   <div class="card-body py-5">
                     <div
-                      class="
-                        icon icon-shape
-                        bg-gradient-primary
-                        text-white
-                        rounded-circle
-                        mb-4
-                      "
+                      class="icon icon-shape bg-gradient-primary text-white rounded-circle mb-4"
                     >
                       <i class="ni ni-check-bold"></i>
                     </div>
@@ -194,13 +160,7 @@
                 <div class="card card-lift--hover shadow border-0">
                   <div class="card-body py-5">
                     <div
-                      class="
-                        icon icon-shape
-                        bg-gradient-success
-                        text-white
-                        rounded-circle
-                        mb-4
-                      "
+                      class="icon icon-shape bg-gradient-success text-white rounded-circle mb-4"
                     >
                       <i class="ni ni-istanbul"></i>
                     </div>
@@ -226,13 +186,7 @@
                 <div class="card card-lift--hover shadow border-0">
                   <div class="card-body py-5">
                     <div
-                      class="
-                        icon icon-shape
-                        bg-gradient-warning
-                        text-white
-                        rounded-circle
-                        mb-4
-                      "
+                      class="icon icon-shape bg-gradient-warning text-white rounded-circle mb-4"
                     >
                       <i class="ni ni-planet"></i>
                     </div>
@@ -465,10 +419,7 @@
                 ></span>
                 <span class="btn-inner--text">Purchase now</span>
                 <span
-                  class="
-                    badge badge-md badge-pill badge-floating badge-danger
-                    border-white
-                  "
+                  class="badge badge-md badge-pill badge-floating badge-danger border-white"
                   >$99</span
                 >
               </a>

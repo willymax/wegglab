@@ -2,7 +2,7 @@
   <card>
     <answer-user
       :user="answer.user"
-      :timestamp="answer.created_at"
+      :timestamp="answer.createdAt"
     ></answer-user>
     <div>
       <h2>{{ answer.body }}</h2>

@@ -4,6 +4,9 @@
     <div v-for="answer in question.answers" :key="answer._id">
       <answer v-if="subscribed" :answer="answer"></answer>
     </div>
+    <div v-if="question.answers.length > 0 && !subscribed">
+      <blurred-answer></blurred-answer>
+    </div>
     <blurred-answer v-if="!subscribed"></blurred-answer>
   </div>
 </template>
@@ -23,7 +26,7 @@ export default {
     },
     subscribed() {
       return this.user.subscription
-        ? this.user.subscription.status === 'ACTIVE'
+        ? this.user.subscription.status === 'Active'
         : false
     },
   },

@@ -3,7 +3,7 @@ export default {
     return {
       selectedRows: [],
       users: [],
-      sort: 'created_at',
+      sort: 'createdAt',
 
       pagination: {
         perPage: 10,
