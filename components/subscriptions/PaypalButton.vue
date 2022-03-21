@@ -149,8 +149,9 @@ export default {
 
             onApprove(data, actions) {
               console.log(JSON.stringify(data))
+              // subscriptions/subscribeUser
               that.$axios
-                .post('/subscriptions/subscribeUser', {
+                .post('/users/subscribeUser', {
                   subscription_id: data.subscriptionID,
                   paypal_plan_id: `${that.planId}`,
                   // status: data.status,
