@@ -56,7 +56,10 @@ export default {
       default: '',
       description: 'Collapse item title',
     },
-    id: String,
+    id: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {

@@ -73,7 +73,7 @@ function chartOptions() {
           },
           arc: {
             backgroundColor: colors.theme.primary,
-            borderColor: mode == 'dark' ? colors.gray[800] : colors.white,
+            borderColor: mode === 'dark' ? colors.gray[800] : colors.white,
             borderWidth: 4,
           },
         },

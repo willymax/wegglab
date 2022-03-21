@@ -65,7 +65,9 @@ export default {
           link.click()
           URL.revokeObjectURL(link.href)
         })
-        .catch(console.error)
+        .catch((error) => {
+          this.$toast.error(error.message)
+        })
     },
   },
 }

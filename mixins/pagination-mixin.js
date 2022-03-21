@@ -52,16 +52,16 @@ export default {
             page: this.pagination.currentPage,
           },
         })
-        .then(function (response) {
+        .then((response) => {
           // handle success
           that.items = response.data.data
           that.pagination.currentPage = response.data.paginator.current_page
           that.pagination.perPage = parseInt(response.data.paginator.per_page)
           that.total = response.data.paginator.total_count
         })
-        .catch(function (error) {
+        .catch((error) => {
           // handle error
-          console.log(error)
+          this.$toast.error(error.message)
         })
         .then(function () {
           // always executed

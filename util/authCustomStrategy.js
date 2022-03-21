@@ -26,9 +26,7 @@ export default class CustomScheme extends LocalScheme {
       endpoint,
       this.options.endpoints.user
     )
-    console.log('this.$auth.setUser(user)')
     if (user) {
-      console.log('this.$auth.setUser(user)')
       this.$auth.setUser(user)
       if (user.subscription_id) {
         //

@@ -47,6 +47,7 @@ export default {
     title: {
       type: String,
       description: 'Dropdown title',
+      default: '',
     },
     direction: {
       type: String,
@@ -56,14 +57,17 @@ export default {
     icon: {
       type: String,
       description: 'Dropdown icon',
+      default: '',
     },
     titleClasses: {
       type: [String, Object, Array],
       description: 'Title css classes',
+      default: '',
     },
     menuClasses: {
       type: [String, Object],
       description: 'Menu css classes',
+      default: '',
     },
     menuOnRight: {
       type: Boolean,

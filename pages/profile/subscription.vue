@@ -56,7 +56,6 @@ export default {
     if (this.subscribed) {
       const res = await this.$store.dispatch('paypal/getAccessToken')
       const accessToken = res.access_token
-      console.log(`${this.user.pay_pal_subscription.subscription_id}`)
       const response = await fetch(
         `https://api-m.sandbox.paypal.com/v1/billing/subscriptions/${this.user.pay_pal_subscription.subscription_id}`,
         {
@@ -67,7 +66,6 @@ export default {
           },
         }
       ).then((res) => res.json())
-      console.log(JSON.stringify(response))
       this.subscription = response
       const planResponse = await fetch(
         `https://api.sandbox.paypal.com/v1/billing/plans/${this.user.pay_pal_subscription.paypal_plan_id}`,
@@ -79,7 +77,6 @@ export default {
           },
         }
       ).then((res) => res.json())
-      console.log(JSON.stringify(planResponse))
       this.plan = planResponse
     }
   },
@@ -130,9 +127,7 @@ export default {
           .then((res) => {
             this.subscription.status = 'CANCELLED'
           })
-      } catch (error) {
-        console.log(error)
-      }
+      } catch (error) {}
     },
     async cancelSubscriptionOnWegglab() {
       //
@@ -159,7 +154,7 @@ export default {
           .catch((error) => {
             this.loading = false
             //
-            console.log(error)
+            this.$toast.error(error.message)
           })
       }
     },

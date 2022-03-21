@@ -22,52 +22,12 @@
               >Update Billing</base-nuxt-button-link
             >
             <button
-              class="
-                flex
-                justify-center
-                max-h-max
-                whitespace-nowrap
-                focus:outline-none focus:ring
-                max-w-max
-                border
-                bg-transparent
-                border-blue-500
-                text-blue-500
-                hover:border-blue-800
-                items-center
-                hover:shadow-lg
-                font-bold
-                py-2
-                px-4
-                rounded-full
-                mr-0
-                ml-auto
-              "
+              class="flex justify-center max-h-max whitespace-nowrap focus:outline-none focus:ring max-w-max border bg-transparent border-blue-500 text-blue-500 hover:border-blue-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto"
             >
               Edit Profile
             </button>
             <button
-              class="
-                flex
-                justify-center
-                max-h-max
-                whitespace-nowrap
-                focus:outline-none focus:ring
-                max-w-max
-                border
-                bg-transparent
-                border-blue-500
-                text-blue-500
-                hover:border-blue-800
-                items-center
-                hover:shadow-lg
-                font-bold
-                py-2
-                px-4
-                rounded-full
-                mr-0
-                ml-auto
-              "
+              class="flex justify-center max-h-max whitespace-nowrap focus:outline-none focus:ring max-w-max border bg-transparent border-blue-500 text-blue-500 hover:border-blue-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto"
               to="/"
               @click="changePasswoordClicked()"
             >
@@ -92,14 +52,7 @@
             <p class="text-black leading-tight mb-2">Some Text Here</p>
           </div>
           <div
-            class="
-              pt-3
-              flex
-              justify-start
-              items-start
-              w-full
-              divide-x divide-gray-800 divide-solid
-            "
+            class="pt-3 flex justify-start items-start w-full divide-x divide-gray-800 divide-solid"
           >
             <div class="text-center pr-3">
               <span class="font-bold text-black">520</span
@@ -140,7 +93,7 @@ export default {
       try {
         const res = await this.$axios.get('billing/billing-portal')
       } catch (error) {
-        console.log(error)
+        this.$toast.error(error.message)
       }
     },
     changePasswoordClicked() {

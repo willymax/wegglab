@@ -107,9 +107,7 @@ export default {
       this.createProduct(
         'https://api-m.sandbox.paypal.com/v1/catalogs/products',
         theData
-      ).then((data) => {
-        console.log(data) // JSON data parsed by `data.json()` call
-      })
+      ).then((data) => {})
     },
   },
 }
