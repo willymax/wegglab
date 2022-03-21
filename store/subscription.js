@@ -1,9 +1,9 @@
 export const state = () => ({
-  subscribed: false,
+  subscribed: true,
 })
 
 export const getters = {
-  isSubscribed: (state) => state.addingAnswer,
+  isSubscribed: (state) => state.subscribed,
 }
 
 export const actions = {

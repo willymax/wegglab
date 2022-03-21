@@ -3,7 +3,9 @@
     <h2 class="text-3xl font-normal leading-normal mt-0 mb-2">Answers</h2>
     <div v-for="answer in question.answers" :key="answer.id">
       <answer v-if="subscribed" :answer="answer"></answer>
-      <blurred-answer v-else></blurred-answer>
+    </div>
+    <div v-if="question.answers.length > 0 && !subscribed">
+      <blurred-answer></blurred-answer>
     </div>
   </div>
 </template>
@@ -18,14 +20,17 @@ export default {
     question() {
       return this.$store.getters['questions/GET_CURRENT_QUESTION']
     },
+    subscribed() {
+      return this.$store.getters['subscription/isSubscribed']
+    },
     user() {
       return this.$auth.user
     },
-    subscribed() {
-      return this.user.pay_pal_subscription
-        ? this.user.pay_pal_subscription.status === 'ACTIVE'
-        : false
-    },
+    // subscribed() {
+    //   return this.user.pay_pal_subscription
+    //     ? this.user.pay_pal_subscription.status === 'ACTIVE'
+    //     : false
+    // },
   },
   methods: {
     ownAnswer(answer) {
