@@ -1,17 +1,13 @@
 <template>
   <with-right-side-bar>
     <div class="p-2">
-      <!-- <base-select v-model="input.subject_id"></base-select> -->
-      <select class="select select-bordered w-full max-w-xs">
-        <option disabled="disabled" selected="selected">Choose Subject</option>
-        <option
-          v-for="subject in subjects"
-          :key="subject.id"
-          :value="subject.id"
-        >
-          {{ subject.name }}
-        </option>
-      </select>
+      <base-select
+        v-model="input.subject_id"
+        :options="subjects"
+        value-key="_id"
+        text-key="name"
+        label="Select Subject"
+      ></base-select>
       <validation-error :errors="apiValidationErrors.subject_id" />
       <base-input
         v-model="input.title"
@@ -52,8 +48,8 @@ export default {
     return {
       FILES: {},
       input: {
-        title: 'The title',
-        body: 'The body',
+        title: '',
+        body: '',
         subject_id: null,
       },
     }

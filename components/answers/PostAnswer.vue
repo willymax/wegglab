@@ -37,15 +37,15 @@ export default {
   methods: {
     postAnswer() {
       const formData = new FormData()
-      const answerFiles = []
+      const files = []
       let counter = 0
       for (const [index, file] of Object.entries(this.FILES)) {
-        formData.append(`answerFiles[${counter}]`, file)
+        formData.append(`files`, file)
         counter++
       }
-      formData.append('title', this.input.title)
+      // formData.append('title', this.input.title)
       formData.append('body', this.input.body)
-      formData.append('question_id', this.question.id)
+      formData.append('question_id', this.question._id)
       delete this.$axios.defaults.headers.common['content-type']
       delete this.$axios.defaults.headers.post['content-type']
       this.$axios({
@@ -63,10 +63,7 @@ export default {
             message: 'Answer created successfully.',
           })
           this.$store.dispatch('answers/updateAddingAnswer', false)
-          this.$store.commit(
-            'questions/ADD_QUESTION_ANSWERS',
-            response.data.data
-          )
+          this.$store.commit('questions/ADD_QUESTION_ANSWERS', response.data)
         })
         .catch((error) => {
           this.setApiValidation(error.response.data.errors)

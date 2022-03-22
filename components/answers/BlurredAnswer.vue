@@ -7,7 +7,7 @@
       <div class="flex flex-col justify-center h-48 min-h-full">
         <card class="w-1/3 text-center m-auto bg-gray-300">
           <h2>Subscribe to access answers</h2>
-          <base-nuxt-button-link to="/subscription/plans"
+          <base-nuxt-button-link to="/subscriptions/plans"
             >Subscribe</base-nuxt-button-link
           >
         </card>

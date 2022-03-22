@@ -19,11 +19,11 @@
     <div class="md:flex-shrink pr-6 pt-3">
       <div>
         <ul class="list-none">
-          <li v-for="(file, index) in question.files" :key="file.id">
+          <li v-for="(file, index) in question.files" :key="file._id">
             <a
-              v-if="attachmentISImage(file.file_type)"
-              :href="$getImageUrl(file.file_url)"
-              @click.prevent="downloadItem(file.file_url)"
+              v-if="attachmentISImage(file.mimetype)"
+              :href="$getImageUrl(file.path)"
+              @click.prevent="downloadItem(file.path)"
             >
               <span class="text-xl"
                 ><img src="~assets/document.svg" class="inline" />
@@ -65,14 +65,9 @@ export default {
           link.click()
           URL.revokeObjectURL(link.href)
         })
-        .catch(console.error)
-      // try {
-      //   const question = await this.$axios.get(
-      //     `files/download/?fileUrl=${fileUrl}`
-      //   )
-      // } catch (ex) {
-      //   console.log(ex.message)
-      // }
+        .catch((error) => {
+          this.$toast.error(error.message)
+        })
     },
   },
 }

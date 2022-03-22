@@ -1,35 +1,33 @@
-import Fuse from 'fuse.js';
+import Fuse from 'fuse.js'
 export default {
   computed: {
     /***
      * Returns a page from the searched data or the whole data. Search is performed in the watch section below
      */
     queriedData() {
-      let result = this.tableData;
+      let result = this.tableData
       if (this.searchedData.length > 0) {
-        result = this.searchedData;
-      } else {
-        if (this.searchQuery) {
-          result = []
-        }
+        result = this.searchedData
+      } else if (this.searchQuery) {
+        result = []
       }
-      return result.slice(this.from, this.to);
+      return result.slice(this.from, this.to)
     },
     to() {
-      let highBound = this.from + this.pagination.perPage;
+      let highBound = this.from + this.pagination.perPage
       if (this.total < highBound) {
-        highBound = this.total;
+        highBound = this.total
       }
-      return highBound;
+      return highBound
     },
     from() {
-      return this.pagination.perPage * (this.pagination.currentPage - 1);
+      return this.pagination.perPage * (this.pagination.currentPage - 1)
     },
     total() {
       return this.searchedData.length > 0
         ? this.searchedData.length
-        : this.tableData.length;
-    }
+        : this.tableData.length
+    },
   },
   data() {
     return {
@@ -37,19 +35,19 @@ export default {
         perPage: 10,
         currentPage: 1,
         perPageOptions: [5, 10, 25, 50],
-        total: 0
+        total: 0,
       },
       searchQuery: '',
       searchedData: [],
-      fuseSearch: null
+      fuseSearch: null,
     }
   },
   methods: {
     sortChange({ prop, order }) {
       if (prop) {
         this.tableData.sort((a, b) => {
-          let aVal = a[prop]
-          let bVal = b[prop]
+          const aVal = a[prop]
+          const bVal = b[prop]
           if (order === 'ascending') {
             return aVal > bVal ? 1 : -1
           }
@@ -57,17 +55,17 @@ export default {
         })
       } else {
         this.tableData.sort((a, b) => {
-          return a.id - b.id
+          return a._id - b._id
         })
       }
-    }
+    },
   },
   mounted() {
     // Fuse search initialization.
     this.fuseSearch = new Fuse(this.tableData, {
       keys: ['name', 'email'],
-      threshold: 0.3
-    });
+      threshold: 0.3,
+    })
   },
   watch: {
     /**
@@ -76,11 +74,11 @@ export default {
      * @param value of the query
      */
     searchQuery(value) {
-      let result = this.tableData;
+      let result = this.tableData
       if (value !== '') {
-        result = this.fuseSearch.search(this.searchQuery);
+        result = this.fuseSearch.search(this.searchQuery)
       }
-      this.searchedData = result;
-    }
-  }
+      this.searchedData = result
+    },
+  },
 }

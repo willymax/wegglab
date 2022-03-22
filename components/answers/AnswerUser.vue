@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-shrink-0 p-4 pb-0 pl-0">
-    <nuxt-link :to="`/users/${user.id}`" class="flex-shrink-0 group block">
+    <nuxt-link :to="`/users/${user._id}`" class="flex-shrink-0 group block">
       <div class="flex items-center">
         <div class="h-10 w-10">
           <base-avatar
@@ -17,8 +17,7 @@
             <span
               class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150"
             >
-              {{ $processTime(timestamp) }}
-              {{ timestamp }}
+              Posted on {{ $processTime(timestamp) }}
             </span>
           </p>
         </div>

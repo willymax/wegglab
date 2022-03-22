@@ -2,7 +2,7 @@
   <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
     <div class="mb-4">
       <base-input
-        v-model="form.data.product.id"
+        v-model="form.data.product._id"
         alternative
         class="mb-3"
         placeholder="Enter id"
@@ -11,7 +11,7 @@
         type="text"
         disabled
       ></base-input>
-      <validation-error :errors="apiValidationErrors.id" />
+      <validation-error :errors="apiValidationErrors._id" />
     </div>
     <div class="mb-4">
       <base-input
@@ -107,9 +107,7 @@ export default {
       this.createProduct(
         'https://api-m.sandbox.paypal.com/v1/catalogs/products',
         theData
-      ).then((data) => {
-        console.log(data) // JSON data parsed by `data.json()` call
-      })
+      ).then((data) => {})
     },
   },
 }

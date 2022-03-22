@@ -23,13 +23,7 @@
         </template>
         <div>
           <div
-            class="
-              col-12
-              d-flex
-              justify-content-center justify-content-sm-between
-              flex-wrap
-              mb-4
-            "
+            class="col-12 d-flex justify-content-center justify-content-sm-between flex-wrap mb-4"
           >
             <el-select
               v-model="pagination.perPage"
@@ -71,7 +65,7 @@
             />
             <el-table-column
               label="Created At"
-              prop="created_at"
+              prop="createdAt"
               min-width="140px"
               sortable="custom"
             />
@@ -161,7 +155,7 @@ export default {
     return {
       selectedRows: [],
       users: [],
-      sort: 'created_at',
+      sort: 'createdAt',
 
       pagination: {
         perPage: 5,
@@ -215,16 +209,16 @@ export default {
             page: this.pagination.currentPage,
           },
         })
-        .then(function (response) {
+        .then((response) => {
           // handle success
           that.users = response.data.data
           that.pagination.currentPage = response.data.paginator.current_page
           that.pagination.perPage = parseInt(response.data.paginator.per_page)
           that.total = response.data.paginator.total_count
         })
-        .catch(function (error) {
+        .catch((error) => {
           // handle error
-          console.log(error)
+          this.$toast.error(error.message)
         })
         .then(function () {
           // always executed

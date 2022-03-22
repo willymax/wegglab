@@ -81,12 +81,9 @@ export default {
   },
   methods: {
     async createBillingAgreement() {
-      console.log('createBillingAgreement')
       //
-      console.log(JSON.stringify(this.agreement))
       const res = await this.$store.dispatch('paypal/getAccessToken')
       const accessToken = res.access_token
-      console.log(`${accessToken}`)
       fetch('https://api-m.sandbox.paypal.com/v1/billing/subscriptions', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         headers: {
@@ -97,7 +94,6 @@ export default {
       })
         .then((res) => res.json())
         .then((response) => {
-          console.log(JSON.stringify(response))
           const MyWindow = window.open(
             response.links[0].href,
             'MyWindow',
@@ -125,7 +121,7 @@ export default {
           }
         })
         .catch(function (err) {
-          console.log('Fetch Error :-S', err)
+          this.$toast.error(err.message)
         })
     },
     renderButtons() {
@@ -146,28 +142,29 @@ export default {
                 plan_id: `${that.planId}`,
               })
             },
-
             onApprove(data, actions) {
-              console.log(JSON.stringify(data))
+              // subscriptions/subscribeUser
               that.$axios
-                .post('/subscriptions/subscribeUser', {
+                .post('/users/subscribeUser', {
                   subscription_id: data.subscriptionID,
                   paypal_plan_id: `${that.planId}`,
                   // status: data.status,
                   // start_time: that.internetDate,
                 })
                 .then((res) => {
-                  that.$auth.setUser(res.data.data)
+                  // Object.assign(target, source)
+                  that.$auth.setUser(
+                    Object.assign(that.$auth.user, res.data.data)
+                  )
                   that.$router.back()
                 })
                 .catch((error) => {
                   if (error.response) {
-                    console.log(JSON.stringify(error.response.data))
+                    //
                   } else if (error.request) {
-                    console.log(error.request)
+                    //
                   } else {
                     //
-                    console.log('Error', error.message)
                   }
                 })
             },

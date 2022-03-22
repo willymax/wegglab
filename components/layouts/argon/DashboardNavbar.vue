@@ -69,7 +69,7 @@
         icon="ni ni-bell-55"
         menu-classes="dropdown-menu-xl dropdown-menu-right py-0 overflow-hidden"
       >
-        <template>
+        <div>
           <!-- Dropdown header -->
           <div class="px-3 py-3">
             <h6 class="text-sm text-muted m-0">
@@ -218,7 +218,7 @@
             class="dropdown-item text-center text-primary font-weight-bold py-3"
             >View all</a
           >
-        </template>
+        </div>
       </base-dropdown>
     </ul>
     <ul class="navbar-nav align-items-center ml-auto ml-md-0">
@@ -246,7 +246,7 @@
           </div>
         </a>
 
-        <template>
+        <div>
           <div class="dropdown-header noti-title">
             <h6 class="text-overflow m-0">Welcome!</h6>
           </div>
@@ -262,7 +262,7 @@
             <i class="ni ni-user-run"></i>
             <span>Logout</span>
           </a>
-        </template>
+        </div>
       </base-dropdown>
     </ul>
   </base-nav>

@@ -33,16 +33,25 @@ export const Forms = {
     resetForm() {
       // Reset attributes
       for (const key in this.form.data.attributes) {
-        if (this.form.data.attributes.hasOwnProperty(key)) {
+        if (
+          Object.prototype.hasOwnProperty.call(this.form.data.attributes, key)
+        ) {
           this.form.data.attributes[key] = null
         }
       }
 
       // Reset relationships if exist
-      if (this.form.data.hasOwnProperty('relationships')) {
+      if (
+        Object.prototype.hasOwnProperty.call(this.form.data, 'relationships')
+      ) {
         for (const key in this.form.data.relationships) {
-          if (this.form.data.relationships.hasOwnProperty(key)) {
-            this.form.data.relationships[key].data.id = null
+          if (
+            Object.prototype.hasOwnProperty.call(
+              this.form.data.relationships,
+              key
+            )
+          ) {
+            this.form.data.relationships[key].data._id = null
           }
         }
       }
@@ -56,9 +65,11 @@ export const Forms = {
         let relationshipIds = []
         newData = omit(newData, ['id', 'type'])
 
-        if (newData.hasOwnProperty('relationshipNames')) {
+        if (
+          Object.prototype.hasOwnProperty.call(newData, 'relationshipNames')
+        ) {
           const relationships = pick(newData, newData.relationshipNames)
-          relationshipIds = Object.values(relationships).map((i) => i.id)
+          relationshipIds = Object.values(relationships).map((i) => i._id)
           newData = omit(newData, [
             ...Object.keys(relationships),
             'relationshipNames',

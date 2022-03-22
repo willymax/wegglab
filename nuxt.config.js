@@ -1,7 +1,7 @@
 /* eslint no-unused-vars: "warn" */
 // import { isDemo } from './plugins/isDemo'
-import pkg from './package'
-console.log('ENV', process.env.NODE_ENV)
+// import pkg from './package'
+// console.log('ENV', process.env.NODE_ENV)
 
 export default {
   env: {
@@ -316,6 +316,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
+    // eslint-disable-next-line no-unused-vars
     extend(config, ctx) {},
     extractCSS: process.env.NODE_ENV === 'production',
     babel: {

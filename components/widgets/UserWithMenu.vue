@@ -18,17 +18,7 @@
           exclude: ['userButton'],
           handler: 'closeDropDown',
         }"
-        class="
-          absolute
-          right-0
-          mt-2
-          w-48
-          bg-white
-          rounded-md
-          overflow-hidden
-          shadow-xl
-          z-10
-        "
+        class="absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10"
         x-transition:enter="transition ease-out duration-100 transform"
         x-transition:enter-start="opacity-0 scale-95"
         x-transition:enter-end="opacity-100 scale-100"
@@ -38,28 +28,16 @@
       >
         <template v-for="option in options" class="text-white">
           <nuxt-link
-            :key="option.id"
+            :key="option._id"
             :to="option.url"
-            class="
-              block
-              px-4
-              py-2
-              text-sm text-gray-700
-              hover:bg-purple-600 hover:text-white
-            "
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-600 hover:text-white"
             :class="'theme-' + color"
             >{{ option.name }}</nuxt-link
           >
         </template>
         <a
           href="javascript:;"
-          class="
-            block
-            px-4
-            py-2
-            text-sm text-gray-700
-            hover:bg-purple-600 hover:text-white
-          "
+          class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-600 hover:text-white"
           @click="showLogoutDialog = true"
           >Logout</a
         >
@@ -125,7 +103,7 @@ export default {
         await this.$auth.logout()
       } catch (error) {
         this.loading = false
-        this.$toast.error(error.response.message)
+        this.$toast.error(error.message)
       }
     },
   },

@@ -176,10 +176,8 @@ export default {
             email: this.form.data.attributes.email,
           },
         })
-        console.log('this.$router.push')
         this.$router.push('/dashboard')
       } catch (e) {
-        console.log('An error has occurred' + JSON.stringify(e.response.data))
         this.error = e.response.data.message
         // handle error
         this.$notify({

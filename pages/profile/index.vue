@@ -102,10 +102,10 @@ export default {
             type: 'success',
             message: 'Information updated successfully.',
           })
-          this.$auth.setUser(response.data.data)
+          this.$auth.setUser(Object.assign(this.$auth.user, response.data.data))
         })
         .catch((err) => {
-          console.log(err)
+          this.$toast.error(err.message)
         })
     },
     uploadFile() {
@@ -130,7 +130,7 @@ export default {
               type: 'success',
               message: 'Avatar uploaded successfully.',
             })
-            this.$auth.setUser(response.data.data)
+            this.$auth.setUser(Object.assign(this.$auth.user, response.data.data))
           })
           .catch((error) => {
             this.loading = false

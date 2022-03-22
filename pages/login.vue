@@ -186,9 +186,7 @@ export default {
     socialLogin(service) {
       this.$auth
         .loginWith(`${service}`)
-        .then((res) => {
-          console.log(JSON.stringify(res))
-        })
+        .then((res) => {})
         .catch((err) => {
           alert(JSON.stringify(err.message))
         })

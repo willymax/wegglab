@@ -63,15 +63,7 @@
           <label class="inline-flex items-center">
             <input
               v-model="form.data.attributes.taxes.inclusive"
-              class="
-                text-indigo-500
-                w-8
-                h-8
-                mr-2
-                focus:ring-indigo-400 focus:ring-opacity-25
-                border border-gray-300
-                rounded
-              "
+              class="text-indigo-500 w-8 h-8 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
               type="checkbox"
             />
             Inclusive
@@ -163,17 +155,16 @@ export default {
         'https://api-m.sandbox.paypal.com/v1/billing/plans',
         theData
       ).then((data) => {
-        console.log(`The data is: ${JSON.stringify(data)}`)
         this.$axios
           .post('plans', {
-            planId: data.id,
+            planId: data._id,
             planDetails: JSON.stringify(data),
           })
           .then((res) => {
             this.$router.push('/plans')
           })
           .catch((err) => {
-            console.log(err)
+            this.$toast.error(err.message)
           })
       })
     },

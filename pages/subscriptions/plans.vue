@@ -1,16 +1,6 @@
 <template>
   <div
-    class="
-      container
-      flex flex-wrap
-      pt-4
-      pb-10
-      m-auto
-      mt-6
-      md:mt-15
-      lg:px-12
-      xl:px-16
-    "
+    class="container flex flex-wrap pt-4 pb-10 m-auto mt-6 md:mt-15 lg:px-12 xl:px-16"
   >
     <div class="w-full px-0 lg:px-4">
       <h2
@@ -94,30 +84,7 @@ export default {
     this.plans = this.plans.concat(response.plans)
   },
   mounted() {},
-  methods: {
-    async createSubscription(url = '', data = {}) {
-      const res = await this.$store.dispatch('paypal/getAccessToken')
-      const accessToken = res.access_token
-      // Default options are marked with *
-      const response = await fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
-      })
-      return response.json() // parses JSON response into native JavaScript objects
-    },
-    subscribe() {
-      this.createSubscription(
-        'https://api-m.sandbox.paypal.com/v1/billing/subscriptions',
-        this.subscription
-      ).then((data) => {
-        console.log(data) // JSON data parsed by `data.json()` call
-      })
-    },
-  },
+  methods: {},
 }
 </script>
 
