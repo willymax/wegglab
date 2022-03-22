@@ -96,13 +96,13 @@ export default {
   methods: {
     update() {
       this.$axios
-        .put(`users/${this.$auth.user._id}`, { ...this.form.data.attributes })
+        .put(`users/${this.$auth.user.id}`, { ...this.form.data.attributes })
         .then((response) => {
           this.$notify({
             type: 'success',
             message: 'Information updated successfully.',
           })
-          this.$auth.setUser(response.data.data)
+          this.$auth.setUser(Object.assign(this.$auth.user, response.data.data))
         })
         .catch((err) => {
           this.$toast.error(err.message)
@@ -130,7 +130,7 @@ export default {
               type: 'success',
               message: 'Avatar uploaded successfully.',
             })
-            this.$auth.setUser(response.data.data)
+            this.$auth.setUser(Object.assign(this.$auth.user, response.data.data))
           })
           .catch((error) => {
             this.loading = false
