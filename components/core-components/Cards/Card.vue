@@ -60,14 +60,17 @@ export default {
     bodyClasses: {
       type: [String, Object, Array],
       description: 'Card body css classes',
+      default: '',
     },
     headerClasses: {
       type: [String, Object, Array],
       description: 'Card header css classes',
+      default: '',
     },
     footerClasses: {
       type: [String, Object, Array],
       description: 'Card footer css classes',
+      default: '',
     },
   },
 }

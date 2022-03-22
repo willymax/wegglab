@@ -11,7 +11,7 @@
       </h2>
     </template>
 
-    <template>
+    <template slot="default">
       <div class="text-center py-3">
         <div class="py-5"><i class="fa fa-frown-o text-white"></i></div>
         <h4 class="display-4 text-white pt-4">

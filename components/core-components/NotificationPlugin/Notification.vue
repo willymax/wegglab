@@ -25,7 +25,7 @@
       <span v-if="title" class="title">
         <b>{{ title }}<br /></b>
       </span>
-      <span v-if="message" v-html="message"></span>
+      <span v-if="message">{{ message }}</span>
       <content-render
         v-if="!message && component"
         :component="component"

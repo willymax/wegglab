@@ -167,7 +167,7 @@
                   </div>
                 </template>
 
-                <template>
+                <div>
                   <div class="text-center text-muted mb-4">
                     <small>Or sign in with credentials</small>
                   </div>
@@ -194,7 +194,7 @@
                       >
                     </div>
                   </form>
-                </template>
+                </div>
               </card>
             </modal>
           </card>
@@ -279,7 +279,6 @@ export default {
   },
   methods: {
     notifyVue(type = 'default') {
-      console.log(type)
       this.$notify({
         message:
           'Welcome to <b>Vue Argon Dashboard Pro</b> - a beautiful resource for every web developer',

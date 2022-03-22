@@ -2,19 +2,7 @@
   <div>
     <div id="my-signin2"></div>
     <button
-      class="
-        flex
-        items-center
-        justify-center
-        mt-4
-        text-gray-600
-        rounded-lg
-        shadow-md
-        w-full
-        dark:bg-gray-700 dark:text-gray-200
-        hover:bg-gray-100
-        dark:hover:bg-gray-600
-      "
+      class="flex items-center justify-center mt-4 text-gray-600 rounded-lg shadow-md w-full dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
       @click="handleClick"
     >
       <div class="px-4 py-3">
@@ -80,10 +68,9 @@ export default {
     },
     onSuccess(googleUser) {
       // googleUser.getBasicProfile().getName()
-      console.log('Logged in as: ')
     },
     onFailure(error) {
-      console.log(error)
+      this.$toast.error(error.message)
     },
     renderButton() {
       this.loadScript().then(() => {

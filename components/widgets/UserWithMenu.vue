@@ -103,7 +103,7 @@ export default {
         await this.$auth.logout()
       } catch (error) {
         this.loading = false
-        this.$toast.error(error.response.message)
+        this.$toast.error(error.message)
       }
     },
   },

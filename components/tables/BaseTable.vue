@@ -201,7 +201,7 @@ export default {
       this.tablePaginations = { ...this.newValue }
     },
     tablePaginations(newValue, oldValue) {
-      console.log(JSON.stringify(newValue))
+      //
     },
     'tablePaginations.currentPage'(newValue, oldValue) {
       if (newValue !== oldValue) {

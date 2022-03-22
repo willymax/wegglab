@@ -105,7 +105,7 @@ export default {
           this.$auth.setUser(response.data.data)
         })
         .catch((err) => {
-          console.log(err)
+          this.$toast.error(err.message)
         })
     },
     uploadFile() {

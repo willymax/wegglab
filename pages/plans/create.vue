@@ -155,7 +155,6 @@ export default {
         'https://api-m.sandbox.paypal.com/v1/billing/plans',
         theData
       ).then((data) => {
-        console.log(`The data is: ${JSON.stringify(data)}`)
         this.$axios
           .post('plans', {
             planId: data._id,
@@ -165,7 +164,7 @@ export default {
             this.$router.push('/plans')
           })
           .catch((err) => {
-            console.log(err)
+            this.$toast.error(err.message)
           })
       })
     },
