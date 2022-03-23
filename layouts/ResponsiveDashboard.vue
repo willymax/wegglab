@@ -2,7 +2,7 @@
   <div :class="{ dark: darkMode }">
     <!-- main wrapper h-screen -->
     <div class="flex flex-col bg-gray-100 dark:bg-gray-800 font-roboto">
-      <header class="flex justify-between items-center p-6">
+      <header class="flex justify-between items-center p-6 flex-wrap">
         <div class="flex items-center space-x-4 lg:space-x-0">
           <button
             class="text-gray-500 dark:text-gray-300 focus:outline-none lg:hidden"
@@ -30,7 +30,7 @@
             /></a>
           </div>
         </div>
-
+        <!-- w-full block flex-grow lg:flex lg:items-center lg:w-auto -->
         <div class="flex items-center space-x-4">
           <base-nuxt-button-link to="/questions/ask"
             >Post A Question</base-nuxt-button-link
@@ -252,12 +252,12 @@
             </div>
           </footer>
           <p class="text-center text-sm text-gray-500 my-10">
-            &copy; 2019-2021
+            &copy; {{ currentYear }}
             <a
-              href="https://themesberg.com"
+              href="https://wegglab.com"
               class="hover:underline"
               target="_blank"
-              >Themesberg</a
+              >Wegglab</a
             >. All rights reserved.
           </p>
         </div>
@@ -280,6 +280,7 @@ export default {
       dropdownOpen: false,
       darkMode: false,
       showLogoutDialog: false,
+      currentYear: new Date().getFullYear(),
     }
   },
   methods: {

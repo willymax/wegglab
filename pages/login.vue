@@ -7,7 +7,7 @@
       </div>
     </div>
     <!-- Page content -->
-    <div class="container">
+    <div class="container p-10">
       <div
         class="flex max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl"
       >
@@ -41,9 +41,11 @@
             Welcome back!
           </p>
 
-          <google-button @click="socialLogin('google')"></google-button>
-          <facebook-button @click="socialLogin('facebook')"></facebook-button>
-          <twitter-button @click="socialLogin('twitter')"></twitter-button>
+          <div>
+            <google-button @click="socialLogin('google')"></google-button>
+            <facebook-button @click="socialLogin('facebook')"></facebook-button>
+            <twitter-button @click="socialLogin('twitter')"></twitter-button>
+          </div>
 
           <div class="flex items-center justify-between mt-4">
             <span class="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
@@ -136,6 +138,7 @@ import formMixin from '@/mixins/form-mixin'
 import GoogleButton from '~/components/buttons/GoogleButton.vue'
 import FacebookButton from '~/components/buttons/FacebookButton.vue'
 import TwitterButton from '~/components/buttons/TwitterButton.vue'
+import Notification from '~/components/core-components/NotificationPlugin/Notification.vue'
 export default {
   components: {
     ValidationError,
@@ -143,6 +146,7 @@ export default {
     GoogleButton,
     FacebookButton,
     TwitterButton,
+    Notification,
   },
   mixins: [formMixin],
   layout: 'AuthLayout',
@@ -193,6 +197,7 @@ export default {
       // window.location.href = `${process.env.apiUrl}/auth/login/${service}`
     },
     handleSubmit() {
+      console.log('handleSubmit')
       this.$auth
         .loginWith('local', {
           data: this.form.data.attributes,
@@ -205,12 +210,16 @@ export default {
           // this.$router.push('/dashboard')
         })
         .catch((error) => {
+          console.log('error', error)
           // handle error
           this.$notify({
             type: 'danger',
+            title: 'An error occurred',
             message: 'Invalid credentials!',
           })
-          this.setApiValidation(error.response.data.errors)
+          this.setApiValidation(
+            error.response.data.errors ? error.response.data.errors : []
+          )
         })
         .then(function () {
           // always executed
