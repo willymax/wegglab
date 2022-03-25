@@ -3,6 +3,7 @@
     <answer-user
       :user="question.user"
       :timestamp="question.createdAt"
+      :resource-link="`/questions/${question.slug}`"
     ></answer-user>
     <h1 class="text-2xl font-bold">{{ question.title }}</h1>
     <p class="">{{ question.body }}</p>
@@ -19,7 +20,7 @@
     <div class="md:flex-shrink pr-6 pt-3">
       <div>
         <ul class="list-none">
-          <li v-for="(file, index) in question.files" :key="file._id">
+          <li v-for="file in question.files" :key="file._id">
             <a
               v-if="attachmentISImage(file.mimetype)"
               :href="$getImageUrl(file.path)"

@@ -11,24 +11,31 @@
         step is highly important so we ask you to please not skip or interrupt
         it.
       </p>
-      <label class="inline-flex items-start">
+      <div class="form-check flex">
         <input
+          id="flexCheckChecked"
+          class="form-check-input appearance-none h-10 w-10 border border-gray-300 rounded-sm bg-white checked:bg-green-600 checked:border-green-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
           type="checkbox"
-          class="
-            text-indigo-500
-            mr-2
-            focus:ring-indigo-400 focus:ring-opacity-25
-            border border-gray-300
-            rounded
-          "
+          value=""
+          checked
         />
-        <span class="ml-2"
-          >I authorize Wegglab to charge me automatically every year, until I
+        <label
+          class="form-check-label inline-block text-gray-800 flex-grow"
+          for="flexCheckChecked"
+        >
+          I authorize Wegglab to charge me automatically every year, until I
           cancel my subscription. I acknowledge that refunds are made according
           to the Terms of Use. The subscription can be canceled at any time from
           the Account and Billing section in the Profile settings. I have read,
-          and agree to, TradingView's Terms of Use and Privacy Policy.</span
-        >
+          and agree to, TradingView's Terms of Use and Privacy Policy.
+        </label>
+      </div>
+      <label class="items-start flex">
+        <input
+          type="checkbox"
+          class="text-indigo-500 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
+        />
+        <span class="ml-2 flex-grow"></span>
       </label>
     </div>
     <div class="bg-gray-200 p-2 items-start">

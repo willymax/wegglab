@@ -61,7 +61,7 @@ export default {
     },
     width: {
       type: String,
-      default: '',
+      default: '1/3',
       description: 'Button size (sm|md|lg)',
     },
     hoverText: {

@@ -10,7 +10,7 @@
     <div class="md:flex-shrink pr-6 pt-3">
       <div>
         <ul class="list-none">
-          <li v-for="(file, index) in answer.files" :key="file._id">
+          <li v-for="file in answer.files" :key="file._id">
             <a
               :href="$getImageUrl(file.path)"
               @click.prevent="downloadItem(file.path)"
