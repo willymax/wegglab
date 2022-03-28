@@ -96,7 +96,7 @@ export default {
           type: 'password-forgot',
           attributes: {
             email: '',
-            redirect_url: process.env.baseUrl + '/password/email',
+            redirect_url: process.env.apiBaseUrl + '/password/email',
           },
         },
       },

@@ -2,39 +2,16 @@
   <article
     class="hover:bg-gray-100 bg-white transition duration-350 ease-in-out rounded-box overflow-hidden shadow-lg m-2"
   >
-    <div class="flex flex-shrink-0 p-4 pb-0">
-      <a href="#" class="flex-shrink-0 group block">
-        <div class="flex items-center">
-          <div>
-            <base-avatar
-              :user-avatar="details.user.avatar"
-              dimensions-classes="h-10 w-10"
-              img-classes="rounded-full"
-            ></base-avatar>
-          </div>
-          <div class="ml-3">
-            <p class="text-base leading-6 font-medium">
-              {{ details.user ? details.user.first_name : '' }}
-              <span
-                class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150"
-              >
-                {{ details.user ? details.user.username : '' }}
-              </span>
-            </p>
-            <p>
-              <span
-                class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150"
-              >
-                {{ $processTime(details.createdAt) }}
-              </span>
-            </p>
-          </div>
-        </div>
-      </a>
+    <div class="p-4">
+      <answer-user
+        :user="details.user"
+        :timestamp="details.createdAt"
+        :resource-link="`/questions/${details.slug}`"
+      ></answer-user>
     </div>
 
     <div class="pl-16">
-      <nuxt-link :to="`/questions/${details.slug}`">
+      <nuxt-link :to="`/questions/${details.slug}`" class="hover:underline">
         <h1 class="text-xl font-bold">{{ details.title }}</h1>
       </nuxt-link>
       <div class="tags">
@@ -105,10 +82,11 @@
 </template>
 
 <script>
+import AnswerUser from '../answers/AnswerUser.vue'
 import BaseAvatar from '../core-components/BaseAvatar.vue'
 export default {
   name: 'Question',
-  components: { BaseAvatar },
+  components: { BaseAvatar, AnswerUser },
   props: {
     details: {
       type: Object,

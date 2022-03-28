@@ -7,7 +7,7 @@ const NotificationStore = {
     verticalAlign: 'top',
     horizontalAlign: 'right',
     type: 'info',
-    timeout: 5000,
+    timeout: 2000,
     closeOnClick: true,
     showClose: true,
   },

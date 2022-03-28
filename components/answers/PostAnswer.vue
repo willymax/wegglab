@@ -1,11 +1,19 @@
 <template>
   <div class="flex flex-col space-y-4">
-    <textarea
-      v-model="input.body"
+    <!-- <textarea
+      v-model=""
       class="form-control mt-1 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
       rows="3"
       placeholder="Enter the description of your question"
-    ></textarea>
+    ></textarea> -->
+    <div class="my-2">
+      <froala
+        id="edit"
+        v-model="input.body"
+        :tag="'textarea'"
+        :config="$getFroalaConfig(config)"
+      ></froala>
+    </div>
     <validation-error :errors="apiValidationErrors.body" />
     <base-file-upload v-model="FILES"></base-file-upload>
     <validation-error :errors="apiValidationErrors.email" />
@@ -18,6 +26,7 @@ import BaseButton from '../core-components/BaseButton.vue'
 import BaseFileUpload from '../core-components/BaseFileUpload.vue'
 import ValidationError from '../ValidationError.vue'
 import formMixin from '@/mixins/form-mixin'
+
 export default {
   components: { BaseFileUpload, ValidationError, BaseButton },
   mixins: [formMixin],
@@ -27,6 +36,13 @@ export default {
       input: {
         body: '',
       },
+      config: {
+        uploadUrl: 'answers/uploadAnswerImage',
+        placeholderText: 'Type your answer here',
+        uploadKey: 'answerFile',
+        imageStorageUrl: `${process.env.apiBaseUrl}/files`,
+      },
+      textModel: 'Edit Your Content Here!',
     }
   },
   computed: {
