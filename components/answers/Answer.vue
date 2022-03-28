@@ -14,7 +14,7 @@
           <li v-for="file in answer.files" :key="file._id">
             <a
               :href="$getImageUrl(file.path)"
-              @click.prevent="downloadItem(file.path)"
+              @click.prevent="$downloadAnswerImage(file.path)"
             >
               <span class="text-xl"
                 ><img src="~assets/document.svg" class="inline" />
@@ -42,26 +42,7 @@ export default {
     },
   },
   computed: {},
-  methods: {
-    downloadItem(fileUrl) {
-      this.$axios(`files/download/?fileUrl=${fileUrl}`, {
-        responseType: 'blob',
-      })
-        .then((response) => {
-          const blob = new Blob([response.data], {
-            type: response.headers['content-type'],
-          })
-          const link = document.createElement('a')
-          link.href = URL.createObjectURL(blob)
-          link.download = fileUrl
-          link.click()
-          URL.revokeObjectURL(link.href)
-        })
-        .catch((error) => {
-          this.$toast.error(error.message)
-        })
-    },
-  },
+  methods: {},
 }
 </script>
 
