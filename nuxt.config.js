@@ -5,8 +5,7 @@
 
 export default {
   env: {
-    apiUrl: process.env.API_BASE_URL,
-    baseUrl: process.env.BASE_URL,
+    apiBaseUrl: process.env.API_BASE_URL,
     isDemo: process.env.IS_DEMO,
     apiKey: process.env.API_KEY,
     baseStorageUrl: process.env.STORAGE_BASE_URL,
@@ -169,6 +168,7 @@ export default {
     '~/plugins/app.js',
     '~/plugins/vue-placeholders.js',
     { src: '~/plugins/froala-editor.js', ssr: false },
+    { src: '~/plugins/sanitize.js', ssr: false },
     '~/plugins/modal.js',
     '~/plugins/vue-observe-visibility.client.js',
   ],

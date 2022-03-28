@@ -5,7 +5,8 @@
       :timestamp="answer.createdAt"
     ></answer-user>
     <div>
-      <span v-html="answerBody"></span>
+      <!-- <span v-html="$sanitizeHtml(answer.body)"></span> -->
+      {{ $sanitizeHtml(answer.body) }}
     </div>
     <div class="md:flex-shrink pr-6 pt-3">
       <div>
@@ -28,7 +29,6 @@
 </template>
 
 <script>
-import DOMPurify from 'dompurify'
 import Card from '../core-components/Cards/Card.vue'
 import AnswerUser from './AnswerUser.vue'
 export default {
@@ -41,13 +41,7 @@ export default {
       },
     },
   },
-  computed: {
-    answerBody() {
-      const clean = DOMPurify.sanitize(this.answer.body)
-      console.log(`clean`, clean)
-      return clean
-    },
-  },
+  computed: {},
   methods: {
     downloadItem(fileUrl) {
       this.$axios(`files/download/?fileUrl=${fileUrl}`, {

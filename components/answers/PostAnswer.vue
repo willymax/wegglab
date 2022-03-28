@@ -24,6 +24,7 @@ import BaseButton from '../core-components/BaseButton.vue'
 import BaseFileUpload from '../core-components/BaseFileUpload.vue'
 import ValidationError from '../ValidationError.vue'
 import formMixin from '@/mixins/form-mixin'
+
 export default {
   components: { BaseFileUpload, ValidationError, BaseButton },
   mixins: [formMixin],
@@ -54,8 +55,7 @@ export default {
         imageUploadParam: 'image_param',
 
         // Set the image upload URL.
-        imageUploadURL:
-          'http://localhost:3003/v1/questions/uploadQuestionImages',
+        imageUploadURL: 'http://localhost:3003/v1/answers/uploadAnswerImage',
 
         // Additional upload params.
         imageUploadParams: { id: 'my_editor' },
@@ -72,9 +72,9 @@ export default {
           'image.beforeUpload'(images) {
             // Before image is uploaded
             const data = new FormData()
-            data.append('files', images[0])
+            data.append('answerFile', images[0])
             that.$axios
-              .post('questions/uploadQuestionImages', data, {
+              .post('answers/uploadAnswerImage', data, {
                 headers: {
                   accept: 'application/json',
                   // Authorization: 'your_imgur_client_id/api_key',

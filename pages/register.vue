@@ -163,7 +163,7 @@ export default {
   },
   methods: {
     socialLogin(service) {
-      window.location.href = `${process.env.apiUrl}/auth/login/${service}`
+      window.location.href = `${process.env.apiBaseUrl}/auth/login/${service}`
     },
     async register() {
       // this.$store.dispatch('register/create', this.form.data.attributes)

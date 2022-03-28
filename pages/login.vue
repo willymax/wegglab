@@ -194,7 +194,7 @@ export default {
         .catch((err) => {
           alert(JSON.stringify(err.message))
         })
-      // window.location.href = `${process.env.apiUrl}/auth/login/${service}`
+      // window.location.href = `${process.env.apiBaseUrl}/auth/login/${service}`
     },
     handleSubmit() {
       this.$auth
