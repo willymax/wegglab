@@ -15,10 +15,14 @@
         placeholder="Enter Question Title"
       />
       <validation-error :errors="apiValidationErrors.title" />
-      <base-text-area
-        v-model="input.body"
-        placeholder="Enter the description of your question."
-      ></base-text-area>
+      <div class="my-2">
+        <froala
+          id="edit"
+          v-model="input.body"
+          :tag="'textarea'"
+          :config="$getFroalaConfig(config)"
+        ></froala>
+      </div>
       <validation-error :errors="apiValidationErrors.body" />
       <BaseFileUpload v-model="FILES"></BaseFileUpload>
       <validation-error :errors="apiValidationErrors.email" />
@@ -51,6 +55,12 @@ export default {
         title: '',
         body: '',
         subject_id: null,
+      },
+      config: {
+        uploadUrl: 'questions/uploadQuestionImage',
+        placeholderText: 'Type your question here',
+        uploadKey: 'questionFile',
+        imageStorageUrl: process.env.baseStorageUrl,
       },
     }
   },

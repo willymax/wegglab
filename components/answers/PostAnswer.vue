@@ -6,12 +6,14 @@
       rows="3"
       placeholder="Enter the description of your question"
     ></textarea> -->
-    <froala
-      id="edit"
-      v-model="input.body"
-      :tag="'textarea'"
-      :config="getFroalaConfig()"
-    ></froala>
+    <div class="my-2">
+      <froala
+        id="edit"
+        v-model="input.body"
+        :tag="'textarea'"
+        :config="$getFroalaConfig(config)"
+      ></froala>
+    </div>
     <validation-error :errors="apiValidationErrors.body" />
     <base-file-upload v-model="FILES"></base-file-upload>
     <validation-error :errors="apiValidationErrors.email" />
@@ -34,6 +36,12 @@ export default {
       input: {
         body: '',
       },
+      config: {
+        uploadUrl: 'answers/uploadAnswerImage',
+        placeholderText: 'Type your answer here',
+        uploadKey: 'answerFile',
+        imageStorageUrl: `${process.env.apiBaseUrl}/files`,
+      },
       textModel: 'Edit Your Content Here!',
     }
   },
@@ -43,65 +51,6 @@ export default {
     },
   },
   methods: {
-    getFroalaConfig() {
-      const that = this
-      return {
-        charCounterCount: true,
-        placeholderText: 'Edit Your Content Here!',
-        imageUpload: true,
-        imageDefaultAlign: 'left',
-        imageDefaultDisplay: 'inline-block',
-        // Set the image upload parameter.
-        imageUploadParam: 'image_param',
-
-        // Set the image upload URL.
-        imageUploadURL: 'http://localhost:3003/v1/answers/uploadAnswerImage',
-
-        // Additional upload params.
-        imageUploadParams: { id: 'my_editor' },
-
-        // Set request type.
-        imageUploadMethod: 'POST',
-
-        // Set max image size to 5MB.
-        imageMaxSize: 5 * 1024 * 1024,
-
-        // Allow to upload PNG and JPG.
-        imageAllowedTypes: ['jpeg', 'jpg', 'png'],
-        events: {
-          'image.beforeUpload'(images) {
-            // Before image is uploaded
-            const data = new FormData()
-            data.append('answerFile', images[0])
-            that.$axios
-              .post('answers/uploadAnswerImage', data, {
-                headers: {
-                  accept: 'application/json',
-                  // Authorization: 'your_imgur_client_id/api_key',
-                  'Accept-Language': 'en-US,en;q=0.8',
-                  'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
-                },
-              })
-              .then((res) => {
-                console.log(`${process.env.baseStorageUrl}/${res.data.link}`)
-                this.image.insert(
-                  `${process.env.baseStorageUrl}/${res.data.link}`,
-                  null,
-                  null,
-                  this.image.get()
-                )
-              })
-              .catch((err) => {
-                console.log(err)
-              })
-            return false
-          },
-          initialized() {
-            console.log('initialized')
-          },
-        },
-      }
-    },
     postAnswer() {
       const formData = new FormData()
       const files = []

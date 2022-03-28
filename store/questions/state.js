@@ -1,6 +1,8 @@
 const state = () => ({
   list: [],
-  CURRENT_QUESTION: {},
+  CURRENT_QUESTION: {
+    body: '',
+  },
   SUBJECTS: [],
   questions: [
     {

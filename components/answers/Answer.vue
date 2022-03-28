@@ -5,8 +5,8 @@
       :timestamp="answer.createdAt"
     ></answer-user>
     <div>
-      <!-- <span v-html="$sanitizeHtml(answer.body)"></span> -->
-      {{ $sanitizeHtml(answer.body) }}
+      <span v-html="answer.body"></span>
+      <!-- {{ $sanitizeHtml(answer.body) }} -->
     </div>
     <div class="md:flex-shrink pr-6 pt-3">
       <div>

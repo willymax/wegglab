@@ -6,7 +6,9 @@
       :resource-link="`/questions/${question.slug}`"
     ></answer-user>
     <h1 class="text-2xl font-bold">{{ question.title }}</h1>
-    <p class="">{{ question.body }}</p>
+    <client-only>
+      <span v-html="question.body"></span>
+    </client-only>
     <div class="tags">
       <nuxt-link
         v-for="tag in question.tag_list"
@@ -47,6 +49,9 @@ export default {
   computed: {
     question() {
       return this.$store.getters['questions/GET_CURRENT_QUESTION']
+    },
+    getQuestionBody() {
+      return this.$sanitizeHtml(this.question.body)
     },
   },
   methods: {
