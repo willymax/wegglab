@@ -168,6 +168,7 @@ export default {
     '~/plugins/isDemo.js',
     '~/plugins/app.js',
     '~/plugins/vue-placeholders.js',
+    { src: '~/plugins/froala-editor.js', ssr: false },
     '~/plugins/modal.js',
     '~/plugins/vue-observe-visibility.client.js',
   ],

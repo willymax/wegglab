@@ -197,7 +197,6 @@ export default {
       // window.location.href = `${process.env.apiUrl}/auth/login/${service}`
     },
     handleSubmit() {
-      console.log('handleSubmit')
       this.$auth
         .loginWith('local', {
           data: this.form.data.attributes,
@@ -207,10 +206,9 @@ export default {
             type: 'success',
             message: 'Login successful.',
           })
-          // this.$router.push('/dashboard')
+          this.$router.push('/dashboard')
         })
         .catch((error) => {
-          console.log('error', error)
           // handle error
           this.$notify({
             type: 'danger',
