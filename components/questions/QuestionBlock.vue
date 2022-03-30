@@ -23,7 +23,6 @@
       <div>
         <ul class="list-none">
           <li v-for="file in question.files" :key="file._id">
-            {{ file.mimetype }} {{ file.path }}
             <a
               v-if="attachmentISImage(file.mimetype)"
               :href="$getImageUrl(file.path)"

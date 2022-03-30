@@ -8,6 +8,24 @@ export default ({ app, route, $axios, $toast, redirect, store }, inject) => {
   inject('sleep', (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms))
   })
+  inject('downloadAnswerImage', (fileUrl) => {
+    $axios(`${process.env.apiBaseUrl}/files/${fileUrl}`, {
+      responseType: 'blob',
+    })
+      .then((response) => {
+        const blob = new Blob([response.data], {
+          type: response.headers['content-type'],
+        })
+        const link = document.createElement('a')
+        link.href = URL.createObjectURL(blob)
+        link.download = fileUrl
+        link.click()
+        URL.revokeObjectURL(link.href)
+      })
+      .catch((error) => {
+        $toast.error(error.message)
+      })
+  })
   inject('downloadItem', (fileUrl) => {
     $axios(`${process.env.baseStorageUrl}/${fileUrl}`, {
       responseType: 'blob',
