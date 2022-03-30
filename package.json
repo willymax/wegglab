@@ -23,6 +23,7 @@
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/toast": "^3.3.1",
     "@reststate/vuex": "^0.2.2",
+    "@tinymce/tinymce-vue": "^3.2.8",
     "@vue-stripe/vue-stripe": "^4.2.8",
     "bootstrap": "4.3.1",
     "chart.js": "^2.9.4",

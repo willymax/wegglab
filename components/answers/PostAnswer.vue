@@ -13,6 +13,27 @@
         :tag="'textarea'"
         :config="$getFroalaConfig(config)"
       ></froala>
+      <editor
+        api-key="fwx0vscmsecgg5by0rvm6xbfpbvdruc2nlbxc478ogqam3tk"
+        initial-value="<p>Initial editor content</p>"
+        :init="{
+          height: 500,
+          menubar: false,
+          selector: 'textarea',
+          a11y_advanced_options: true,
+          plugins: [
+            'advlist autolink lists link image charmap',
+            'searchreplace visualblocks code fullscreen',
+            'print preview anchor insertdatetime media',
+            'paste code help wordcount table',
+          ],
+          toolbar:
+            'undo redo | formatselect | bold italic | \
+        alignleft aligncenter alignright | \
+        bullist numlist outdent indent | help',
+        }"
+      >
+      </editor>
     </div>
     <validation-error :errors="apiValidationErrors.body" />
     <base-file-upload v-model="FILES"></base-file-upload>
@@ -22,13 +43,14 @@
 </template>
 
 <script>
+import Editor from '@tinymce/tinymce-vue'
 import BaseButton from '../core-components/BaseButton.vue'
 import BaseFileUpload from '../core-components/BaseFileUpload.vue'
 import ValidationError from '../ValidationError.vue'
 import formMixin from '@/mixins/form-mixin'
 
 export default {
-  components: { BaseFileUpload, ValidationError, BaseButton },
+  components: { BaseFileUpload, ValidationError, BaseButton, Editor },
   mixins: [formMixin],
   data() {
     return {
