@@ -7,31 +7,11 @@
       placeholder="Enter the description of your question"
     ></textarea> -->
     <div class="my-2">
-      <froala
-        id="edit"
-        v-model="input.body"
-        :tag="'textarea'"
-        :config="$getFroalaConfig(config)"
-      ></froala>
       <editor
+        v-model="input.body"
         api-key="fwx0vscmsecgg5by0rvm6xbfpbvdruc2nlbxc478ogqam3tk"
         initial-value="<p>Initial editor content</p>"
-        :init="{
-          height: 500,
-          menubar: false,
-          selector: 'textarea',
-          a11y_advanced_options: true,
-          plugins: [
-            'advlist autolink lists link image charmap',
-            'searchreplace visualblocks code fullscreen',
-            'print preview anchor insertdatetime media',
-            'paste code help wordcount table',
-          ],
-          toolbar:
-            'undo redo | formatselect | bold italic | \
-        alignleft aligncenter alignright | \
-        bullist numlist outdent indent | help',
-        }"
+        :init="$initializeEditor(config)"
       >
       </editor>
     </div>

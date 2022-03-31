@@ -16,12 +16,13 @@
       />
       <validation-error :errors="apiValidationErrors.title" />
       <div class="my-2">
-        <froala
-          id="edit"
+        <editor
           v-model="input.body"
-          :tag="'textarea'"
-          :config="$getFroalaConfig(config)"
-        ></froala>
+          api-key="fwx0vscmsecgg5by0rvm6xbfpbvdruc2nlbxc478ogqam3tk"
+          initial-value="<p>Initial editor content</p>"
+          :init="$initializeEditor(config)"
+        >
+        </editor>
       </div>
       <validation-error :errors="apiValidationErrors.body" />
       <BaseFileUpload v-model="FILES"></BaseFileUpload>
