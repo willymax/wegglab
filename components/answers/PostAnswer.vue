@@ -10,7 +10,6 @@
       <editor
         v-model="input.body"
         api-key="fwx0vscmsecgg5by0rvm6xbfpbvdruc2nlbxc478ogqam3tk"
-        initial-value="<p>Initial editor content</p>"
         :init="$initializeEditor(config)"
       >
       </editor>

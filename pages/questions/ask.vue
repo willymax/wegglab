@@ -19,7 +19,6 @@
         <editor
           v-model="input.body"
           api-key="fwx0vscmsecgg5by0rvm6xbfpbvdruc2nlbxc478ogqam3tk"
-          initial-value="<p>Initial editor content</p>"
           :init="$initializeEditor(config)"
         >
         </editor>
@@ -33,6 +32,7 @@
 </template>
 
 <script>
+import Editor from '@tinymce/tinymce-vue'
 import BaseButton from '~/components/core-components/BaseButton.vue'
 import BaseFileUpload from '~/components/core-components/BaseFileUpload.vue'
 import formMixin from '@/mixins/form-mixin'
@@ -46,6 +46,7 @@ export default {
     WithRightSideBar,
     BaseTextArea,
     BaseSelect,
+    Editor,
   },
   mixins: [formMixin],
   layout: 'ResponsiveDashboard',

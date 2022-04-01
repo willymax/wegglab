@@ -47,9 +47,16 @@ export default ({ app, route, $axios, $toast, redirect, store }, inject) => {
   inject('initializeEditor', (config) => {
     return {
       selector: 'textarea#local-upload',
-      plugins: 'image code',
-      toolbar: 'undo redo | image code',
-
+      plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount',
+      ],
+      toolbar:
+        'undo redo | formatselect | image code | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+      height: 400,
+      menubar: false,
+      placeholder: config.placeholderText,
       /* without images_upload_url set, Upload tab won't show up */
       images_upload_url: 'postAcceptor.php',
 

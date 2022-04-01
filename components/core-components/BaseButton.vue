@@ -3,7 +3,7 @@
     :is="tag"
     :type="tag === 'button' ? nativeType : ''"
     :disabled="disabled || loading"
-    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded uppercase"
+    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded uppercase my-2"
     :class="[
       { rounded: round },
       { 'bg-transparent': transparent },
@@ -61,7 +61,7 @@ export default {
     },
     width: {
       type: String,
-      default: '1/3',
+      default: '',
       description: 'Button size (sm|md|lg)',
     },
     hoverText: {
