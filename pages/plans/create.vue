@@ -28,20 +28,31 @@
           "
           alternative
           class="mb-3"
-          placeholder="Price"
+          placeholder="0.00"
           name="price"
-          label="Plan Price"
+          label="Plan Price ($)"
         ></base-input>
         <validation-error :errors="apiValidationErrors.firstName" />
       </div>
+    </div>
+    <div class="mb-4">
+      <base-input
+        v-model="form.data.attributes.numberOfQuestions"
+        alternative
+        class="mb-3"
+        placeholder="Questions"
+        name="numberOfQuestions"
+        label="Number of Questions"
+      ></base-input>
+      <validation-error :errors="apiValidationErrors.firstName" />
     </div>
     <div class="mb-4">
       <base-text-area
         v-model="form.data.attributes.description"
         alternative
         placeholder="Plan Description."
-        name="Description"
-        label="Description"
+        name="description"
+        label="Description of the plan"
       ></base-text-area>
       <validation-error :errors="apiValidationErrors.description" />
     </div>
@@ -93,8 +104,9 @@ export default {
           attributes: {
             // it will be rare to create plans at the same time
             product_id: `PROD-8F8138281X6705217`,
-            name: 'Another Plan',
-            description: 'Another plan created created with local db',
+            numberOfQuestions: '',
+            name: '',
+            description: '',
             billing_cycles: [
               {
                 frequency: {
@@ -106,7 +118,7 @@ export default {
                 total_cycles: 0,
                 pricing_scheme: {
                   fixed_price: {
-                    value: '10',
+                    value: '',
                     currency_code: 'USD',
                   },
                 },
@@ -126,7 +138,7 @@ export default {
               payment_failure_threshold: 3,
             },
             taxes: {
-              percentage: '10',
+              percentage: '',
               inclusive: false,
             },
           },
