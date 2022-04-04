@@ -146,8 +146,9 @@ export default {
     ],
     script: [
       {
-        src: `https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}&vault=true&intent=subscription`,
+        src: `https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}&vault=true`,
         body: true,
+        'data-sdk-integration-source': 'button-factory',
       },
     ],
   },

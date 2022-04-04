@@ -1,12 +1,21 @@
 <template>
-  <div class="relative w-full h-48">
-    <div class="top-0 left-0 absolute w-full h-48">
-      <img src="~/assets/img/blurry.png" class="object-cover h-48 w-full" />
-    </div>
+  <div class="relative w-full">
+    <!-- <div class="inset-0 bg-center absolute w-full">
+      <img src="~/assets/img/blurry.png" class="object-cover w-full" />
+      <div></div>
+      <img src="~/assets/img/blurry.png" bg-[url(/img/grid.svg)]
+      class="object-cover w-full" />
+    </div> -->
+    <div
+      class="absolute inset-0 bg-[url(~/assets/img/blurry.png)] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"
+    ></div>
     <div class="top-0 left-0 z-10 absolute w-full h-48 min-h-full">
-      <div class="flex flex-col justify-center h-48 min-h-full">
-        <card class="w-1/3 text-center m-auto bg-gray-300">
-          <h2>Subscribe to access answers</h2>
+      <div class="flex flex-col justify-center min-h-fit">
+        <card class="min-w-fit text-center m-auto bg-gray-300">
+          <p>Get full Expert solution in seconds</p>
+          <paypal-buy-button></paypal-buy-button>
+          <h2>Or subscribe to access answers</h2>
+
           <base-nuxt-button-link to="/subscriptions/plans"
             >Subscribe</base-nuxt-button-link
           >
@@ -19,8 +28,9 @@
 <script>
 import BaseNuxtButtonLink from '../core-components/BaseNuxtButtonLink.vue'
 import Card from '../core-components/Cards/Card.vue'
+import PaypalBuyButton from '../subscriptions/PaypalBuyButton.vue'
 export default {
-  components: { Card, BaseNuxtButtonLink },
+  components: { Card, BaseNuxtButtonLink, PaypalBuyButton },
 }
 </script>
 
