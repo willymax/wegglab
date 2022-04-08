@@ -17,7 +17,10 @@
         <card class="min-w-fit text-center m-auto bg-gray-300">
           <div class="px-6 sm:px-12">
             <p>Get full Expert solution in seconds</p>
-            <paypal-buy-button></paypal-buy-button>
+            <paypal-buy-button
+              amount="30"
+              @paymentReceived="paymentReceived"
+            ></paypal-buy-button>
             <h2>Or subscribe to access answers</h2>
 
             <base-nuxt-button-link to="/subscriptions/plans"
@@ -36,6 +39,9 @@ import Card from '../core-components/Cards/Card.vue'
 import PaypalBuyButton from '../subscriptions/PaypalBuyButton.vue'
 export default {
   components: { Card, BaseNuxtButtonLink, PaypalBuyButton },
+  methods: {
+    paymentReceived() {},
+  },
 }
 </script>
 

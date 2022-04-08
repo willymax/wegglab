@@ -8,11 +8,18 @@
 
 <script>
 export default {
+  props: {
+    amount: {
+      type: Number,
+      default: 0,
+    },
+  },
   mounted() {
     this.initPayPalButton()
   },
   methods: {
     initPayPalButton() {
+      const that = this
       // eslint-disable-next-line no-undef
       paypal
         .Buttons({
@@ -25,7 +32,9 @@ export default {
 
           createOrder(data, actions) {
             return actions.order.create({
-              purchase_units: [{ amount: { currency_code: 'USD', value: 1 } }],
+              purchase_units: [
+                { amount: { currency_code: 'USD', value: that.amount } },
+              ],
             })
           },
 
