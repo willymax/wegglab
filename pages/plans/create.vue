@@ -57,7 +57,7 @@
       <validation-error :errors="apiValidationErrors.description" />
     </div>
     <fieldset class="border border-solid border-gray-300 p-3">
-      <legend class="text-sm">Taxes</legend>
+      <legend class="text-sm font-bold text-gray-700">Taxes</legend>
       <div class="mb-4 md:flex md:justify-between">
         <div class="md:ml-2">
           <base-input
