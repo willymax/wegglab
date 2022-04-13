@@ -144,6 +144,7 @@ export default {
             },
             onApprove(data, actions) {
               // subscriptions/subscribeUser
+              console.log('subscription data', data)
               that.$axios
                 .post('/users/subscribeUser', {
                   subscription_id: data.subscriptionID,
