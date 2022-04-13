@@ -40,7 +40,10 @@ import PaypalBuyButton from '../subscriptions/PaypalBuyButton.vue'
 export default {
   components: { Card, BaseNuxtButtonLink, PaypalBuyButton },
   methods: {
-    paymentReceived() {},
+    paymentReceived() {
+      // reload page
+      // location.reload(true)
+    },
   },
 }
 </script>

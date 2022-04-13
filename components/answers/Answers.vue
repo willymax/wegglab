@@ -4,6 +4,7 @@
     <div v-for="answer in question.answers" :key="answer._id">
       <answer v-if="subscribed" :answer="answer"></answer>
     </div>
+    >
     <div v-if="question.answers.length > 0 && !subscribed">
       <blurred-answer></blurred-answer>
     </div>
@@ -28,6 +29,9 @@ export default {
         ? this.user.subscription.status === 'Active'
         : false
     },
+  },
+  created() {
+    this.$nuxt.$on('paymentReceived', ($event) => {})
   },
   methods: {
     ownAnswer(answer) {

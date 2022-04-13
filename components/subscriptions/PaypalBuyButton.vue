@@ -15,6 +15,7 @@ export default {
     },
   },
   mounted() {
+    this.$nuxt.$emit('paymentReceived', true)
     this.initPayPalButton()
   },
   methods: {
@@ -50,6 +51,8 @@ export default {
               element.innerHTML = ''
               element.innerHTML = '<h3>Thank you for your payment!</h3>'
               // Or go to another URL:  actions.redirect('thank_you.html');
+              that.$emit('paymentReceived', true)
+              that.$nuxt.$emit('paymentReceived', true)
             })
           },
 

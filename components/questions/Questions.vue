@@ -63,7 +63,7 @@ export default {
   },
   async fetch() {
     const res = await this.$axios.get(
-      `questions?tag=nuxt&state=rising&page=${this.currentPage}&size=${this.size}`
+      `questions?page=${this.currentPage}&perPage=${this.size}`
     )
     this.questions = this.questions.concat(res.data.data)
   },
