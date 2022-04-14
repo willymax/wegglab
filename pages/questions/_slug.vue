@@ -65,6 +65,11 @@ export default {
     this.question = question
   },
   computed: {},
+  created() {
+    this.$nuxt.$on('paymentReceived', ($event) => {
+      location.reload(true)
+    })
+  },
 }
 </script>
 

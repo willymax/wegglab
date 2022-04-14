@@ -14,8 +14,15 @@ export default {
       default: 0,
     },
   },
+  computed: {
+    theQuestion() {
+      return this.$store.getters['questions/GET_CURRENT_QUESTION']
+    },
+  },
+  created() {
+    console.log('question', this.theQuestion)
+  },
   mounted() {
-    this.$nuxt.$emit('paymentReceived', true)
     this.initPayPalButton()
   },
   methods: {
@@ -45,14 +52,29 @@ export default {
                 orderData,
                 JSON.stringify(orderData, null, 2)
               )
-
-              // Show a success message within this page, e.g.
-              const element = document.getElementById('paypal-button-container')
-              element.innerHTML = ''
-              element.innerHTML = '<h3>Thank you for your payment!</h3>'
-              // Or go to another URL:  actions.redirect('thank_you.html');
-              that.$emit('paymentReceived', true)
-              that.$nuxt.$emit('paymentReceived', true)
+              that.$axios
+                .post('answer-purchases/', {
+                  question_id: that.theQuestion._id,
+                  payment_id: orderData.id,
+                  user_id: that.$auth.user.id,
+                  status: orderData.status,
+                  amount: that.amount,
+                  create_time: orderData.create_time,
+                  update_time: orderData.update_time,
+                })
+                .then((response) => {
+                  // Show a success message within this page, e.g.
+                  const element = document.getElementById(
+                    'paypal-button-container'
+                  )
+                  element.innerHTML = ''
+                  element.innerHTML = '<h3>Thank you for your payment!</h3>'
+                  // Or go to another URL:  actions.redirect('thank_you.html');
+                  that.$nuxt.$emit('paymentReceived', true)
+                })
+                .catch((error) => {
+                  console.log(error)
+                })
             })
           },
 

@@ -1,11 +1,5 @@
 <template>
   <div class="relative w-full min-h-fit md:py-12">
-    <!-- <div class="inset-0 bg-center absolute w-full">
-      <img src="~/assets/img/blurry.png" class="object-cover w-full" />
-      <div></div>
-      <img src="~/assets/img/blurry.png" bg-[url(/img/grid.svg)]
-      class="object-cover w-full" />
-    </div> -->
     <div
       :style="{
         backgroundImage: 'url(' + require('@/assets/img/blurry.png') + ')',
@@ -41,8 +35,7 @@ export default {
   components: { Card, BaseNuxtButtonLink, PaypalBuyButton },
   methods: {
     paymentReceived() {
-      // reload page
-      // location.reload(true)
+      //
     },
   },
 }
