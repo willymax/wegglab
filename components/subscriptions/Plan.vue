@@ -28,9 +28,7 @@
       <div
         class="w-5/6 py-2 mt-2 font-semibold text-center uppercase border border-transparent rounded text-blue-500"
       >
-        <base-button :width="1 / 2" @click="show = !show"
-          >Start Plan</base-button
-        >
+        <base-button width="1/2" @click="show = !show">Start Plan</base-button>
       </div>
     </div>
     <app-modal v-if="show" :show.sync="show">
