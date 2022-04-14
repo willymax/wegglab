@@ -98,7 +98,7 @@ export default {
     },
     subscribed() {
       return this.user.subscription
-        ? this.user.subscription.status === 'Active'
+        ? this.user.subscription.status === 'ACTIVE'
         : false
     },
     price() {
@@ -128,11 +128,21 @@ export default {
             Authorization: `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
           },
+        }).then((res) => {
+          this.subscription.status = 'CANCELLED'
+          this.$axios
+            .patch('subscriptions/updateSubscription?status=CANCELLED')
+            .then((response) => {
+              this.$auth.setUser(
+                Object.assign(this.$auth.user, {
+                  subscription: response.subscription,
+                })
+              )
+            })
+            .catch((error) => {
+              console.log(error)
+            })
         })
-          .then((res) => {})
-          .then((res) => {
-            this.subscription.status = 'CANCELLED'
-          })
       } catch (error) {}
     },
     async cancelSubscriptionOnWegglab() {

@@ -28,13 +28,17 @@
       <div
         class="w-5/6 py-2 mt-2 font-semibold text-center uppercase border border-transparent rounded text-blue-500"
       >
-        <base-button width="1/2" @click="show = !show">Start Plan</base-button>
+        <base-button width="md:w-64 w-full" :round="true" @click="show = !show"
+          >Start Plan</base-button
+        >
       </div>
     </div>
     <app-modal v-if="show" :show.sync="show">
       <Checkout :price="price" :plan-id="planId" :name="name"></Checkout>
       <template #footer>
-        <base-button @click="show = !show">Close Dialog</base-button>
+        <base-button width="md:w-64 w-full" @click="show = !show"
+          >Close Dialog</base-button
+        >
       </template>
     </app-modal>
   </div>

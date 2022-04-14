@@ -1,5 +1,5 @@
 <template>
-  <div class="md:grid grid-cols-3 gap-2">
+  <div class="md:grid md:grid-cols-3 grid-cols-1 gap-2 overflow-y-auto">
     <div class="col-span-2 text-left">
       <h2 class="font-bold">{{ name }}</h2>
       <p>The learning tool to take your review to the next level</p>
@@ -50,7 +50,6 @@
           :name="name"
         ></paypal-button>
       </div>
-      {{ authorize }}
     </div>
   </div>
 </template>
