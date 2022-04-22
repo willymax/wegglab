@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-table :items="plans" :columns="columns">
+    <base-table :items="plans" :columns="columns" table-title="Plans List">
       <template #actions>
         <base-button @click="subscribe">Subscribe</base-button>
       </template></base-table

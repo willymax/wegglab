@@ -120,6 +120,7 @@ export default {
   methods: {
     async cancelSubscription() {
       try {
+        const that = this
         const res = await this.$store.dispatch('paypal/getAccessToken')
         const accessToken = res.access_token
         await fetch(`${this.cancellationLink}`, {
@@ -133,7 +134,7 @@ export default {
           this.$axios
             .patch('subscriptions/updateSubscription?status=CANCELLED')
             .then((response) => {
-              this.$auth.setUser(
+              that.$auth.setUser(
                 Object.assign(this.$auth.user, {
                   subscription: response.subscription,
                 })

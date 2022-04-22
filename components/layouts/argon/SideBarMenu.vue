@@ -20,7 +20,7 @@
     </side-bar-menu-link>
     <menu-item to="/questions">
       <template #link-icon>
-        <i class="fa fa-question fa-lg" aria-hidden="true"></i>
+        <img class="w-5 h-5 inline" src="~assets/question-mark.svg" />
       </template>
       Questions</menu-item
     >

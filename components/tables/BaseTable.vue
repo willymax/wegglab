@@ -9,14 +9,14 @@
         <template slot="header">
           <div class="row">
             <div class="col-6">
-              <h3 class="mb-0">Items List</h3>
+              <h3 class="mb-0">{{ tableTitle }}</h3>
             </div>
             <div class="col-6 text-right">
               <base-button type="primary" icon size="sm" @click="onProFeature">
                 <span class="btn-inner--icon"
                   ><i class="fas fa-user-edit"></i
                 ></span>
-                <span class="btn-inner--text">Add User</span>
+                <span class="btn-inner--text">Add Item</span>
               </base-button>
             </div>
           </div>
@@ -162,6 +162,10 @@ export default {
     total: {
       type: Number,
       default: 1,
+    },
+    tableTitle: {
+      type: String,
+      default: 'Items List',
     },
     pagination: {
       type: Object,

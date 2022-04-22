@@ -124,7 +124,7 @@
               type="button"
               @click="sidebarOpen = false"
             >
-              <i class="fa fa-times fa-2x"></i>
+              <img class="w-5 h-5" src="~assets/close.svg" />
             </button>
           </div>
           <side-bar-menu> </side-bar-menu>

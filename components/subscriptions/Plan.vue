@@ -28,7 +28,7 @@
       <div
         class="w-5/6 py-2 mt-2 font-semibold text-center uppercase border border-transparent rounded text-blue-500"
       >
-        <base-button width="md:w-64 w-full" :round="true" @click="show = !show"
+        <base-button width="w-full" :round="true" @click="show = !show"
           >Start Plan</base-button
         >
       </div>
