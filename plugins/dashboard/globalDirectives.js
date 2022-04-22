@@ -1,10 +1,9 @@
 import Vue from 'vue'
-// import clickOutside from './directives/click-outside.js'
-
+import clickOutside from './directives/click-outside.js'
 /**
  * You can register global directives here and use them as a plugin in your main Vue instance
  */
-// Vue.directive('click-outside', clickOutside)
+Vue.directive('click-outside', clickOutside)
 Vue.directive('closable', {
   bind(el, binding, vnode) {
     // Here's the click/touchstart handler

@@ -36,6 +36,15 @@
       </div>
     </div>
     <div class="mb-4">
+      <base-select
+        v-model="form.data.attributes.product_id"
+        :options="products"
+        label="Select Plan Product"
+        value-key="id"
+        text-key="name"
+      ></base-select>
+    </div>
+    <div class="mb-4">
       <base-input
         v-model="form.data.attributes.numberOfQuestions"
         alternative
@@ -99,6 +108,7 @@ export default {
   data() {
     return {
       statuses: ['CREATED', 'INACTIVE', 'ACTIVE'],
+      products: [],
       form: {
         data: {
           attributes: {
@@ -146,6 +156,9 @@ export default {
       },
     }
   },
+  mounted() {
+    this.getProducts()
+  },
   methods: {
     async createPlan(url = '', data = {}) {
       const res = await this.$store.dispatch('paypal/getAccessToken')
@@ -179,6 +192,22 @@ export default {
             this.$toast.error(err.message)
           })
       })
+    },
+    async getProducts() {
+      const res = await this.$store.dispatch('paypal/getAccessToken')
+      const accessToken = res.access_token
+      const response = await fetch(
+        'https://api-m.sandbox.paypal.com/v1/catalogs/products?page_size=2&page=1&total_required=true',
+        {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      ).then((res) => res.json())
+      this.products = this.products.concat(response.products)
+      console.log('products', this.products)
     },
   },
 }

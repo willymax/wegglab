@@ -28,7 +28,7 @@
     <div class="mb-4">
       <base-text-area
         v-model="form.data.product.description"
-        placeholder="Enter description"
+        placeholder="The description of the product"
         name="description"
         label="Product Description"
       ></base-text-area>
@@ -39,6 +39,7 @@
         v-model="form.data.product.type"
         :options="types"
         label="Product Type"
+        disabled
       ></base-select>
     </div>
     <div class="mb-4">
@@ -77,8 +78,8 @@ export default {
         data: {
           product: {
             // id: `PROD-${Date.now()}`,
-            name: 'First Product',
-            description: 'The description of the product',
+            name: null,
+            description: null,
             type: 'SERVICE',
             // image_url: '',
             category: 'EDUCATIONAL_AND_TEXTBOOKS',
