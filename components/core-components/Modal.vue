@@ -1,70 +1,43 @@
 <template>
   <SlideYUpTransition :duration="animationDuration">
-    <!--Overlay Effect-->
     <div
       id="my-modal"
       style="z-index: 9998"
-      class="
-        fixed
-        inset-0
-        h-full
-        w-full
-        bg-gray-600 bg-opacity-50
-        overflow-y-auto overflow-x-auto
-        table
-      "
-      :class="[{ 'modal-mini': type === 'mini' }]"
+      class="fixed inset-0 overflow-y-auto"
+      aria-labelledby="modal-title"
       role="dialog"
-      tabindex="-1"
+      aria-modal="true"
       :aria-hidden="!show"
-      @mousedown.self="closeModal"
     >
-      <div class="table-cell align-middle">
-        <div
-          class="top-20 mx-auto p-5 border w-4/5 shadow-lg rounded-md bg-white"
-          :class="[
-            { 'modal-notice': type === 'notice', [`modal-${size}`]: size },
-            modalClasses,
-          ]"
-        >
-          <div
-            class="mt-3 text-center"
-            :class="[
-              gradient ? `bg-gradient-${gradient}` : '',
-              modalContentClasses,
-            ]"
-          >
-            <div
-              v-if="$slots.header"
-              class="modal-header"
-              :class="[headerClasses]"
-            >
-              <slot name="header"></slot>
-              <slot name="close-button">
-                <button
-                  v-if="showClose"
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                  @click="closeModal"
-                >
-                  <span :aria-hidden="!show">×</span>
-                </button>
-              </slot>
-            </div>
+      <div
+        class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+      >
+        <!--
+      Background overlay, show/hide based on modal state.
 
-            <div class="modal-body" :class="bodyClasses">
-              <slot></slot>
-            </div>
-            <div
-              v-if="$slots.footer"
-              class="modal-footer"
-              :class="footerClasses"
-            >
-              <slot name="footer"></slot>
-            </div>
-          </div>
+      Entering: "ease-out duration-300"
+        From: "opacity-0"
+        To: "opacity-100"
+      Leaving: "ease-in duration-200"
+        From: "opacity-100"
+        To: "opacity-0"
+    -->
+        <div
+          class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+          aria-hidden="true"
+        ></div>
+
+        <!-- This element is to trick the browser into centering the modal contents. -->
+        <span
+          class="hidden sm:inline-block sm:align-middle sm:h-screen"
+          aria-hidden="true"
+          >&#8203;</span
+        >
+        <div
+          v-click-outside="closeModal"
+          class="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        >
+          <slot></slot>
         </div>
       </div>
     </div>
@@ -160,6 +133,7 @@ export default {
   },
   methods: {
     closeModal() {
+      console.log("this.$emit('close')")
       this.$emit('update:show', false)
       // this.$emit('close')
     },
