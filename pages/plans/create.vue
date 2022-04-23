@@ -91,6 +91,7 @@
         </div>
       </div>
     </fieldset>
+    {{ form.data.attributes }}
     <base-button @click="postData">Submit</base-button>
   </form>
 </template>
@@ -113,7 +114,7 @@ export default {
         data: {
           attributes: {
             // it will be rare to create plans at the same time
-            product_id: `PROD-8F8138281X6705217`,
+            product_id: null,
             numberOfQuestions: '',
             name: '',
             description: '',
@@ -180,10 +181,12 @@ export default {
         'https://api-m.sandbox.paypal.com/v1/billing/plans',
         theData
       ).then((data) => {
+        console.log('plan data is ', data)
         this.$axios
-          .post('plans', {
-            planId: data._id,
-            planDetails: JSON.stringify(data),
+          .post('/subscription-plan', {
+            id: data.id,
+            details: data,
+            numberOfQuestions: this.form.data.attributes.numberOfQuestions,
           })
           .then((res) => {
             this.$router.push('/plans')

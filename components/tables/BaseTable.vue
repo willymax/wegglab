@@ -55,32 +55,34 @@
               :sortable="column.sortable"
             />
             <el-table-column min-width="180px" align="center">
-              <div class="table-actions">
-                <el-tooltip content="Edit" placement="top">
-                  <a
-                    type="text"
-                    class="table-action"
-                    data-toggle="tooltip"
-                    style="cursor: pointer"
-                    @click="onProFeature"
-                  >
-                    <i class="fas fa-user-edit"></i>
-                  </a>
-                </el-tooltip>
+              <template slot-scope="scope">
+                <div class="table-actions">
+                  <el-tooltip content="Edit" placement="top">
+                    <a
+                      type="text"
+                      class="table-action"
+                      data-toggle="tooltip"
+                      style="cursor: pointer"
+                      @click="onProFeature"
+                    >
+                      <i class="fas fa-user-edit"></i>
+                    </a>
+                  </el-tooltip>
 
-                <el-tooltip content="Delete" placement="top">
-                  <a
-                    type="text"
-                    class="table-action table-action-delete"
-                    data-toggle="tooltip"
-                    style="cursor: pointer"
-                    @click="trashClicked()"
-                  >
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </el-tooltip>
-                <slot name="actions"></slot>
-              </div>
+                  <el-tooltip content="Delete" placement="top">
+                    <a
+                      type="text"
+                      class="table-action table-action-delete"
+                      data-toggle="tooltip"
+                      style="cursor: pointer"
+                      @click="trashClicked(scope.$index, scope.row)"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </a>
+                  </el-tooltip>
+                  <slot name="actions"></slot>
+                </div>
+              </template>
             </el-table-column>
           </el-table>
         </div>
@@ -144,9 +146,7 @@
               </h3>
               <div class="mt-2">
                 <p class="text-sm text-gray-500">
-                  Are you sure you want to deactivate your account? All of your
-                  data will be permanently removed. This action cannot be
-                  undone.
+                  Are you sure you want to delete this plan?
                 </p>
               </div>
             </div>
@@ -157,7 +157,7 @@
             type="button"
             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
           >
-            Deactivate
+            Delete
           </button>
           <button
             type="button"
@@ -246,6 +246,7 @@ export default {
       selectedRows: [],
       sort: 'createdAt',
       tablePaginations: { ...this.pagination },
+      selectedItem: null,
     }
   },
   computed: {
@@ -290,7 +291,8 @@ export default {
   },
 
   methods: {
-    trashClicked() {
+    trashClicked(index, row) {
+      this.selectedItem = row
       this.showDeleteDialog = true
     },
     getItems() {
