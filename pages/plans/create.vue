@@ -164,6 +164,7 @@ export default {
     async createPlan(url = '', data = {}) {
       const res = await this.$store.dispatch('paypal/getAccessToken')
       const accessToken = res.access_token
+      console.log('accessToken', accessToken)
       // Default options are marked with *
       const response = await fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -173,28 +174,38 @@ export default {
         },
         body: JSON.stringify(data), // body data type must match "Content-Type" header
       })
-      return response.json() // parses JSON response into native JavaScript objects
+      if (response.ok) {
+        return response.json() // parses JSON response into native JavaScript objects
+      } else {
+        console.log(response.status)
+        return Promise.reject(new Error('Plan '))
+      }
     },
     postData() {
-      const theData = this.form.data.attributes
+      const theData = { ...this.form.data.attributes }
+      delete theData.numberOfQuestions
       this.createPlan(
         'https://api-m.sandbox.paypal.com/v1/billing/plans',
         theData
-      ).then((data) => {
-        console.log('plan data is ', data)
-        this.$axios
-          .post('/subscription-plan', {
-            id: data.id,
-            details: data,
-            numberOfQuestions: this.form.data.attributes.numberOfQuestions,
-          })
-          .then((res) => {
-            this.$router.push('/plans')
-          })
-          .catch((err) => {
-            this.$toast.error(err.message)
-          })
-      })
+      )
+        .then((data) => {
+          console.log('plan data is ', data)
+          this.$axios
+            .post('/subscription-plans', {
+              id: data.id,
+              details: data,
+              numberOfQuestions: this.form.data.attributes.numberOfQuestions,
+            })
+            .then((res) => {
+              this.$router.push('/plans')
+            })
+            .catch((err) => {
+              this.$toast.error(err.message)
+            })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     async getProducts() {
       const res = await this.$store.dispatch('paypal/getAccessToken')
