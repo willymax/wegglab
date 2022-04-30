@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen">
     <notifications></notifications>
-    <base-nav></base-nav>
+    <!-- <base-nav></base-nav> -->
     <nav-bar></nav-bar>
     <div class="h-screen container mx-auto md:px-10">
       <div class="rounded-lg shadow bg-base-200 drawer drawer-mobile h-screen">
