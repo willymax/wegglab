@@ -4,7 +4,7 @@
       <template v-if="$fetchState.pending">
         <div class="article-cards-wrapper">
           <content-placeholders
-            v-for="p in size"
+            v-for="p in paginator.per_page"
             :key="p"
             rounded
             class="article-card-block"
@@ -52,28 +52,67 @@ export default {
   },
   // mixins: [questionsMixin],
   layout: 'ResponsiveDashboard',
+  props: {
+    userId: {
+      type: String,
+      default: null,
+    },
+    bookmarked: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       items: [],
       questions: [],
       relativeUrl: 'questions',
-      currentPage: 1,
-      size: 5,
+      paginator: {
+        total_count: 0,
+        per_page: 5,
+        current_page: 1,
+        last_page: 0,
+        total_pages: 0,
+        from: 0,
+        to: 0,
+      },
     }
   },
   async fetch() {
+    let queryParams = `&bookmarked=${this.bookmarked}`
+    if (this.userId) {
+      queryParams = queryParams + `&userId=${this.userId}`
+    }
     const res = await this.$axios.get(
-      `questions?page=${this.currentPage}&perPage=${this.size}`
+      `questions?page=${this.paginator.current_page}&perPage=${this.paginator.per_page}${queryParams}`
     )
+    this.paginator = { ...res.data.paginator }
     this.questions = this.questions.concat(res.data.data)
   },
+  watch: {
+    userId(newValue, oldValue) {
+      this.resetAndFetch()
+    },
+    bookmarked(newValue, oldValue) {
+      this.resetAndFetch()
+    },
+  },
   methods: {
+    resetAndFetch() {
+      this.paginator.current_page = 1
+      this.questions = []
+      this.$fetch()
+    },
     lazyLoadQuestions(isVisible) {
+      if (
+        this.paginator.total_count < this.paginator.per_page ||
+        this.paginator.current_page >= this.paginator.last_page
+      ) {
+        return
+      }
       if (isVisible) {
-        if (this.currentPage < 5) {
-          this.currentPage++
-          this.$fetch()
-        }
+        this.paginator.current_page++
+        this.$fetch()
       }
     },
   },

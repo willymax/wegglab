@@ -1,10 +1,8 @@
 <template>
   <div
-    class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800"
+    class="min-h-screen flex flex-row flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800"
   >
-    <div
-      class="fixed flex flex-col top-0 left-0 w-3/12 bg-white h-full border-r"
-    >
+    <div class="flex flex-col top-0 left-0 w-3/12 bg-white h-full border-r">
       <div class="flex items-center justify-center h-14 border-b">
         <div>Sidebar Navigation By iAmine</div>
       </div>
@@ -288,6 +286,7 @@ import Logout from '~/components/widgets/Logout.vue'
 import SideBarMenu from '~/components/layouts/argon/SideBarMenu.vue'
 import MenuItem from '~/components/layouts/argon/MenuItem.vue'
 import NavBar from '~/components/settings/NavBar.vue'
+//
 function hasElement(className) {
   return document.getElementsByClassName(className).length > 0
 }
@@ -313,7 +312,7 @@ export default {
     MenuItem,
     NavBar,
   },
-  // layout: 'ResponsiveDashboard',
+  layout: 'ResponsiveDashboard',
   mounted() {
     this.initScrollbar(), this.$store.dispatch('profile/me')
   },
