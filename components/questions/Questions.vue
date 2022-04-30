@@ -57,6 +57,10 @@ export default {
       type: String,
       default: null,
     },
+    bookmarked: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -75,7 +79,7 @@ export default {
     }
   },
   async fetch() {
-    let queryParams = ''
+    let queryParams = `&bookmarked=${this.bookmarked}`
     if (this.userId) {
       queryParams = queryParams + `&userId=${this.userId}`
     }
@@ -87,6 +91,9 @@ export default {
   },
   watch: {
     userId(newValue, oldValue) {
+      this.resetAndFetch()
+    },
+    bookmarked(newValue, oldValue) {
       this.resetAndFetch()
     },
   },

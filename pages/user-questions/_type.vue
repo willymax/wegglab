@@ -11,6 +11,9 @@ export default {
       if (this.$route.params.type === '1') {
         return { userId: this.$auth.user.id }
       }
+      if (this.$route.params.type === '2') {
+        return { bookmarked: true }
+      }
       return {}
     },
   },

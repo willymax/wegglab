@@ -1,10 +1,16 @@
 <template>
   <card>
-    <answer-user
-      :user="question.user"
-      :timestamp="question.createdAt"
-      :resource-link="`/questions/${question.slug}`"
-    ></answer-user>
+    <div class="flex">
+      <answer-user
+        class="flex-1"
+        :user="question.user"
+        :timestamp="question.createdAt"
+        :resource-link="`/questions/${question.slug}`"
+      ></answer-user>
+      <div>
+        <BookmarkQuestion></BookmarkQuestion>
+      </div>
+    </div>
     <h1 class="text-2xl font-bold">{{ question.title }}</h1>
     <client-only>
       <span v-html="question.body"></span>
@@ -43,8 +49,9 @@
 <script>
 import AnswerUser from '../answers/AnswerUser.vue'
 import Card from '../core-components/Cards/Card.vue'
+import BookmarkQuestion from './BookmarkQuestion.vue'
 export default {
-  components: { Card, AnswerUser },
+  components: { Card, AnswerUser, BookmarkQuestion },
   computed: {
     question() {
       return this.$store.getters['questions/GET_CURRENT_QUESTION']
