@@ -85,7 +85,10 @@ export default {
       loading: false,
       showLogoutDialog: false,
       dropdownOpen: false,
-      options: [{ name: 'Account settings', url: '/profile', id: 1 }],
+      options: [
+        { name: 'Account settings', url: '/profile/setting', id: 1 },
+        { name: 'My Questions', url: '/user/questions', id: 1 },
+      ],
     }
   },
   methods: {

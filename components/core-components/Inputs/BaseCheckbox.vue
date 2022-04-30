@@ -1,22 +1,22 @@
 <template>
   <div
-    class="custom-control custom-checkbox"
+    class=""
     :class="[
       { disabled: disabled },
       { [`custom-checkbox-${type}`]: type },
       inlineClass,
     ]"
   >
-    <input
-      :id="cbId"
-      v-model="model"
-      class="custom-control-input"
-      :aria-label="ariaLabel"
-      :class="inputClasses"
-      type="checkbox"
-      :disabled="disabled"
-    />
     <label :for="cbId" class="custom-control-label">
+      <input
+        :id="cbId"
+        v-model="model"
+        class="text-indigo-500 w-6 h-6 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
+        :aria-label="ariaLabel"
+        :class="inputClasses"
+        type="checkbox"
+        :disabled="disabled"
+      />
       <slot>
         <span v-if="inline">&nbsp;</span>
       </slot>

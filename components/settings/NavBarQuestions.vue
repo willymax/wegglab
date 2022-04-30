@@ -3,16 +3,13 @@
     <nav>
       <ul>
         <li>
-          <NuxtLink to="/profile/setting">Profile</NuxtLink>
+          <NuxtLink to="/questions/setting">My Questions</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/profile/password/">Change Password</NuxtLink>
+          <NuxtLink to="/questions/watching/">Watching</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/profile/payments/">Payments</NuxtLink>
-        </li>
-        <li>
-          <NuxtLink to="/profile/subscription/">Subscription</NuxtLink>
+          <NuxtLink to="/questions/answers/">My Answers</NuxtLink>
         </li>
       </ul>
     </nav>

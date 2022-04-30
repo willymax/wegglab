@@ -28,25 +28,45 @@
           "
           alternative
           class="mb-3"
-          placeholder="Price"
+          placeholder="0.00"
           name="price"
-          label="Plan Price"
+          label="Plan Price ($)"
         ></base-input>
         <validation-error :errors="apiValidationErrors.firstName" />
       </div>
+    </div>
+    <div class="mb-4">
+      <base-select
+        v-model="form.data.attributes.product_id"
+        :options="products"
+        label="Select Plan Product"
+        value-key="id"
+        text-key="name"
+      ></base-select>
+    </div>
+    <div class="mb-4">
+      <base-input
+        v-model="form.data.attributes.numberOfQuestions"
+        alternative
+        class="mb-3"
+        placeholder="Questions"
+        name="numberOfQuestions"
+        label="Number of Questions"
+      ></base-input>
+      <validation-error :errors="apiValidationErrors.firstName" />
     </div>
     <div class="mb-4">
       <base-text-area
         v-model="form.data.attributes.description"
         alternative
         placeholder="Plan Description."
-        name="Description"
-        label="Description"
+        name="description"
+        label="Description of the plan"
       ></base-text-area>
       <validation-error :errors="apiValidationErrors.description" />
     </div>
     <fieldset class="border border-solid border-gray-300 p-3">
-      <legend class="text-sm">Taxes</legend>
+      <legend class="text-sm font-bold text-gray-700">Taxes</legend>
       <div class="mb-4 md:flex md:justify-between">
         <div class="md:ml-2">
           <base-input
@@ -71,6 +91,7 @@
         </div>
       </div>
     </fieldset>
+    {{ form.data.attributes }}
     <base-button @click="postData">Submit</base-button>
   </form>
 </template>
@@ -88,13 +109,15 @@ export default {
   data() {
     return {
       statuses: ['CREATED', 'INACTIVE', 'ACTIVE'],
+      products: [],
       form: {
         data: {
           attributes: {
             // it will be rare to create plans at the same time
-            product_id: `PROD-8F8138281X6705217`,
-            name: 'Another Plan',
-            description: 'Another plan created created with local db',
+            product_id: null,
+            numberOfQuestions: '',
+            name: '',
+            description: '',
             billing_cycles: [
               {
                 frequency: {
@@ -106,7 +129,7 @@ export default {
                 total_cycles: 0,
                 pricing_scheme: {
                   fixed_price: {
-                    value: '10',
+                    value: '',
                     currency_code: 'USD',
                   },
                 },
@@ -126,7 +149,7 @@ export default {
               payment_failure_threshold: 3,
             },
             taxes: {
-              percentage: '10',
+              percentage: '',
               inclusive: false,
             },
           },
@@ -134,10 +157,14 @@ export default {
       },
     }
   },
+  mounted() {
+    this.getProducts()
+  },
   methods: {
     async createPlan(url = '', data = {}) {
       const res = await this.$store.dispatch('paypal/getAccessToken')
       const accessToken = res.access_token
+      console.log('accessToken', accessToken)
       // Default options are marked with *
       const response = await fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -147,26 +174,54 @@ export default {
         },
         body: JSON.stringify(data), // body data type must match "Content-Type" header
       })
-      return response.json() // parses JSON response into native JavaScript objects
+      if (response.ok) {
+        return response.json() // parses JSON response into native JavaScript objects
+      } else {
+        console.log(response.status)
+        return Promise.reject(new Error('Plan '))
+      }
     },
     postData() {
-      const theData = this.form.data.attributes
+      const theData = { ...this.form.data.attributes }
+      delete theData.numberOfQuestions
       this.createPlan(
         'https://api-m.sandbox.paypal.com/v1/billing/plans',
         theData
-      ).then((data) => {
-        this.$axios
-          .post('plans', {
-            planId: data._id,
-            planDetails: JSON.stringify(data),
-          })
-          .then((res) => {
-            this.$router.push('/plans')
-          })
-          .catch((err) => {
-            this.$toast.error(err.message)
-          })
-      })
+      )
+        .then((data) => {
+          console.log('plan data is ', data)
+          this.$axios
+            .post('/subscription-plans', {
+              id: data.id,
+              details: data,
+              numberOfQuestions: this.form.data.attributes.numberOfQuestions,
+            })
+            .then((res) => {
+              this.$router.push('/plans')
+            })
+            .catch((err) => {
+              this.$toast.error(err.message)
+            })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    async getProducts() {
+      const res = await this.$store.dispatch('paypal/getAccessToken')
+      const accessToken = res.access_token
+      const response = await fetch(
+        'https://api-m.sandbox.paypal.com/v1/catalogs/products?page_size=2&page=1&total_required=true',
+        {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      ).then((res) => res.json())
+      this.products = this.products.concat(response.products)
+      console.log('products', this.products)
     },
   },
 }

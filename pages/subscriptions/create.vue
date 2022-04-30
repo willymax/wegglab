@@ -4,11 +4,11 @@
   >
     <div class="w-full px-0 lg:px-4">
       <h2
-        class="px-12 text-base font-bold text-center md:text-2xl text-blue-700"
+        class="px-12 text-base font-bold text-center md:text-2xl text-gray-700"
       >
         Choose your plan
       </h2>
-      <p class="py-1 text-sm text-center text-blue-700 mb-10">
+      <p class="py-1 text-sm text-center text-gray-700 mb-10">
         It is a long established fact that a reader will be distracted by the
         readable content of a page when looking at its layout.
       </p>

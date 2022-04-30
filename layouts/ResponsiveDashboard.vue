@@ -124,7 +124,7 @@
               type="button"
               @click="sidebarOpen = false"
             >
-              <i class="fa fa-times fa-2x"></i>
+              <img class="w-5 h-5" src="~assets/close.svg" />
             </button>
           </div>
           <side-bar-menu> </side-bar-menu>
@@ -134,7 +134,7 @@
           <main class="flex-1 overflow-x-hidden overflow-y-auto">
             <div class="container mx-auto px-6 py-8">
               <div
-                class="min-h-screen text-gray-500 dark:text-gray-300 text-xl border-4 border-gray-300 border-dashed"
+                class="min-h-screen overflow-auto text-gray-500 dark:text-gray-300 text-xl border-4 border-gray-300 border-dashed"
               >
                 <nuxt></nuxt>
               </div>

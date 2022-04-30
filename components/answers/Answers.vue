@@ -2,9 +2,9 @@
   <div>
     <h2 class="text-3xl font-normal leading-normal mt-0 mb-2">Answers</h2>
     <div v-for="answer in question.answers" :key="answer._id">
-      <answer v-if="subscribed" :answer="answer"></answer>
+      <answer :answer="answer"></answer>
     </div>
-    <div v-if="question.answers.length > 0 && !subscribed">
+    <div v-if="question.showBlur">
       <blurred-answer></blurred-answer>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="md:grid grid-cols-3 gap-2">
+  <div class="md:grid md:grid-cols-3 grid-cols-1 gap-2 overflow-y-auto">
     <div class="col-span-2 text-left">
       <h2 class="font-bold">{{ name }}</h2>
       <p>The learning tool to take your review to the next level</p>
@@ -11,32 +11,16 @@
         step is highly important so we ask you to please not skip or interrupt
         it.
       </p>
-      <div class="form-check flex">
-        <input
-          id="flexCheckChecked"
-          class="form-check-input appearance-none h-10 w-10 border border-gray-300 rounded-sm bg-white checked:bg-green-600 checked:border-green-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-          type="checkbox"
-          value=""
-          checked
-        />
-        <label
-          class="form-check-label inline-block text-gray-800 flex-grow"
-          for="flexCheckChecked"
-        >
-          I authorize Wegglab to charge me automatically every year, until I
+      <div class="form-check flex py-4">
+        <base-checkbox v-model="authorize"
+          >I authorize Wegglab to charge me automatically every year, until I
           cancel my subscription. I acknowledge that refunds are made according
           to the Terms of Use. The subscription can be canceled at any time from
           the Account and Billing section in the Profile settings. I have read,
-          and agree to, TradingView's Terms of Use and Privacy Policy.
-        </label>
+          and agree to, TradingView's Terms of Use and Privacy
+          Policy.</base-checkbox
+        >
       </div>
-      <label class="items-start flex">
-        <input
-          type="checkbox"
-          class="text-indigo-500 mr-2 focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded"
-        />
-        <span class="ml-2 flex-grow"></span>
-      </label>
     </div>
     <div class="bg-gray-200 p-2 items-start">
       <div class="flex flex-row">
@@ -72,9 +56,10 @@
 
 <script>
 import BaseLabel from '../core-components/BaseLabel.vue'
+import BaseCheckbox from '../core-components/Inputs/BaseCheckbox.vue'
 import PaypalButton from './PaypalButton.vue'
 export default {
-  components: { BaseLabel, PaypalButton },
+  components: { BaseLabel, PaypalButton, BaseCheckbox },
   props: {
     price: {
       type: Number,
@@ -88,6 +73,11 @@ export default {
       type: String,
       default: '',
     },
+  },
+  data() {
+    return {
+      authorize: false,
+    }
   },
   methods: {
     subscriptionExpiresOn() {

@@ -44,62 +44,61 @@ export default ({ app, route, $axios, $toast, redirect, store }, inject) => {
         $toast.error(error.message)
       })
   })
-  inject('getFroalaConfig', (config) => {
+  inject('initializeEditor', (config) => {
     return {
-      charCounterCount: true,
-      placeholderText: config.placeholderText,
-      imageUpload: true,
-      imageDefaultAlign: 'left',
-      imageDefaultDisplay: 'inline-block',
-      // Set the image upload parameter.
-      imageUploadParam: 'image_param',
+      selector: 'textarea#local-upload',
+      plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount',
+      ],
+      toolbar:
+        'undo redo | formatselect | image code | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+      height: 400,
+      menubar: false,
+      placeholder: config.placeholderText,
+      /* without images_upload_url set, Upload tab won't show up */
+      images_upload_url: 'postAcceptor.php',
 
-      // Set the image upload URL.
-      imageUploadURL: 'http://localhost:3003/v1/answers/uploadAnswerImage',
+      /* We override default upload handler to simulate successful upload */
+      images_upload_handler(blobInfo, success, failure, progress) {
+        // progress((e.loaded / e.total) * 100)
+        const data = new FormData()
+        data.append(config.uploadKey, blobInfo.blob(), blobInfo.filename())
+        $axios
+          .post(`${config.uploadUrl}`, data, {
+            headers: {
+              accept: 'application/json',
+              // Authorization: 'your_imgur_client_id/api_key',
+              'Accept-Language': 'en-US,en;q=0.8',
+              'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+            },
+          })
+          .then((res) => {
+            if (res.status === 403) {
+              failure('HTTP Error: ' + res.status, { remove: true })
+              return
+            }
 
-      // Additional upload params.
-      imageUploadParams: { id: 'my_editor' },
-
-      // Set request type.
-      imageUploadMethod: 'POST',
-
-      // Set max image size to 5MB.
-      imageMaxSize: 5 * 1024 * 1024,
-
-      // Allow to upload PNG and JPG.
-      imageAllowedTypes: ['jpeg', 'jpg', 'png'],
-      events: {
-        'image.beforeUpload'(images) {
-          // Before image is uploaded
-          const data = new FormData()
-          data.append(config.uploadKey, images[0])
-          $axios
-            .post(`${config.uploadUrl}`, data, {
-              headers: {
-                accept: 'application/json',
-                // Authorization: 'your_imgur_client_id/api_key',
-                'Accept-Language': 'en-US,en;q=0.8',
-                'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
-              },
-            })
-            .then((res) => {
-              console.log(`${process.env.baseStorageUrl}/${res.data.link}`)
-              this.image.insert(
-                `${config.imageStorageUrl}/${res.data.link}`,
-                null,
-                null,
-                this.image.get()
+            if (res.status < 200 || res.status >= 300) {
+              failure('HTTP Error: ' + res.status)
+              return
+            }
+            success(`${config.imageStorageUrl}/${res.data.link}`)
+          })
+          .catch((error) => {
+            if (error.response) {
+              failure(
+                'Image upload failed due to a XHR Transport error. Code: ' +
+                  error.response.status
               )
-            })
-            .catch((err) => {
-              console.log(err)
-            })
-          return false
-        },
-        initialized() {
-          console.log('initialized')
-        },
+            } else {
+              failure('Image upload failed')
+            }
+          })
       },
+      content_style:
+        'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
     }
   })
   inject('processTime', (datetimestamp) => {

@@ -4,7 +4,7 @@
       <template v-if="$fetchState.pending">
         <div class="article-cards-wrapper">
           <content-placeholders
-            v-for="p in 30"
+            v-for="p in size"
             :key="p"
             rounded
             class="article-card-block"
@@ -63,7 +63,7 @@ export default {
   },
   async fetch() {
     const res = await this.$axios.get(
-      `questions?tag=nuxt&state=rising&page=${this.currentPage}&size=${this.size}`
+      `questions?page=${this.currentPage}&perPage=${this.size}`
     )
     this.questions = this.questions.concat(res.data.data)
   },

@@ -71,7 +71,7 @@ export default {
     AvatarUpload,
     BaseLabel,
   },
-  // layout: 'AccountSettings',
+  layout: 'AccountSettings',
   data() {
     return {
       FILE: {},
@@ -130,7 +130,9 @@ export default {
               type: 'success',
               message: 'Avatar uploaded successfully.',
             })
-            this.$auth.setUser(Object.assign(this.$auth.user, response.data.data))
+            this.$auth.setUser(
+              Object.assign(this.$auth.user, response.data.data)
+            )
           })
           .catch((error) => {
             this.loading = false

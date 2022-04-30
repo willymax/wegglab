@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-table :items="plans" :columns="columns">
+    <base-table :items="plans" :columns="columns" table-title="Plans List">
       <template #actions>
         <base-button @click="subscribe">Subscribe</base-button>
       </template></base-table
@@ -25,69 +25,81 @@ export default {
           sortable: 'custom',
         },
         {
+          label: 'Number of Questions',
+          'min-width': '310px',
+          prop: 'numberOfQuestions',
+          sortable: 'custom',
+        },
+        {
           label: 'Product ID',
           'min-width': '310px',
-          prop: 'product_id',
+          prop: 'details.product_id',
           sortable: 'custom',
         },
         {
           label: 'Name',
           'min-width': '310px',
-          prop: 'name',
+          prop: 'details.name',
           sortable: 'custom',
         },
         {
           label: 'Status',
           'min-width': '310px',
-          prop: 'status',
+          prop: 'details.status',
           sortable: 'custom',
         },
         {
           label: 'Description',
           'min-width': '310px',
-          prop: 'description',
+          prop: 'details.description',
           sortable: 'custom',
         },
         {
           label: 'Create time',
           'min-width': '310px',
-          prop: 'create_time',
+          prop: 'details.create_time',
           sortable: 'custom',
         },
       ],
     }
   },
-  async fetch() {
-    let tries = 0
-    let retry = true
-    while (retry) {
-      try {
-        const res = await this.$store.dispatch('paypal/getAccessToken')
-        const accessToken = res.access_token
-        try {
-          retry = false
-          const response = await fetch(
-            'https://api-m.sandbox.paypal.com/v1/billing/plans',
-            {
-              method: 'GET', // *GET, POST, PUT, DELETE, etc.
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
-              },
-            }
-          ).then((res) => res.json())
-          this.plans = response.plans
-        } catch ($ex) {}
-      } catch (error) {
-        tries++
-        if (tries >= 3) {
-          retry = false
-        }
-      }
-    }
+  async fetch() {},
+  mounted() {
+    this.getPlans()
   },
   methods: {
     subscribe() {},
+    async getPlans() {
+      let tries = 0
+      let retry = true
+      while (retry) {
+        try {
+          const res = await this.$store.dispatch('paypal/getAccessToken')
+          const accessToken = res.access_token
+          try {
+            retry = false
+            // const response = await fetch(
+            //   'https://api-m.sandbox.paypal.com/v1/billing/plans',
+            //   {
+            //     method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            //     headers: {
+            //       Authorization: `Bearer ${accessToken}`,
+            //       'Content-Type': 'application/json',
+            //     },
+            //   }
+            // ).then((res) => res.json())
+            const response = await this.$axios.get('/subscription-plans')
+            this.plans = response.data.data
+            console.log('this.plans', this.plans)
+          } catch ($ex) {}
+        } catch (error) {
+          tries++
+          if (tries >= 3) {
+            retry = false
+          }
+        }
+      }
+    },
   },
 }
 </script>

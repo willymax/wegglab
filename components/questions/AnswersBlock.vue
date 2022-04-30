@@ -1,6 +1,6 @@
 <template>
   <div>
-    <answers v-if="!hasNoAnswers()"></answers>
+    <answers></answers>
     <post-answer v-if="addingAnswer"></post-answer>
     <add-answers>Post Answer</add-answers>
   </div>

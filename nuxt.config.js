@@ -146,8 +146,9 @@ export default {
     ],
     script: [
       {
-        src: `https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}&vault=true&intent=subscription`,
+        src: `https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}&vault=true`,
         body: true,
+        'data-sdk-integration-source': 'button-factory',
       },
     ],
   },
@@ -167,7 +168,6 @@ export default {
     '~/plugins/isDemo.js',
     '~/plugins/app.js',
     '~/plugins/vue-placeholders.js',
-    { src: '~/plugins/froala-editor.js', ssr: false },
     { src: '~/plugins/sanitize.js', ssr: false },
     '~/plugins/modal.js',
     '~/plugins/vue-observe-visibility.client.js',

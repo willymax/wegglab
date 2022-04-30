@@ -37,7 +37,7 @@
             v-bind="$attrs"
             :valid="valid"
             :required="required"
-            class="flex-shrink flex-grow flex-auto leading-normal block px-3 py-1.5 rounded rounded-l-none text-gray-700 bg-white border border-gray-300 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500"
+            class="text-base flex-shrink flex-grow flex-auto leading-normal block px-3 py-1.5 rounded rounded-l-none text-gray-700 bg-white border border-gray-300 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500"
             :class="[
               { 'is-valid': valid && validated && successMessage },
               { 'is-invalid': invalid && validated },

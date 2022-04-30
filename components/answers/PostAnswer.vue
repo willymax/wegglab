@@ -1,18 +1,12 @@
 <template>
   <div class="flex flex-col space-y-4">
-    <!-- <textarea
-      v-model=""
-      class="form-control mt-1 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-      rows="3"
-      placeholder="Enter the description of your question"
-    ></textarea> -->
     <div class="my-2">
-      <froala
-        id="edit"
+      <editor
         v-model="input.body"
-        :tag="'textarea'"
-        :config="$getFroalaConfig(config)"
-      ></froala>
+        api-key="fwx0vscmsecgg5by0rvm6xbfpbvdruc2nlbxc478ogqam3tk"
+        :init="$initializeEditor(config)"
+      >
+      </editor>
     </div>
     <validation-error :errors="apiValidationErrors.body" />
     <base-file-upload v-model="FILES"></base-file-upload>
@@ -22,13 +16,14 @@
 </template>
 
 <script>
+import Editor from '@tinymce/tinymce-vue'
 import BaseButton from '../core-components/BaseButton.vue'
 import BaseFileUpload from '../core-components/BaseFileUpload.vue'
 import ValidationError from '../ValidationError.vue'
 import formMixin from '@/mixins/form-mixin'
 
 export default {
-  components: { BaseFileUpload, ValidationError, BaseButton },
+  components: { BaseFileUpload, ValidationError, BaseButton, Editor },
   mixins: [formMixin],
   data() {
     return {
