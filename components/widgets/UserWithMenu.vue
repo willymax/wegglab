@@ -26,15 +26,14 @@
         x-transition:leave-start="opacity-100 scale-100"
         x-transition:leave-end="opacity-0 scale-95"
       >
-        <template v-for="option in options" class="text-white">
-          <nuxt-link
-            :key="option._id"
-            :to="option.url"
-            class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-600 hover:text-white"
-            :class="'theme-' + color"
-            >{{ option.name }}</nuxt-link
-          >
-        </template>
+        <nuxt-link
+          v-for="option in options"
+          :key="option._id"
+          :to="option.url"
+          class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-600 hover:text-white"
+          :class="'theme-' + color"
+          >{{ option.name }}</nuxt-link
+        >
         <a
           href="javascript:;"
           class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-600 hover:text-white"

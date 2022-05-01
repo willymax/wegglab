@@ -61,6 +61,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    answered: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -79,7 +83,7 @@ export default {
     }
   },
   async fetch() {
-    let queryParams = `&bookmarked=${this.bookmarked}`
+    let queryParams = `&bookmarked=${this.bookmarked}&answered=${this.answered}`
     if (this.userId) {
       queryParams = queryParams + `&userId=${this.userId}`
     }
@@ -94,6 +98,9 @@ export default {
       this.resetAndFetch()
     },
     bookmarked(newValue, oldValue) {
+      this.resetAndFetch()
+    },
+    answered(newValue, oldValue) {
       this.resetAndFetch()
     },
   },
