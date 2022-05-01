@@ -37,12 +37,15 @@ export default {
   methods: {
     bookmark() {
       this.$axios
-        .post(`questions/bookmarkQuestion/${this.question._id}`)
+        .post(`questions/bookmarkQuestion/626d8a5152f5bf28209109cf`)
         .then((response) => {
           this.$auth.setUser(
-            Object.assign(this.$auth.user, {
-              bookmarkedQuestions: response.bookmarkedQuestions,
-            })
+            Object.assign(
+              { ...this.$auth.user },
+              {
+                bookmarkedQuestions: response.bookmarkedQuestions,
+              }
+            )
           )
         })
         .catch((error) => {

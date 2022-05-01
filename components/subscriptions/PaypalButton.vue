@@ -150,7 +150,7 @@ export default {
                 .then((res) => {
                   // Object.assign(target, source)
                   that.$auth.setUser(
-                    Object.assign(that.$auth.user, res.data.data)
+                    Object.assign({ ...that.$auth.user }, res.data.data)
                   )
                   that.$router.back()
                 })

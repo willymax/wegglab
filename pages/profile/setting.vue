@@ -102,7 +102,9 @@ export default {
             type: 'success',
             message: 'Information updated successfully.',
           })
-          this.$auth.setUser(Object.assign(this.$auth.user, response.data.data))
+          this.$auth.setUser(
+            Object.assign({ ...this.$auth.user }, response.data.data)
+          )
         })
         .catch((err) => {
           this.$toast.error(err.message)
