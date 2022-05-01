@@ -29,28 +29,56 @@ export default {
     },
     bookmarked() {
       return (
-        this.$auth.user.bookmarkedQuestions &&
-        this.$auth.user.bookmarkedQuestions.includes(this.question._id)
+        this.$store.state.auth.user.bookmarkedQuestions &&
+        this.$store.state.auth.user.bookmarkedQuestions.includes(
+          this.question._id
+        )
       )
+    },
+    user() {
+      return this.$auth.user
+    },
+  },
+  watch: {
+    '$store.state.auth.user'(oldValue, newValue) {
+      //
     },
   },
   methods: {
     bookmark() {
-      this.$axios
-        .post(`questions/bookmarkQuestion/626d8a5152f5bf28209109cf`)
-        .then((response) => {
-          this.$auth.setUser(
-            Object.assign(
-              { ...this.$auth.user },
-              {
-                bookmarkedQuestions: response.bookmarkedQuestions,
-              }
+      if (this.bookmarked) {
+        this.$axios
+          .post(`/questions/unBookmarkQuestion/${this.question._id}`)
+          .then((response) => {
+            this.$auth.setUser(
+              Object.assign(
+                { ...this.$auth.user },
+                {
+                  bookmarkedQuestions: response.data.bookmarkedQuestions,
+                }
+              )
             )
-          )
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      } else {
+        this.$axios
+          .post(`/questions/bookmarkQuestion/${this.question._id}`)
+          .then((response) => {
+            this.$auth.setUser(
+              Object.assign(
+                { ...this.$auth.user },
+                {
+                  bookmarkedQuestions: response.data.bookmarkedQuestions,
+                }
+              )
+            )
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
     },
   },
 }
