@@ -24,8 +24,10 @@
           #{{ tag }}
         </nuxt-link>
       </div>
-
-      <div class="flex items-center py-4">
+      <div>
+        <p class="text-sm">{{ details.numberOfAnswers }} Answers</p>
+      </div>
+      <div class="flex items-center py-4 hidden">
         <div
           class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out"
         >
