@@ -24,6 +24,7 @@
               class="overflow-hidden shadow-xl transform transition-all py-10 relative bg-white inline-block rounded-lg text-left align-middle md:w-fit w-full"
             >
               <button
+                v-if="showClose"
                 aria-label="Close"
                 type="button"
                 class="absolute top-5 right-5"
@@ -131,6 +132,18 @@ export default {
       type: Number,
       default: 500,
       description: 'Modal transition duration',
+    },
+  },
+  watch: {
+    show(newValue, oldValue) {
+      const body = document.getElementsByTagName('BODY')[0]
+      if (newValue === true) {
+        // Disable scroll
+        body.style.overflow = 'hidden'
+      } else {
+        // Enable scroll
+        body.style.overflow = 'auto'
+      }
     },
   },
   methods: {

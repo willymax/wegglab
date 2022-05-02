@@ -37,20 +37,14 @@
         <a
           href="javascript:;"
           class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-600 hover:text-white"
-          @click="showLogoutDialog = true"
+          @click="logout()"
           >Logout</a
         >
       </div>
     </div>
-    <app-modal
-      v-if="showLogoutDialog"
-      :show.sync="showLogoutDialog"
-      :show-close="true"
-    >
+    <app-modal :show.sync="showLogoutDialog">
       <template #default>
         <p>You are about to logout</p>
-      </template>
-      <template #footer>
         <div class="flex flex-row justify-center space-x-4 m-2">
           <button @click="showLogoutDialog = !showLogoutDialog">Close</button>
           <base-button width="md" :loading="loading" round @click="logout"
