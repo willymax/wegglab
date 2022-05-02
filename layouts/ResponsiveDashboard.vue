@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ dark: darkMode }">
+  <div :class="{ dark: darkMode }" class="main-container">
     <!-- main wrapper h-screen -->
     <div class="flex flex-col bg-gray-100 dark:bg-gray-800 font-roboto">
       <header class="flex justify-between items-center p-6 flex-wrap">
@@ -291,4 +291,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="postcss">
+body.modal {
+  overflow: hidden !important;
+}
+</style>

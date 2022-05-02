@@ -33,7 +33,7 @@
         >
       </div>
     </div>
-    <app-modal v-if="show" :show.sync="show">
+    <app-modal :show.sync="show">
       <Checkout :price="price" :plan-id="planId" :name="name"></Checkout>
       <template #footer>
         <base-button width="md:w-64 w-full" @click="show = !show"

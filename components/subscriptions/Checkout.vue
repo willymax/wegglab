@@ -1,8 +1,8 @@
 <template>
-  <div class="md:grid md:grid-cols-3 grid-cols-1 gap-2 overflow-y-auto">
+  <div class="md:grid md:grid-cols-3 grid-cols-1 gap-2 overflow-y-hidden">
     <div class="col-span-2 text-left">
       <h2 class="font-bold">{{ name }}</h2>
-      <p>The learning tool to take your review to the next level</p>
+      <!-- <p>The learning tool to take your review to the next level</p> -->
       <h2>PayPal</h2>
       <p>
         We'll now send you on to PayPal so that you can complete your purchase.

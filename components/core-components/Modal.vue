@@ -1,42 +1,51 @@
 <template>
   <SlideYUpTransition :duration="animationDuration">
     <div
+      v-if="show"
       id="my-modal"
+      class="modal"
+      tabindex="-1"
       style="z-index: 9998"
-      class="fixed inset-0 overflow-y-auto"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
       :aria-hidden="!show"
     >
       <div
-        class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
-      >
-        <!--
-      Background overlay, show/hide based on modal state.
-
-      Entering: "ease-out duration-300"
-        From: "opacity-0"
-        To: "opacity-100"
-      Leaving: "ease-in duration-200"
-        From: "opacity-100"
-        To: "opacity-0"
-    -->
-        <div
-          class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
-          aria-hidden="true"
-        ></div>
-
-        <!-- This element is to trick the browser into centering the modal contents. -->
-        <span
-          class="hidden sm:inline-block sm:align-middle sm:h-screen"
-          aria-hidden="true"
-          >&#8203;</span
-        >
-        <div
-          class="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-        >
-          <slot></slot>
+        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+        aria-hidden="true"
+      ></div>
+      <div class="inset-0 overflow-y-auto no-scrollbar fixed overflow-x-hidden">
+        <div class="text-center h-full">
+          <div class="flex items-start md:items-center justify-center h-full">
+            <div
+              tabindex="-1"
+              style="z-index: 9998; max-width: 768px"
+              class="overflow-hidden shadow-xl transform transition-all py-10 relative bg-white inline-block rounded-lg text-left align-middle md:w-fit w-full"
+            >
+              <button
+                aria-label="Close"
+                type="button"
+                class="absolute top-5 right-5"
+                @click="closeModal()"
+              >
+                <span class="" aria-hidden="true"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 23 23"
+                    width="23"
+                    height="23"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                      d="M1 1l21 21m0-21L1 22"
+                    ></path></svg
+                ></span>
+              </button>
+              <div class="p-5"><slot></slot></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -52,6 +61,10 @@ export default {
   },
   props: {
     show: Boolean,
+    minWidth: {
+      type: Number,
+      default: 768,
+    },
     showClose: {
       type: Boolean,
       default: true,
@@ -120,27 +133,25 @@ export default {
       description: 'Modal transition duration',
     },
   },
-  watch: {
-    show(val) {
-      const modal = document.getElementById('my-modal')
-      if (val) {
-        modal.style.display = 'block'
-      } else {
-        modal.style.display = 'none'
-      }
-    },
-  },
   methods: {
     closeModal() {
-      console.log("this.$emit('close')")
       this.$emit('update:show', false)
-      // this.$emit('close')
     },
   },
 }
 </script>
-<style>
+<style lang="postcss" scoped>
 .modal.show {
   background-color: rgba(0, 0, 0, 0.3);
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 </style>

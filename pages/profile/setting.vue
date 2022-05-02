@@ -93,6 +93,13 @@ export default {
       return this.$getImageUrl(this.$auth.user.avatar)
     },
   },
+  watch: {
+    '$store.state.auth.user'(newValue, oldValue) {
+      //
+      console.log('newValue', newValue)
+      Object.assign(this.form.data.attributes, { ...newValue })
+    },
+  },
   methods: {
     update() {
       this.$axios
