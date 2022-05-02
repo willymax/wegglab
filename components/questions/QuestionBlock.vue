@@ -17,12 +17,12 @@
     </client-only>
     <div class="tags">
       <nuxt-link
-        v-for="tag in question.tag_list"
-        :key="tag"
+        v-for="tag in question.tags"
+        :key="tag.code"
         :to="{ name: 't-tag', params: { tag } }"
         class="tag"
       >
-        #{{ tag }}
+        #{{ tag.name }}
       </nuxt-link>
     </div>
     <div class="md:flex-shrink pr-6 pt-3">

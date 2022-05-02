@@ -24,6 +24,12 @@
       </template>
       Questions</menu-item
     >
+    <menu-item to="/subjects">
+      <template #link-icon>
+        <img class="w-5 h-5 inline" src="~assets/book.svg" />
+      </template>
+      Subjects</menu-item
+    >
     <side-bar-menu-link>
       <template #link-icon>
         <img class="w-5 h-5" src="~assets/img/user.png" />

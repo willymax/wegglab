@@ -15,6 +15,12 @@
         class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
         aria-hidden="true"
       ></div>
+      <!-- This element is to trick the browser into centering the modal contents. -->
+      <span
+        class="hidden sm:inline-block sm:align-middle sm:h-screen"
+        aria-hidden="true"
+        >&#8203;</span
+      >
       <div class="inset-0 overflow-y-auto no-scrollbar fixed overflow-x-hidden">
         <div class="text-center h-full">
           <div class="flex items-start md:items-center justify-center h-full">
