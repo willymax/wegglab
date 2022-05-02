@@ -1,12 +1,18 @@
 <template>
-  <div
-    class="min-h-screen md:flex flex-row flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800"
-  >
-    <div
-      class="md:flex flex-col top-0 left-0 w-3/12 bg-white h-full border-r hidden"
-    >
+  <div>
+    <div class="flex flex-col top-0 left-0 w-3/12 bg-white h-full border-r">
+      <div class="flex items-center justify-center h-14 border-b">
+        <div>Users Questions</div>
+      </div>
       <div class="overflow-y-auto overflow-x-hidden flex-grow">
         <ul class="flex flex-col py-4 space-y-1">
+          <li class="px-5">
+            <div class="flex flex-row items-center h-8">
+              <div class="text-sm font-light tracking-wide text-gray-500">
+                Menu
+              </div>
+            </div>
+          </li>
           <li>
             <Nuxt-Link
               to="/user-questions/1"
@@ -117,127 +123,11 @@
         </ul>
       </div>
     </div>
-    <div class="group block md:hidden w-full p-4">
-      <button
-        class="outline-none focus:outline-none border px-3 py-1 bg-white rounded-sm flex items-center min-w-32 w-full"
-      >
-        <span class="pr-1 font-semibold flex-1">Select</span>
-        <span>
-          <svg
-            class="fill-current h-4 w-4 transform group-hover:-rotate-180 transition duration-150 ease-in-out"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-          >
-            <path
-              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-            />
-          </svg>
-        </span>
-      </button>
-      <ul
-        class="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32"
-        style="z-index: 100"
-      >
-        <li class="rounded-sm px-3 py-1 hover:bg-gray-100">
-          <Nuxt-Link to="/user-questions/1">My Questions</Nuxt-Link>
-        </li>
-        <li class="rounded-sm px-3 py-1 hover:bg-gray-100">
-          <Nuxt-Link to="/user-questions/2">Watching</Nuxt-Link>
-        </li>
-        <li class="rounded-sm px-3 py-1 hover:bg-gray-100">
-          <Nuxt-Link to="/user-questions/3">My Answers</Nuxt-Link>
-        </li>
-      </ul>
-    </div>
-    <div class="md:w-9/12 w-full">
-      <NuxtChild />
-    </div>
   </div>
 </template>
+
 <script>
-/* eslint-disable no-new */
-import PerfectScrollbar from 'perfect-scrollbar'
-import 'perfect-scrollbar/css/perfect-scrollbar.css'
-import DashboardNavbar from '~/components/layouts/argon/DashboardNavbar.vue'
-import ContentFooter from '~/components/layouts/argon/ContentFooter.vue'
-import DashboardContent from '~/components/layouts/argon/Content.vue'
-import Logout from '~/components/widgets/Logout.vue'
-import SideBarMenu from '~/components/layouts/argon/SideBarMenu.vue'
-import MenuItem from '~/components/layouts/argon/MenuItem.vue'
-import NavBar from '~/components/settings/NavBar.vue'
-//
-function hasElement(className) {
-  return document.getElementsByClassName(className).length > 0
-}
-
-function initScrollbar(className) {
-  if (hasElement(className)) {
-    new PerfectScrollbar(`.${className}`)
-  } else {
-    // try to init it later in case this component is loaded async
-    setTimeout(() => {
-      initScrollbar(className)
-    }, 100)
-  }
-}
-
-export default {
-  components: {
-    DashboardNavbar,
-    ContentFooter,
-    DashboardContent,
-    Logout,
-    SideBarMenu,
-    MenuItem,
-    NavBar,
-  },
-  layout: 'ResponsiveDashboard',
-  mounted() {
-    this.initScrollbar(), this.$store.dispatch('profile/me')
-  },
-  methods: {
-    initScrollbar() {
-      const isWindows = navigator.platform.startsWith('Win')
-      if (isWindows) {
-        initScrollbar('scrollbar-inner')
-      }
-    },
-  },
-}
+export default {}
 </script>
-<style scoped>
-/* since nested groupes are not supported we have to use
-     regular css for the nested dropdowns
-  */
-li > ul {
-  transform: translatex(100%) scale(0);
-}
-li:hover > ul {
-  transform: translatex(101%) scale(1);
-}
-li > button svg {
-  transform: rotate(-90deg);
-}
-li:hover > button svg {
-  transform: rotate(-270deg);
-}
 
-/* Below styles fake what can be achieved with the tailwind config
-     you need to add the group-hover variant to scale and define your custom
-     min width style.
-  	 See https://codesandbox.io/s/tailwindcss-multilevel-dropdown-y91j7?file=/index.html
-  	 for implementation with config file
-  */
-.group:hover .group-hover\:scale-100 {
-  transform: scale(1);
-}
-.group:hover .group-hover\:-rotate-180 {
-  transform: rotate(180deg);
-}
-.scale-0 {
-  transform: scale(0);
-}
-.min-w-32 {
-  min-width: 8rem;
-}
-</style>
+<style lang="scss" scoped></style>

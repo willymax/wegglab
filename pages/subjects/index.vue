@@ -5,7 +5,7 @@
         <base-input v-model="subject" label="Enter subject"></base-input>
         <base-button @click="addSubject()">Add</base-button>
       </div>
-      <div class="px-10 flex-grow">
+      <div class="md:px-10 flex-grow">
         <base-label>Added Subjects</base-label>
         <p v-for="(item, index) in subjects" :key="item._id">
           {{ index + 1 }}. {{ item.name }}
