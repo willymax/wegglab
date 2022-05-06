@@ -57,6 +57,10 @@ export default {
       type: String,
       default: null,
     },
+    tag: {
+      type: String,
+      default: null,
+    },
     bookmarked: {
       type: Boolean,
       default: false,
@@ -86,6 +90,9 @@ export default {
     let queryParams = `&bookmarked=${this.bookmarked}&answered=${this.answered}`
     if (this.userId) {
       queryParams = queryParams + `&userId=${this.userId}`
+    }
+    if (this.userId) {
+      queryParams = queryParams + `&tag=${this.tag}`
     }
     const res = await this.$axios.get(
       `questions?page=${this.paginator.current_page}&perPage=${this.paginator.per_page}${queryParams}`
