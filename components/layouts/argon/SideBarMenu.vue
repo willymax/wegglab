@@ -44,17 +44,15 @@
       </side-bar-menu-link>
     </div>
     <div>
-      <menu-item to="/subjects">
-        <template #link-icon>
-          <img class="w-5 h-5 inline" src="~assets/book.svg" />
-        </template>
-        Physics</menu-item
+      <menu-item
+        v-for="subject in subjects"
+        :key="subject._id"
+        :to="`/questions/tagged/${subject.name}`"
       >
-      <menu-item to="/subjects">
         <template #link-icon>
           <img class="w-5 h-5 inline" src="~assets/book.svg" />
         </template>
-        Chemistry</menu-item
+        {{ subject.name }}</menu-item
       >
     </div>
     <!-- Test Sidebar Menu links -->
@@ -71,7 +69,23 @@ export default {
     return {
       isActive: false,
       open: false,
+      subjects: [],
     }
+  },
+  mounted() {
+    this.getSubjects()
+  },
+  methods: {
+    getSubjects() {
+      this.$axios
+        .get('/subjects')
+        .then((response) => {
+          this.subjects = response.data.data
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
   },
 }
 </script>

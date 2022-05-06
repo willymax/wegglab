@@ -19,7 +19,7 @@
       <nuxt-link
         v-for="tag in question.tags"
         :key="tag.code"
-        :to="{ name: 'questions', params: { tag } }"
+        :to="{ name: 'questions-tagged-tag', params: { tag: tag.name } }"
         class="tag"
       >
         #{{ tag.name }}

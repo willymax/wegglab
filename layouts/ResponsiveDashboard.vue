@@ -112,7 +112,7 @@
           "
           class="fixed z-30 inset-y-0 left-0 w-60 transition duration-300 transform md:bg-transparent bg-white dark:bg-gray-900 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0"
         >
-          <div class="flex items-center mt-8 lg:hidden">
+          <div class="flex items-center lg:hidden">
             <div class="flex flex-1 items-center">
               <span
                 class="text-gray-800 dark:text-white text-2xl font-semibold p-2"
@@ -132,7 +132,7 @@
         <div class="flex-1 flex flex-col overflow-hidden">
           <!-- main section -->
           <main class="flex-1 overflow-x-hidden overflow-y-auto">
-            <div class="container mx-auto px-6 py-8">
+            <div class="container mx-auto px-6">
               <!-- border-gray-300 border-dashed border-4 -->
               <div
                 class="min-h-screen overflow-auto text-gray-500 dark:text-gray-300 text-xl"

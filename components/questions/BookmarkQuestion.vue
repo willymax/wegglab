@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="$auth.loggedIn"
     class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out"
   >
     <svg
@@ -29,6 +30,7 @@ export default {
     },
     bookmarked() {
       return (
+        this.$store.state.auth.user &&
         this.$store.state.auth.user.bookmarkedQuestions &&
         this.$store.state.auth.user.bookmarkedQuestions.includes(
           this.question._id
@@ -36,7 +38,7 @@ export default {
       )
     },
     user() {
-      return this.$auth.user
+      return this.$auth.user || {}
     },
   },
   watch: {

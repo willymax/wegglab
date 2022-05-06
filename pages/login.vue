@@ -206,7 +206,7 @@ export default {
             type: 'success',
             message: 'Login successful.',
           })
-          this.$router.push('/dashboard')
+          this.$router.push(this.$route.query.redirect || '/dashboard')
         })
         .catch((error) => {
           // handle error

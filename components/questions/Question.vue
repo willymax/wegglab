@@ -16,12 +16,12 @@
       </nuxt-link>
       <div class="tags">
         <nuxt-link
-          v-for="tag in details.tag_list"
-          :key="tag"
-          :to="{ name: 't-tag', params: { tag } }"
+          v-for="tag in details.tags"
+          :key="tag.code"
+          :to="{ name: 'questions-tagged-tag', params: { tag: tag.name } }"
           class="tag"
         >
-          #{{ tag }}
+          #{{ tag.name }}
         </nuxt-link>
       </div>
       <div>

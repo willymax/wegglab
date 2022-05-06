@@ -22,6 +22,13 @@ export default {
   },
   methods: {
     handleClick(evt) {
+      if (!this.$auth.loggedIn) {
+        // If not authenticated, add a path where to redirect after login.
+        this.$router.push({
+          name: 'login',
+          query: { redirect: this.$route.path },
+        })
+      }
       this.$store.dispatch('answers/updateAddingAnswer', !this.addingAnswer)
     },
   },
