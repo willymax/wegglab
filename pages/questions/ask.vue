@@ -52,8 +52,6 @@
       <validation-error :errors="apiValidationErrors.email" />
       <base-button @click="postQuestion()">Submit</base-button>
     </div>
-    {{ input }}
-    {{ typeof input.tags }}
   </with-right-side-bar>
 </template>
 
@@ -134,7 +132,14 @@ export default {
       formData.append('title', this.input.title)
       formData.append('subject', this.input.subject)
       formData.append('body', this.input.body)
-      formData.append('tags', JSON.stringify(this.input.tags))
+      formData.append(
+        'tags',
+        JSON.stringify(
+          this.input.tags.map((item) => {
+            return item.name
+          })
+        )
+      )
       delete this.$axios.defaults.headers.common['content-type']
       delete this.$axios.defaults.headers.post['content-type']
       this.$axios({

@@ -33,8 +33,9 @@
 <script>
 import BaseButton from '~/components/core-components/BaseButton.vue'
 import BaseInput from '~/components/core-components/Inputs/BaseInput.vue'
+import BaseLabel from '~/components/core-components/BaseLabel.vue'
 export default {
-  components: { BaseInput, BaseButton },
+  components: { BaseInput, BaseButton, BaseLabel },
   layout: 'ResponsiveDashboard',
   data() {
     return {
@@ -44,6 +45,11 @@ export default {
   },
   mounted() {
     this.getSubjects()
+    this.$nextTick(() => {
+      console.log(this.$nuxt.$loading.start())
+      this.$nuxt.$loading.start()
+      setTimeout(() => this.$nuxt.$loading.finish(), 500)
+    })
   },
   methods: {
     addSubject() {

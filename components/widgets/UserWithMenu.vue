@@ -6,9 +6,9 @@
         class="flex items-center space-x-2 relative focus:outline-none"
         @click="dropdownOpen = !dropdownOpen"
       >
-        <h2 class="text-gray-700 dark:text-gray-300 text-sm hidden sm:block">
+        <!-- <h2 class="text-gray-700 dark:text-gray-300 text-sm hidden sm:block">
           {{ $auth.user.first_name }} {{ $auth.user.last_name }}
-        </h2>
+        </h2> -->
         <base-avatar :user-avatar="$auth.user.avatar"></base-avatar>
       </button>
 
@@ -54,14 +54,31 @@
       </template>
     </app-modal>
   </div>
+  <div v-else>
+    <base-nuxt-button-link
+      :to="{
+        name: 'login',
+        query: { redirect: $route.path },
+      }"
+      >Login</base-nuxt-button-link
+    >
+    <base-nuxt-button-link
+      :to="{
+        name: 'register',
+        query: { redirect: $route.path },
+      }"
+      >Sign Up</base-nuxt-button-link
+    >
+  </div>
 </template>
 
 <script>
 import BaseAvatar from '../core-components/BaseAvatar.vue'
 import BaseButton from '../core-components/BaseButton.vue'
+import BaseNuxtButtonLink from '../core-components/BaseNuxtButtonLink.vue'
 import Logout from './Logout.vue'
 export default {
-  components: { Logout, BaseAvatar, BaseButton },
+  components: { Logout, BaseAvatar, BaseButton, BaseNuxtButtonLink },
   props: {
     color: {
       type: String,

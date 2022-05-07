@@ -96,7 +96,7 @@
             </svg>
           </button>
 
-          <user-with-menu v-if="$auth.loggedIn"></user-with-menu>
+          <user-with-menu></user-with-menu>
         </div>
       </header>
       <div class="flex">
