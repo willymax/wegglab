@@ -31,6 +31,22 @@
         </template>
         Subjects</menu-item
       >
+      <side-bar-menu-link :menu-disabled="true" :is-open="true">
+        <template #link-icon>
+          <img class="w-5 h-5 inline" src="~assets/book.svg" />
+        </template>
+        Subjects
+        <template #menus>
+          <menu-item
+            v-for="subject in subjects"
+            :key="subject._id"
+            :to="`/questions/tagged/${subject.name}`"
+          >
+            {{ subject.name }}</menu-item
+          >
+          <menu-item to="/subjects">Manage Subjects</menu-item>
+        </template>
+      </side-bar-menu-link>
       <side-bar-menu-link>
         <template #link-icon>
           <img class="w-5 h-5" src="~assets/img/user.png" />
@@ -42,18 +58,6 @@
           <menu-item to="/students">Students</menu-item>
         </template>
       </side-bar-menu-link>
-    </div>
-    <div>
-      <menu-item
-        v-for="subject in subjects"
-        :key="subject._id"
-        :to="`/questions/tagged/${subject.name}`"
-      >
-        <template #link-icon>
-          <img class="w-5 h-5 inline" src="~assets/book.svg" />
-        </template>
-        {{ subject.name }}</menu-item
-      >
     </div>
     <!-- Test Sidebar Menu links -->
     <slot></slot>

@@ -2,14 +2,29 @@
   <div class="p-10">
     <div class="md:flex flex-row">
       <div class="flex-grow">
-        <base-input v-model="subject" label="Enter subject"></base-input>
-        <base-button @click="addSubject()">Add</base-button>
+        <base-input
+          v-model="subject"
+          label="Enter subject"
+          @keydown.enter="addSubject()"
+        ></base-input>
+        <base-button @click="addSubject()">Add Subject</base-button>
       </div>
       <div class="md:px-10 flex-grow">
-        <base-label>Added Subjects</base-label>
-        <p v-for="(item, index) in subjects" :key="item._id">
-          {{ index + 1 }}. {{ item.name }}
-        </p>
+        <div>
+          <base-label>Added Subjects</base-label>
+          <div v-for="(item, index) in subjects" :key="item._id" class="flex">
+            <p class="flex-1">{{ index + 1 }}. {{ item.name }}</p>
+            <a
+              type="text"
+              class="table-action table-action-delete flex-1"
+              data-toggle="tooltip"
+              style="cursor: pointer"
+              @click="deleteSubject(index, item._id)"
+            >
+              <i class="fas fa-trash"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -55,6 +70,14 @@ export default {
         .catch((error) => {
           console.log(error)
         })
+    },
+    async deleteSubject(index, id) {
+      try {
+        await this.$axios.delete(`/subjects/${id}`)
+        this.subjects.splice(index, 1)
+      } catch (error) {
+        console.log(error)
+      }
     },
   },
 }

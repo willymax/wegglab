@@ -10,7 +10,6 @@ export default {
   layout: 'ResponsiveDashboard',
   computed: {
     currentProperties() {
-      console.log('tag', this.$route.params.tag)
       return { tag: this.$route.params.tag }
     },
   },

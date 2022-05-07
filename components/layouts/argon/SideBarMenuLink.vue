@@ -4,18 +4,11 @@
     <a
       v-if="hasSubMenus"
       to="#"
-      class="
-        flex
-        items-center
-        p-2
-        text-gray-500
-        transition-colors
-        rounded-md
-        dark:text-light
-        hover:bg-indigo-100
-        dark:hover:bg-indigo-600
-      "
-      :class="{ 'bg-indigo-100 dark:bg-indigo-600': isActive || open }"
+      class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-indigo-100 dark:hover:bg-indigo-600"
+      :class="{
+        'bg-indigo-100 dark:bg-indigo-600': isActive || open,
+        'pointer-events-none': menuDisabled,
+      }"
       role="button"
       aria-haspopup="true"
       :aria-expanded="open || isActive ? 'true' : 'false'"
@@ -69,12 +62,28 @@ export default {
       type: Boolean,
       default: true,
     },
+    menuDisabled: {
+      type: Boolean,
+      default: false,
+    },
+    isOpen: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       isActive: false,
       open: false,
     }
+  },
+  watch: {
+    isOpen(newValue, oldValue) {
+      this.open = newValue
+    },
+  },
+  mounted() {
+    this.open = this.isOpen
   },
   methods: {},
 }
