@@ -1,6 +1,6 @@
 <template>
   <span v-if="errors && errors.length">
-    <small class="argon-error" v-text="errors[0]" />
+    <small class="argon-error" v-text="errorMessage(errors[0])" />
   </span>
 </template>
 
@@ -12,13 +12,20 @@ export default {
       default: () => [],
     },
   },
+  methods: {
+    errorMessage(message) {
+      message = message ? message.replace(/['"]+/g, '').toLowerCase() : ''
+      message = `${message[0].toUpperCase()}${message.slice(1)}`
+      return message
+    },
+  },
 }
 </script>
 
 <style>
 .argon-error {
   position: relative;
-  bottom: 25px;
+  bottom: 20px;
   color: #fb6340;
 }
 </style>

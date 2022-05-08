@@ -125,7 +125,7 @@ export default {
           type: 'danger',
           message: "We can't find a user with that e-mail address.",
         })
-        this.setApiValidation(error.response.data.errors)
+        this.setApiValidation(error)
       }
     },
   },

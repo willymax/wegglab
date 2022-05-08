@@ -145,7 +145,7 @@ export default {
           })
           .catch((error) => {
             this.loading = false
-            this.setApiValidation(error.response.data.errors)
+            this.setApiValidation(error)
           })
           .then(function () {
             // always executed

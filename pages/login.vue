@@ -215,9 +215,7 @@ export default {
             title: 'An error occurred',
             message: 'Invalid credentials!',
           })
-          this.setApiValidation(
-            error.response.data.errors ? error.response.data.errors : []
-          )
+          this.setApiValidation(error)
         })
         .then(function () {
           // always executed

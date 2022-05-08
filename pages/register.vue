@@ -149,13 +149,11 @@ export default {
         data: {
           type: 'token',
           attributes: {
-            first_name: '',
-            last_name: '',
+            first_name: 'william',
+            last_name: 'makau',
             email: '',
-            password: '',
-            password_confirmation: '',
-            agree: false,
-            scors: '',
+            password: 'makau1993',
+            password_confirmation: 'makau1993',
           },
         },
       },
@@ -183,7 +181,7 @@ export default {
           type: 'danger',
           message: 'An error has occurred!',
         })
-        this.setApiValidation(e.response.data.errors)
+        this.setApiValidation(e)
       }
     },
   },

@@ -9,24 +9,29 @@ export default {
   },
   methods: {
     /* extract API server validation errors and assigns them to local mixin data */
-    setApiValidation(serverErrors, refs = null) {
-      this.apiValidationErrors = serverErrors.reduce(
-        (accumulator, errorObject) => {
-          if (typeof errorObject.field === 'undefined') return false
+    setApiValidation(errors, refs = null) {
+      if (errors && errors.response && errors.response.data) {
+        errors = errors.response.data.errors
+      }
+      if (errors && `${typeof errors}` === 'object') {
+        this.apiValidationErrors = errors.reduce((accumulator, errorObject) => {
+          if (
+            typeof errorObject.field === 'undefined' &&
+            typeof errorObject.context === 'undefined'
+          )
+            return false
 
           // const errorFieldName = errorObject.field.pointer.split('/')[3]
-          const errorFieldName = errorObject.field
+          const errorFieldName = errorObject.field || errorObject.context?.key
           const errorDetail = (accumulator[errorFieldName] || []).concat(
-            errorObject.messages
+            errorObject.messages || errorObject.message
           )
-
           return {
             ...accumulator,
             [errorFieldName]: errorDetail,
           }
-        },
-        {}
-      )
+        }, {})
+      }
     },
 
     unsetApiValidationErrors() {

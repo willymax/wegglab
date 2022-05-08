@@ -108,7 +108,7 @@ export default {
           type: 'danger',
           message: 'The given data was invalid.',
         })
-        this.setApiValidation(error.response.data.errors)
+        this.setApiValidation(error)
       }
     },
   },

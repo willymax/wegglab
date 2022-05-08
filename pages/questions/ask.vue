@@ -159,7 +159,7 @@ export default {
           this.$router.push('/questions')
         })
         .catch((error) => {
-          this.setApiValidation(error.response.data.errors)
+          this.setApiValidation(error)
         })
         .then(function () {
           // always executed
