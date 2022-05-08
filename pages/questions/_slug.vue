@@ -47,6 +47,7 @@ export default {
     WithRightSideBar,
     BlurredAnswer,
   },
+  auth: false,
   layout: 'ResponsiveDashboard',
   asyncData({ params, redirect }) {
     const slug = params.slug

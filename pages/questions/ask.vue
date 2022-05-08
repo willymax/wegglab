@@ -2,19 +2,43 @@
   <with-right-side-bar>
     <div class="p-2">
       <base-select
-        v-model="input.subject_id"
+        v-model="input.subject"
         :options="subjects"
-        value-key="_id"
+        value-key="name"
+        key-key="_id"
         text-key="name"
         label="Select Subject"
       ></base-select>
-      <validation-error :errors="apiValidationErrors.subject_id" />
+      <!-- <multiselect
+        v-model="selected"
+        :options="options"
+        :close-on-select="true"
+        :clear-on-select="false"
+        placeholder="Select one"
+        lable="name"
+        track-by="name"
+      >
+      </multiselect> -->
+      <validation-error :errors="apiValidationErrors.subject" />
       <base-input
         v-model="input.title"
         label="Title"
         placeholder="Enter Question Title"
       />
       <validation-error :errors="apiValidationErrors.title" />
+      <base-label>Add Question Tags</base-label>
+      <multiselect
+        v-model="input.tags"
+        :options="taggingOptions"
+        :multiple="true"
+        :taggable="true"
+        tag-placeholder="Add this as new tag"
+        placeholder="Type to search or add tag"
+        label="name"
+        track-by="code"
+        @tag="addTag"
+      >
+      </multiselect>
       <div class="my-2">
         <editor
           v-model="input.body"
@@ -33,12 +57,14 @@
 
 <script>
 import Editor from '@tinymce/tinymce-vue'
+import Multiselect from 'vue-multiselect'
 import BaseButton from '~/components/core-components/BaseButton.vue'
 import BaseFileUpload from '~/components/core-components/BaseFileUpload.vue'
 import formMixin from '@/mixins/form-mixin'
 import WithRightSideBar from '~/components/Dashboard/WithRightSideBar.vue'
 import BaseTextArea from '~/components/core-components/Inputs/BaseTextArea.vue'
 import BaseSelect from '~/components/core-components/Inputs/BaseSelect.vue'
+import BaseLabel from '~/components/core-components/BaseLabel.vue'
 export default {
   components: {
     BaseFileUpload,
@@ -46,17 +72,23 @@ export default {
     WithRightSideBar,
     BaseTextArea,
     BaseSelect,
+    Multiselect,
     Editor,
+    BaseLabel,
   },
   mixins: [formMixin],
   layout: 'ResponsiveDashboard',
   data() {
     return {
+      selected: null,
+      options: ['list', 'of', 'options'],
       FILES: {},
+      taggingOptions: [],
       input: {
         title: '',
         body: '',
-        subject_id: null,
+        subject: null,
+        tags: [],
       },
       config: {
         uploadUrl: 'questions/uploadQuestionImage',
@@ -81,6 +113,14 @@ export default {
     FILES(newValue, oldValue) {},
   },
   methods: {
+    addTag(newTag) {
+      const tag = {
+        name: newTag,
+        code: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      }
+      this.taggingOptions.push(tag)
+      this.input.tags.push(tag)
+    },
     postQuestion() {
       const formData = new FormData()
       const questionFiles = []
@@ -90,8 +130,16 @@ export default {
         counter++
       }
       formData.append('title', this.input.title)
+      formData.append('subject', this.input.subject)
       formData.append('body', this.input.body)
-      formData.append('subject_id', this.input.subject_id)
+      formData.append(
+        'tags',
+        JSON.stringify(
+          this.input.tags.map((item) => {
+            return item.name
+          })
+        )
+      )
       delete this.$axios.defaults.headers.common['content-type']
       delete this.$axios.defaults.headers.post['content-type']
       this.$axios({
@@ -111,7 +159,7 @@ export default {
           this.$router.push('/questions')
         })
         .catch((error) => {
-          this.setApiValidation(error.response.data.errors)
+          this.setApiValidation(error)
         })
         .then(function () {
           // always executed
@@ -122,3 +170,4 @@ export default {
 </script>
 
 <style lang="scss" scoped></style>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

@@ -156,6 +156,11 @@ export default {
       description: 'key containing value incase of an object',
       default: '_id',
     },
+    keyKey: {
+      type: String,
+      description: 'key containing key incase of an object',
+      default: '_id',
+    },
     textKey: {
       type: String,
       description: 'key containing text incase of a object',
@@ -208,7 +213,7 @@ export default {
     },
     getKey(option) {
       return typeof option === 'object' && option != null
-        ? option[this.valueKey]
+        ? option[this.keyKey]
         : option
     },
     getText(option) {

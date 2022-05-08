@@ -135,9 +135,12 @@ export default {
             .patch('subscriptions/updateSubscription?status=CANCELLED')
             .then((response) => {
               that.$auth.setUser(
-                Object.assign(this.$auth.user, {
-                  subscription: response.subscription,
-                })
+                Object.assign(
+                  { ...this.$auth.user },
+                  {
+                    subscription: response.subscription,
+                  }
+                )
               )
             })
             .catch((error) => {

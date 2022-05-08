@@ -77,7 +77,7 @@ export default {
           this.$store.commit('questions/ADD_QUESTION_ANSWERS', response.data)
         })
         .catch((error) => {
-          this.setApiValidation(error.response.data.errors)
+          this.setApiValidation(error)
         })
         .then(function () {
           // always executed

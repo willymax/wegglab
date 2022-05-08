@@ -6,7 +6,7 @@
     >
       Logout
     </button>
-    <app-modal v-if="showDialog" :show.sync="showDialog" :show-close="true">
+    <app-modal :show.sync="show">
       <template #default>
         <p>You are about to logout</p>
       </template>

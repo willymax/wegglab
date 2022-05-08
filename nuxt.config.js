@@ -167,6 +167,7 @@ export default {
     '~/plugins/dashboard/JsonApi.js',
     '~/plugins/isDemo.js',
     '~/plugins/app.js',
+    '~/plugins/auth.js',
     '~/plugins/vue-placeholders.js',
     { src: '~/plugins/sanitize.js', ssr: false },
     '~/plugins/modal.js',

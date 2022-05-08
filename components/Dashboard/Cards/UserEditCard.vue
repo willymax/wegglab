@@ -86,7 +86,7 @@ export default {
           type: 'danger',
           message: 'Oops, something went wrong!',
         })
-        this.setApiValidation(error.response.data.errors)
+        this.setApiValidation(error)
       }
     },
   },

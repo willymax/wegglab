@@ -93,6 +93,13 @@ export default {
       return this.$getImageUrl(this.$auth.user.avatar)
     },
   },
+  watch: {
+    '$store.state.auth.user'(newValue, oldValue) {
+      //
+      console.log('newValue', newValue)
+      Object.assign(this.form.data.attributes, { ...newValue })
+    },
+  },
   methods: {
     update() {
       this.$axios
@@ -102,7 +109,9 @@ export default {
             type: 'success',
             message: 'Information updated successfully.',
           })
-          this.$auth.setUser(Object.assign(this.$auth.user, response.data.data))
+          this.$auth.setUser(
+            Object.assign({ ...this.$auth.user }, response.data.data)
+          )
         })
         .catch((err) => {
           this.$toast.error(err.message)
@@ -136,7 +145,7 @@ export default {
           })
           .catch((error) => {
             this.loading = false
-            this.setApiValidation(error.response.data.errors)
+            this.setApiValidation(error)
           })
           .then(function () {
             // always executed

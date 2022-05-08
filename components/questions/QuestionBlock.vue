@@ -17,9 +17,9 @@
     </client-only>
     <div class="tags">
       <nuxt-link
-        v-for="tag in question.tag_list"
+        v-for="tag in question.tags"
         :key="tag"
-        :to="{ name: 't-tag', params: { tag } }"
+        :to="{ name: 'questions-tagged-tag', params: { tag: tag } }"
         class="tag"
       >
         #{{ tag }}

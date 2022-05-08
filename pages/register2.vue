@@ -239,7 +239,7 @@ export default {
         })
         this.$router.push('/dashboard')
       } catch (error) {
-        this.setApiValidation(error.response.data.errors)
+        this.setApiValidation(error)
         this.$notify({
           type: 'danger',
           message: 'Oops, something went wrong!',

@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="$auth.loggedIn"
     class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out"
   >
     <svg
@@ -29,25 +30,57 @@ export default {
     },
     bookmarked() {
       return (
-        this.$auth.user.bookmarkedQuestions &&
-        this.$auth.user.bookmarkedQuestions.includes(this.question._id)
+        this.$store.state.auth.user &&
+        this.$store.state.auth.user.bookmarkedQuestions &&
+        this.$store.state.auth.user.bookmarkedQuestions.includes(
+          this.question._id
+        )
       )
+    },
+    user() {
+      return this.$auth.user || {}
+    },
+  },
+  watch: {
+    '$store.state.auth.user'(oldValue, newValue) {
+      //
     },
   },
   methods: {
     bookmark() {
-      this.$axios
-        .post(`questions/bookmarkQuestion/${this.question._id}`)
-        .then((response) => {
-          this.$auth.setUser(
-            Object.assign(this.$auth.user, {
-              bookmarkedQuestions: response.bookmarkedQuestions,
-            })
-          )
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+      if (this.bookmarked) {
+        this.$axios
+          .post(`/questions/unBookmarkQuestion/${this.question._id}`)
+          .then((response) => {
+            this.$auth.setUser(
+              Object.assign(
+                { ...this.$auth.user },
+                {
+                  bookmarkedQuestions: response.data.bookmarkedQuestions,
+                }
+              )
+            )
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      } else {
+        this.$axios
+          .post(`/questions/bookmarkQuestion/${this.question._id}`)
+          .then((response) => {
+            this.$auth.setUser(
+              Object.assign(
+                { ...this.$auth.user },
+                {
+                  bookmarkedQuestions: response.data.bookmarkedQuestions,
+                }
+              )
+            )
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
     },
   },
 }

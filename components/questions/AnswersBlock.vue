@@ -1,7 +1,7 @@
 <template>
   <div>
     <answers></answers>
-    <post-answer v-if="addingAnswer"></post-answer>
+    <post-answer v-if="addingAnswer && $auth.loggedIn"></post-answer>
     <add-answers>Post Answer</add-answers>
   </div>
 </template>

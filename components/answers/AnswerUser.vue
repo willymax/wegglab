@@ -24,7 +24,7 @@
             class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150"
           >
             <nuxt-link :to="resourceLink" class="flex-shrink-0 group block">
-              <span>Posted on {{ $processTime(timestamp) }}</span>
+              <span>{{ $processTime(timestamp) }}</span>
             </nuxt-link>
           </span>
         </p>

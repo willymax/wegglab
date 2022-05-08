@@ -12,7 +12,7 @@ export default {
   name: 'BaseNuxtButtonLink',
   props: {
     to: {
-      type: String,
+      type: [String, Object],
       default: '',
     },
     description: {

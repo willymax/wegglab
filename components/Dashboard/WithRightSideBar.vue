@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <section class="w-full md:w-4/5 border-y-0 border-gray-800 p-4">
+    <section class="w-full md:w-4/5 border-y-0 border-gray-800 px-4">
       <slot>
         <p>Page Content</p>
       </slot>

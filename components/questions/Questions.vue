@@ -15,9 +15,27 @@
         </div>
       </template>
       <template v-else-if="$fetchState.error">
-        <p>{{ $fetchState.error.message }}</p>
+        <div class="flex flex-col items-center justify-center">
+          <p>{{ $fetchState.error.message }}</p>
+          <p>An error occurred while loading questions. Try again.</p>
+        </div>
       </template>
       <template v-else>
+        <div class="flex justify-center items-center">
+          <base-input
+            v-model="searchText"
+            label="Search"
+            placeholder="Enter search text"
+            class="flex-grow"
+            @keydown.enter="performSearch()"
+          >
+            <template #infoBlock>
+              <base-button class="ml-2" @click="performSearch()"
+                >Search</base-button
+              >
+            </template>
+          </base-input>
+        </div>
         <h1 class="text-2xl">Questions</h1>
         <question
           v-for="(item, index) in questions"
@@ -28,6 +46,12 @@
           :details="item"
         ></question>
       </template>
+      <div class="flex flex-col items-center justify-center">
+        <p v-if="!$fetchState.pending && questions.length === 0">
+          No questions found
+        </p>
+        <base-button @click="resetAndFetch()">Refresh</base-button>
+      </div>
       <!-- <base-pagination
       v-model="pagination.currentPage"
       class="pagination-no-border"
@@ -39,6 +63,8 @@
 </template>
 
 <script>
+import BaseButton from '../core-components/BaseButton.vue'
+import BaseInput from '../core-components/Inputs/BaseInput.vue'
 import Question from '~/components/questions/Question.vue'
 import { BasePagination } from '@/components/core-components'
 import WithRightSideBar from '~/components/Dashboard/WithRightSideBar.vue'
@@ -49,6 +75,8 @@ export default {
     Question,
     BasePagination,
     WithRightSideBar,
+    BaseButton,
+    BaseInput,
   },
   // mixins: [questionsMixin],
   layout: 'ResponsiveDashboard',
@@ -57,13 +85,22 @@ export default {
       type: String,
       default: null,
     },
+    tag: {
+      type: String,
+      default: null,
+    },
     bookmarked: {
+      type: Boolean,
+      default: false,
+    },
+    answered: {
       type: Boolean,
       default: false,
     },
   },
   data() {
     return {
+      searchText: this.$route.query.search,
       items: [],
       questions: [],
       relativeUrl: 'questions',
@@ -79,9 +116,15 @@ export default {
     }
   },
   async fetch() {
-    let queryParams = `&bookmarked=${this.bookmarked}`
+    let queryParams = `&bookmarked=${this.bookmarked}&answered=${this.answered}`
     if (this.userId) {
       queryParams = queryParams + `&userId=${this.userId}`
+    }
+    if (this.tag) {
+      queryParams = queryParams + `&tag=${this.tag}`
+    }
+    if (this.$route.query.search) {
+      queryParams = queryParams + `&search=${this.$route.query.search}`
     }
     const res = await this.$axios.get(
       `questions?page=${this.paginator.current_page}&perPage=${this.paginator.per_page}${queryParams}`
@@ -90,14 +133,24 @@ export default {
     this.questions = this.questions.concat(res.data.data)
   },
   watch: {
+    '$route.query'(newValue) {
+      this.searchText = this.$route.query.search
+      this.resetAndFetch()
+    },
     userId(newValue, oldValue) {
       this.resetAndFetch()
     },
     bookmarked(newValue, oldValue) {
       this.resetAndFetch()
     },
+    answered(newValue, oldValue) {
+      this.resetAndFetch()
+    },
   },
   methods: {
+    performSearch() {
+      this.$router.push({ query: { search: this.searchText } })
+    },
     resetAndFetch() {
       this.paginator.current_page = 1
       this.questions = []

@@ -91,11 +91,13 @@ export default {
         })
         return
       }
-      this.user.current_password = this.form.current_password
-      this.user.password = this.form.password
-      this.user.password_confirmation = this.form.password_confirmation
+      const userDetails = {
+        current_password: this.form.current_password,
+        password: this.form.password,
+        password_confirmation: this.form.password_confirmation,
+      }
       try {
-        await this.$store.dispatch('users/update', this.user)
+        await this.$store.dispatch('users/update', userDetails)
         this.$refs.password_form.reset()
         this.unsetApiValidationErrors()
         this.$notify({
@@ -107,7 +109,7 @@ export default {
           type: 'danger',
           message: 'Oops, something went wrong!',
         })
-        this.setApiValidation(error.response.data.errors)
+        this.setApiValidation(error)
       }
     },
   },

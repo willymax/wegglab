@@ -14,6 +14,9 @@ export default {
       if (this.$route.params.type === '2') {
         return { bookmarked: true }
       }
+      if (this.$route.params.type === '3') {
+        return { answered: true }
+      }
       return {}
     },
   },

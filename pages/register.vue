@@ -154,8 +154,6 @@ export default {
             email: '',
             password: '',
             password_confirmation: '',
-            agree: false,
-            scors: '',
           },
         },
       },
@@ -183,7 +181,7 @@ export default {
           type: 'danger',
           message: 'An error has occurred!',
         })
-        this.setApiValidation(e.response.data.errors)
+        this.setApiValidation(e)
       }
     },
   },

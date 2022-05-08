@@ -162,8 +162,8 @@ export default {
         data: {
           type: 'token',
           attributes: {
-            email: 'williammakau070@gmail.com',
-            password: 'makau1993',
+            email: '',
+            password: '',
           },
         },
       },
@@ -206,7 +206,7 @@ export default {
             type: 'success',
             message: 'Login successful.',
           })
-          this.$router.push('/dashboard')
+          this.$router.push(this.$route.query.redirect || '/dashboard')
         })
         .catch((error) => {
           // handle error
@@ -215,9 +215,7 @@ export default {
             title: 'An error occurred',
             message: 'Invalid credentials!',
           })
-          this.setApiValidation(
-            error.response.data.errors ? error.response.data.errors : []
-          )
+          this.setApiValidation(error)
         })
         .then(function () {
           // always executed

@@ -23,11 +23,6 @@ export default {
     user() {
       return this.$auth.user
     },
-    subscribed() {
-      return this.user.subscription
-        ? this.user.subscription.status === 'Active'
-        : false
-    },
   },
   methods: {
     ownAnswer(answer) {
