@@ -162,8 +162,8 @@ export default {
         data: {
           type: 'token',
           attributes: {
-            email: 'williammakau070@gmail.com',
-            password: 'makau1993',
+            email: '',
+            password: '',
           },
         },
       },

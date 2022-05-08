@@ -149,11 +149,11 @@ export default {
         data: {
           type: 'token',
           attributes: {
-            first_name: 'william',
-            last_name: 'makau',
+            first_name: '',
+            last_name: '',
             email: '',
-            password: 'makau1993',
-            password_confirmation: 'makau1993',
+            password: '',
+            password_confirmation: '',
           },
         },
       },
