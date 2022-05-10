@@ -2,7 +2,9 @@
   <div :class="{ dark: darkMode }" class="main-container">
     <!-- main wrapper h-screen -->
     <div class="flex flex-col bg-gray-100 dark:bg-gray-800 font-roboto">
-      <header class="flex justify-between items-center p-6 flex-wrap">
+      <header
+        class="flex justify-between items-center p-6 flex-wrap bg-gray-100 dark:bg-gray-600"
+      >
         <div class="flex items-center space-x-4 lg:space-x-0">
           <button
             class="text-gray-500 dark:text-gray-300 focus:outline-none lg:hidden"
