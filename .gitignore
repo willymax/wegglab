@@ -88,3 +88,11 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# Elastic Beanstalk environment
+.elasticbeanstalk/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
