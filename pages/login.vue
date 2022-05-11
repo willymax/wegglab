@@ -199,10 +199,12 @@ export default {
           data: this.form.data.attributes,
         })
         .then((response) => {
-          this.$notify({
-            type: 'success',
-            message: 'Login successful.',
-          })
+          // this.$notify({
+          //   type: 'success',
+          //   message: 'Login successful.',
+          // }).then((res) => {
+
+          // })
           this.$router.push(this.$route.query.redirect || '/dashboard')
         })
         .catch((error) => {

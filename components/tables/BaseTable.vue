@@ -323,8 +323,8 @@ export default {
       //     // always executed
       //   })
     },
-    onProFeature() {
-      this.$notify({
+     onProFeature() {
+       this.$notify({
         type: 'danger',
         message: 'This is a PRO feature.',
       })

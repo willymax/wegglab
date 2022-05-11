@@ -71,7 +71,6 @@ export default {
         }
       ).then((res) => res.json())
       this.subscription = response
-      console.log('this.subscription', this.subscription)
       const planResponse = await fetch(
         `https://api.sandbox.paypal.com/v1/billing/plans/${this.user.subscription.paypal_plan_id}`,
         {

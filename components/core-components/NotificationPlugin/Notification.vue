@@ -108,7 +108,7 @@ export default {
     },
     timeout: {
       type: Number,
-      default: 5000,
+      default: 10000,
       validator: (value) => {
         return value >= 0
       },

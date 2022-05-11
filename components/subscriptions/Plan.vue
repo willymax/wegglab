@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col rounded-lg border-2 shadow-lg relative cursor-pointer hover:shadow-2xl"
+    class="flex flex-col rounded-lg border-2 shadow-lg relative cursor-pointer hover:shadow-2xl bg-white"
   >
     <div class="w-full px-4 py-6 rounded-t-lg card-section-1">
       <p class="text-3xl font-bold group-hover:text-white text-blue-500">
