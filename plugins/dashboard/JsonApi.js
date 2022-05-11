@@ -3,7 +3,7 @@ export default function ({ $axios, store, redirect }) {
   // $axios.setHeader('content-type', 'application/vnd.api+json')
   $axios.onRequest((config) => {
     console.log('Making request to ' + config.url)
-    console.log(JSON.stringify(config))
+    // console.log(JSON.stringify(config))
   })
 
   $axios.onError((error) => {

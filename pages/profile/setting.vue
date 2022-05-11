@@ -40,7 +40,7 @@
           <base-label>Profile Image</base-label>
           <div class="flex flex-row items-center md:space-x-4 flex-wrap mb-2">
             <base-avatar
-              :user-avatar="userAvatar"
+              :user-avatar="$auth.user.avatar"
               :loading="loading"
             ></base-avatar>
             <avatar-upload v-model="FILE" @input="uploadFile"></avatar-upload>
@@ -91,11 +91,6 @@ export default {
       },
     }
   },
-  computed: {
-    userAvatar() {
-      return this.$getImageUrl(this.$auth.user.avatar)
-    },
-  },
   watch: {
     '$store.state.auth.user'(newValue, oldValue) {
       //
@@ -142,9 +137,7 @@ export default {
               type: 'success',
               message: 'Avatar uploaded successfully.',
             })
-            this.$auth.setUser(
-              Object.assign(this.$auth.user, { avatar: response.data.avatar })
-            )
+            this.$auth.setUser(response.data)
           })
           .catch((error) => {
             this.loading = false
