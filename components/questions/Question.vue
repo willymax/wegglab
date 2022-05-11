@@ -12,7 +12,9 @@
 
     <div class="pl-16">
       <nuxt-link :to="`/questions/${details.slug}`" class="hover:underline">
-        <h1 class="text-xl font-bold dark:text-white">{{ details.title }}</h1>
+        <h1 class="text-xl font-bold dark:text-white">
+          {{ details.title | truncate(540, '...') }}
+        </h1>
       </nuxt-link>
       <div class="tags">
         <nuxt-link
