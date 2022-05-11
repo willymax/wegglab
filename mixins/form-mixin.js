@@ -10,10 +10,15 @@ export default {
   methods: {
     /* extract API server validation errors and assigns them to local mixin data */
     setApiValidation(errors, refs = null) {
+      this.unsetApiValidationErrors()
       if (errors && errors.response && errors.response.data) {
-        errors = errors.response.data.errors
+        if (errors.response.data.errors) {
+          errors = errors.response.data.errors
+        } else {
+          this.apiValidationErrors.message = [errors.response.data.message]
+        }
       }
-      if (errors && `${typeof errors}` === 'object') {
+      if (errors && errors instanceof Array) {
         this.apiValidationErrors = errors.reduce((accumulator, errorObject) => {
           if (
             typeof errorObject.field === 'undefined' &&

@@ -252,7 +252,7 @@ export default {
     redirect: {
       login: '/login',
       register: '/register',
-      logout: '/',
+      logout: '/login',
       callback: '/login',
       home: '/dashboard',
     },

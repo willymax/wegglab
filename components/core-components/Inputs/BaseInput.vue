@@ -67,9 +67,9 @@
         </div>
       </slot>
       <slot name="error">
-        <div v-if="errors[0]" class="text-error" style="display: block">
-          {{ errors[0] }}
-        </div>
+        <span v-if="errors[0]">
+          <small class="text-error" style="display: block" v-text="errors[0]" />
+        </span>
       </slot>
     </div>
   </validation-provider>

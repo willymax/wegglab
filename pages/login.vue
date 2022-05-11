@@ -31,7 +31,7 @@
           <!-- prettier-ignore-end -->
 
           <div
-            class="w-full lg:w-7/12 p-5 shadow-md rounded-lg lg:rounded-l-none"
+            class="w-full lg:w-7/12 p-5 m-5 shadow-md rounded-lg lg:rounded-l-none"
           >
             <h2
               class="text-2xl font-semibold text-center text-gray-700 dark:text-white"
