@@ -126,7 +126,7 @@ export default {
       const questionFiles = []
       let counter = 0
       for (const [index, file] of Object.entries(this.FILES)) {
-        formData.append(`questionFiles[${counter}]`, file)
+        formData.append(`files`, file)
         counter++
       }
       formData.append('title', this.input.title)

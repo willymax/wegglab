@@ -10,19 +10,19 @@
     </div>
     <div class="md:flex-shrink pr-6 pt-3">
       <div>
-        <ul class="list-none">
-          <li v-for="file in answer.files" :key="file._id">
-            <a
-              :href="$getImageUrl(file.path)"
-              @click.prevent="$downloadAnswerImage(file.path)"
+        <span class="inline">
+          <a
+            v-for="file in answer.files"
+            :key="file._id"
+            :href="$getImageUrl(file.path)"
+            @click.prevent="$downloadAnswerImage(file.path)"
+          >
+            <span class="text-xl"
+              ><img src="~assets/document.svg" class="inline" />
+              {{ file.originalname }}</span
             >
-              <span class="text-xl"
-                ><img src="~assets/document.svg" class="inline" />
-                {{ file.name }}</span
-              >
-            </a>
-          </li>
-        </ul>
+          </a>
+        </span>
       </div>
     </div>
   </card>

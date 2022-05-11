@@ -104,7 +104,7 @@ export default {
       try {
         await this.$store.dispatch('reset/createNewPassword', this.form.data)
       } catch (error) {
-        await this.$notify({
+        this.$notify({
           type: 'danger',
           message: 'The given data was invalid.',
         })

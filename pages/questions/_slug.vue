@@ -1,7 +1,11 @@
 <template>
   <with-right-side-bar>
     <template #sidebar>
-      <p>We will include the other related questions here</p>
+      <h1 class="text-xl font-bold">Related Questions</h1>
+      <related-questions
+        v-if="!$fetchState.pending"
+        :question="question"
+      ></related-questions>
     </template>
     <div class="page-wrapper">
       <template v-if="$fetchState.pending">
@@ -39,6 +43,7 @@ import AnswersBlock from '~/components/questions/AnswersBlock.vue'
 import QuestionAsideBlock from '~/components/questions/QuestionAsideBlock.vue'
 import WithRightSideBar from '~/components/Dashboard/WithRightSideBar.vue'
 import BlurredAnswer from '~/components/answers/BlurredAnswer.vue'
+import RelatedQuestions from '~/components/questions/RelatedQuestions.vue'
 export default {
   components: {
     QuestionBlock,
@@ -46,6 +51,7 @@ export default {
     QuestionAsideBlock,
     WithRightSideBar,
     BlurredAnswer,
+    RelatedQuestions,
   },
   auth: false,
   layout: 'ResponsiveDashboard',

@@ -221,7 +221,7 @@ export default {
         },
         endpoints: {
           login: { url: '/auth/login', method: 'post' },
-          logout: { url: '/logout', method: 'post' },
+          logout: { url: '/auth/logout', method: 'post' },
           user: { url: '/users/profile', method: 'get' },
           refresh: { url: '/auth/refresh', method: 'post' },
         },
@@ -252,7 +252,7 @@ export default {
     redirect: {
       login: '/login',
       register: '/register',
-      logout: '/',
+      logout: '/login',
       callback: '/login',
       home: '/dashboard',
     },

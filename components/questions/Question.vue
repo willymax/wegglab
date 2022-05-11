@@ -1,6 +1,6 @@
 <template>
   <article
-    class="hover:bg-gray-100 bg-white transition duration-350 ease-in-out rounded-box overflow-hidden shadow-lg m-2"
+    class="dark:hover:bg-gray-500 bg-white hover:bg-gray-50 dark:bg-gray-600 transition duration-350 ease-in-out rounded-box overflow-hidden shadow-lg m-2"
   >
     <div class="p-4">
       <answer-user
@@ -12,7 +12,9 @@
 
     <div class="pl-16">
       <nuxt-link :to="`/questions/${details.slug}`" class="hover:underline">
-        <h1 class="text-xl font-bold">{{ details.title }}</h1>
+        <h1 class="text-xl font-bold dark:text-white">
+          {{ details.title | truncate(540, '...') }}
+        </h1>
       </nuxt-link>
       <div class="tags">
         <nuxt-link

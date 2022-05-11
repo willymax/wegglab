@@ -24,22 +24,23 @@
             label="First Name"
           ></base-input>
         </div>
-        <div class="mb-4 space-x-4 md:flex">
+        <div class="mb-4 md:w-1/3 w-full">
           <base-input
             v-model="form.data.attributes.email"
             alternative
             class="mb-3"
-            placeholder="Email"
-            type="email"
+            placeholder="email"
             name="email"
             label="Email"
+            type="email"
           ></base-input>
+          <validation-error :errors="apiValidationErrors.email" />
         </div>
         <div class="w-full">
           <base-label>Profile Image</base-label>
           <div class="flex flex-row items-center md:space-x-4 flex-wrap mb-2">
             <base-avatar
-              :user-avatar="userAvatar"
+              :user-avatar="$auth.user.avatar"
               :loading="loading"
             ></base-avatar>
             <avatar-upload v-model="FILE" @input="uploadFile"></avatar-upload>
@@ -62,6 +63,7 @@ import BaseButton from '~/components/core-components/BaseButton.vue'
 import BaseFileUpload from '~/components/core-components/BaseFileUpload.vue'
 import BaseLabel from '~/components/core-components/BaseLabel.vue'
 import Card from '~/components/core-components/Cards/Card.vue'
+import formMixin from '@/mixins/form-mixin'
 export default {
   components: {
     BaseButton,
@@ -71,6 +73,7 @@ export default {
     AvatarUpload,
     BaseLabel,
   },
+  mixins: [formMixin],
   layout: 'AccountSettings',
   data() {
     return {
@@ -87,11 +90,6 @@ export default {
         },
       },
     }
-  },
-  computed: {
-    userAvatar() {
-      return this.$getImageUrl(this.$auth.user.avatar)
-    },
   },
   watch: {
     '$store.state.auth.user'(newValue, oldValue) {
@@ -121,12 +119,12 @@ export default {
       if (this.FILE) {
         this.loading = true
         const formData = new FormData()
-        formData.append('new_avatar', this.FILE)
+        formData.append('avatar', this.FILE)
         delete this.$axios.defaults.headers.common['content-type']
         delete this.$axios.defaults.headers.post['content-type']
         this.$axios({
           method: 'POST',
-          url: 'updateAvatar',
+          url: 'users/updateAvatar',
           data: formData,
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -139,9 +137,7 @@ export default {
               type: 'success',
               message: 'Avatar uploaded successfully.',
             })
-            this.$auth.setUser(
-              Object.assign(this.$auth.user, response.data.data)
-            )
+            this.$auth.setUser(response.data)
           })
           .catch((error) => {
             this.loading = false

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <!-- active & hover classes 'bg-indigo-100 dark:bg-indigo-600' -->
+    <!-- active & hover classes 'bg-green-100 dark:bg-green-600' -->
     <a
       v-if="hasSubMenus"
       to="#"
-      class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-indigo-100 dark:hover:bg-indigo-600"
+      class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-green-100 dark:hover:bg-green-600"
       :class="{
-        'bg-indigo-100 dark:bg-indigo-600': isActive || open,
+        'bg-green-100 dark:bg-green-600': isActive || open,
         'pointer-events-none': menuDisabled,
       }"
       role="button"

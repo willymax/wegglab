@@ -31,7 +31,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: '',
+      default: 'white',
       description: 'Card type',
     },
     gradient: {

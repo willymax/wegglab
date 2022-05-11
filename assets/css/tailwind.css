@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.text-error {
+    position: relative;
+    bottom: 20px;
+    color: #fb6340;
+}

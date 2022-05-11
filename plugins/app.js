@@ -9,7 +9,7 @@ export default ({ app, route, $axios, $toast, redirect, store }, inject) => {
     return new Promise((resolve) => setTimeout(resolve, ms))
   })
   inject('downloadAnswerImage', (fileUrl) => {
-    $axios(`${process.env.apiBaseUrl}/${fileUrl}`, {
+    $axios(`${process.env.baseStorageUrl}/${fileUrl}`, {
       responseType: 'blob',
     })
       .then((response) => {

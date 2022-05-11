@@ -105,7 +105,7 @@ export default {
   methods: {
     async handleSubmit() {
       if (this.$isDemo === 1) {
-        await this.$notify({
+        this.$notify({
           type: 'danger',
           message: 'Password reset is disabled in the demo.',
         })
@@ -116,12 +116,12 @@ export default {
           'reset/forgotPassword',
           this.form.data.attributes
         )
-        await this.$notify({
+        this.$notify({
           type: 'success',
           message: 'An email with reset password link was sent.',
         })
       } catch (error) {
-        await this.$notify({
+        this.$notify({
           type: 'danger',
           message: "We can't find a user with that e-mail address.",
         })

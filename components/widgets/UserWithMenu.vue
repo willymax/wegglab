@@ -114,6 +114,10 @@ export default {
       this.loading = true
       try {
         await this.$auth.logout()
+        this.$notify({
+          type: 'success',
+          message: 'You have logged out successfully.',
+        })
       } catch (error) {
         this.loading = false
         this.$toast.error(error.message)

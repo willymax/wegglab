@@ -7,7 +7,12 @@
   >
     <div :class="{ 'is-invalid': validated && invalid }">
       <slot name="label">
-        <label v-if="label" :class="labelClasses">
+        <label
+          v-if="label"
+          :for="id"
+          :class="labelClasses"
+          class="text-gray-600 dark:text-gray-200 block mb-2 text-sm font-medium"
+        >
           {{ label }}
         </label>
       </slot>
@@ -33,6 +38,7 @@
         </div>
         <slot v-bind="slotData">
           <input
+            :id="id"
             :type="type"
             v-bind="$attrs"
             :valid="valid"
@@ -61,9 +67,9 @@
         </div>
       </slot>
       <slot name="error">
-        <div v-if="errors[0]" class="text-error" style="display: block">
-          {{ errors[0] }}
-        </div>
+        <span v-if="errors[0]">
+          <small class="text-error" style="display: block" v-text="errors[0]" />
+        </span>
       </slot>
     </div>
   </validation-provider>
@@ -104,7 +110,7 @@ export default {
     labelClasses: {
       type: String,
       description: 'Input label css classes',
-      default: 'block mb-2 text-sm font-bold text-gray-700',
+      default: '',
     },
     inputClasses: {
       type: String,
@@ -130,6 +136,11 @@ export default {
       type: String,
       default: '',
       description: 'Prepend icon (left)',
+    },
+    id: {
+      type: String,
+      default: null,
+      description: 'The id of the input',
     },
     rules: {
       type: [String, Array, Object],

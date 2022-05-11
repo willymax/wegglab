@@ -27,19 +27,21 @@
     </div>
     <div class="md:flex-shrink pr-6 pt-3">
       <div>
-        <ul class="list-none">
-          <li v-for="file in question.files" :key="file._id">
-            <a
-              v-if="attachmentISImage(file.mimetype)"
-              :href="$getImageUrl(file.path)"
-              @click.prevent="$downloadItem(file.path)"
+        <span>
+          <a
+            v-for="file in question.files"
+            :key="file._id"
+            :href="$getImageUrl(file.path)"
+            @click.prevent="$downloadItem(file.path)"
+          >
+            <span class="text-xl"
+              ><img src="~assets/document.svg" class="inline" />
+              {{ file.originalname }}</span
             >
-              <span class="text-xl"
-                ><img src="~assets/document.svg" class="inline" />
-                {{ file.name }}</span
-              >
-            </a>
-          </li>
+          </a>
+        </span>
+        <ul class="list-none">
+          <li></li>
         </ul>
       </div>
     </div>
