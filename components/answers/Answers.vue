@@ -4,6 +4,9 @@
     <div v-for="answer in question.answers" :key="answer._id">
       <answer :answer="answer"></answer>
     </div>
+    <div v-if="question.numberOfAnswers === 0">
+      <p class="text-center">No answers for this question</p>
+    </div>
     <div v-if="question.showBlur">
       <blurred-answer></blurred-answer>
     </div>
