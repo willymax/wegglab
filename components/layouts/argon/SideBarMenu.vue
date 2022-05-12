@@ -33,8 +33,8 @@
           Users
           <template #menus>
             <menu-item to="/users">Users (All for now)</menu-item>
-            <menu-item to="/experts">Experts</menu-item>
-            <menu-item to="/students">Students</menu-item>
+            <menu-item to="/users?type=expert">Experts</menu-item>
+            <menu-item to="/users?type=student">Students</menu-item>
           </template>
         </side-bar-menu-link>
       </template>

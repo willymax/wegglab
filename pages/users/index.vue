@@ -46,6 +46,24 @@
             @sort-change="sortChange"
           >
             <el-table-column
+              label="Id"
+              min-width="220px"
+              prop="id"
+              sortable="custom"
+            >
+              <template slot-scope="scope">
+                <nuxt-link :to="`/users/${scope.row.id}`" class="underline">{{
+                  scope.row.id
+                }}</nuxt-link>
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="Type"
+              min-width="310px"
+              prop="role"
+              sortable="custom"
+            />
+            <el-table-column
               label="First Name"
               min-width="310px"
               prop="first_name"
@@ -191,7 +209,6 @@ export default {
       }
     },
   },
-
   created() {
     this.getItems()
   },
@@ -203,10 +220,11 @@ export default {
     getItems() {
       const that = this
       this.$axios
-        .get('users', {
+        .get(`users`, {
           params: {
             perPage: this.pagination.perPage,
             page: this.pagination.currentPage,
+            role: this.$route.query.type || null,
           },
         })
         .then((response) => {
