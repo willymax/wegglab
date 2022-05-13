@@ -2,7 +2,10 @@
   <div>
     <answers></answers>
     <post-answer v-if="addingAnswer && $auth.loggedIn"></post-answer>
-    <add-answers>Post Answer</add-answers>
+    <add-answers
+      v-if="$auth.user.role === 'expert' || $auth.user.role === 'admin'"
+      >Post Answer</add-answers
+    >
   </div>
 </template>
 
