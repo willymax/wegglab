@@ -21,16 +21,24 @@
           </content-placeholders>
         </div>
       </template>
-      <template v-else-if="$fetchState.error">
-        <p>{{ $fetchState.error.message }}</p>
-      </template>
-      <div class="question-content-wrapper">
-        <question-block class="question-block" />
-        <div class="question-aside-wrapper">
-          <question-aside-block class="question-aside-block" />
+      <template v-if="$fetchState.error && !$fetchState.pending">
+        <div class="flex flex-col items-center justify-center">
+          <template v-if="$fetchState.error.status === 404">
+            <p>The question you are looking for does not exist</p>
+            <base-nuxt-button-link to="/questions/ask"
+              >Ask Our Experts</base-nuxt-button-link
+            >
+          </template>
+          <template
+            v-if="$fetchState.error.status && $fetchState.error.status !== 404"
+          >
+            <p>An error has occurred</p>
+            <base-button @click="refreshQuestion()">Refresh</base-button>
+          </template>
         </div>
-      </div>
-      <div>
+      </template>
+      <div v-if="question" class="question-content-wrapper">
+        <question-block class="question-block" />
         <answers-block class="answers-block" />
       </div>
     </div>
@@ -40,42 +48,43 @@
 <script>
 import QuestionBlock from '~/components/questions/QuestionBlock.vue'
 import AnswersBlock from '~/components/questions/AnswersBlock.vue'
-import QuestionAsideBlock from '~/components/questions/QuestionAsideBlock.vue'
 import WithRightSideBar from '~/components/Dashboard/WithRightSideBar.vue'
 import BlurredAnswer from '~/components/answers/BlurredAnswer.vue'
 import RelatedQuestions from '~/components/questions/RelatedQuestions.vue'
+import BaseButton from '~/components/core-components/BaseButton.vue'
+import BaseNuxtButtonLink from '~/components/core-components/BaseNuxtButtonLink.vue'
 export default {
   components: {
     QuestionBlock,
     AnswersBlock,
-    QuestionAsideBlock,
     WithRightSideBar,
     BlurredAnswer,
     RelatedQuestions,
+    BaseButton,
+    BaseNuxtButtonLink,
   },
   auth: false,
   layout: 'ResponsiveDashboard',
-  asyncData({ params, redirect }) {
-    const slug = params.slug
-    // const response = await this.$axios.get(slug)
-  },
-  data() {
-    return {
-      question: {},
-    }
-  },
   async fetch() {
     let question = await this.$axios.get(`questions/${this.$route.params.slug}`)
     question = question.data.data
 
     await this.$store.dispatch('questions/SET_CURRENT_QUESTION', question)
-    this.question = question
   },
-  computed: {},
+  computed: {
+    question() {
+      return this.$store.getters['questions/GET_CURRENT_QUESTION']
+    },
+  },
   created() {
     this.$nuxt.$on('paymentReceived', ($event) => {
       location.reload(true)
     })
+  },
+  methods: {
+    refreshQuestion() {
+      this.fetch()
+    },
   },
 }
 </script>

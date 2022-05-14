@@ -1,12 +1,15 @@
 <template>
   <div class="py-2">
-    <div v-for="(item, index) in questions" :key="item._id">
-      <nuxt-link :to="`/questions/${item.slug}`" class="hover:underline">
-        <h4 class="font-normal dark:text-white">
-          {{ item.title | truncate(100, '...') }}
-        </h4>
-      </nuxt-link>
-    </div>
+    <nuxt-link
+      v-for="(item, index) in questions"
+      :key="item._id"
+      :to="`/questions/${item.slug}`"
+      class="block underline my-2 hover:text-green-400"
+    >
+      <h4 class="font-normal dark:text-white">
+        {{ item.title | truncate(100, '...') }}
+      </h4>
+    </nuxt-link>
   </div>
 </template>
 
