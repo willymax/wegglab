@@ -1,6 +1,5 @@
 <template>
-  <card v-if="question">
-    {{ question }}
+  <card>
     <div class="flex">
       <answer-user
         class="flex-1"

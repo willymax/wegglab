@@ -6,12 +6,6 @@
   >
     <div>
       <template v-if="$auth.loggedIn">
-        <menu-item to="/questions">
-          <template #link-icon>
-            <img class="w-5 h-5 inline" src="~assets/question-mark.svg" />
-          </template>
-          Questions</menu-item
-        >
         <side-bar-menu-link v-if="$auth.user.role === 'admin'">
           <template #link-icon>
             <img class="w-5 h-5" src="~assets/wallet.svg" />
@@ -38,6 +32,12 @@
           </template>
         </side-bar-menu-link>
       </template>
+      <menu-item to="/">
+        <template #link-icon>
+          <img class="w-5 h-5 inline" src="~assets/question-mark.svg" />
+        </template>
+        Questions</menu-item
+      >
       <side-bar-menu-link :menu-disabled="true" :is-open="true">
         <template #link-icon>
           <img class="w-5 h-5 inline" src="~assets/book.svg" />
