@@ -25,6 +25,9 @@
         <div class="flex flex-col items-center justify-center">
           <template v-if="$fetchState.error.status === 404">
             <p>The question you are looking for does not exist</p>
+            <base-nuxt-button-link to="/questions/ask"
+              >Ask Our Experts</base-nuxt-button-link
+            >
           </template>
           <template
             v-if="$fetchState.error.status && $fetchState.error.status !== 404"
@@ -34,10 +37,7 @@
           </template>
         </div>
       </template>
-      <div
-        v-if="Object.keys(question).length !== 0"
-        class="question-content-wrapper"
-      >
+      <div v-if="question" class="question-content-wrapper">
         <question-block class="question-block" />
         <answers-block class="answers-block" />
       </div>
@@ -52,6 +52,7 @@ import WithRightSideBar from '~/components/Dashboard/WithRightSideBar.vue'
 import BlurredAnswer from '~/components/answers/BlurredAnswer.vue'
 import RelatedQuestions from '~/components/questions/RelatedQuestions.vue'
 import BaseButton from '~/components/core-components/BaseButton.vue'
+import BaseNuxtButtonLink from '~/components/core-components/BaseNuxtButtonLink.vue'
 export default {
   components: {
     QuestionBlock,
@@ -60,6 +61,7 @@ export default {
     BlurredAnswer,
     RelatedQuestions,
     BaseButton,
+    BaseNuxtButtonLink,
   },
   auth: false,
   layout: 'ResponsiveDashboard',

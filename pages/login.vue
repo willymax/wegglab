@@ -83,7 +83,7 @@
                 <NuxtLink
                   to="/password/reset"
                   class="text-xs text-gray-500 dark:text-gray-300 hover:underline"
-                  >Forget Password?</NuxtLink
+                  >Forgot Password?</NuxtLink
                 >
               </div>
               <base-input
@@ -112,15 +112,21 @@
                 Login
               </button>
             </div>
-
+            <div class="text-center">
+              <p
+                class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
+              >
+                Don't have an account?
+              </p>
+            </div>
             <div class="flex items-center justify-between mt-4">
-              <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+              <span class="w-2/5 border-b border-gray-600 md:w-1/4"></span>
               <nuxt-link
                 to="register"
                 class="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
-                >or sign up</nuxt-link
+                >Sign up</nuxt-link
               >
-              <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+              <span class="w-2/5 border-b border-gray-600 md:w-1/4"></span>
             </div>
           </div>
         </div>
