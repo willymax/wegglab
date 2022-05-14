@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <p>The page you are looking for can not be foound</p>
+    <p>The page you are looking for can not be found</p>
     <base-nuxt-button-link to="/">Go To Homepage</base-nuxt-button-link>
   </div>
 </template>
