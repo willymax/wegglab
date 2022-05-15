@@ -1,5 +1,5 @@
 <template>
-  <card>
+  <card class="">
     <div class="flex">
       <answer-user
         class="flex-1"
@@ -8,7 +8,9 @@
         :resource-link="`/questions/${question.slug}`"
       ></answer-user>
       <div>
-        <BookmarkQuestion></BookmarkQuestion>
+        <div class="flex items-center">
+          <BookmarkQuestion></BookmarkQuestion>
+        </div>
       </div>
     </div>
     <h1 class="text-2xl font-bold">{{ question.title }}</h1>
@@ -45,6 +47,9 @@
         </ul>
       </div>
     </div>
+    <div class="flex flex-row-reverse">
+      <question-share></question-share>
+    </div>
   </card>
 </template>
 
@@ -52,8 +57,9 @@
 import AnswerUser from '../answers/AnswerUser.vue'
 import Card from '../core-components/Cards/Card.vue'
 import BookmarkQuestion from './BookmarkQuestion.vue'
+import QuestionShare from './QuestionShare.vue'
 export default {
-  components: { Card, AnswerUser, BookmarkQuestion },
+  components: { Card, AnswerUser, BookmarkQuestion, QuestionShare },
   computed: {
     question() {
       return this.$store.getters['questions/GET_CURRENT_QUESTION']

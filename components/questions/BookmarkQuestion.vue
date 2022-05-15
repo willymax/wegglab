@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="$auth.loggedIn"
-    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out"
+    class="flex-1 flex text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out"
   >
     <svg
       v-if="!bookmarked"

@@ -4,7 +4,49 @@
 
 
 .text-error {
-    position: relative;
-    bottom: 20px;
-    color: #fb6340;
+  position: relative;
+  bottom: 20px;
+  color: #fb6340;
+}
+
+:root {
+  --color: #243746;
+  --color-primary: #158876;
+  --color-secondary: #0e2233;
+  --on-background: #504231;
+  --on-surface: #504231;
+  --on-primary: #504231;
+  --on-secondary: #504231;
+  --background: #f3f5f4;
+  --surface: #f3f5f4;
+  --border-color: #ddd;
+}
+
+.dark-mode {
+  --color: #ebf4f1;
+  --color-primary: #41b38a;
+  --color-secondary: #fdf9f3;
+  --on-background: #504231;
+  --on-surface: #504231;
+  --on-primary: #504231;
+  --on-secondary: #504231;
+  --background: #091a28;
+  --surface: #091a28;
+  --border-color: #0d2538;
+}
+
+.sepia-mode {
+  --color: #433422;
+  --background: #f1e7d0;
+  --surface: #f1e7d0;
+  --color-secondary: #504231;
+  --on-background: #504231;
+  --on-surface: #504231;
+  --on-primary: #504231;
+  --on-secondary: #504231;
+  --border-color: #ded0bf;
+}
+
+.fill-color {
+  filter: invert(30%) sepia(96%) saturate(6927%) hue-rotate(355deg) brightness(98%) contrast(120%);
 }

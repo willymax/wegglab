@@ -2,7 +2,7 @@
   <!-- Sidebar links -->
   <nav
     aria-label="Sidebar"
-    class="flex-1 px-2 py-4 space-y-2 overflow-y-hidden hover:overflow-y-auto text-base-content"
+    class="flex-1 px-2 py-6 space-y-2 overflow-y-hidden hover:overflow-y-auto text-base-content"
   >
     <div>
       <template v-if="$auth.loggedIn">
@@ -22,7 +22,7 @@
         </side-bar-menu-link>
         <side-bar-menu-link v-if="$auth.user.role === 'admin'">
           <template #link-icon>
-            <img class="w-5 h-5" src="~assets/img/user.png" />
+            <img class="w-5 h-5" src="~assets/users.svg" />
           </template>
           Users
           <template #menus>
@@ -34,7 +34,7 @@
       </template>
       <menu-item to="/">
         <template #link-icon>
-          <img class="w-5 h-5 inline" src="~assets/question-mark.svg" />
+          <img class="w-5 h-5 fill-color inline" src="~assets/wallet.svg" />
         </template>
         Questions</menu-item
       >
@@ -65,8 +65,9 @@
 <script>
 import MenuItem from './MenuItem.vue'
 import SideBarMenuLink from './SideBarMenuLink.vue'
+import QuestionMark from '@/assets/question-mark.svg?inline'
 export default {
-  components: { MenuItem, SideBarMenuLink },
+  components: { MenuItem, SideBarMenuLink, QuestionMark },
   data() {
     return {
       isActive: false,

@@ -18,6 +18,7 @@ import { messages } from 'vee-validate/dist/locale/en.json'
 import { configure } from 'vee-validate'
 import Notifications from '~/components/core-components/NotificationPlugin'
 import SideBar from '~/components/core-components/SidebarPlugin'
+import VueSocialSharing from 'vue-social-sharing'
 
 Object.keys(rules).forEach((rule) => {
   extend(rule, {
@@ -30,6 +31,7 @@ locale.use(lang)
 
 Vue.use(SideBar)
 Vue.use(Notifications)
+Vue.use(VueSocialSharing)
 configure({
   classes: {
     valid: 'is-valid',
