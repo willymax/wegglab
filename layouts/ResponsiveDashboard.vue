@@ -1,9 +1,9 @@
 <template>
   <div :class="{ dark: darkMode }" class="main-container">
     <!-- main wrapper h-screen -->
-    <div class="flex flex-col bg-gray-100 dark:bg-gray-800 font-roboto">
+    <div class="flex flex-col bg-background font-roboto">
       <header
-        class="flex justify-between items-center p-6 flex-wrap bg-gray-100 dark:bg-gray-600"
+        class="flex justify-between items-center p-6 flex-wrap bg-surface"
       >
         <div class="flex items-center space-x-4 lg:space-x-0">
           <button
@@ -112,7 +112,7 @@
           :class="
             sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'
           "
-          class="fixed z-30 inset-y-0 left-0 w-60 transition duration-300 transform lg:bg-transparent bg-white dark:bg-gray-600 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0"
+          class="fixed z-30 inset-y-0 left-0 w-60 transition duration-300 transform lg:bg-transparent bg-surface overflow-y-auto lg:translate-x-0 lg:static lg:inset-0"
         >
           <div class="flex items-center lg:hidden">
             <div class="flex flex-1 items-center">
@@ -282,7 +282,7 @@ export default {
       sidebarOpen: false,
       notificationOpen: false,
       dropdownOpen: false,
-      darkMode: false,
+      darkMode: this.$colorMode.preference === 'dark',
       showLogoutDialog: false,
       currentYear: new Date().getFullYear(),
     }
@@ -301,6 +301,7 @@ export default {
       } else {
         this.$colorMode.preference = 'white'
       }
+      this.darkMode = this.$colorMode.preference === 'dark'
     },
   },
 }

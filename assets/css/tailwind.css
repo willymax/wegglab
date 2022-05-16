@@ -12,26 +12,26 @@
 :root {
   --color: #243746;
   --color-primary: #158876;
-  --color-secondary: #0e2233;
+  --color-secondary: #16a34a;
   --on-background: #504231;
   --on-surface: #504231;
   --on-primary: #504231;
-  --on-secondary: #504231;
-  --background: #f3f5f4;
-  --surface: #f3f5f4;
+  --on-secondary: #ffffff;
+  --background: #f9fafb;
+  --surface: #f3f4f6;
   --border-color: #ddd;
 }
 
 .dark-mode {
   --color: #ebf4f1;
   --color-primary: #41b38a;
-  --color-secondary: #fdf9f3;
+  --color-secondary: #86efac;
   --on-background: #504231;
   --on-surface: #504231;
   --on-primary: #504231;
-  --on-secondary: #504231;
-  --background: #091a28;
-  --surface: #091a28;
+  --on-secondary: #1f2937;
+  --background: #1f2937;
+  --surface: #4b5563;
   --border-color: #0d2538;
 }
 

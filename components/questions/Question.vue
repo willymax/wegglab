@@ -1,6 +1,6 @@
 <template>
   <article
-    class="dark:hover:bg-gray-500 bg-white hover:bg-gray-50 dark:bg-gray-600 transition duration-350 ease-in-out rounded-box overflow-hidden shadow-lg m-2"
+    class="dark:hover:bg-gray-500 bg-surface hover:bg-gray-50 transition duration-350 ease-in-out rounded-box overflow-hidden shadow-lg m-2"
   >
     <div class="p-4">
       <answer-user
