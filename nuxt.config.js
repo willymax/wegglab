@@ -166,6 +166,7 @@ export default {
     { src: '~/plugins/dashboard/world-map', ssr: false },
     '~/plugins/dashboard/JsonApi.js',
     '~/plugins/isDemo.js',
+    '~/plugins/testPlugin.js',
     '~/plugins/app.js',
     '~/plugins/auth.js',
     '~/plugins/vue-placeholders.js',

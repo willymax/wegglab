@@ -66,6 +66,7 @@ import BaseTextArea from '~/components/core-components/Inputs/BaseTextArea.vue'
 import BaseSelect from '~/components/core-components/Inputs/BaseSelect.vue'
 import BaseLabel from '~/components/core-components/BaseLabel.vue'
 export default {
+  auth: false,
   components: {
     BaseFileUpload,
     BaseButton,
@@ -121,7 +122,8 @@ export default {
       this.taggingOptions.push(tag)
       this.input.tags.push(tag)
     },
-    postQuestion() {
+    async postQuestion() {
+      console.log('postQuestion')
       const formData = new FormData()
       const questionFiles = []
       let counter = 0
@@ -142,28 +144,16 @@ export default {
       )
       delete this.$axios.defaults.headers.common['content-type']
       delete this.$axios.defaults.headers.post['content-type']
-      this.$axios({
-        method: 'POST',
-        url: 'questions',
-        data: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Accept: 'application/json',
-        },
-      })
-        .then((response) => {
-          this.$notify({
-            type: 'success',
-            message: 'Question created successfully.',
-          })
-          this.$router.push('/questions')
+
+      if (!this.$auth.loggedIn) {
+        await this.$store.dispatch('questions/SET_GUEST_QUESTION', formData)
+        this.$router.push({
+          name: 'login',
+          query: { redirect: this.$route.path },
         })
-        .catch((error) => {
-          this.setApiValidation(error)
-        })
-        .then(function () {
-          // always executed
-        })
+      } else {
+        //
+      }
     },
   },
 }

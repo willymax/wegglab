@@ -172,6 +172,11 @@ export default {
       },
     }
   },
+  computed: {
+    GUEST_QUESTION() {
+      return this.$store.getters['questions/GET_GUEST_QUESTION']
+    },
+  },
   mounted() {
     // use route object
     // directly use params
@@ -209,9 +214,8 @@ export default {
           //   type: 'success',
           //   message: 'Login successful.',
           // }).then((res) => {
-
           // })
-          this.$router.push(this.$route.query.redirect || '/dashboard')
+          // this.$router.push(this.$route.query.redirect || '/dashboard')
         })
         .catch((error) => {
           // handle error

@@ -11,6 +11,9 @@ const mutations = {
   SET_SUBJECTS(state, subjects) {
     state.SUBJECTS = subjects
   },
+  SET_GUEST_QUESTION(state, guestQuestionFormData) {
+    state.GUEST_QUESTION = guestQuestionFormData
+  },
   remove(state, { todo }) {
     state.list.splice(state.list.indexOf(todo), 1)
   },
