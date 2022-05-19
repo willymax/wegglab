@@ -215,7 +215,11 @@ export default {
           //   message: 'Login successful.',
           // }).then((res) => {
           // })
-          // this.$router.push(this.$route.query.redirect || '/dashboard')
+          if (this.GUEST_QUESTION) {
+            this.$router.push('/questions/ask')
+          } else {
+            this.$router.push(this.$route.query.redirect || '/dashboard')
+          }
         })
         .catch((error) => {
           // handle error

@@ -14,19 +14,7 @@
         <div
           id="overlay"
           ref="overlay"
-          class="
-            w-full
-            h-full
-            absolute
-            top-0
-            left-0
-            pointer-events-none
-            z-50
-            flex flex-col
-            items-center
-            justify-center
-            rounded-md
-          "
+          class="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md"
           :class="{ draggedover: draggedover }"
         >
           <i>
@@ -48,22 +36,10 @@
         <!-- scroll area -->
         <section class="h-full overflow-auto p-8 w-full flex flex-col">
           <header
-            class="
-              border-dashed border-2 border-gray-400
-              py-12
-              flex flex-col
-              justify-center
-              items-center
-            "
+            class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center"
           >
             <p
-              class="
-                mb-3
-                font-semibold
-                text-gray-900
-                flex flex-wrap
-                justify-center
-              "
+              class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center"
             >
               <span>Drag and drop your</span>&nbsp;<span
                 >files anywhere or</span
@@ -78,15 +54,7 @@
             />
             <button
               ref="button"
-              class="
-                mt-2
-                rounded-sm
-                px-3
-                py-1
-                bg-gray-200
-                hover:bg-gray-300
-                focus:shadow-outline focus:outline-none
-              "
+              class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none"
               @click="uploadAFile"
             >
               Upload a file
@@ -102,14 +70,7 @@
           >
             <li
               ref="empty"
-              class="
-                h-full
-                w-full
-                text-center
-                flex flex-col
-                items-center
-                justify-center
-              "
+              class="h-full w-full text-center flex flex-col items-center justify-center"
               :class="{ hidden: objectList.length > 0 }"
             >
               <img
@@ -119,19 +80,18 @@
               />
               <span class="text-small text-gray-500">No files selected</span>
             </li>
-            <template v-for="item in objectList">
+            <span
+              v-for="item in objectList"
+              :key="item.objectURL"
+              class="inline"
+            >
               <ImagePreview
                 v-if="item.isImage"
-                :key="item.objectURL"
                 :object-details="item"
               ></ImagePreview>
-              <FilePreview
-                v-else
-                :key="item.objectURL"
-                :object-details="item"
-              ></FilePreview>
+              <FilePreview v-else :object-details="item"></FilePreview>
               {{ item.fileName }}
-            </template>
+            </span>
           </ul>
         </section>
 
@@ -160,14 +120,24 @@ export default {
       draggedover: false,
     }
   },
+  computed: {
+    GUEST_QUESTION() {
+      return this.$store.getters['questions/GET_GUEST_QUESTION'] || {}
+    },
+  },
   watch: {
     FILES: {
       handler(val, oldVal) {},
       deep: true,
     },
   },
+  created() {
+    this.FILES = this.GUEST_QUESTION?.fileUploadDetails?.FILES || {}
+    this.objectList = this.GUEST_QUESTION?.fileUploadDetails?.objectList || []
+  },
   methods: {
     addFile(target, file) {
+      console.log('addFile', 'addFile')
       const isImage = file.type.match('image.*')
       const objectURL = URL.createObjectURL(file)
 
@@ -188,7 +158,7 @@ export default {
 
       this.FILES[objectURL] = file
 
-      this.$emit('input', this.FILES)
+      this.$emit('input', { FILES: this.FILES, objectList: this.objectList })
     },
     uploadAFile(event) {
       const hiddenInput = this.$refs.hiddenInput
@@ -249,7 +219,7 @@ export default {
           return el.objectURL !== ou
         })
         delete this.FILES[ou]
-        this.$emit('input', this.FILES)
+        this.$emit('input', { FILES: this.FILES, objectList: this.objectList })
       }
     },
     submit() {

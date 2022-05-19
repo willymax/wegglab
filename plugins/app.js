@@ -1,30 +1,30 @@
 export default ({ app, route, $axios, $toast, redirect, store }, inject) => {
   inject('postQuestion', async () => {
     const formData = await store.getters['questions/GET_GUEST_QUESTION']
-    app
-      .$axios({
-        method: 'POST',
-        url: 'questions',
-        data: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Accept: 'application/json',
-        },
-      })
-      .then((response) => {
-        app.$notify({
-          type: 'success',
-          message: 'Question created successfully.',
+    return new Promise((resolve, reject) => {
+      delete app.$axios.defaults.headers.common['content-type']
+      delete app.$axios.defaults.headers.post['content-type']
+
+      app
+        .$axios({
+          method: 'POST',
+          url: 'questions',
+          data: formData,
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Accept: 'application/json',
+          },
         })
-        app.$router.push(`/questions/${response.data.slug}`)
-      })
-      .catch((error) => {
-        console.log(error)
-        // app.setApiValidation(error)
-      })
-      .then(function () {
-        // always executed
-      })
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+        .then(function () {
+          // always executed
+        })
+    })
   })
   inject('getImageUrl', (relativePath) => {
     return `${process.env.baseStorageUrl}/${relativePath}`
