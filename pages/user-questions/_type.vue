@@ -20,9 +20,7 @@ export default {
       return {}
     },
   },
-  mounted() {
-    console.log('params', this.$route.params)
-  },
+  mounted() {},
 }
 </script>
 

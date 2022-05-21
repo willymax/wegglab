@@ -137,7 +137,6 @@ export default {
   },
   methods: {
     addFile(target, file) {
-      console.log('addFile', 'addFile')
       const isImage = file.type.match('image.*')
       const objectURL = URL.createObjectURL(file)
 

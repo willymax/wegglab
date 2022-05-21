@@ -46,7 +46,6 @@ export default {
   mounted() {
     this.getSubjects()
     this.$nextTick(() => {
-      console.log(this.$nuxt.$loading.start())
       this.$nuxt.$loading.start()
       setTimeout(() => this.$nuxt.$loading.finish(), 500)
     })

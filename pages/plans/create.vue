@@ -164,7 +164,6 @@ export default {
     async createPlan(url = '', data = {}) {
       const res = await this.$store.dispatch('paypal/getAccessToken')
       const accessToken = res.access_token
-      console.log('accessToken', accessToken)
       // Default options are marked with *
       const response = await fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -177,7 +176,6 @@ export default {
       if (response.ok) {
         return response.json() // parses JSON response into native JavaScript objects
       } else {
-        console.log(response.status)
         return Promise.reject(new Error('Plan '))
       }
     },
@@ -221,7 +219,6 @@ export default {
         }
       ).then((res) => res.json())
       this.products = this.products.concat(response.products)
-      console.log('products', this.products)
     },
   },
 }
