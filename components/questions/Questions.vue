@@ -4,7 +4,7 @@
       <template v-if="$fetchState.pending">
         <div class="article-cards-wrapper">
           <content-placeholders
-            v-for="p in paginator.per_page"
+            v-for="p in 3"
             :key="p"
             rounded
             class="article-card-block"
@@ -41,13 +41,17 @@
           v-for="(item, index) in questions"
           :key="item._id"
           v-observe-visibility="
-            index === questions.length - 1 ? lazyLoadQuestions : false
+            index >= questions.length - 6 ? lazyLoadQuestions : false
           "
           :details="item"
         ></question>
       </template>
       <div class="flex flex-col items-center justify-center">
-        <p v-if="!$fetchState.pending && questions.length === 0">
+        <p
+          v-if="
+            !$fetchState.pending && !$fetchState.error && questions.length === 0
+          "
+        >
           No questions found
         </p>
         <base-button @click="resetAndFetch()">Refresh</base-button>
