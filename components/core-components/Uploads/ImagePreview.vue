@@ -5,49 +5,16 @@
   >
     <article
       tabindex="0"
-      class="
-        group
-        hasImage
-        w-full
-        h-full
-        rounded-md
-        focus:outline-none focus:shadow-outline
-        bg-gray-100
-        cursor-pointer
-        relative
-        text-transparent
-        hover:text-white hover:bg-blend-darken
-        shadow-sm
-      "
+      class="group hasImage w-full h-full rounded-md focus:outline-none focus:shadow-outline bg-gray-100 cursor-pointer relative text-transparent hover:text-white hover:bg-blend-darken shadow-sm"
     >
       <img
         :alt="objectDetails.fileName"
-        class="
-          img-preview
-          w-full
-          h-full
-          sticky
-          object-cover
-          rounded-md
-          bg-fixed
-        "
+        class="img-preview w-full h-full sticky object-cover rounded-md bg-fixed"
         :src="objectDetails.objectURL"
       />
 
       <section
-        class="
-          flex flex-col
-          rounded-md
-          text-xs
-          break-words
-          w-full
-          h-full
-          z-20
-          absolute
-          top-0
-          py-2
-          px-3
-        "
+        class="flex flex-col rounded-md text-xs break-words w-full h-full z-20 absolute top-0 py-2 px-3"
       >
         <h1 class="flex-1">{{ objectDetails.fileName }}</h1>
         <div class="flex">
@@ -69,14 +36,7 @@
 
           <p class="p-1 size text-xs">{{ objectDetails.size }}</p>
           <button
-            class="
-              delete
-              ml-auto
-              focus:outline-none
-              hover:bg-gray-300
-              p-1
-              rounded-md
-            "
+            class="delete ml-auto focus:outline-none hover:bg-gray-300 p-1 rounded-md"
             :data-target="objectDetails.objectURL"
           >
             <svg

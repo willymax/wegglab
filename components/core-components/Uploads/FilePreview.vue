@@ -1,49 +1,18 @@
 <template>
   <div>
+    {{ objectDetails.objectURL }}
     <li class="block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24">
       <article
         tabindex="0"
-        class="
-          group
-          w-full
-          h-full
-          rounded-md
-          focus:outline-none focus:shadow-outline
-          elative
-          bg-gray-100
-          cursor-pointer
-          relative
-          shadow-sm
-        "
+        class="group w-full h-full rounded-md focus:outline-none focus:shadow-outline elative bg-gray-100 cursor-pointer relative shadow-sm"
       >
         <img
           alt="upload preview"
-          class="
-            img-preview
-            hidden
-            w-full
-            h-full
-            sticky
-            object-cover
-            rounded-md
-            bg-fixed
-          "
+          class="img-preview hidden w-full h-full sticky object-cover rounded-md bg-fixed"
         />
 
         <section
-          class="
-            flex flex-col
-            rounded-md
-            text-xs
-            break-words
-            w-full
-            h-full
-            z-20
-            absolute
-            top-0
-            py-2
-            px-3
-          "
+          class="flex flex-col rounded-md text-xs break-words w-full h-full z-20 absolute top-0 py-2 px-3"
         >
           <h1 class="flex-1 group-hover:text-blue-800"></h1>
           <div class="flex">
@@ -62,15 +31,7 @@
             </span>
             <p class="p-1 size text-xs text-gray-700"></p>
             <button
-              class="
-                delete
-                ml-auto
-                focus:outline-none
-                hover:bg-gray-300
-                p-1
-                rounded-md
-                text-gray-800
-              "
+              class="delete ml-auto focus:outline-none hover:bg-gray-300 p-1 rounded-md text-gray-800"
               :data-target="objectDetails.objectURL"
             >
               <svg

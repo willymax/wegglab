@@ -80,6 +80,8 @@
               />
               <span class="text-small text-gray-500">No files selected</span>
             </li>
+            <FilePreview :object-details="previewItem"></FilePreview>
+            <ImagePreview :object-details="previewItem"></ImagePreview>
             <span
               v-for="item in objectList"
               :key="item.objectURL"
@@ -118,6 +120,13 @@ export default {
       objectList: [],
       counter: 0,
       draggedover: false,
+      previewItem: {
+        fileName: 'cert_test-1653289276933 (2).pdf',
+        objectURL:
+          'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
+        isImage: false,
+        size: '70kb',
+      },
     }
   },
   computed: {
