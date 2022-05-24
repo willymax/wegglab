@@ -173,6 +173,8 @@ export default {
     { src: '~/plugins/sanitize.js', ssr: false },
     '~/plugins/modal.js',
     '~/plugins/vue-observe-visibility.client.js',
+    { src: '~/plugins/notifications-ssr', ssr: true },
+    { src: '~/plugins/notifications-client', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
