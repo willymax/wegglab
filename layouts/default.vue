@@ -1,14 +1,12 @@
 <template>
   <div>
     <notifications></notifications>
-    <nuxt></nuxt>
+    <Nuxt />
   </div>
 </template>
 
 <script>
-export default {
-  layout: 'ResponsiveDashboard',
-}
+export default {}
 </script>
 
 <style lang="scss" scoped></style>

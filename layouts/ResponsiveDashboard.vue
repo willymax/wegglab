@@ -1,5 +1,6 @@
 <template>
   <div :class="{ dark: darkMode }" class="main-container">
+    <notifications></notifications>
     <!-- main wrapper h-screen -->
     <div class="flex flex-col bg-background font-roboto">
       <header

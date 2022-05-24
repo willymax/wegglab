@@ -1,6 +1,7 @@
 <template>
   <!-- <body class="antialiased h-screen"> -->
   <div class="h-screen">
+    <notifications></notifications>
     <base-nav></base-nav>
     <div class="main-content bg-gray-200">
       <p>Guest content hear</p>

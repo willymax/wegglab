@@ -166,6 +166,7 @@ export default {
             })
           )
         )
+        await this.$store.dispatch('questions/SET_GUEST_QUESTION', formData)
 
         this.$postQuestion()
           .then((res) => {

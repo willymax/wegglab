@@ -13,9 +13,6 @@ export default {
       return { tag: this.$route.params.tag }
     },
   },
-  mounted() {
-    console.log('this.$route', this.$route)
-  },
 }
 </script>
 

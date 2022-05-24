@@ -210,11 +210,10 @@ export default {
           data: this.form.data.attributes,
         })
         .then((response) => {
-          // this.$notify({
-          //   type: 'success',
-          //   message: 'Login successful.',
-          // }).then((res) => {
-          // })
+          this.$notify({
+            type: 'success',
+            message: 'Login successful.',
+          })
           if (this.GUEST_QUESTION) {
             this.$router.push('/questions/ask')
           } else {

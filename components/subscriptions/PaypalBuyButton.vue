@@ -19,9 +19,6 @@ export default {
       return this.$store.getters['questions/GET_CURRENT_QUESTION']
     },
   },
-  created() {
-    console.log('question', this.theQuestion)
-  },
   mounted() {
     this.initPayPalButton()
   },

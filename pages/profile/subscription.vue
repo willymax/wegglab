@@ -81,7 +81,6 @@ export default {
           },
         }
       ).then((res) => res.json())
-      console.log('planResponse', planResponse)
       this.plan = planResponse
     }
   },

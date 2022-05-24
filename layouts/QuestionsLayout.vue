@@ -2,6 +2,7 @@
   <div
     class="min-h-screen flex flex-row flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800"
   >
+    <notifications></notifications>
     <div class="flex flex-col top-0 left-0 w-3/12 bg-white h-full border-r">
       <div class="flex items-center justify-center h-14 border-b">
         <div>Sidebar Navigation By iAmine</div>

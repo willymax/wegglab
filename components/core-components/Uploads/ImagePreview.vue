@@ -5,11 +5,11 @@
   >
     <article
       tabindex="0"
-      class="group hasImage w-full h-full rounded-md focus:outline-none focus:shadow-outline bg-gray-100 cursor-pointer relative text-transparent hover:text-white hover:bg-blend-darken shadow-sm"
+      class="group hasImage w-full h-full min-w-full rounded-md focus:outline-none bg-gray-100 cursor-pointer relative text-transparent hover:text-color-secondary hover:bg-blend-darken shadow-sm"
     >
       <img
         :alt="objectDetails.fileName"
-        class="img-preview w-full h-full sticky object-cover rounded-md bg-fixed"
+        class="img-preview sticky rounded-md bg-fixed object-cover h-full full"
         :src="objectDetails.objectURL"
       />
 
