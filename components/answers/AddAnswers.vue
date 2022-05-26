@@ -8,11 +8,11 @@
     </button>
     <app-modal :show.sync="show">
       <PostAnswerWarning></PostAnswerWarning>
-      <!-- <template #footer>
+      <template #footer>
         <base-button width="md:w-64 w-full" @click="showPostAnswerForm()"
           >Continue</base-button
         >
-      </template> -->
+      </template>
     </app-modal>
   </div>
 </template>

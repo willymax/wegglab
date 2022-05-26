@@ -1,5 +1,5 @@
 <template>
-  <SlideYUpTransition :duration="animationDuration">
+  <ZoomCenterTransition :duration="animationDuration">
     <div
       v-if="show"
       id="my-modal"
@@ -23,7 +23,7 @@
       >
       <div class="inset-0 overflow-y-auto no-scrollbar fixed overflow-x-hidden">
         <div class="text-center h-full">
-          <div class="flex items-start md:items-center justify-center h-full">
+          <div class="flex items-center md:items-center justify-center h-full">
             <div
               tabindex="-1"
               style="z-index: 20000; max-width: 768px"
@@ -57,15 +57,15 @@
         </div>
       </div>
     </div>
-  </SlideYUpTransition>
+  </ZoomCenterTransition>
 </template>
 <script>
-import { SlideYUpTransition } from 'vue2-transitions'
+import { ZoomCenterTransition } from 'vue2-transitions'
 
 export default {
   name: 'BaseModal',
   components: {
-    SlideYUpTransition,
+    ZoomCenterTransition,
   },
   props: {
     show: Boolean,
@@ -137,7 +137,7 @@ export default {
     },
     animationDuration: {
       type: Number,
-      default: 500,
+      default: 100,
       description: 'Modal transition duration',
     },
   },
