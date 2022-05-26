@@ -1,10 +1,12 @@
 <template>
   <!-- <body class="antialiased h-screen"> -->
-  <div class="h-screen">
+  <div class="main-container relative z-0">
     <notifications></notifications>
-    <base-nav></base-nav>
-    <div class="main-content bg-gray-100 dark:bg-gray-800">
-      <nuxt></nuxt>
+    <div class="flex flex-col bg-background font-roboto">
+      <base-nav></base-nav>
+      <div class="main-content bg-gray-100 dark:bg-gray-800">
+        <nuxt></nuxt>
+      </div>
     </div>
   </div>
 </template>

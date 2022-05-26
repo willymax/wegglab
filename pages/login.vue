@@ -2,9 +2,7 @@
   <div>
     <!-- Header -->
     <div class="header">
-      <div class="container">
-        <notifications></notifications>
-      </div>
+      <div class="container"></div>
     </div>
     <!-- Page content -->
     <div class="container p-10">
@@ -223,9 +221,9 @@ export default {
         .catch((error) => {
           // handle error
           this.$notify({
-            type: 'danger',
+            type: 'error',
             title: 'An error occurred',
-            message: 'Invalid credentials!',
+            text: 'Invalid credentials!',
           })
           this.setApiValidation(error)
         })
