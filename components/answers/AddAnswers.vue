@@ -6,13 +6,31 @@
     >
       <slot></slot>
     </button>
+    <app-modal :show.sync="show">
+      <PostAnswerWarning></PostAnswerWarning>
+      <!-- <template #footer>
+        <base-button width="md:w-64 w-full" @click="showPostAnswerForm()"
+          >Continue</base-button
+        >
+      </template> -->
+    </app-modal>
   </div>
 </template>
 <script>
 import BaseNuxtButtonLink from '../core-components/BaseNuxtButtonLink.vue'
 import Card from '../core-components/Cards/Card.vue'
+import PostAnswerWarning from '../questions/PostAnswerWarning.vue'
 export default {
-  components: { Card, BaseNuxtButtonLink },
+  components: {
+    Card,
+    BaseNuxtButtonLink,
+    PostAnswerWarning,
+  },
+  data() {
+    return {
+      show: false,
+    }
+  },
   computed: {
     addingAnswer() {
       return this.$store.getters['answers/addingAnswer']
@@ -20,6 +38,10 @@ export default {
   },
   methods: {
     handleClick(evt) {
+      this.show = true
+    },
+    showPostAnswerForm() {
+      this.show = !this.show
       if (!this.$auth.loggedIn) {
         // If not authenticated, add a path where to redirect after login.
         this.$router.push({

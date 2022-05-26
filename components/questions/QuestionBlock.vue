@@ -13,6 +13,7 @@
         </div>
       </div>
     </div>
+    <h1 class="font-semibold">Deadline: {{ question.deadline }}</h1>
     <h1 class="text-2xl font-bold">{{ question.title }}</h1>
     <client-only>
       <span v-html="question.body"></span>

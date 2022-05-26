@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ dark: darkMode }" class="main-container">
+  <div :class="{ dark: darkMode }" class="main-container relative z-0">
     <notifications></notifications>
     <!-- main wrapper h-screen -->
     <div class="flex flex-col bg-background font-roboto">
@@ -108,7 +108,6 @@
           class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"
           @click="sidebarOpen = false"
         ></div>
-
         <div
           :class="
             sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'

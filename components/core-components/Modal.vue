@@ -3,9 +3,9 @@
     <div
       v-if="show"
       id="my-modal"
-      class="modal"
+      class="modal fixed"
       tabindex="-1"
-      style="z-index: 9998"
+      style="z-index: 20000"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
@@ -26,8 +26,8 @@
           <div class="flex items-start md:items-center justify-center h-full">
             <div
               tabindex="-1"
-              style="z-index: 9998; max-width: 768px"
-              class="overflow-hidden shadow-xl transform transition-all py-10 relative bg-white inline-block rounded-lg text-left align-middle md:w-fit w-full"
+              style="z-index: 20000; max-width: 768px"
+              class="fixed overflow-hidden shadow-xl transform transition-all py-10 bg-white inline-block rounded-lg text-left align-middle md:w-fit w-full"
             >
               <button
                 v-if="showClose"
@@ -51,6 +51,7 @@
                 ></span>
               </button>
               <div class="p-5"><slot></slot></div>
+              <div class="p-5"><slot name="footer"></slot></div>
             </div>
           </div>
         </div>
