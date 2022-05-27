@@ -39,7 +39,7 @@
         <slot v-bind="slotData">
           <input
             :id="id"
-            :type="show ? 'password' : type === 'password' ? 'text' : type"
+            :type="show ? 'text' : type === 'password' ? 'password' : type"
             v-bind="$attrs"
             :valid="valid"
             :required="required"
