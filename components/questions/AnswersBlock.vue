@@ -1,11 +1,13 @@
 <template>
   <div>
     <answers></answers>
-    <post-answer v-if="addingAnswer && $auth.loggedIn"></post-answer>
-    <add-answers
-      v-if="$auth.user.role === 'expert' || $auth.user.role === 'admin'"
-      >Post Answer</add-answers
-    >
+    <post-answer v-if="canAnswerTheQuestion"></post-answer>
+    <template v-else>
+      <add-answers
+        v-if="$auth.user.role === 'expert' || $auth.user.role === 'admin'"
+        >Post Answer</add-answers
+      >
+    </template>
   </div>
 </template>
 
@@ -22,6 +24,9 @@ export default {
     },
     addingAnswer() {
       return this.$store.getters['answers/addingAnswer']
+    },
+    canAnswerTheQuestion() {
+      return this.question && this.question.canAnswer
     },
   },
   methods: {

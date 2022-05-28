@@ -35,13 +35,18 @@ export default {
     addingAnswer() {
       return this.$store.getters['answers/addingAnswer']
     },
+    question() {
+      return this.$store.getters['questions/GET_CURRENT_QUESTION']
+    },
   },
   methods: {
     handleClick(evt) {
       this.show = true
     },
-    showPostAnswerForm() {
-      this.show = !this.show
+    async showPostAnswerForm() {
+      const response = await this.$axios.post('/questions/assignQuestion', {
+        questionId: this.question._id,
+      })
       if (!this.$auth.loggedIn) {
         // If not authenticated, add a path where to redirect after login.
         this.$router.push({
@@ -49,6 +54,7 @@ export default {
           query: { redirect: this.$route.path },
         })
       }
+      this.show = !this.show
       this.$store.dispatch('answers/updateAddingAnswer', !this.addingAnswer)
     },
   },
