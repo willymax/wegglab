@@ -60,11 +60,7 @@
               Upload a file
             </button>
           </header>
-          <ul
-            ref="gallery"
-            class="flex flex-1 flex-wrap -m-1"
-            @click="galleryClick"
-          >
+          <ul ref="gallery" class="flex flex-1 flex-wrap" @click="galleryClick">
             <li
               ref="empty"
               class="h-full w-full text-center flex flex-col items-center justify-center"
@@ -77,20 +73,20 @@
               />
               <span class="text-small text-gray-500">No files selected</span>
             </li>
-            <FilePreview :object-details="previewItem"></FilePreview>
-            <ImagePreview :object-details="previewItem"></ImagePreview>
-            <span
+          </ul>
+          <ul class="w-full flex flex-wrap">
+            <li
               v-for="item in objectList"
+              :id="item.objectURL"
               :key="item.objectURL"
-              class="inline"
+              class="inline-block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24"
             >
               <ImagePreview
                 v-if="item.isImage"
                 :object-details="item"
               ></ImagePreview>
               <FilePreview v-else :object-details="item"></FilePreview>
-              {{ item.fileName }}
-            </span>
+            </li>
           </ul>
         </section>
 

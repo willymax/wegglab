@@ -1,3 +1,3 @@
 export default ({ app }, inject) => {
-  console.log('params are', app)
+  // console.log('params are', app)
 }

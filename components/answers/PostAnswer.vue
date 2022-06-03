@@ -1,12 +1,12 @@
 <template>
   <div class="flex flex-col space-y-4">
     <div class="my-2">
-      <editor
+      <!-- <editor
         v-model="input.body"
         api-key="fwx0vscmsecgg5by0rvm6xbfpbvdruc2nlbxc478ogqam3tk"
         :init="$initializeEditor(config)"
       >
-      </editor>
+      </editor> -->
     </div>
     <validation-error :errors="apiValidationErrors.body" />
     <base-file-upload v-model="FILES"></base-file-upload>
@@ -73,7 +73,7 @@ export default {
             type: 'success',
             message: 'Answer created successfully.',
           })
-          this.$store.dispatch('answers/updateAddingAnswer', false)
+          // this.$store.dispatch('answers/updateAddingAnswer', false)
           this.$store.commit('questions/ADD_QUESTION_ANSWERS', response.data)
         })
         .catch((error) => {

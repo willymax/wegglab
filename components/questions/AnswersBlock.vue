@@ -2,7 +2,7 @@
   <div>
     <answers></answers>
     <post-answer v-if="canAnswerTheQuestion"></post-answer>
-    <template v-else>
+    <template>
       <add-answers
         v-if="$auth.user.role === 'expert' || $auth.user.role === 'admin'"
         >Post Answer</add-answers

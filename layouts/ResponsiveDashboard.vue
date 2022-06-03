@@ -307,8 +307,4 @@ export default {
 }
 </script>
 
-<style lang="postcss">
-body.modal {
-  overflow: hidden !important;
-}
-</style>
+<style lang="postcss"></style>

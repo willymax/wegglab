@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!addingAnswer" class="text-center ma-5">
+  <div class="text-center ma-5">
     <button
       class="py-2 px-4 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75"
       @click="handleClick"
@@ -60,7 +60,7 @@ export default {
         })
       }
       this.show = !this.show
-      this.$store.dispatch('answers/updateAddingAnswer', !this.addingAnswer)
+      // this.$store.dispatch('answers/updateAddingAnswer', !this.addingAnswer)
     },
   },
 }

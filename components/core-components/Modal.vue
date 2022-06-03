@@ -36,19 +36,7 @@
                 class="absolute top-5 right-5"
                 @click="closeModal()"
               >
-                <span class="" aria-hidden="true"
-                  ><svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 23 23"
-                    width="23"
-                    height="23"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-width="1.2"
-                      d="M1 1l21 21m0-21L1 22"
-                    ></path></svg
-                ></span>
+                Close
               </button>
               <div class="p-5"><slot></slot></div>
               <div class="p-5"><slot name="footer"></slot></div>
@@ -143,13 +131,13 @@ export default {
   },
   watch: {
     show(newValue, oldValue) {
-      const body = document.getElementsByTagName('BODY')[0]
+      const body = document.getElementsByTagName('body')[0]
       if (newValue === true) {
         // Disable scroll
-        body.style.overflow = 'hidden'
+        body.classList.add('overflow-hidden')
       } else {
         // Enable scroll
-        body.style.overflow = 'auto'
+        body.classList.remove('overflow-hidden')
       }
     },
   },

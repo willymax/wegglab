@@ -1,15 +1,12 @@
 <template>
-  <li
-    :id="objectDetails.objectURL"
-    class="block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24"
-  >
+  <span>
     <article
       tabindex="0"
-      class="group hasImage w-full h-full min-w-full rounded-md focus:outline-none bg-gray-100 cursor-pointer relative text-transparent hover:text-color-secondary hover:bg-blend-darken shadow-sm"
+      class="group hasImage w-full h-full min-w-full rounded-md focus:outline-none bg-gray-100 cursor-pointer relative text-transparent hover:text-black hover:bg-blend-darken shadow-sm"
     >
       <img
         :alt="objectDetails.fileName"
-        class="img-preview sticky rounded-md bg-fixed object-cover h-full full"
+        class="img-preview sticky rounded-md bg-fixed object-cover h-full w-full"
         :src="objectDetails.objectURL"
       />
 
@@ -55,7 +52,8 @@
         </div>
       </section>
     </article>
-  </li>
+    <h6 class="text-sm break-all">{{ objectDetails.fileName }}</h6>
+  </span>
 </template>
 
 <script>

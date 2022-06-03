@@ -129,7 +129,7 @@ export default ({ app, route, $axios, $toast, redirect, store }, inject) => {
     }
   })
   inject('log', (message, ...params) => {
-    console.log(message, params)
+    // console.log(message, params)
   })
   inject('processTime', (datetimestamp) => {
     const theDate = new Date(datetimestamp)
