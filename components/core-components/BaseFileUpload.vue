@@ -80,6 +80,7 @@
               :id="item.objectURL"
               :key="item.objectURL"
               class="inline-block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24"
+              @click="galleryClick"
             >
               <ImagePreview
                 v-if="item.isImage"
