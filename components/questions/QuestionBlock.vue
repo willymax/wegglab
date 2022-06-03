@@ -13,7 +13,9 @@
         </div>
       </div>
     </div>
-    <h1 class="font-semibold">Deadline: {{ question.deadline }}</h1>
+    <h1 v-if="question.canAnswer" class="font-semibold">
+      Time Left: {{ timeLeft }}
+    </h1>
     <h1 class="text-2xl font-bold">{{ question.title }}</h1>
     <client-only>
       <span v-html="question.body"></span>
@@ -55,12 +57,18 @@
 </template>
 
 <script>
+import moment from 'moment'
 import AnswerUser from '../answers/AnswerUser.vue'
 import Card from '../core-components/Cards/Card.vue'
 import BookmarkQuestion from './BookmarkQuestion.vue'
 import QuestionShare from './QuestionShare.vue'
 export default {
   components: { Card, AnswerUser, BookmarkQuestion, QuestionShare },
+  data() {
+    return {
+      timeLeft: '',
+    }
+  },
   computed: {
     question() {
       return this.$store.getters['questions/GET_CURRENT_QUESTION']
@@ -68,6 +76,19 @@ export default {
     getQuestionBody() {
       return this.$sanitizeHtml(this.question.body)
     },
+  },
+  mounted() {
+    const eventTime = 1366549200 // Timestamp - Sun, 21 Apr 2013 13:00:00 GMT
+    const currentTime = 1366547400 // Timestamp - Sun, 21 Apr 2013 12:30:00 GMT
+    const diffTime = eventTime - currentTime
+    let duration = moment.duration(diffTime * 1000, 'milliseconds')
+    const interval = 1000
+
+    setInterval(function () {
+      duration = moment.duration(duration - interval, 'milliseconds')
+      this.timeLeft =
+        duration.hours() + ':' + duration.minutes() + ':' + duration.seconds()
+    }, interval)
   },
   methods: {
     attachmentISImage(fileType) {

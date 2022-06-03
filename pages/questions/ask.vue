@@ -49,7 +49,6 @@
       </div>
       <validation-error :errors="apiValidationErrors.body" />
       <BaseFileUpload v-model="fileUploadDetails"></BaseFileUpload>
-      {{ fileUploadDetails }}
       <validation-error :errors="apiValidationErrors.email" />
       <base-button @click="postQuestion()">Submit</base-button>
     </div>
