@@ -77,19 +77,37 @@ export default {
       return this.$sanitizeHtml(this.question.body)
     },
   },
-  mounted() {
-    const eventTime = 1366549200 // Timestamp - Sun, 21 Apr 2013 13:00:00 GMT
-    const currentTime = 1366547400 // Timestamp - Sun, 21 Apr 2013 12:30:00 GMT
+  created() {
+    const eventTime = moment(this.question.deadline).unix() // Timestamp - Sun, 21 Apr 2013 13:00:00 GMT
+    const currentTime = moment().unix() // Timestamp - Sun, 21 Apr 2013 12:30:00 GMT
     const diffTime = eventTime - currentTime
-    let duration = moment.duration(diffTime * 1000, 'milliseconds')
-    const interval = 1000
-
-    setInterval(function () {
-      duration = moment.duration(duration - interval, 'milliseconds')
-      this.timeLeft =
-        duration.hours() + ':' + duration.minutes() + ':' + duration.seconds()
-    }, interval)
+    if (diffTime > 0) {
+      let duration = moment.duration(diffTime * 1000, 'milliseconds')
+      const interval = 1000
+      setInterval(() => {
+        duration = moment.duration(duration - interval, 'milliseconds')
+        this.timeLeft =
+          ((hours) => {
+            let s = hours + ''
+            while (s.length < 2) s = '0' + s
+            return s
+          })(duration.hours()) +
+          ':' +
+          ((minutes) => {
+            let s = minutes + ''
+            while (s.length < 2) s = '0' + s
+            return s
+          })(duration.minutes()) +
+          ':' +
+          ((seconds) => {
+            let s = seconds + ''
+            while (s.length < 2) s = '0' + s
+            return s
+          })(duration.seconds())
+      }, interval)
+    }
   },
+  mounted() {},
   methods: {
     attachmentISImage(fileType) {
       return fileType != null
