@@ -105,6 +105,8 @@ export default {
             return s
           })(duration.seconds())
       }, interval)
+    } else {
+      this.timeLeft = '00:00:00'
     }
   },
   mounted() {},
