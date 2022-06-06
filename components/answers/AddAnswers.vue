@@ -44,13 +44,27 @@ export default {
       this.show = true
     },
     async showPostAnswerForm() {
-      const response = await this.$axios.post(
-        `/questions/assignQuestion/?questionId=${this.question._id}`
-      )
-      await this.$store.dispatch('questions/SET_CURRENT_QUESTION', {
-        ...this.question,
-        ...response.data,
-      })
+      try {
+        const response = await this.$axios.post(
+          `/questions/assignQuestion/?questionId=${this.question._id}`
+        )
+        await this.$store.dispatch('questions/SET_CURRENT_QUESTION', {
+          ...this.question,
+          ...response.data,
+        })
+      } catch (error) {
+        if (error.response) {
+          if (error.response.status === 404) {
+            this.$notify({
+              type: 'error',
+              text: error.response.data.message,
+              title: 'Error',
+            })
+          } else {
+            this.$toast.error('An error occurred')
+          }
+        }
+      }
 
       if (!this.$auth.loggedIn) {
         // If not authenticated, add a path where to redirect after login.

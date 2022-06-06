@@ -2,15 +2,20 @@
   <article
     class="dark:hover:bg-gray-500 bg-surface hover:bg-gray-50 transition duration-350 ease-in-out rounded-box overflow-hidden shadow-lg m-2"
   >
-    <div class="p-4">
+    <div class="p-4 flex justify-between items-center">
       <answer-user
         :user="details.user"
         :timestamp="details.createdAt"
         :resource-link="`/questions/${details.slug}`"
       ></answer-user>
+      <p
+        class="text-sm lowercase bg-color-secondary text-on-secondary p-2 rounded-lg border"
+      >
+        {{ details.status }}
+      </p>
     </div>
 
-    <div class="pl-16">
+    <div class="pl-12">
       <nuxt-link :to="`/questions/${details.slug}`" class="hover:underline">
         <h1 class="text-xl font-bold dark:text-white">
           {{ details.title | truncate(540, '...') }}

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-shrink-0 p-4 pb-0 pl-0">
+  <div class="flex flex-shrink-0">
     <div class="flex items-center">
       <div class="h-10 w-10">
         <nuxt-link :to="`/users/${user.id}`" class="flex-shrink-0 group block">
