@@ -71,8 +71,12 @@ export default {
         .then((response) => {
           this.$notify({
             type: 'success',
-            message: 'Answer created successfully.',
+            text: 'Answer created successfully.',
           })
+          this.FILES = {}
+          this.input = {
+            body: '',
+          }
           // this.$store.dispatch('answers/updateAddingAnswer', false)
           this.$store.commit('questions/ADD_QUESTION_ANSWERS', response.data)
         })

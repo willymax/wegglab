@@ -78,36 +78,37 @@ export default {
     },
   },
   created() {
+    const interval = 1000
     const eventTime = moment(this.question.deadline).unix() // Timestamp - Sun, 21 Apr 2013 13:00:00 GMT
-    const currentTime = moment().unix() // Timestamp - Sun, 21 Apr 2013 12:30:00 GMT
-    const diffTime = eventTime - currentTime
-    if (diffTime > 0) {
+    const timer = setInterval(() => {
+      const currentTime = moment().unix() // Timestamp - Sun, 21 Apr 2013 12:30:00 GMT
+      let diffTime = eventTime - currentTime
+      if (diffTime <= 0) {
+        clearInterval(timer)
+        diffTime = 0
+      }
       let duration = moment.duration(diffTime * 1000, 'milliseconds')
-      const interval = 1000
-      setInterval(() => {
-        duration = moment.duration(duration - interval, 'milliseconds')
-        this.timeLeft =
-          ((hours) => {
-            let s = hours + ''
-            while (s.length < 2) s = '0' + s
-            return s
-          })(duration.hours()) +
-          ':' +
-          ((minutes) => {
-            let s = minutes + ''
-            while (s.length < 2) s = '0' + s
-            return s
-          })(duration.minutes()) +
-          ':' +
-          ((seconds) => {
-            let s = seconds + ''
-            while (s.length < 2) s = '0' + s
-            return s
-          })(duration.seconds())
-      }, interval)
-    } else {
-      this.timeLeft = '00:00:00'
-    }
+      duration = moment.duration(duration - interval, 'milliseconds')
+      this.timeLeft =
+        ((hours) => {
+          let s = hours + ''
+          while (s.length < 2) s = '0' + s
+          return s
+        })(duration.hours()) +
+        ':' +
+        ((minutes) => {
+          let s = minutes + ''
+          while (s.length < 2) s = '0' + s
+          return s
+        })(duration.minutes()) +
+        ':' +
+        ((seconds) => {
+          if (seconds < 0) seconds = 0
+          let s = seconds + ''
+          while (s.length < 2) s = '0' + s
+          return s
+        })(duration.seconds())
+    }, interval)
   },
   mounted() {},
   methods: {

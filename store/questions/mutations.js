@@ -21,7 +21,7 @@ const mutations = {
     todo.done = !todo.done
   },
   ADD_QUESTION_ANSWERS(state, newAnswers) {
-    state.CURRENT_QUESTION.answers.unshift(newAnswers)
+    state.CURRENT_QUESTION.answers.push(newAnswers)
     state.CURRENT_QUESTION = { ...state.CURRENT_QUESTION }
   },
 }
