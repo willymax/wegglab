@@ -51,7 +51,7 @@ export default {
               )
               that.$axios
                 .post('answer-purchases/', {
-                  question_id: that.theQuestion._id,
+                  questionId: that.theQuestion._id,
                   payment_id: orderData.id,
                   user_id: that.$auth.user.id,
                   status: orderData.status,

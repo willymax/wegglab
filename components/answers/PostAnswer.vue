@@ -56,7 +56,7 @@ export default {
       }
       // formData.append('title', this.input.title)
       formData.append('body', this.input.body)
-      formData.append('question_id', this.question._id)
+      formData.append('questionId', this.question._id)
       delete this.$axios.defaults.headers.common['content-type']
       delete this.$axios.defaults.headers.post['content-type']
       this.$axios({
