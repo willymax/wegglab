@@ -9,7 +9,7 @@
       </editor>
     </div>
     <validation-error :errors="apiValidationErrors.body" />
-    <base-file-upload v-model="FILES"></base-file-upload>
+    <base-file-upload v-model="fileUploadDetails"></base-file-upload>
     <validation-error :errors="apiValidationErrors.email" />
     <base-button @click="postAnswer()">Submit</base-button>
   </div>
@@ -27,7 +27,7 @@ export default {
   mixins: [formMixin],
   data() {
     return {
-      FILES: {},
+      fileUploadDetails: {},
       input: {
         body: '',
       },
@@ -48,9 +48,10 @@ export default {
   methods: {
     postAnswer() {
       const formData = new FormData()
-      const files = []
       let counter = 0
-      for (const [index, file] of Object.entries(this.FILES)) {
+      for (const [index, file] of Object.entries(
+        this.fileUploadDetails.FILES
+      )) {
         formData.append(`files`, file)
         counter++
       }

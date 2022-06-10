@@ -35,11 +35,15 @@ export default {
             label: 'pay',
           },
           createOrder(data, actions) {
-            return actions.order.create({
-              purchase_units: [
-                { amount: { currency_code: 'USD', value: that.amount } },
-              ],
-            })
+            return that.$axios
+              .post('orders', {
+                questionId: that.theQuestion._id,
+                total: that.amount,
+                totalTax: 0,
+              })
+              .then((response) => {
+                return response.data._id
+              })
           },
           onApprove(data, actions) {
             return actions.order.capture().then(function (orderData) {
