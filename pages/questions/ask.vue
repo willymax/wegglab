@@ -147,12 +147,15 @@ export default {
         })
       } else {
         const formData = new FormData()
-        let counter = 0
-        for (const [index, file] of Object.entries(
-          this.fileUploadDetails.FILES
-        )) {
-          formData.append(`files`, file)
-          counter++
+
+        if (this.fileUploadDetails && this.fileUploadDetails.FILES) {
+          let counter = 0
+          for (const [index, file] of Object.entries(
+            this.fileUploadDetails.FILES
+          )) {
+            formData.append(`files`, file)
+            counter++
+          }
         }
         formData.append('title', this.input.title)
         formData.append('subject', this.input.subject)

@@ -25,6 +25,7 @@ export default {
   methods: {
     initPayPalButton() {
       const that = this
+      let orderId
       // eslint-disable-next-line no-undef
       paypal
         .Buttons({
@@ -34,6 +35,7 @@ export default {
             layout: 'vertical',
             label: 'pay',
           },
+          onClick(data, actions) {},
           createOrder(data, actions) {
             return that.$axios
               .post('orders', {
@@ -42,28 +44,60 @@ export default {
                 totalTax: 0,
               })
               .then((response) => {
-                return response.data._id
+                if (response.data) {
+                  return response.data.paypalOrderId
+                } else {
+                  return null
+                  // return actions.reject()
+                }
               })
+            // return actions.order
+            //   .create({
+            //     purchase_units: [
+            //       {
+            //         amount: { currency_code: 'USD', value: that.amount },
+            //         custom_id: window.wegglabOrderId,
+            //       },
+            //     ],
+            //   })
+            //   .then((orderData) => {
+            //     console.log('orderData', orderData)
+            //     console.log('orderData.id', orderData.id)
+            //     orderId = orderData.id // needed later to complete capture
+            //     return orderData.id
+            //   })
           },
           onApprove(data, actions) {
+            console.log('onApprove order', data)
             return actions.order.capture().then(function (orderData) {
+              // Three cases to handle:
+              //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+              //   (2) Other non-recoverable errors -> Show a failure message
+              //   (3) Successful transaction -> Show confirmation or thank you
+              // This example reads a v2/checkout/orders capture response, propagated from the server
+              // You could use a different API or structure for your 'orderData'
+              const errorDetail =
+                Array.isArray(orderData.details) && orderData.details[0]
+              if (errorDetail && errorDetail.issue === 'INSTRUMENT_DECLINED') {
+                return actions.restart() // Recoverable state, per:
+                // https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
+              }
+              if (errorDetail) {
+                let msg = 'Sorry, your transaction could not be processed.'
+                if (errorDetail.description)
+                  msg += '\n\n' + errorDetail.description
+                if (orderData.debug_id) msg += ' (' + orderData.debug_id + ')'
+                return alert(msg) // Show a failure message
+              }
               // Full available details
-              console.log(
-                'Capture result',
-                orderData,
-                JSON.stringify(orderData, null, 2)
-              )
-              that.$axios
-                .post('answer-purchases/', {
-                  questionId: that.theQuestion._id,
-                  payment_id: orderData.id,
-                  user_id: that.$auth.user.id,
+              return that.$axios
+                .post('orders/complete', {
+                  paypalOrderId: orderData.id,
                   status: orderData.status,
-                  amount: that.amount,
-                  create_time: orderData.create_time,
-                  update_time: orderData.update_time,
                 })
                 .then((response) => {
+                  // Show a success message or redirect
+                  // alert('Transaction completed!')
                   // Show a success message within this page, e.g.
                   const element = document.getElementById(
                     'paypal-button-container'
