@@ -52,32 +52,34 @@
               sortable="custom"
             >
               <template slot-scope="scope">
-                <nuxt-link :to="`/users/${scope.row.id}`" class="underline">{{
-                  scope.row.id
-                }}</nuxt-link>
+                <nuxt-link
+                  :to="`/users/${scope.row.id}`"
+                  class="underline cursor-pointer"
+                  >{{ scope.row.id }}</nuxt-link
+                >
               </template>
             </el-table-column>
             <el-table-column
               label="Type"
-              min-width="310px"
+              min-width="150px"
               prop="role"
               sortable="custom"
             />
             <el-table-column
               label="First Name"
-              min-width="310px"
+              min-width="150px"
               prop="first_name"
               sortable="custom"
             />
             <el-table-column
               label="Last Name"
-              min-width="310px"
+              min-width="150px"
               prop="last_name"
               sortable="custom"
             />
             <el-table-column
               label="Email"
-              min-width="310px"
+              min-width="150px"
               prop="email"
               sortable="custom"
             />
