@@ -109,11 +109,11 @@ export default {
       questions: [],
       relativeUrl: 'questions',
       paginator: {
-        total_count: 0,
-        per_page: 5,
-        current_page: 1,
-        last_page: 0,
-        total_pages: 0,
+        totalCount: 0,
+        perPage: 5,
+        currentPage: 1,
+        lastPage: 0,
+        totalPages: 0,
         from: 0,
         to: 0,
       },
@@ -131,7 +131,7 @@ export default {
       queryParams = queryParams + `&search=${this.$route.query.search}`
     }
     const res = await this.$axios.get(
-      `questions?page=${this.paginator.current_page}&perPage=${this.paginator.per_page}${queryParams}`
+      `questions?page=${this.paginator.currentPage}&perPage=${this.paginator.perPage}${queryParams}`
     )
     this.paginator = { ...res.data.paginator }
     this.questions = this.questions.concat(res.data.data)
@@ -156,19 +156,19 @@ export default {
       this.$router.push({ query: { search: this.searchText } })
     },
     resetAndFetch() {
-      this.paginator.current_page = 1
+      this.paginator.currentPage = 1
       this.questions = []
       this.$fetch()
     },
     lazyLoadQuestions(isVisible) {
       if (
-        this.paginator.total_count < this.paginator.per_page ||
-        this.paginator.current_page >= this.paginator.last_page
+        this.paginator.totalCount < this.paginator.perPage ||
+        this.paginator.currentPage >= this.paginator.lastPage
       ) {
         return
       }
       if (isVisible) {
-        this.paginator.current_page++
+        this.paginator.currentPage++
         this.$fetch()
       }
     },

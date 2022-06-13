@@ -22,6 +22,20 @@
         </side-bar-menu-link>
         <side-bar-menu-link v-if="$auth.user.role === 'admin'">
           <template #link-icon>
+            <img class="w-5 h-5" src="~assets/wallet.svg" />
+          </template>
+          Orders
+          <template #menus>
+            <menu-item to="/orders">Orders</menu-item>
+            <menu-item to="/products">List Products</menu-item>
+            <menu-item to="/plans/create">Create Plan</menu-item>
+            <menu-item to="/products/create">Create Product</menu-item>
+            <menu-item to="/subscriptions/plans">Subscribe</menu-item>
+            <menu-item to="/subscriptions">Subscriptions</menu-item>
+          </template>
+        </side-bar-menu-link>
+        <side-bar-menu-link v-if="$auth.user.role === 'admin'">
+          <template #link-icon>
             <img class="w-5 h-5" src="~assets/users.svg" />
           </template>
           Users

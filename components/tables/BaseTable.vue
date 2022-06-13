@@ -53,7 +53,17 @@
               :min-width="column.minWidth"
               :prop="column.prop"
               :sortable="column.sortable"
-            />
+            >
+              <!-- <template v-if="column.prop === '_id'" #default="table">
+                <router-link
+                  class="cursor-pointer"
+                  :to="{ name: 'questions', params: { id: table.row._id } }"
+                  tag="span"
+                >
+                  {{ table.row._id }}
+                </router-link>
+              </template> -->
+            </el-table-column>
             <el-table-column min-width="180px" align="center">
               <template slot-scope="scope">
                 <div class="table-actions">
@@ -215,16 +225,7 @@ export default {
       type: String,
       default: 'student',
     },
-    items: {
-      type: Array,
-      default() {
-        return []
-      },
-    },
-    total: {
-      type: Number,
-      default: 1,
-    },
+
     tableTitle: {
       type: String,
       default: 'Items List',
@@ -247,6 +248,8 @@ export default {
       sort: 'createdAt',
       tablePaginations: { ...this.pagination },
       selectedItem: null,
+      items: [],
+      total: 0,
     }
   },
   computed: {
@@ -296,35 +299,38 @@ export default {
       this.showDeleteDialog = true
     },
     getItems() {
-      this.$emit('getItems', {
-        perPage: this.tablePaginations.perPage,
-        page: this.tablePaginations.currentPage,
-      })
-      // const that = this
-      // this.$axios
-      //   .get('items', {
-      //     params: {
-      //       perPage: this.tablePaginations.perPage,
-      //       page: this.tablePaginations.currentPage,
-      //     },
-      //   })
-      //   .then(function (response) {
-      //     // handle success
-      //     that.items = response.data.data
-      //     that.tablePaginations.currentPage = response.data.paginator.current_page
-      //     that.tablePaginations.perPage = parseInt(response.data.paginator.per_page)
-      //     that.total = response.data.paginator.total_count
-      //   })
-      //   .catch(function (error) {
-      //     // handle error
-      //     console.log(error)
-      //   })
-      //   .then(function () {
-      //     // always executed
-      //   })
+      // this.$emit('getItems', {
+      //   perPage: this.tablePaginations.perPage,
+      //   page: this.tablePaginations.currentPage,
+      // })
+      const that = this
+      this.$axios
+        .get(`${this.resource}`, {
+          params: {
+            perPage: this.tablePaginations.perPage,
+            page: this.tablePaginations.currentPage,
+          },
+        })
+        .then(function (response) {
+          // handle success
+          that.items = response.data.data
+          that.tablePaginations.currentPage =
+            response.data.paginator.currentPage
+          that.tablePaginations.perPage = parseInt(
+            response.data.paginator.perPage
+          )
+          that.total = response.data.paginator.totalCount
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error)
+        })
+        .then(function () {
+          // always executed
+        })
     },
-     onProFeature() {
-       this.$notify({
+    onProFeature() {
+      this.$notify({
         type: 'danger',
         message: 'This is a PRO feature.',
       })
