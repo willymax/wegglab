@@ -84,6 +84,12 @@
               sortable="custom"
             />
             <el-table-column
+              label="Total Earning"
+              min-width="150px"
+              prop="earning.cancelled"
+              sortable="custom"
+            />
+            <el-table-column
               label="Created At"
               prop="createdAt"
               min-width="140px"
@@ -139,6 +145,7 @@
           />
         </div>
       </card>
+      {{ users }}
     </div>
   </div>
 </template>

@@ -208,15 +208,19 @@ export default {
           data: this.form.data.attributes,
         })
         .then((response) => {
+          console.log('setTimeout')
           this.$notify({
             type: 'success',
-            message: 'Login successful.',
+            title: "You're in",
+            text: 'Login successful.',
           })
-          if (this.GUEST_QUESTION) {
-            this.$router.push('/questions/ask')
-          } else {
-            this.$router.push(this.$route.query.redirect || '/dashboard')
-          }
+          setTimeout(() => {
+            if (this.GUEST_QUESTION) {
+              this.$router.push('/questions/ask')
+            } else {
+              this.$router.push(this.$route.query.redirect || '/dashboard')
+            }
+          }, 2000)
         })
         .catch((error) => {
           // handle error

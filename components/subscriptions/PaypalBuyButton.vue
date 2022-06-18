@@ -68,49 +68,43 @@ export default {
             //   })
           },
           onApprove(data, actions) {
-            console.log('onApprove order', data)
-            return actions.order.capture().then(function (orderData) {
-              // Three cases to handle:
-              //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
-              //   (2) Other non-recoverable errors -> Show a failure message
-              //   (3) Successful transaction -> Show confirmation or thank you
-              // This example reads a v2/checkout/orders capture response, propagated from the server
-              // You could use a different API or structure for your 'orderData'
-              const errorDetail =
-                Array.isArray(orderData.details) && orderData.details[0]
-              if (errorDetail && errorDetail.issue === 'INSTRUMENT_DECLINED') {
-                return actions.restart() // Recoverable state, per:
-                // https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
-              }
-              if (errorDetail) {
-                let msg = 'Sorry, your transaction could not be processed.'
-                if (errorDetail.description)
-                  msg += '\n\n' + errorDetail.description
-                if (orderData.debug_id) msg += ' (' + orderData.debug_id + ')'
-                return alert(msg) // Show a failure message
-              }
-              // Full available details
-              return that.$axios
-                .post('orders/complete', {
-                  paypalOrderId: orderData.id,
-                  status: orderData.status,
-                })
-                .then((response) => {
-                  // Show a success message or redirect
-                  // alert('Transaction completed!')
-                  // Show a success message within this page, e.g.
-                  const element = document.getElementById(
-                    'paypal-button-container'
-                  )
-                  element.innerHTML = ''
-                  element.innerHTML = '<h3>Thank you for your payment!</h3>'
-                  // Or go to another URL:  actions.redirect('thank_you.html');
-                  that.$nuxt.$emit('paymentReceived', true)
-                })
-                .catch((error) => {
-                  console.log(error)
-                })
-            })
+            return that.$axios
+              .get(`paypal/orders/capture/${data.orderID}`)
+              .then(function (orderData) {
+                // Three cases to handle:
+                //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+                //   (2) Other non-recoverable errors -> Show a failure message
+                //   (3) Successful transaction -> Show confirmation or thank you
+                // This example reads a v2/checkout/orders capture response, propagated from the server
+                // You could use a different API or structure for your 'orderData'
+                const errorDetail =
+                  Array.isArray(orderData.details) && orderData.details[0]
+                if (
+                  errorDetail &&
+                  errorDetail.issue === 'INSTRUMENT_DECLINED'
+                ) {
+                  return actions.restart() // Recoverable state, per:
+                  // https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
+                }
+                if (errorDetail) {
+                  let msg = 'Sorry, your transaction could not be processed.'
+                  if (errorDetail.description)
+                    msg += '\n\n' + errorDetail.description
+                  if (orderData.debug_id) msg += ' (' + orderData.debug_id + ')'
+                  return alert(msg) // Show a failure message
+                }
+                // Full available details
+                // Show a success message or redirect
+                // alert('Transaction completed!')
+                // Show a success message within this page, e.g.
+                const element = document.getElementById(
+                  'paypal-button-container'
+                )
+                element.innerHTML = ''
+                element.innerHTML = '<h3>Thank you for your payment!</h3>'
+                // Or go to another URL:  actions.redirect('thank_you.html');
+                that.$nuxt.$emit('paymentReceived', true)
+              })
           },
 
           onError(err) {

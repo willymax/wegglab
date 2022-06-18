@@ -1,6 +1,6 @@
 <template>
   <!-- <body class="antialiased h-screen"> -->
-  <div class="main-container relative z-0">
+  <div class="main-container relative">
     <notifications></notifications>
     <div class="flex flex-col bg-background font-roboto">
       <base-nav></base-nav>
