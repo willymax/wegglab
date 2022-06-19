@@ -17,11 +17,6 @@
           <div v-else class="px-6 sm:px-12">
             <p>Get full Expert solution in seconds</p>
             <paypal-buy-button :amount="30"></paypal-buy-button>
-            <h2>Or subscribe to access answers</h2>
-
-            <base-nuxt-button-link to="/subscriptions/plans"
-              >Subscribe</base-nuxt-button-link
-            >
           </div>
         </card>
       </div>

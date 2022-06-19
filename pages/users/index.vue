@@ -59,12 +59,7 @@
                 >
               </template>
             </el-table-column>
-            <el-table-column
-              label="Type"
-              min-width="150px"
-              prop="role"
-              sortable="custom"
-            />
+
             <el-table-column
               label="First Name"
               min-width="150px"
@@ -78,13 +73,55 @@
               sortable="custom"
             />
             <el-table-column
+              label="Role"
+              min-width="150px"
+              prop="role"
+              sortable="custom"
+            />
+            <el-table-column
               label="Email"
               min-width="150px"
               prop="email"
               sortable="custom"
             />
             <el-table-column
+              label="Account Status"
+              min-width="150px"
+              prop="email"
+              sortable="custom"
+            />
+            <el-table-column
               label="Total Earning"
+              min-width="150px"
+              prop="earning.cancelled"
+              sortable="custom"
+            />
+            <el-table-column
+              label="Pending Clearance"
+              min-width="150px"
+              prop="earning.pendingClearance"
+              sortable="custom"
+            />
+            <el-table-column
+              label="Cleared"
+              min-width="150px"
+              prop="earning.cleared"
+              sortable="custom"
+            />
+            <el-table-column
+              label="Withdrawn"
+              min-width="150px"
+              prop="earning.withdrawn"
+              sortable="custom"
+            />
+            <el-table-column
+              label="Used For Purchase"
+              min-width="150px"
+              prop="earning.usedForPurchase"
+              sortable="custom"
+            />
+            <el-table-column
+              label="Cancelled"
               min-width="150px"
               prop="earning.cancelled"
               sortable="custom"
@@ -145,7 +182,6 @@
           />
         </div>
       </card>
-      {{ users }}
     </div>
   </div>
 </template>

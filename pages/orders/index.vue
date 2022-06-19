@@ -83,16 +83,6 @@ export default {
           const accessToken = res.access_token
           try {
             retry = false
-            // const response = await fetch(
-            //   'https://api-m.sandbox.paypal.com/v1/billing/orders',
-            //   {
-            //     method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            //     headers: {
-            //       Authorization: `Bearer ${accessToken}`,
-            //       'Content-Type': 'application/json',
-            //     },
-            //   }
-            // ).then((res) => res.json())
             const response = await this.$axios.get('/orders')
             this.orders = response.data.data
           } catch ($ex) {}
