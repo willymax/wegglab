@@ -11,7 +11,7 @@
       <p
         class="text-sm lowercase bg-color-secondary text-on-secondary p-2 rounded-lg border"
       >
-        {{ details.status }}
+        {{ getStatusToShow(details.status) }}
       </p>
     </div>
 
@@ -107,6 +107,14 @@ export default {
   methods: {
     getQuestionUrl(slug) {
       //
+    },
+    getStatusToShow(status) {
+      if (status === 'ASSIGNED') {
+        if (!this.$auth.loggedIn || this.$auth.user.role === 'student') {
+          return 'unanswered'
+        }
+      }
+      return status
     },
   },
 }

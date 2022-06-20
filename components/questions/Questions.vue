@@ -120,6 +120,7 @@ export default {
     }
   },
   async fetch() {
+    console.log('fetching fetch');
     let queryParams = `&bookmarked=${this.bookmarked}&answered=${this.answered}`
     if (this.userId) {
       queryParams = queryParams + `&userId=${this.userId}`
