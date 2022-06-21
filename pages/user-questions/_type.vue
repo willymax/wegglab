@@ -15,7 +15,10 @@ export default {
         return { bookmarked: true }
       }
       if (this.$route.params.type === '3') {
-        return { answered: true }
+        return { assignedToMe: true }
+      }
+      if (this.$route.params.type === '4') {
+        return { purchased: true }
       }
       return {}
     },

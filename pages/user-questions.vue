@@ -29,7 +29,32 @@
                 </svg>
               </span>
               <span class="ml-2 text-sm tracking-wide truncate"
-                >My Questions</span
+                >Posted By Me</span
+              >
+            </Nuxt-Link>
+          </li>
+          <li>
+            <Nuxt-Link
+              to="/user-questions/4"
+              class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
+            >
+              <span class="inline-flex justify-center items-center ml-4">
+                <svg
+                  class="w-5 h-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="0 0 24 24"
+                  width="24px"
+                  fill="#000000"
+                >
+                  <path d="M0 0h24v24H0z" fill="none" />
+                  <path
+                    d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10z"
+                  />
+                </svg>
+              </span>
+              <span class="ml-2 text-sm tracking-wide truncate"
+                >Unlocked Questions</span
               >
             </Nuxt-Link>
           </li>
@@ -40,21 +65,24 @@
             >
               <span class="inline-flex justify-center items-center ml-4">
                 <svg
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="0 0 24 24"
+                  width="24px"
+                  fill="#000000"
                 >
+                  <path d="M0 0h24v24H0V0z" fill="none" />
                   <path
-                    d="M 6.0097656 2 C 4.9143111 2 4.0097656 2.9025988 4.0097656 3.9980469 L 4 22 L 12 19 L 20 22 L 20 20.556641 L 20 4 C 20 2.9069372 19.093063 2 18 2 L 6.0097656 2 z M 6.0097656 4 L 18 4 L 18 19.113281 L 12 16.863281 L 6.0019531 19.113281 L 6.0097656 4 z"
+                    d="M19 18l2 1V3c0-1.1-.9-2-2-2H8.99C7.89 1 7 1.9 7 3h10c1.1 0 2 .9 2 2v13zM15 5H5c-1.1 0-2 .9-2 2v16l7-3 7 3V7c0-1.1-.9-2-2-2z"
                   />
                 </svg>
               </span>
-              <span class="ml-2 text-sm tracking-wide truncate">Watching</span>
+              <span class="ml-2 text-sm tracking-wide truncate"
+                >Bookmarked</span
+              >
               <span
                 class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-indigo-500 bg-indigo-50 rounded-full"
-                >Watching</span
+                >Bookmarked</span
               >
             </Nuxt-Link>
           </li>
@@ -80,7 +108,7 @@
                 </svg>
               </span>
               <span class="ml-2 text-sm tracking-wide truncate"
-                >My Answers</span
+                >Assigned To Me</span
               >
             </Nuxt-Link>
           </li>
