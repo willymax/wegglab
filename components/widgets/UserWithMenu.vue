@@ -100,7 +100,7 @@ export default {
       dropdownOpen: false,
       options: [
         { name: 'Account settings', url: '/profile', id: 1 },
-        { name: 'Questions', url: '/user-questions', id: 1 },
+        { name: 'Questions', url: '/user-questions/1', id: 1 },
         // { name: 'Orders', url: '/orders', id: 1 },
         { name: 'Payments', url: '/payments', id: 1 },
       ],
