@@ -9,7 +9,7 @@
           <NuxtLink to="/profile/password/">Change Password</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/profile/payments/">Payments</NuxtLink>
+          <NuxtLink to="/payments/">Payments</NuxtLink>
         </li>
         <li>
           <NuxtLink to="/profile/subscription/">Subscription</NuxtLink>

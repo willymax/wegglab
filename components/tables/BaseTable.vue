@@ -64,6 +64,7 @@
                 </router-link>
               </template> -->
             </el-table-column>
+            <slot name="custom-columns"></slot>
             <el-table-column min-width="180px" align="center">
               <template slot-scope="scope">
                 <div class="table-actions">

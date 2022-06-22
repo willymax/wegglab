@@ -97,7 +97,11 @@ export default {
       type: Boolean,
       default: false,
     },
-    answered: {
+    assignedToMe: {
+      type: Boolean,
+      default: false,
+    },
+    purchased: {
       type: Boolean,
       default: false,
     },
@@ -120,7 +124,8 @@ export default {
     }
   },
   async fetch() {
-    let queryParams = `&bookmarked=${this.bookmarked}&answered=${this.answered}`
+    console.log('fetching fetch')
+    let queryParams = `&bookmarked=${this.bookmarked}&assignedToMe=${this.assignedToMe}&purchased=${this.purchased}`
     if (this.userId) {
       queryParams = queryParams + `&userId=${this.userId}`
     }
@@ -147,7 +152,10 @@ export default {
     bookmarked(newValue, oldValue) {
       this.resetAndFetch()
     },
-    answered(newValue, oldValue) {
+    assignedToMe(newValue, oldValue) {
+      this.resetAndFetch()
+    },
+    pruchased(newValue, oldValue) {
       this.resetAndFetch()
     },
   },
