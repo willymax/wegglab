@@ -1,5 +1,5 @@
 <template>
-  <card>
+  <card class="">
     <div class="flex">
       <answer-user
         class="flex-1"
@@ -8,9 +8,14 @@
         :resource-link="`/questions/${question.slug}`"
       ></answer-user>
       <div>
-        <BookmarkQuestion></BookmarkQuestion>
+        <div class="flex items-center">
+          <BookmarkQuestion></BookmarkQuestion>
+        </div>
       </div>
     </div>
+    <h1 v-if="question.canAnswer" class="font-semibold">
+      Time Left: {{ timeLeft }}
+    </h1>
     <h1 class="text-2xl font-bold">{{ question.title }}</h1>
     <client-only>
       <span v-html="question.body"></span>
@@ -45,15 +50,25 @@
         </ul>
       </div>
     </div>
+    <div class="flex flex-row-reverse">
+      <question-share></question-share>
+    </div>
   </card>
 </template>
 
 <script>
+import moment from 'moment'
 import AnswerUser from '../answers/AnswerUser.vue'
 import Card from '../core-components/Cards/Card.vue'
 import BookmarkQuestion from './BookmarkQuestion.vue'
+import QuestionShare from './QuestionShare.vue'
 export default {
-  components: { Card, AnswerUser, BookmarkQuestion },
+  components: { Card, AnswerUser, BookmarkQuestion, QuestionShare },
+  data() {
+    return {
+      timeLeft: '',
+    }
+  },
   computed: {
     question() {
       return this.$store.getters['questions/GET_CURRENT_QUESTION']
@@ -62,6 +77,40 @@ export default {
       return this.$sanitizeHtml(this.question.body)
     },
   },
+  created() {
+    const interval = 1000
+    const eventTime = moment(this.question.deadline).unix() // Timestamp - Sun, 21 Apr 2013 13:00:00 GMT
+    const timer = setInterval(() => {
+      const currentTime = moment().unix() // Timestamp - Sun, 21 Apr 2013 12:30:00 GMT
+      let diffTime = eventTime - currentTime
+      if (diffTime <= 0) {
+        clearInterval(timer)
+        diffTime = 0
+      }
+      let duration = moment.duration(diffTime * 1000, 'milliseconds')
+      duration = moment.duration(duration - interval, 'milliseconds')
+      this.timeLeft =
+        ((hours) => {
+          let s = hours + ''
+          while (s.length < 2) s = '0' + s
+          return s
+        })(duration.hours()) +
+        ':' +
+        ((minutes) => {
+          let s = minutes + ''
+          while (s.length < 2) s = '0' + s
+          return s
+        })(duration.minutes()) +
+        ':' +
+        ((seconds) => {
+          if (seconds < 0) seconds = 0
+          let s = seconds + ''
+          while (s.length < 2) s = '0' + s
+          return s
+        })(duration.seconds())
+    }, interval)
+  },
+  mounted() {},
   methods: {
     attachmentISImage(fileType) {
       return fileType != null

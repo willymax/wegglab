@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-shrink-0 p-4 pb-0 pl-0">
+  <div class="flex flex-shrink-0">
     <div class="flex items-center">
       <div class="h-10 w-10">
         <nuxt-link :to="`/users/${user.id}`" class="flex-shrink-0 group block">
@@ -23,8 +23,11 @@
           <span
             class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150"
           >
-            <nuxt-link :to="resourceLink" class="flex-shrink-0 group block">
-              <span>{{ $processTime(timestamp) }}</span>
+            <nuxt-link
+              :to="`/users/${user.id}`"
+              class="flex-shrink-0 group block"
+            >
+              {{ $processTime(timestamp) }}
             </nuxt-link>
           </span>
         </p>

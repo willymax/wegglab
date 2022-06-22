@@ -1,16 +1,19 @@
 <template>
   <div v-if="$auth.loggedIn">
     <div class="relative">
-      <button
-        ref="userButton"
-        class="flex items-center space-x-2 relative focus:outline-none"
-        @click="dropdownOpen = !dropdownOpen"
-      >
-        <!-- <h2 class="text-gray-700 dark:text-gray-300 text-sm hidden sm:block">
+      <div class="flex flex-row justify-center items-center">
+        <p>{{ $auth.user.role }}</p>
+        <button
+          ref="userButton"
+          class="flex items-center space-x-2 relative focus:outline-none"
+          @click="dropdownOpen = !dropdownOpen"
+        >
+          <!-- <h2 class="text-gray-700 dark:text-gray-300 text-sm hidden sm:block">
           {{ $auth.user.first_name }} {{ $auth.user.last_name }}
         </h2> -->
-        <base-avatar :user-avatar="$auth.user.avatar"></base-avatar>
-      </button>
+          <base-avatar :user-avatar="$auth.user.avatar"></base-avatar>
+        </button>
+      </div>
 
       <div
         v-show="dropdownOpen"
@@ -96,8 +99,10 @@ export default {
       showLogoutDialog: false,
       dropdownOpen: false,
       options: [
-        { name: 'Account settings', url: '/profile/setting', id: 1 },
-        { name: 'My Questions', url: '/user-questions', id: 1 },
+        { name: 'Account settings', url: '/profile', id: 1 },
+        { name: 'Questions', url: '/user-questions/1', id: 1 },
+        // { name: 'Orders', url: '/orders', id: 1 },
+        { name: 'Payments', url: '/payments', id: 1 },
       ],
     }
   },
@@ -116,7 +121,7 @@ export default {
         await this.$auth.logout()
         this.$notify({
           type: 'success',
-          message: 'You have logged out successfully.',
+          text: 'You have logged out successfully.',
         })
       } catch (error) {
         this.loading = false

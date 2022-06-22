@@ -15,9 +15,11 @@ import './globalComponents'
 import { extend } from 'vee-validate'
 import * as rules from 'vee-validate/dist/rules'
 import { messages } from 'vee-validate/dist/locale/en.json'
-import { configure } from 'vee-validate'
-import Notifications from '~/components/core-components/NotificationPlugin'
+// import { configure } from 'vee-validate'
+// import Notifications from '~/components/core-components/NotificationPlugin'
 import SideBar from '~/components/core-components/SidebarPlugin'
+import VueSocialSharing from 'vue-social-sharing'
+// import Notifications from 'vue-notification/dist/ssr.js'
 
 Object.keys(rules).forEach((rule) => {
   extend(rule, {
@@ -29,11 +31,11 @@ Object.keys(rules).forEach((rule) => {
 locale.use(lang)
 
 Vue.use(SideBar)
-Vue.use(Notifications)
-configure({
-  classes: {
-    valid: 'is-valid',
-    invalid: 'is-invalid',
-    dirty: ['is-dirty', 'is-dirty'], // multiple classes per flag!
-  },
-})
+Vue.use(VueSocialSharing)
+// configure({
+//   classes: {
+//     valid: 'is-valid',
+//     invalid: 'is-invalid',
+//     dirty: ['is-dirty', 'is-dirty'], // multiple classes per flag!
+//   },
+// })

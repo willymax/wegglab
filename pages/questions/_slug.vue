@@ -39,7 +39,7 @@
       </template>
       <div v-if="question" class="question-content-wrapper">
         <question-block class="question-block" />
-        <answers-block class="answers-block" />
+        <answers-block v-if="$auth.loggedIn" class="answers-block" />
       </div>
     </div>
   </with-right-side-bar>

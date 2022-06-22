@@ -1,11 +1,11 @@
 <template>
-  <SlideYUpTransition :duration="animationDuration">
+  <ZoomCenterTransition :duration="animationDuration">
     <div
       v-if="show"
       id="my-modal"
-      class="modal"
+      class="modal fixed"
       tabindex="-1"
-      style="z-index: 9998"
+      style="z-index: 20000"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
@@ -23,11 +23,11 @@
       >
       <div class="inset-0 overflow-y-auto no-scrollbar fixed overflow-x-hidden">
         <div class="text-center h-full">
-          <div class="flex items-start md:items-center justify-center h-full">
+          <div class="flex items-center md:items-center justify-center h-full">
             <div
               tabindex="-1"
-              style="z-index: 9998; max-width: 768px"
-              class="overflow-hidden shadow-xl transform transition-all py-10 relative bg-white inline-block rounded-lg text-left align-middle md:w-fit w-full"
+              style="z-index: 20000; max-width: 768px"
+              class="fixed overflow-hidden shadow-xl transform transition-all py-10 bg-white inline-block rounded-lg text-left align-middle md:w-fit w-full"
             >
               <button
                 v-if="showClose"
@@ -36,35 +36,24 @@
                 class="absolute top-5 right-5"
                 @click="closeModal()"
               >
-                <span class="" aria-hidden="true"
-                  ><svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 23 23"
-                    width="23"
-                    height="23"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-width="1.2"
-                      d="M1 1l21 21m0-21L1 22"
-                    ></path></svg
-                ></span>
+                Close
               </button>
               <div class="p-5"><slot></slot></div>
+              <div class="p-5"><slot name="footer"></slot></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </SlideYUpTransition>
+  </ZoomCenterTransition>
 </template>
 <script>
-import { SlideYUpTransition } from 'vue2-transitions'
+import { ZoomCenterTransition } from 'vue2-transitions'
 
 export default {
   name: 'BaseModal',
   components: {
-    SlideYUpTransition,
+    ZoomCenterTransition,
   },
   props: {
     show: Boolean,
@@ -136,19 +125,19 @@ export default {
     },
     animationDuration: {
       type: Number,
-      default: 500,
+      default: 100,
       description: 'Modal transition duration',
     },
   },
   watch: {
     show(newValue, oldValue) {
-      const body = document.getElementsByTagName('BODY')[0]
+      const body = document.getElementsByTagName('body')[0]
       if (newValue === true) {
         // Disable scroll
-        body.style.overflow = 'hidden'
+        body.classList.add('overflow-hidden')
       } else {
         // Enable scroll
-        body.style.overflow = 'auto'
+        body.classList.remove('overflow-hidden')
       }
     },
   },

@@ -11,7 +11,7 @@
             <div class="col-6">
               <h3 class="mb-0">{{ tableTitle }}</h3>
             </div>
-            <div class="col-6 text-right">
+            <div v-if="showAddButton" class="col-6 text-right">
               <base-button type="primary" icon size="sm" @click="onProFeature">
                 <span class="btn-inner--icon"
                   ><i class="fas fa-user-edit"></i
@@ -53,8 +53,23 @@
               :min-width="column.minWidth"
               :prop="column.prop"
               :sortable="column.sortable"
-            />
-            <el-table-column min-width="180px" align="center">
+            >
+              <!-- <template v-if="column.prop === '_id'" #default="table">
+                <router-link
+                  class="cursor-pointer"
+                  :to="{ name: 'questions', params: { id: table.row._id } }"
+                  tag="span"
+                >
+                  {{ table.row._id }}
+                </router-link>
+              </template> -->
+            </el-table-column>
+            <slot name="customColumns"></slot>
+            <el-table-column
+              v-if="!hideActions"
+              min-width="180px"
+              align="center"
+            >
               <template slot-scope="scope">
                 <div class="table-actions">
                   <el-tooltip content="Edit" placement="top">
@@ -184,11 +199,10 @@ import {
   Button,
 } from 'element-ui'
 import { integer } from 'vee-validate/dist/rules'
-import { BasePagination } from '@/components/core-components'
+import BasePagination from '../core-components/BasePagination.vue'
 
 export default {
   components: {
-    BasePagination,
     [Tooltip.name]: Tooltip,
     [Table.name]: Table,
     [TableColumn.name]: TableColumn,
@@ -198,6 +212,7 @@ export default {
     [Select.name]: Select,
     [Option.name]: Option,
     [Button.name]: Button,
+    BasePagination,
   },
   layout: 'ResponsiveDashboard',
   props: {
@@ -209,22 +224,21 @@ export default {
     },
     paginated: {
       type: Boolean,
+      default: true,
+    },
+    showAddButton: {
+      type: Boolean,
+      default: false,
+    },
+    hideActions: {
+      type: Boolean,
       default: false,
     },
     resource: {
       type: String,
       default: 'student',
     },
-    items: {
-      type: Array,
-      default() {
-        return []
-      },
-    },
-    total: {
-      type: Number,
-      default: 1,
-    },
+
     tableTitle: {
       type: String,
       default: 'Items List',
@@ -247,6 +261,8 @@ export default {
       sort: 'createdAt',
       tablePaginations: { ...this.pagination },
       selectedItem: null,
+      items: [],
+      total: 0,
     }
   },
   computed: {
@@ -296,35 +312,39 @@ export default {
       this.showDeleteDialog = true
     },
     getItems() {
-      this.$emit('getItems', {
-        perPage: this.tablePaginations.perPage,
-        page: this.tablePaginations.currentPage,
-      })
-      // const that = this
-      // this.$axios
-      //   .get('items', {
-      //     params: {
-      //       perPage: this.tablePaginations.perPage,
-      //       page: this.tablePaginations.currentPage,
-      //     },
-      //   })
-      //   .then(function (response) {
-      //     // handle success
-      //     that.items = response.data.data
-      //     that.tablePaginations.currentPage = response.data.paginator.current_page
-      //     that.tablePaginations.perPage = parseInt(response.data.paginator.per_page)
-      //     that.total = response.data.paginator.total_count
-      //   })
-      //   .catch(function (error) {
-      //     // handle error
-      //     console.log(error)
-      //   })
-      //   .then(function () {
-      //     // always executed
-      //   })
+      // this.$emit('getItems', {
+      //   perPage: this.tablePaginations.perPage,
+      //   page: this.tablePaginations.currentPage,
+      // })
+      const that = this
+      this.$axios
+        .get(`${this.resource}`, {
+          params: {
+            perPage: this.tablePaginations.perPage,
+            page: this.tablePaginations.currentPage,
+          },
+        })
+        .then(function (response) {
+          // handle success
+          that.items = response.data.data
+          that.tablePaginations.currentPage = parseInt(
+            response.data.paginator.currentPage
+          )
+          that.tablePaginations.perPage = parseInt(
+            response.data.paginator.perPage
+          )
+          that.total = parseInt(response.data.paginator.totalCount)
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error)
+        })
+        .then(function () {
+          // always executed
+        })
     },
-     onProFeature() {
-       this.$notify({
+    onProFeature() {
+      this.$notify({
         type: 'danger',
         message: 'This is a PRO feature.',
       })

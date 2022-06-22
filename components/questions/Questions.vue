@@ -4,7 +4,7 @@
       <template v-if="$fetchState.pending">
         <div class="article-cards-wrapper">
           <content-placeholders
-            v-for="p in paginator.per_page"
+            v-for="p in 3"
             :key="p"
             rounded
             class="article-card-block"
@@ -41,13 +41,17 @@
           v-for="(item, index) in questions"
           :key="item._id"
           v-observe-visibility="
-            index === questions.length - 1 ? lazyLoadQuestions : false
+            index >= questions.length - 6 ? lazyLoadQuestions : false
           "
           :details="item"
         ></question>
       </template>
       <div class="flex flex-col items-center justify-center">
-        <p v-if="!$fetchState.pending && questions.length === 0">
+        <p
+          v-if="
+            !$fetchState.pending && !$fetchState.error && questions.length === 0
+          "
+        >
           No questions found
         </p>
         <base-button @click="resetAndFetch()">Refresh</base-button>
@@ -93,7 +97,11 @@ export default {
       type: Boolean,
       default: false,
     },
-    answered: {
+    assignedToMe: {
+      type: Boolean,
+      default: false,
+    },
+    purchased: {
       type: Boolean,
       default: false,
     },
@@ -105,18 +113,19 @@ export default {
       questions: [],
       relativeUrl: 'questions',
       paginator: {
-        total_count: 0,
-        per_page: 5,
-        current_page: 1,
-        last_page: 0,
-        total_pages: 0,
+        totalCount: 0,
+        perPage: 5,
+        currentPage: 1,
+        lastPage: 0,
+        totalPages: 0,
         from: 0,
         to: 0,
       },
     }
   },
   async fetch() {
-    let queryParams = `&bookmarked=${this.bookmarked}&answered=${this.answered}`
+    console.log('fetching fetch')
+    let queryParams = `&bookmarked=${this.bookmarked}&assignedToMe=${this.assignedToMe}&purchased=${this.purchased}`
     if (this.userId) {
       queryParams = queryParams + `&userId=${this.userId}`
     }
@@ -127,7 +136,7 @@ export default {
       queryParams = queryParams + `&search=${this.$route.query.search}`
     }
     const res = await this.$axios.get(
-      `questions?page=${this.paginator.current_page}&perPage=${this.paginator.per_page}${queryParams}`
+      `questions?page=${this.paginator.currentPage}&perPage=${this.paginator.perPage}${queryParams}`
     )
     this.paginator = { ...res.data.paginator }
     this.questions = this.questions.concat(res.data.data)
@@ -143,7 +152,10 @@ export default {
     bookmarked(newValue, oldValue) {
       this.resetAndFetch()
     },
-    answered(newValue, oldValue) {
+    assignedToMe(newValue, oldValue) {
+      this.resetAndFetch()
+    },
+    pruchased(newValue, oldValue) {
       this.resetAndFetch()
     },
   },
@@ -152,19 +164,19 @@ export default {
       this.$router.push({ query: { search: this.searchText } })
     },
     resetAndFetch() {
-      this.paginator.current_page = 1
+      this.paginator.currentPage = 1
       this.questions = []
       this.$fetch()
     },
     lazyLoadQuestions(isVisible) {
       if (
-        this.paginator.total_count < this.paginator.per_page ||
-        this.paginator.current_page >= this.paginator.last_page
+        this.paginator.totalCount < this.paginator.perPage ||
+        this.paginator.currentPage >= this.paginator.lastPage
       ) {
         return
       }
       if (isVisible) {
-        this.paginator.current_page++
+        this.paginator.currentPage++
         this.$fetch()
       }
     },

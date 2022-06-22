@@ -3,7 +3,7 @@
     :is="tag"
     :type="tag === 'button' ? nativeType : ''"
     :disabled="disabled || loading"
-    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded capitalize my-2"
+    class="bg-color-secondary hover:bg-green-700 text-on-secondary font-bold py-2 px-4 rounded capitalize my-2"
     :class="[
       { 'rounded-full': round },
       { 'bg-transparent': transparent },

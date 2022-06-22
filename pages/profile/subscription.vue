@@ -47,7 +47,6 @@ import ContentLoading from '~/components/core-components/ContentLoading.vue'
 import Plans from '~/components/subscriptions/Plans.vue'
 export default {
   components: { Plans, ContentLoading, BaseLabel, BaseButton },
-  layout: 'AccountSettings',
   data() {
     return {
       subscription: {},
@@ -81,7 +80,6 @@ export default {
           },
         }
       ).then((res) => res.json())
-      console.log('planResponse', planResponse)
       this.plan = planResponse
     }
   },

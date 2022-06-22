@@ -2,9 +2,7 @@
   <div>
     <!-- Header -->
     <div class="header">
-      <div class="container">
-        <notifications></notifications>
-      </div>
+      <div class="container"></div>
     </div>
     <!-- Page content -->
     <div class="container p-10">
@@ -172,6 +170,11 @@ export default {
       },
     }
   },
+  computed: {
+    GUEST_QUESTION() {
+      return this.$store.getters['questions/GET_GUEST_QUESTION']
+    },
+  },
   mounted() {
     // use route object
     // directly use params
@@ -205,20 +208,26 @@ export default {
           data: this.form.data.attributes,
         })
         .then((response) => {
-          // this.$notify({
-          //   type: 'success',
-          //   message: 'Login successful.',
-          // }).then((res) => {
-
-          // })
-          this.$router.push(this.$route.query.redirect || '/dashboard')
+          console.log('setTimeout')
+          this.$notify({
+            type: 'success',
+            title: "You're in",
+            text: 'Login successful.',
+          })
+          setTimeout(() => {
+            if (this.GUEST_QUESTION) {
+              this.$router.push('/questions/ask')
+            } else {
+              this.$router.push(this.$route.query.redirect || '/dashboard')
+            }
+          }, 2000)
         })
         .catch((error) => {
           // handle error
           this.$notify({
-            type: 'danger',
+            type: 'error',
             title: 'An error occurred',
-            message: 'Invalid credentials!',
+            text: 'Invalid credentials!',
           })
           this.setApiValidation(error)
         })

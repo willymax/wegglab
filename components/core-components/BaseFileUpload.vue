@@ -14,19 +14,7 @@
         <div
           id="overlay"
           ref="overlay"
-          class="
-            w-full
-            h-full
-            absolute
-            top-0
-            left-0
-            pointer-events-none
-            z-50
-            flex flex-col
-            items-center
-            justify-center
-            rounded-md
-          "
+          class="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md"
           :class="{ draggedover: draggedover }"
         >
           <i>
@@ -48,22 +36,10 @@
         <!-- scroll area -->
         <section class="h-full overflow-auto p-8 w-full flex flex-col">
           <header
-            class="
-              border-dashed border-2 border-gray-400
-              py-12
-              flex flex-col
-              justify-center
-              items-center
-            "
+            class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center"
           >
             <p
-              class="
-                mb-3
-                font-semibold
-                text-gray-900
-                flex flex-wrap
-                justify-center
-              "
+              class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center"
             >
               <span>Drag and drop your</span>&nbsp;<span
                 >files anywhere or</span
@@ -78,38 +54,16 @@
             />
             <button
               ref="button"
-              class="
-                mt-2
-                rounded-sm
-                px-3
-                py-1
-                bg-gray-200
-                hover:bg-gray-300
-                focus:shadow-outline focus:outline-none
-              "
+              class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none"
               @click="uploadAFile"
             >
               Upload a file
             </button>
           </header>
-          <h1 class="pt-8 pb-3 font-semibold sm:text-lg text-gray-900">
-            To Upload
-          </h1>
-          <ul
-            ref="gallery"
-            class="flex flex-1 flex-wrap -m-1"
-            @click="galleryClick"
-          >
+          <ul ref="gallery" class="flex flex-1 flex-wrap" @click="galleryClick">
             <li
               ref="empty"
-              class="
-                h-full
-                w-full
-                text-center
-                flex flex-col
-                items-center
-                justify-center
-              "
+              class="h-full w-full text-center flex flex-col items-center justify-center"
               :class="{ hidden: objectList.length > 0 }"
             >
               <img
@@ -119,19 +73,21 @@
               />
               <span class="text-small text-gray-500">No files selected</span>
             </li>
-            <template v-for="item in objectList">
+          </ul>
+          <ul class="w-full flex flex-wrap">
+            <li
+              v-for="item in objectList"
+              :id="item.objectURL"
+              :key="item.objectURL"
+              class="inline-block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24"
+              @click="galleryClick"
+            >
               <ImagePreview
                 v-if="item.isImage"
-                :key="item.objectURL"
                 :object-details="item"
               ></ImagePreview>
-              <FilePreview
-                v-else
-                :key="item.objectURL"
-                :object-details="item"
-              ></FilePreview>
-              {{ item.fileName }}
-            </template>
+              <FilePreview v-else :object-details="item"></FilePreview>
+            </li>
           </ul>
         </section>
 
@@ -158,13 +114,29 @@ export default {
       objectList: [],
       counter: 0,
       draggedover: false,
+      previewItem: {
+        fileName: 'cert_test-1653289276933 (2).pdf',
+        objectURL:
+          'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
+        isImage: false,
+        size: '70kb',
+      },
     }
+  },
+  computed: {
+    GUEST_QUESTION() {
+      return this.$store.getters['questions/GET_GUEST_QUESTION'] || {}
+    },
   },
   watch: {
     FILES: {
       handler(val, oldVal) {},
       deep: true,
     },
+  },
+  created() {
+    this.FILES = this.GUEST_QUESTION?.fileUploadDetails?.FILES || {}
+    this.objectList = this.GUEST_QUESTION?.fileUploadDetails?.objectList || []
   },
   methods: {
     addFile(target, file) {
@@ -188,7 +160,7 @@ export default {
 
       this.FILES[objectURL] = file
 
-      this.$emit('input', this.FILES)
+      this.$emit('input', { FILES: this.FILES, objectList: this.objectList })
     },
     uploadAFile(event) {
       const hiddenInput = this.$refs.hiddenInput
@@ -249,7 +221,7 @@ export default {
           return el.objectURL !== ou
         })
         delete this.FILES[ou]
-        this.$emit('input', this.FILES)
+        this.$emit('input', { FILES: this.FILES, objectList: this.objectList })
       }
     },
     submit() {

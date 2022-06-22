@@ -90,7 +90,6 @@ export default {
             // ).then((res) => res.json())
             const response = await this.$axios.get('/subscription-plans')
             this.plans = response.data.data
-            console.log('this.plans', this.plans)
           } catch ($ex) {}
         } catch (error) {
           tries++

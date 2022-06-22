@@ -1,16 +1,21 @@
 <template>
   <article
-    class="dark:hover:bg-gray-500 bg-white hover:bg-gray-50 dark:bg-gray-600 transition duration-350 ease-in-out rounded-box overflow-hidden shadow-lg m-2"
+    class="dark:hover:bg-gray-500 bg-surface hover:bg-gray-50 transition duration-350 ease-in-out rounded-box overflow-hidden shadow-lg m-2"
   >
-    <div class="p-4">
+    <div class="p-4 flex justify-between items-center">
       <answer-user
         :user="details.user"
         :timestamp="details.createdAt"
         :resource-link="`/questions/${details.slug}`"
       ></answer-user>
+      <p
+        class="text-sm lowercase bg-color-secondary text-on-secondary p-2 rounded-lg border"
+      >
+        {{ getStatusToShow(details.status) }}
+      </p>
     </div>
 
-    <div class="pl-16">
+    <div class="pl-12">
       <nuxt-link :to="`/questions/${details.slug}`" class="hover:underline">
         <h1 class="text-xl font-bold dark:text-white">
           {{ details.title | truncate(540, '...') }}
@@ -102,6 +107,14 @@ export default {
   methods: {
     getQuestionUrl(slug) {
       //
+    },
+    getStatusToShow(status) {
+      if (status === 'ASSIGNED') {
+        if (!this.$auth.loggedIn || this.$auth.user.role === 'student') {
+          return 'unanswered'
+        }
+      }
+      return status
     },
   },
 }

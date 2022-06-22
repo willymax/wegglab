@@ -74,7 +74,6 @@ export default {
     BaseLabel,
   },
   mixins: [formMixin],
-  layout: 'AccountSettings',
   data() {
     return {
       FILE: {},
@@ -94,7 +93,6 @@ export default {
   watch: {
     '$store.state.auth.user'(newValue, oldValue) {
       //
-      console.log('newValue', newValue)
       Object.assign(this.form.data.attributes, { ...newValue })
     },
   },

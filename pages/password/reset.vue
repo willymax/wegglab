@@ -2,9 +2,7 @@
   <div>
     <!-- Container -->
     <div class="container mx-auto">
-      <div class="container">
-        <notifications></notifications>
-      </div>
+      <div class="container"></div>
       <div class="flex justify-center px-6 my-12">
         <!-- Row -->
         <div class="w-full xl:w-3/4 lg:w-11/12 flex">

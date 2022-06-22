@@ -1,18 +1,21 @@
 <template>
   <!-- <body class="antialiased h-screen"> -->
-  <div class="h-screen">
-    <base-nav></base-nav>
-    <div class="main-content bg-gray-100 dark:bg-gray-800">
-      <nuxt></nuxt>
+  <div class="main-container relative">
+    <notifications></notifications>
+    <div class="flex flex-col bg-background font-roboto">
+      <base-header></base-header>
+      <div class="main-content bg-gray-100 dark:bg-gray-800">
+        <nuxt></nuxt>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import BaseNav from '~/components/core-components/Navbar/BaseNav.vue'
+import BaseHeader from '~/components/header/BaseHeader.vue'
 
 export default {
   components: {
-    BaseNav,
+    BaseHeader,
   },
   props: {
     backgroundColor: {

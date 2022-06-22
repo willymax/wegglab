@@ -1,4 +1,31 @@
 export default ({ app, route, $axios, $toast, redirect, store }, inject) => {
+  inject('postQuestion', async () => {
+    const formData = await store.getters['questions/GET_GUEST_QUESTION']
+    return new Promise((resolve, reject) => {
+      delete app.$axios.defaults.headers.common['content-type']
+      delete app.$axios.defaults.headers.post['content-type']
+
+      app
+        .$axios({
+          method: 'POST',
+          url: 'questions',
+          data: formData,
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Accept: 'application/json',
+          },
+        })
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+        .then(function () {
+          // always executed
+        })
+    })
+  })
   inject('getImageUrl', (relativePath) => {
     return `${process.env.baseStorageUrl}/${relativePath}`
   })
@@ -102,7 +129,7 @@ export default ({ app, route, $axios, $toast, redirect, store }, inject) => {
     }
   })
   inject('log', (message, ...params) => {
-    console.log(message, params)
+    // console.log(message, params)
   })
   inject('processTime', (datetimestamp) => {
     const theDate = new Date(datetimestamp)

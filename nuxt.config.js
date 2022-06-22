@@ -19,11 +19,18 @@ export default {
     linkExactActiveClass: 'active',
     middleware: ['auth'],
     extendRoutes(routes, resolve) {
-      routes.push({
-        name: 'custom',
-        path: '*',
-        component: resolve(__dirname, 'pages/404.vue'),
-      })
+      routes.push(
+        {
+          name: 'custom',
+          path: '*',
+          component: resolve(__dirname, 'pages/404.vue'),
+        },
+        {
+          name: 'user-questions-default',
+          path: '/user-questions',
+          component: resolve(__dirname, 'pages/user-questions/index.vue'),
+        }
+      )
     },
   },
   meta: {
@@ -166,12 +173,15 @@ export default {
     { src: '~/plugins/dashboard/world-map', ssr: false },
     '~/plugins/dashboard/JsonApi.js',
     '~/plugins/isDemo.js',
+    '~/plugins/testPlugin.js',
     '~/plugins/app.js',
     '~/plugins/auth.js',
     '~/plugins/vue-placeholders.js',
     { src: '~/plugins/sanitize.js', ssr: false },
     '~/plugins/modal.js',
     '~/plugins/vue-observe-visibility.client.js',
+    { src: '~/plugins/notifications-ssr', ssr: true },
+    { src: '~/plugins/notifications-client', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -184,6 +194,7 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/svg',
+    '@nuxtjs/color-mode',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -194,6 +205,7 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/auth-next',
     '@nuxtjs/toast',
+    'vue-social-sharing/nuxt',
   ],
 
   /*

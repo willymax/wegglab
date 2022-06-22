@@ -39,7 +39,7 @@
         <slot v-bind="slotData">
           <input
             :id="id"
-            :type="type"
+            :type="show ? 'text' : type === 'password' ? 'password' : type"
             v-bind="$attrs"
             :valid="valid"
             :required="required"
@@ -59,6 +59,20 @@
             </slot>
           </span>
         </div>
+        <img
+          v-if="type === 'password'"
+          class="w-5 h-5"
+          src="~assets/svgs/visibility_fill.svg"
+          :class="{ hidden: !show, block: show }"
+          @click="show = !show"
+        />
+        <img
+          v-if="type === 'password'"
+          class="w-5 h-5"
+          src="~assets/svgs/visibility_off.svg"
+          :class="{ block: !show, hidden: show }"
+          @click="show = !show"
+        />
         <slot name="infoBlock"></slot>
       </div>
       <slot name="success">
@@ -156,6 +170,7 @@ export default {
   data() {
     return {
       focused: false,
+      show: false,
     }
   },
   computed: {

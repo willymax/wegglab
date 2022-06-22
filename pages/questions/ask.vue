@@ -48,7 +48,7 @@
         </editor>
       </div>
       <validation-error :errors="apiValidationErrors.body" />
-      <BaseFileUpload v-model="FILES"></BaseFileUpload>
+      <BaseFileUpload v-model="fileUploadDetails"></BaseFileUpload>
       <validation-error :errors="apiValidationErrors.email" />
       <base-button @click="postQuestion()">Submit</base-button>
     </div>
@@ -66,6 +66,7 @@ import BaseTextArea from '~/components/core-components/Inputs/BaseTextArea.vue'
 import BaseSelect from '~/components/core-components/Inputs/BaseSelect.vue'
 import BaseLabel from '~/components/core-components/BaseLabel.vue'
 export default {
+  auth: false,
   components: {
     BaseFileUpload,
     BaseButton,
@@ -82,12 +83,12 @@ export default {
     return {
       selected: null,
       options: ['list', 'of', 'options'],
-      FILES: {},
+      fileUploadDetails: {},
       taggingOptions: [],
       input: {
         title: '',
         body: '',
-        subject: null,
+        subject: '',
         tags: [],
       },
       config: {
@@ -108,9 +109,16 @@ export default {
     subjects() {
       return this.$store.getters['questions/GET_SUBJECTS']
     },
+    GUEST_QUESTION() {
+      return this.$store.getters['questions/GET_GUEST_QUESTION'] || {}
+    },
   },
-  watch: {
-    FILES(newValue, oldValue) {},
+  created() {
+    this.input.title = this.GUEST_QUESTION.title
+    this.input.body = this.GUEST_QUESTION.body
+    this.input.subject = this.GUEST_QUESTION.subject
+    this.input.tags = this.GUEST_QUESTION.tags || []
+    this.fileUploadDetails = this.GUEST_QUESTION?.fileUploadDetails || {}
   },
   methods: {
     addTag(newTag) {
@@ -121,49 +129,59 @@ export default {
       this.taggingOptions.push(tag)
       this.input.tags.push(tag)
     },
-    postQuestion() {
-      const formData = new FormData()
-      const questionFiles = []
-      let counter = 0
-      for (const [index, file] of Object.entries(this.FILES)) {
-        formData.append(`files`, file)
-        counter++
+    async postQuestion() {
+      const formInput = {
+        title: this.input.title,
+        subject: this.input.subject,
+        body: this.input.body,
+        tags: this.input.tags,
+        fileUploadDetails: this.fileUploadDetails,
       }
-      formData.append('title', this.input.title)
-      formData.append('subject', this.input.subject)
-      formData.append('body', this.input.body)
-      formData.append(
-        'tags',
-        JSON.stringify(
-          this.input.tags.map((item) => {
-            return item.name
-          })
+
+      if (!this.$auth.loggedIn) {
+        //
+        await this.$store.dispatch('questions/SET_GUEST_QUESTION', formInput)
+        this.$router.push({
+          name: 'login',
+          // query: { redirect: this.$route.path },
+        })
+      } else {
+        const formData = new FormData()
+
+        if (this.fileUploadDetails && this.fileUploadDetails.FILES) {
+          let counter = 0
+          for (const [index, file] of Object.entries(
+            this.fileUploadDetails.FILES
+          )) {
+            formData.append(`files`, file)
+            counter++
+          }
+        }
+        formData.append('title', this.input.title)
+        formData.append('subject', this.input.subject)
+        formData.append('body', this.input.body)
+        formData.append(
+          'tags',
+          JSON.stringify(
+            this.input.tags.map((item) => {
+              return item.name
+            })
+          )
         )
-      )
-      delete this.$axios.defaults.headers.common['content-type']
-      delete this.$axios.defaults.headers.post['content-type']
-      this.$axios({
-        method: 'POST',
-        url: 'questions',
-        data: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Accept: 'application/json',
-        },
-      })
-        .then((response) => {
-          this.$notify({
-            type: 'success',
-            message: 'Question created successfully.',
+        await this.$store.dispatch('questions/SET_GUEST_QUESTION', formData)
+
+        this.$postQuestion()
+          .then((res) => {
+            this.$notify({
+              type: 'success',
+              message: 'Question created successfully.',
+            })
+            this.$router.push(`/questions/${res.data.slug}`)
           })
-          this.$router.push('/questions')
-        })
-        .catch((error) => {
-          this.setApiValidation(error)
-        })
-        .then(function () {
-          // always executed
-        })
+          .catch((error) => {
+            this.setApiValidation(error)
+          })
+      }
     },
   },
 }

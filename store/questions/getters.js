@@ -8,5 +8,8 @@ const getters = {
   GET_SUBJECTS: (state) => {
     return state.SUBJECTS
   },
+  GET_GUEST_QUESTION: (state) => {
+    return state.GUEST_QUESTION
+  },
 }
 export default getters
