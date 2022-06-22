@@ -2,12 +2,7 @@
   <div>
     <answers></answers>
     <post-answer v-if="canAnswerTheQuestion"></post-answer>
-    <template>
-      <add-answers
-        v-if="$auth.user.role === 'expert' || $auth.user.role === 'admin'"
-        >Post Answer</add-answers
-      >
-    </template>
+    <add-answers v-if="showPostAnswer">Post Answer</add-answers>
   </div>
 </template>
 
@@ -27,6 +22,9 @@ export default {
     },
     canAnswerTheQuestion() {
       return this.question && this.question.canAnswer
+    },
+    showPostAnswer() {
+      return this.question && this.question.isAvailableToTake
     },
   },
   methods: {
