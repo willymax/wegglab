@@ -3,7 +3,7 @@
     <div class="my-2">
       <editor
         v-model="input.body"
-        api-key="fwx0vscmsecgg5by0rvm6xbfpbvdruc2nlbxc478ogqam3tk"
+        :api-key="$getTinyMceKey(config)"
         :init="$initializeEditor(config)"
       >
       </editor>

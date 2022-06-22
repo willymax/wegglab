@@ -12,6 +12,7 @@ export default {
     paypalClient: process.env.PAYPAL_CLIENT_ID,
     paypalSecret: process.env.PAYPAL_SECRET,
     googleClientId: process.env.GOOGLE_CLIENT_ID,
+    tinyMCEKey: process.env.TINY_MCE_KEY,
   },
   // mode: 'spa',
   router: {
