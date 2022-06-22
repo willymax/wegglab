@@ -286,7 +286,7 @@ import DashboardContent from '~/components/layouts/argon/Content.vue'
 import Logout from '~/components/widgets/Logout.vue'
 import SideBarMenu from '~/components/layouts/argon/SideBarMenu.vue'
 import MenuItem from '~/components/layouts/argon/MenuItem.vue'
-import NavBar from '~/components/settings/NavBar.vue'
+import ProfileNavBar from '~/components/settings/ProfileNavBar.vue'
 //
 function hasElement(className) {
   return document.getElementsByClassName(className).length > 0
@@ -311,7 +311,7 @@ export default {
     Logout,
     SideBarMenu,
     MenuItem,
-    NavBar,
+    ProfileNavBar,
   },
   layout: 'ResponsiveDashboard',
   mounted() {

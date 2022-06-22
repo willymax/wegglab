@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div>
-      <nav-bar></nav-bar>
+      <profile-nav-bar></profile-nav-bar>
     </div>
     <div>
       <card class="border-2 m-4">
@@ -13,9 +13,9 @@
 
 <script>
 import Card from '~/components/core-components/Cards/Card.vue'
-import NavBar from '~/components/settings/NavBar.vue'
+import ProfileNavBar from '~/components/settings/ProfileNavBar.vue'
 export default {
-  components: { NavBar, Card },
+  components: { ProfileNavBar, Card },
   layout: 'ResponsiveDashboard',
 }
 </script>

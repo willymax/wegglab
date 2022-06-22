@@ -95,11 +95,11 @@
   </header>
 </template>
 <script>
-import BaseButton from '../BaseButton.vue'
-import BaseNuxtButtonLink from '../BaseNuxtButtonLink.vue'
+import BaseButton from '../core-components/BaseButton.vue'
+import BaseNuxtButtonLink from '../core-components/BaseNuxtButtonLink.vue'
 import UserWithMenu from '~/components/widgets/UserWithMenu.vue'
 export default {
-  name: 'BaseNav',
+  name: 'BaseHeader',
   components: { BaseButton, BaseNuxtButtonLink, UserWithMenu },
   model: {
     prop: 'show',

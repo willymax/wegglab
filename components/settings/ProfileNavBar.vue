@@ -3,24 +3,26 @@
     <nav>
       <ul>
         <li>
-          <NuxtLink to="/profile/setting">Profile</NuxtLink>
+          <NuxtLink to="/profile/">Profile</NuxtLink>
         </li>
         <li>
           <NuxtLink to="/profile/password/">Change Password</NuxtLink>
         </li>
-        <li>
+        <!-- <li>
           <NuxtLink to="/payments/">Payments</NuxtLink>
         </li>
         <li>
           <NuxtLink to="/profile/subscription/">Subscription</NuxtLink>
-        </li>
+        </li> -->
       </ul>
     </nav>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'ProfileNavBar',
+}
 </script>
 
 <style scoped>
