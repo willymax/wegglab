@@ -92,6 +92,7 @@
       </div>
     </div>
     <base-table resource="payments">
+      <template #custom-columns> </template>
       <template #actions> </template
     ></base-table>
   </div>
