@@ -11,7 +11,7 @@
             <div class="col-6">
               <h3 class="mb-0">{{ tableTitle }}</h3>
             </div>
-            <div class="col-6 text-right">
+            <div v-if="showAddButton" class="col-6 text-right">
               <base-button type="primary" icon size="sm" @click="onProFeature">
                 <span class="btn-inner--icon"
                   ><i class="fas fa-user-edit"></i
@@ -124,7 +124,6 @@
         </div>
       </card>
     </div>
-    {{ items }}
     <app-modal
       v-if="showDeleteDialog"
       :show.sync="showDeleteDialog"
@@ -226,6 +225,10 @@ export default {
     paginated: {
       type: Boolean,
       default: true,
+    },
+    showAddButton: {
+      type: Boolean,
+      default: false,
     },
     hideActions: {
       type: Boolean,

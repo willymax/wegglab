@@ -142,7 +142,7 @@
               ><nuxt-link
                 :to="`/questions/${scope.row.question._id}`"
                 class="underline cursor-pointer"
-                >{{ scope.row.question._id }}</nuxt-link
+                >question</nuxt-link
               ></span
             ><span>)</span>
           </template></el-table-column

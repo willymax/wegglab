@@ -56,9 +56,11 @@ a.nuxt-link-active {
   font-weight: bold;
   border-bottom: 1px solid #000;
   padding-bottom: 3px;
+  color: #00c58e;
 }
 
 /* exact link will show the primary color for only the exact matching link */
 a.nuxt-link-exact-active {
   color: #00c58e;
+
 }
