@@ -3,13 +3,6 @@
     class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20"
   >
     <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-      <div>
-        <p
-          class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400"
-        >
-          Brand new
-        </p>
-      </div>
       <h2
         class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto"
       >
@@ -36,17 +29,13 @@
               height="24"
             ></rect>
           </svg>
-          <span class="relative">The</span>
+          <span class="relative">A</span>
         </span>
-        quick, brown fox jumps over a lazy dog
+        Summary of your earnings
       </h2>
-      <p class="text-base text-gray-700 md:text-lg">
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque rem aperiam, eaque ipsa quae.
-      </p>
     </div>
     <div
-      class="relative grid gap-8 row-gap-5 mb-8 md:row-gap-8 lg:grid-cols-4 sm:grid-cols-2"
+      class="relative grid gap-6 row-gap-5 mb-8 md:row-gap-8 lg:grid-cols-4 sm:grid-cols-2"
     >
       <div
         class="absolute inset-0 flex items-center justify-center sm:hidden lg:flex"
@@ -57,74 +46,50 @@
         class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2"
       >
         <div class="flex items-center justify-between mb-2">
-          <p class="text-lg font-bold leading-5">Believe</p>
-          <p
-            class="flex items-center justify-center w-6 h-6 font-bold rounded text-deep-purple-accent-400 bg-indigo-50"
-          >
-            1
-          </p>
+          <p class="text-lg font-bold leading-5">Pending Clearance</p>
         </div>
-        <p class="text-sm text-gray-900">
-          Skate ipsum dolor sit amet, alley oop vert mute-air Colby Carter flail
-          180 berm.
+        <p
+          class="flex items-center justify-center w-2/3 h-10 font-bold rounded text-deep-purple-accent-400"
+        >
+          $ {{ earning.pendingClearance }}
         </p>
       </div>
       <div
         class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2"
       >
         <div class="flex items-center justify-between mb-2">
-          <p class="text-lg font-bold leading-5">Be yourself</p>
-          <p
-            class="flex items-center justify-center w-6 h-6 font-bold rounded text-deep-purple-accent-400 bg-indigo-50"
-          >
-            2
-          </p>
+          <p class="text-lg font-bold leading-5">Cleared</p>
         </div>
-        <p class="text-sm text-gray-900">
-          A flower in my garden, a mystery in my panties. Heart attack never
-          stopped.
+        <p
+          class="flex items-center justify-center w-2/3 h-10 font-bold rounded text-deep-purple-accent-400"
+        >
+          $ {{ earning.cleared }}
         </p>
       </div>
       <div
         class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2"
       >
         <div class="flex items-center justify-between mb-2">
-          <p class="text-lg font-bold leading-5">Just do it</p>
-          <p
-            class="flex items-center justify-center w-6 h-6 font-bold rounded text-deep-purple-accent-400 bg-indigo-50"
-          >
-            3
-          </p>
+          <p class="text-lg font-bold leading-5">Cancelled</p>
         </div>
-        <p class="text-sm text-gray-900">
-          Chase ball of string eat plants, meow, and throw up because I ate
-          plants going.
+        <p
+          class="flex items-center justify-center w-2/3 h-10 font-bold rounded text-deep-purple-accent-400"
+        >
+          $ {{ earning.cancelled }}
         </p>
       </div>
       <div
         class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2"
       >
         <div class="flex items-center justify-between mb-2">
-          <p class="text-lg font-bold leading-5">Eat that</p>
-          <p
-            class="flex items-center justify-center w-6 h-6 font-bold rounded text-deep-purple-accent-400 bg-indigo-50"
-          >
-            4
-          </p>
+          <p class="text-lg font-bold leading-5">Total Earning</p>
         </div>
-        <p class="text-sm text-gray-900">
-          Bro ipsum dolor sit amet gaper backside single track, manny Bike epic
-          clipless.
+        <p
+          class="flex items-center justify-center w-2/3 h-10 font-bold rounded text-deep-purple-accent-400"
+        >
+          $ {{ earning.totalEarning }}
         </p>
       </div>
-    </div>
-    <div class="text-center">
-      <a
-        href="/"
-        class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-      >
-        Learn more
-      </a>
     </div>
     <base-table resource="payments">
       <template #actions> </template
@@ -137,6 +102,31 @@ import BaseTable from '~/components/tables/BaseTable.vue'
 export default {
   components: { BaseTable },
   layout: 'ResponsiveDashboard',
+  data() {
+    return {
+      earning: {
+        cancelled: 0,
+        pendingClearance: 0,
+        cleared: 0,
+        withdrawn: 0,
+        usedForPurchase: 0,
+        totalEarning: 0,
+      },
+    }
+  },
+  mounted() {
+    this.loadEarnings()
+  },
+  methods: {
+    loadEarnings() {
+      //
+      this.$axios
+        .get(`earning-stats/user/${this.$auth.user.id}`)
+        .then((response) => {
+          this.earning = response.data
+        })
+    },
+  },
 }
 </script>
 
