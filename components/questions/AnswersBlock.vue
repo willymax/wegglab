@@ -1,8 +1,8 @@
 <template>
   <div>
     <answers></answers>
-    <post-answer v-if="canAnswerTheQuestion"></post-answer>
-    <add-answers v-if="showPostAnswer">Post Answer</add-answers>
+    <post-answer v-if="canAnswerTheQuestion" class="m-4"></post-answer>
+    <add-answers v-if="showPostAnswer" class="m-4">Post Answer</add-answers>
   </div>
 </template>
 

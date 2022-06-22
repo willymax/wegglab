@@ -12,6 +12,7 @@
     <base-file-upload v-model="fileUploadDetails"></base-file-upload>
     <validation-error :errors="apiValidationErrors.email" />
     <base-button @click="postAnswer()">Submit</base-button>
+    <validation-error :errors="apiValidationErrors.message" />
   </div>
 </template>
 
@@ -84,6 +85,7 @@ export default {
           this.$store.commit('questions/ADD_QUESTION_ANSWERS', response.data)
         })
         .catch((error) => {
+          console.log('error', error.response)
           this.setApiValidation(error)
         })
         .then(function () {
