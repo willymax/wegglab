@@ -3,7 +3,7 @@
     <div class="flex items-center space-x-4 lg:space-x-0">
       <button
         class="text-gray-500 dark:text-gray-300 focus:outline-none lg:hidden"
-        @click="sidebarOpen = true"
+        @click="$emit('update:sidebarOpen', true)"
       >
         <svg
           class="h-6 w-6"
@@ -212,6 +212,11 @@ export default {
       default: false,
       description: 'Whether navbar is transparent',
     },
+    sidebarOpen: {
+      type: Boolean,
+      default: false,
+      description: 'Whether open or not',
+    },
     expand: {
       type: String,
       default: 'lg',
@@ -251,7 +256,6 @@ export default {
   },
   data() {
     return {
-      sidebarOpen: false,
       notificationOpen: false,
       dropdownOpen: false,
       darkMode: this.$colorMode.preference === 'dark',
@@ -296,7 +300,6 @@ export default {
       return this.$slots.default
     },
   },
-  watch: {},
   methods: {
     toggleMenu() {
       this.showMobileMenu = !this.showMobileMenu

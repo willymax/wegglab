@@ -3,7 +3,7 @@
     <notifications></notifications>
     <!-- main wrapper h-screen -->
     <div class="flex flex-col bg-background font-roboto">
-      <base-header></base-header>
+      <base-header :sidebar-open.sync="sidebarOpen"></base-header>
       <div class="flex">
         <div
           :class="sidebarOpen ? 'block' : 'hidden'"
@@ -179,6 +179,7 @@ import SideBarMenu from '~/components/layouts/argon/SideBarMenu.vue'
 import UserWithMenu from '~/components/widgets/UserWithMenu.vue'
 import BaseHeader from '~/components/header/BaseHeader.vue'
 export default {
+  name: 'ResponsiveDashboard',
   components: {
     BaseButton,
     SideBarMenu,

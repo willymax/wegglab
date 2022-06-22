@@ -1,6 +1,5 @@
 <template>
   <div class="h-screen">
-    <notifications></notifications>
     <!-- <base-nav></base-nav> -->
     <profile-nav-bar></profile-nav-bar>
     <div class="h-screen container mx-auto md:px-10">
