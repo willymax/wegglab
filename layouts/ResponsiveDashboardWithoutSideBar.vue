@@ -5,34 +5,6 @@
     <div class="flex flex-col bg-background font-roboto">
       <base-header :sidebar-open.sync="sidebarOpen"></base-header>
       <div class="flex">
-        <div
-          :class="sidebarOpen ? 'block' : 'hidden'"
-          class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"
-          @click="sidebarOpen = false"
-        ></div>
-        <div
-          :class="
-            sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'
-          "
-          class="fixed z-30 inset-y-0 left-0 w-60 transition duration-300 transform lg:bg-transparent bg-surface overflow-y-auto lg:translate-x-0 lg:static lg:inset-0"
-        >
-          <div class="flex items-center lg:hidden">
-            <div class="flex flex-1 items-center">
-              <span
-                class="text-gray-800 dark:text-white text-2xl font-semibold p-2"
-                >Wegglab</span
-              >
-            </div>
-            <button
-              class="bg-transparent outline-none focus:outline-none ease-linear transition-all duration-150 p-3"
-              type="button"
-              @click="sidebarOpen = false"
-            >
-              <img class="w-5 h-5" src="~assets/close.svg" />
-            </button>
-          </div>
-          <side-bar-menu> </side-bar-menu>
-        </div>
         <div class="flex-1 flex flex-col overflow-hidden">
           <!-- main section -->
           <main class="flex-1 overflow-x-hidden overflow-y-auto">

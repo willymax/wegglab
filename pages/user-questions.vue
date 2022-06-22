@@ -1,9 +1,9 @@
 <template>
   <div
-    class="min-h-screen md:flex flex-row flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800"
+    class="min-h-screen md:flex flex-row flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800 w-full mx-auto"
   >
     <div
-      class="md:flex flex-col top-0 left-0 w-3/12 bg-white h-full border-r hidden"
+      class="md:flex flex-col top-0 left-0 md:w-3/12 w-full bg-white h-full border-r hidden"
     >
       <div class="overflow-y-auto overflow-x-hidden flex-grow">
         <ul class="flex flex-col py-4 space-y-1">
@@ -219,7 +219,7 @@ export default {
     MenuItem,
     ProfileNavBar,
   },
-  layout: 'ResponsiveDashboard',
+  layout: 'ResponsiveDashboardWithoutSideBar',
   mounted() {
     this.initScrollbar(), this.$store.dispatch('profile/me')
   },

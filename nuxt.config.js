@@ -19,11 +19,18 @@ export default {
     linkExactActiveClass: 'active',
     middleware: ['auth'],
     extendRoutes(routes, resolve) {
-      routes.push({
-        name: 'custom',
-        path: '*',
-        component: resolve(__dirname, 'pages/404.vue'),
-      })
+      routes.push(
+        {
+          name: 'custom',
+          path: '*',
+          component: resolve(__dirname, 'pages/404.vue'),
+        },
+        {
+          name: 'user-questions-default',
+          path: '/user-questions',
+          component: resolve(__dirname, 'pages/user-questions/index.vue'),
+        }
+      )
     },
   },
   meta: {
