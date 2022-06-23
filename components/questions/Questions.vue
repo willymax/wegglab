@@ -1,7 +1,7 @@
 <template>
   <with-right-side-bar>
     <div class="">
-      <template v-if="$fetchState.pending">
+      <client-only v-if="$fetchState.pending">
         <div class="article-cards-wrapper">
           <content-placeholders
             v-for="p in 3"
@@ -11,15 +11,14 @@
           >
             <content-placeholders-img />
             <content-placeholders-text :lines="3" />
-          </content-placeholders>
-        </div>
-      </template>
-      <template v-else-if="$fetchState.error">
+          </content-placeholders></div
+      ></client-only>
+      <client-only v-else-if="$fetchState.error">
         <div class="flex flex-col items-center justify-center">
           <p>{{ $fetchState.error.message }}</p>
           <p>An error occurred while loading questions. Try again.</p>
         </div>
-      </template>
+      </client-only>
       <template v-else>
         <div class="flex justify-center items-center">
           <base-input
@@ -47,13 +46,13 @@
         ></question>
       </template>
       <div class="flex flex-col items-center justify-center">
-        <p
+        <client-only
           v-if="
             !$fetchState.pending && !$fetchState.error && questions.length === 0
           "
         >
-          No questions found
-        </p>
+          <p>No questions found</p>
+        </client-only>
         <base-button @click="resetAndFetch()">Refresh</base-button>
       </div>
       <!-- <base-pagination
