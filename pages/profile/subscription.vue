@@ -1,9 +1,9 @@
 <template>
   <div>
     <h3></h3>
-    <div v-if="$fetchState.pending">
+    <client-only v-if="$fetchState.pending">
       <content-loading></content-loading>
-    </div>
+    </client-only>
     <template v-else-if="$fetchState.error">
       <p>{{ $fetchState.error.message }}</p>
     </template>

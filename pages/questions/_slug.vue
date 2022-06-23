@@ -8,7 +8,7 @@
       ></related-questions>
     </template>
     <div class="page-wrapper">
-      <template v-if="$fetchState.pending">
+      <client-only v-if="$fetchState.pending">
         <div class="article-cards-wrapper">
           <content-placeholders
             v-for="p in 5"
@@ -20,8 +20,8 @@
             <content-placeholders-text :lines="3" />
           </content-placeholders>
         </div>
-      </template>
-      <template v-if="$fetchState.error && !$fetchState.pending">
+      </client-only>
+      <client-only v-if="$fetchState.error && !$fetchState.pending">
         <div class="flex flex-col items-center justify-center">
           <template v-if="$fetchState.error.status === 404">
             <p>The question you are looking for does not exist</p>
@@ -36,7 +36,7 @@
             <base-button @click="refreshQuestion()">Refresh</base-button>
           </template>
         </div>
-      </template>
+      </client-only>
       <div v-if="question" class="question-content-wrapper">
         <question-block class="question-block" />
         <answers-block v-if="$auth.loggedIn" class="answers-block" />
