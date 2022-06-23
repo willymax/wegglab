@@ -71,6 +71,9 @@ export default ({ app, route, $axios, $toast, redirect, store }, inject) => {
         $toast.error(error.message)
       })
   })
+  inject('getTinyMceKey', () => {
+    return process.env.tinyMCEKey
+  })
   inject('initializeEditor', (config) => {
     return {
       selector: 'textarea#local-upload',
