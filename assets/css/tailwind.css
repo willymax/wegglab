@@ -52,7 +52,7 @@
 }
 
 /* home route and active route will show in bold as it matches / and /about */
-a.nuxt-link-active {
+a.nuxt-link-active:not(.button) {
   font-weight: bold;
   border-bottom: 1px solid #000;
   padding-bottom: 3px;
@@ -60,7 +60,7 @@ a.nuxt-link-active {
 }
 
 /* exact link will show the primary color for only the exact matching link */
-a.nuxt-link-exact-active {
+a.nuxt-link-exact-active:not(.button) {
   color: #00c58e;
 
 }
