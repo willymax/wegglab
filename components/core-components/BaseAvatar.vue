@@ -1,5 +1,5 @@
 <template>
-  <div :class="marginTop">
+  <client-only :class="marginTop">
     <div class="relative" :class="dimensionsClasses">
       <img
         ref="avatar"
@@ -17,7 +17,7 @@
         <i class="fas fa-circle-notch fa-spin"></i>
       </span>
     </div>
-  </div>
+  </client-only>
 </template>
 
 <script>
