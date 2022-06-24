@@ -35,7 +35,21 @@ export default {
             layout: 'vertical',
             label: 'pay',
           },
-          onClick(data, actions) {},
+          onClick(data, actions) {
+            if (that.$auth.loggedIn) {
+              return actions.resolve()
+            } else {
+              console.log('redirect: this.$route.path ' + actions)
+              // to be changed in future
+
+              return actions.reject().then((res) => {
+                that.$router.push({
+                  name: 'login',
+                  query: { redirect: that.$route.path },
+                })
+              })
+            }
+          },
           createOrder(data, actions) {
             return that.$axios
               .post('orders', {
