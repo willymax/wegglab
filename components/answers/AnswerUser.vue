@@ -27,7 +27,7 @@
               :to="`/users/${user.id}`"
               class="flex-shrink-0 group block"
             >
-              {{ $processTime(timestamp) }}
+              <!-- {{ $processTime(timestamp) }} -->
             </nuxt-link>
           </span>
         </p>
