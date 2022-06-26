@@ -140,6 +140,9 @@ export default {
     this.paginator = { ...res.data.paginator }
     this.questions = this.questions.concat(res.data.data)
   },
+  fetchOnServer: false,
+  // multiple components can return the same `fetchKey` and Nuxt will track them both separately
+  fetchKey: 'question-list',
   watch: {
     '$route.query'(newValue) {
       this.searchText = this.$route.query.search
