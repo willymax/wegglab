@@ -14,7 +14,7 @@
           :class="
             sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'
           "
-          class="fixed z-30 inset-y-0 left-0 w-60 transition duration-300 transform lg:bg-transparent bg-surface overflow-y-auto lg:translate-x-0 lg:static lg:inset-0"
+          class="fixed z-30 inset-y-0 left-0 w-60 transition duration-300 transform bg-surface overflow-y-auto lg:translate-x-0 lg:static lg:inset-0"
         >
           <div class="flex items-center lg:hidden">
             <div class="flex flex-1 items-center">
