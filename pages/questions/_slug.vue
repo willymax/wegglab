@@ -79,7 +79,7 @@ export default {
       return this.$store.getters['questions/GET_CURRENT_QUESTION']
     },
   },
-  created() {
+  mounted() {
     this.$nuxt.$on('paymentReceived', ($event) => {
       location.reload(true)
     })

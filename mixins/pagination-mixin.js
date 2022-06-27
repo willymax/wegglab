@@ -39,8 +39,8 @@ export default {
       }
     },
   },
-  created() {
-    this.getItems()
+  mounted() {
+    // this.getItems()
   },
   methods: {
     getItems() {

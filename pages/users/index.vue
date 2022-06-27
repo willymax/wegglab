@@ -254,11 +254,8 @@ export default {
       }
     },
   },
-  created() {
-    this.getItems()
-  },
   mounted() {
-    // this.getUsers()
+    this.getItems()
   },
 
   methods: {
