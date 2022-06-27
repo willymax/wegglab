@@ -1,32 +1,44 @@
 <template>
   <div class="flex flex-col space-y-4">
-    <textarea
-      v-model="input.body"
-      class="form-control mt-1 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-      rows="3"
-      placeholder="Enter the description of your question"
-    ></textarea>
+    <div class="my-2">
+      <editor
+        v-model="input.body"
+        :api-key="$getTinyMceKey(config)"
+        :init="$initializeEditor(config)"
+      >
+      </editor>
+    </div>
     <validation-error :errors="apiValidationErrors.body" />
-    <base-file-upload v-model="FILES"></base-file-upload>
+    <base-file-upload v-model="fileUploadDetails"></base-file-upload>
     <validation-error :errors="apiValidationErrors.email" />
     <base-button @click="postAnswer()">Submit</base-button>
+    <validation-error :errors="apiValidationErrors.message" />
   </div>
 </template>
 
 <script>
+import Editor from '@tinymce/tinymce-vue'
 import BaseButton from '../core-components/BaseButton.vue'
 import BaseFileUpload from '../core-components/BaseFileUpload.vue'
 import ValidationError from '../ValidationError.vue'
 import formMixin from '@/mixins/form-mixin'
+
 export default {
-  components: { BaseFileUpload, ValidationError, BaseButton },
+  components: { BaseFileUpload, ValidationError, BaseButton, Editor },
   mixins: [formMixin],
   data() {
     return {
-      FILES: {},
+      fileUploadDetails: {},
       input: {
         body: '',
       },
+      config: {
+        uploadUrl: 'answers/uploadAnswerImage',
+        placeholderText: 'Type your answer here',
+        uploadKey: 'answerFile',
+        imageStorageUrl: `${process.env.apiBaseUrl}/files`,
+      },
+      textModel: 'Edit Your Content Here!',
     }
   },
   computed: {
@@ -37,15 +49,18 @@ export default {
   methods: {
     postAnswer() {
       const formData = new FormData()
-      const files = []
-      let counter = 0
-      for (const [index, file] of Object.entries(this.FILES)) {
-        formData.append(`files`, file)
-        counter++
+      if (this.fileUploadDetails && this.fileUploadDetails.FILES) {
+        let counter = 0
+        for (const [index, file] of Object.entries(
+          this.fileUploadDetails.FILES
+        )) {
+          formData.append(`files`, file)
+          counter++
+        }
       }
       // formData.append('title', this.input.title)
       formData.append('body', this.input.body)
-      formData.append('question_id', this.question._id)
+      formData.append('questionId', this.question._id)
       delete this.$axios.defaults.headers.common['content-type']
       delete this.$axios.defaults.headers.post['content-type']
       this.$axios({
@@ -60,13 +75,18 @@ export default {
         .then((response) => {
           this.$notify({
             type: 'success',
-            message: 'Answer created successfully.',
+            text: 'Answer created successfully.',
           })
-          this.$store.dispatch('answers/updateAddingAnswer', false)
+          this.FILES = {}
+          this.input = {
+            body: '',
+          }
+          // this.$store.dispatch('answers/updateAddingAnswer', false)
           this.$store.commit('questions/ADD_QUESTION_ANSWERS', response.data)
         })
         .catch((error) => {
-          this.setApiValidation(error.response.data.errors)
+          console.log('error', error.response)
+          this.setApiValidation(error)
         })
         .then(function () {
           // always executed

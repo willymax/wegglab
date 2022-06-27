@@ -77,9 +77,9 @@ export default {
         .then((response) => {
           // handle success
           that.students = response.data.data
-          that.pagination.currentPage = response.data.paginator.current_page
-          that.pagination.perPage = parseInt(response.data.paginator.per_page)
-          that.total = response.data.paginator.total_count
+          that.pagination.currentPage = response.data.paginator.currentPage
+          that.pagination.perPage = parseInt(response.data.paginator.perPage)
+          that.total = response.data.paginator.totalCount
         })
         .catch((error) => {
           // handle error

@@ -1,85 +1,66 @@
 <template>
-  <SlideYUpTransition :duration="animationDuration">
-    <!--Overlay Effect-->
+  <ZoomCenterTransition :duration="animationDuration">
     <div
+      v-if="show"
       id="my-modal"
-      style="z-index: 9998"
-      class="
-        fixed
-        inset-0
-        h-full
-        w-full
-        bg-gray-600 bg-opacity-50
-        overflow-y-auto overflow-x-auto
-        table
-      "
-      :class="[{ 'modal-mini': type === 'mini' }]"
-      role="dialog"
+      class="modal fixed"
       tabindex="-1"
+      style="z-index: 20000"
+      aria-labelledby="modal-title"
+      role="dialog"
+      aria-modal="true"
       :aria-hidden="!show"
-      @mousedown.self="closeModal"
     >
-      <div class="table-cell align-middle">
-        <div
-          class="top-20 mx-auto p-5 border w-4/5 shadow-lg rounded-md bg-white"
-          :class="[
-            { 'modal-notice': type === 'notice', [`modal-${size}`]: size },
-            modalClasses,
-          ]"
-        >
-          <div
-            class="mt-3 text-center"
-            :class="[
-              gradient ? `bg-gradient-${gradient}` : '',
-              modalContentClasses,
-            ]"
-          >
+      <div
+        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+        aria-hidden="true"
+      ></div>
+      <!-- This element is to trick the browser into centering the modal contents. -->
+      <span
+        class="hidden sm:inline-block sm:align-middle sm:h-screen"
+        aria-hidden="true"
+        >&#8203;</span
+      >
+      <div class="inset-0 overflow-y-auto no-scrollbar fixed overflow-x-hidden">
+        <div class="text-center h-full">
+          <div class="flex items-center md:items-center justify-center h-full">
             <div
-              v-if="$slots.header"
-              class="modal-header"
-              :class="[headerClasses]"
+              tabindex="-1"
+              style="z-index: 20000; max-width: 768px"
+              class="fixed overflow-hidden shadow-xl transform transition-all py-10 bg-white inline-block rounded-lg text-left align-middle md:w-fit w-full"
             >
-              <slot name="header"></slot>
-              <slot name="close-button">
-                <button
-                  v-if="showClose"
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                  @click="closeModal"
-                >
-                  <span :aria-hidden="!show">×</span>
-                </button>
-              </slot>
-            </div>
-
-            <div class="modal-body" :class="bodyClasses">
-              <slot></slot>
-            </div>
-            <div
-              v-if="$slots.footer"
-              class="modal-footer"
-              :class="footerClasses"
-            >
-              <slot name="footer"></slot>
+              <button
+                v-if="showClose"
+                aria-label="Close"
+                type="button"
+                class="absolute top-5 right-5"
+                @click="closeModal()"
+              >
+                Close
+              </button>
+              <div class="p-5"><slot></slot></div>
+              <div class="p-5"><slot name="footer"></slot></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </SlideYUpTransition>
+  </ZoomCenterTransition>
 </template>
 <script>
-import { SlideYUpTransition } from 'vue2-transitions'
+import { ZoomCenterTransition } from 'vue2-transitions'
 
 export default {
   name: 'BaseModal',
   components: {
-    SlideYUpTransition,
+    ZoomCenterTransition,
   },
   props: {
     show: Boolean,
+    minWidth: {
+      type: Number,
+      default: 768,
+    },
     showClose: {
       type: Boolean,
       default: true,
@@ -144,30 +125,41 @@ export default {
     },
     animationDuration: {
       type: Number,
-      default: 500,
+      default: 100,
       description: 'Modal transition duration',
     },
   },
   watch: {
-    show(val) {
-      const modal = document.getElementById('my-modal')
-      if (val) {
-        modal.style.display = 'block'
+    show(newValue, oldValue) {
+      const body = document.getElementsByTagName('body')[0]
+      if (newValue === true) {
+        // Disable scroll
+        body.classList.add('overflow-hidden')
       } else {
-        modal.style.display = 'none'
+        // Enable scroll
+        body.classList.remove('overflow-hidden')
       }
     },
   },
   methods: {
     closeModal() {
       this.$emit('update:show', false)
-      // this.$emit('close')
     },
   },
 }
 </script>
-<style>
+<style lang="postcss" scoped>
 .modal.show {
   background-color: rgba(0, 0, 0, 0.3);
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 </style>

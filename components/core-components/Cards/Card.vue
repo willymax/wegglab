@@ -7,6 +7,7 @@
       { [`shadow-${shadowSize}`]: shadowSize },
       { [`bg-gradient-${gradient}`]: gradient },
       { [`bg-${type}`]: type },
+      { [`dark:bg-${darkType}`]: darkType },
     ]"
   >
     <slot name="image"></slot>
@@ -31,7 +32,12 @@ export default {
   props: {
     type: {
       type: String,
-      default: '',
+      default: 'white',
+      description: 'Card type',
+    },
+    darkType: {
+      type: String,
+      default: 'gray-600',
       description: 'Card type',
     },
     gradient: {

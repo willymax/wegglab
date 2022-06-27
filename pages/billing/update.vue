@@ -28,6 +28,9 @@ export default {
 
     this.client_secret = res.data.data.client_secret
   },
+  fetchOnServer: false,
+  // multiple components can return the same `fetchKey` and Nuxt will track them both separately
+  fetchKey: 'billing-update',
   computed: {
     user() {
       return this.$auth.user

@@ -2,9 +2,7 @@
   <div>
     <!-- Header -->
     <div class="header bg-gradient-success py-7 py-lg-8 pt-lg-9">
-      <div class="container">
-        <notifications></notifications>
-      </div>
+      <div class="container"></div>
       <div class="separator separator-bottom separator-skew zindex-100">
         <svg
           x="0"
@@ -104,11 +102,11 @@ export default {
       try {
         await this.$store.dispatch('reset/createNewPassword', this.form.data)
       } catch (error) {
-        await this.$notify({
+        this.$notify({
           type: 'danger',
           message: 'The given data was invalid.',
         })
-        this.setApiValidation(error.response.data.errors)
+        this.setApiValidation(error)
       }
     },
   },

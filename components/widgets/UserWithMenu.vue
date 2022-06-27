@@ -1,16 +1,19 @@
 <template>
   <div v-if="$auth.loggedIn">
     <div class="relative">
-      <button
-        ref="userButton"
-        class="flex items-center space-x-2 relative focus:outline-none"
-        @click="dropdownOpen = !dropdownOpen"
-      >
-        <h2 class="text-gray-700 dark:text-gray-300 text-sm hidden sm:block">
+      <div class="flex flex-row justify-center items-center">
+        <p>{{ $auth.user.role }}</p>
+        <button
+          ref="userButton"
+          class="flex items-center space-x-2 relative focus:outline-none"
+          @click="dropdownOpen = !dropdownOpen"
+        >
+          <!-- <h2 class="text-gray-700 dark:text-gray-300 text-sm hidden sm:block">
           {{ $auth.user.first_name }} {{ $auth.user.last_name }}
-        </h2>
-        <base-avatar :user-avatar="$auth.user.avatar"></base-avatar>
-      </button>
+        </h2> -->
+          <base-avatar :user-avatar="$auth.user.avatar"></base-avatar>
+        </button>
+      </div>
 
       <div
         v-show="dropdownOpen"
@@ -26,32 +29,25 @@
         x-transition:leave-start="opacity-100 scale-100"
         x-transition:leave-end="opacity-0 scale-95"
       >
-        <template v-for="option in options" class="text-white">
-          <nuxt-link
-            :key="option._id"
-            :to="option.url"
-            class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-600 hover:text-white"
-            :class="'theme-' + color"
-            >{{ option.name }}</nuxt-link
-          >
-        </template>
+        <nuxt-link
+          v-for="option in options"
+          :key="option._id"
+          :to="option.url"
+          class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-600 hover:text-white"
+          :class="'theme-' + color"
+          >{{ option.name }}</nuxt-link
+        >
         <a
           href="javascript:;"
           class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-600 hover:text-white"
-          @click="showLogoutDialog = true"
+          @click="logout()"
           >Logout</a
         >
       </div>
     </div>
-    <app-modal
-      v-if="showLogoutDialog"
-      :show.sync="showLogoutDialog"
-      :show-close="true"
-    >
+    <app-modal :show.sync="showLogoutDialog">
       <template #default>
         <p>You are about to logout</p>
-      </template>
-      <template #footer>
         <div class="flex flex-row justify-center space-x-4 m-2">
           <button @click="showLogoutDialog = !showLogoutDialog">Close</button>
           <base-button width="md" :loading="loading" round @click="logout"
@@ -61,14 +57,31 @@
       </template>
     </app-modal>
   </div>
+  <div v-else>
+    <base-nuxt-button-link
+      :to="{
+        name: 'login',
+        query: { redirect: $route.path },
+      }"
+      >Login</base-nuxt-button-link
+    >
+    <base-nuxt-button-link
+      :to="{
+        name: 'register',
+        query: { redirect: $route.path },
+      }"
+      >Sign Up</base-nuxt-button-link
+    >
+  </div>
 </template>
 
 <script>
 import BaseAvatar from '../core-components/BaseAvatar.vue'
 import BaseButton from '../core-components/BaseButton.vue'
+import BaseNuxtButtonLink from '../core-components/BaseNuxtButtonLink.vue'
 import Logout from './Logout.vue'
 export default {
-  components: { Logout, BaseAvatar, BaseButton },
+  components: { Logout, BaseAvatar, BaseButton, BaseNuxtButtonLink },
   props: {
     color: {
       type: String,
@@ -85,7 +98,12 @@ export default {
       loading: false,
       showLogoutDialog: false,
       dropdownOpen: false,
-      options: [{ name: 'Account settings', url: '/profile', id: 1 }],
+      options: [
+        { name: 'Account settings', url: '/profile', id: 1 },
+        { name: 'Questions', url: '/user-questions/1', id: 1 },
+        // { name: 'Orders', url: '/orders', id: 1 },
+        { name: 'Payments', url: '/payments', id: 1 },
+      ],
     }
   },
   methods: {
@@ -101,6 +119,10 @@ export default {
       this.loading = true
       try {
         await this.$auth.logout()
+        this.$notify({
+          type: 'success',
+          text: 'You have logged out successfully.',
+        })
       } catch (error) {
         this.loading = false
         this.$toast.error(error.message)

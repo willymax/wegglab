@@ -1,9 +1,11 @@
 <template>
   <div
     data-notify="container"
-    class="alert alert-notify alert-dismissible"
+    class="alert alert-notify max-w-md w-3/12 px-2 py-3 flex items-center alert-dismissible bg-gray-100 shadow-lg rounded-lg overflow-hidden"
     :class="[
       { 'alert-with-icon': icon },
+      { 'text-red-500': alertType == 'alert-danger' },
+      { 'text-blue-500': alertType == 'alert-info' },
       verticalAlign,
       horizontalAlign,
       alertType,
@@ -21,7 +23,7 @@
       </slot>
     </template>
 
-    <span class="alert-text">
+    <span class="alert-text flex-grow">
       <span v-if="title" class="title">
         <b>{{ title }}<br /></b>
       </span>
@@ -35,7 +37,7 @@
     <slot name="dismiss-icon">
       <button
         type="button"
-        class="close"
+        class="close py-1 px-1"
         data-dismiss="alert"
         aria-label="Close"
         @click="close"
@@ -106,7 +108,7 @@ export default {
     },
     timeout: {
       type: Number,
-      default: 5000,
+      default: 10000,
       validator: (value) => {
         return value >= 0
       },

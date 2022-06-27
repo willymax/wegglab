@@ -7,7 +7,7 @@
           <base-input
             v-model="form.current_password"
             type="password"
-            name="current_password"
+            name="current password"
             autocomplete="on"
             class="mb-3"
             prepend-icon="fa fa-key"
@@ -30,14 +30,15 @@
         <base-input
           v-model="form.password_confirmation"
           type="password"
-          name="confirm_password"
+          name="password confirmation"
           autocomplete="on"
           class="mb-3"
           prepend-icon="fa fa-key"
           label="Confirm Password"
           rules="required"
         />
-        <validation-error :errors="apiValidationErrors.confirm_password" />
+        <validation-error :errors="apiValidationErrors.password_confirmation" />
+        <validation-error :errors="apiValidationErrors.message" />
         <div class="my-4">
           <base-button
             type="button"
@@ -85,29 +86,31 @@ export default {
   methods: {
     async handleChangePassword() {
       if (['1'].includes(this.user._id)) {
-        await this.$notify({
+        this.$notify({
           type: 'danger',
           message: 'You are not allowed not change data of default users.',
         })
         return
       }
-      this.user.current_password = this.form.current_password
-      this.user.password = this.form.password
-      this.user.password_confirmation = this.form.password_confirmation
+      const userDetails = {
+        current_password: this.form.current_password,
+        password: this.form.password,
+        password_confirmation: this.form.password_confirmation,
+      }
       try {
-        await this.$store.dispatch('users/update', this.user)
-        this.$refs.password_form.reset()
-        this.unsetApiValidationErrors()
+        await this.$store.dispatch('users/update', userDetails)
+        // this.$refs.password_form.reset()
         this.$notify({
           type: 'success',
           message: 'Password changed successfully.',
         })
+        await this.$auth.logout()
       } catch (error) {
         this.$notify({
           type: 'danger',
           message: 'Oops, something went wrong!',
         })
-        this.setApiValidation(error.response.data.errors)
+        this.setApiValidation(error)
       }
     },
   },

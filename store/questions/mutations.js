@@ -11,14 +11,18 @@ const mutations = {
   SET_SUBJECTS(state, subjects) {
     state.SUBJECTS = subjects
   },
+  SET_GUEST_QUESTION(state, guestQuestionFormData) {
+    state.GUEST_QUESTION = guestQuestionFormData
+  },
   remove(state, { todo }) {
     state.list.splice(state.list.indexOf(todo), 1)
   },
   toggle(state, todo) {
     todo.done = !todo.done
   },
-  ADD_QUESTION_ANSWERS(state, question) {
-    state.CURRENT_QUESTION.answers.unshift(question)
+  ADD_QUESTION_ANSWERS(state, newAnswers) {
+    state.CURRENT_QUESTION.answers.push(newAnswers)
+    state.CURRENT_QUESTION = { ...state.CURRENT_QUESTION }
   },
 }
 export default mutations

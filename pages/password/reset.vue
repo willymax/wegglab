@@ -2,9 +2,7 @@
   <div>
     <!-- Container -->
     <div class="container mx-auto">
-      <div class="container">
-        <notifications></notifications>
-      </div>
+      <div class="container"></div>
       <div class="flex justify-center px-6 my-12">
         <!-- Row -->
         <div class="w-full xl:w-3/4 lg:w-11/12 flex">
@@ -96,7 +94,7 @@ export default {
           type: 'password-forgot',
           attributes: {
             email: '',
-            redirect_url: process.env.baseUrl + '/password/email',
+            redirect_url: process.env.apiBaseUrl + '/password/email',
           },
         },
       },
@@ -105,7 +103,7 @@ export default {
   methods: {
     async handleSubmit() {
       if (this.$isDemo === 1) {
-        await this.$notify({
+        this.$notify({
           type: 'danger',
           message: 'Password reset is disabled in the demo.',
         })
@@ -116,16 +114,16 @@ export default {
           'reset/forgotPassword',
           this.form.data.attributes
         )
-        await this.$notify({
+        this.$notify({
           type: 'success',
           message: 'An email with reset password link was sent.',
         })
       } catch (error) {
-        await this.$notify({
+        this.$notify({
           type: 'danger',
           message: "We can't find a user with that e-mail address.",
         })
-        this.setApiValidation(error.response.data.errors)
+        this.setApiValidation(error)
       }
     },
   },

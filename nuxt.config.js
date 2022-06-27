@@ -5,14 +5,14 @@
 
 export default {
   env: {
-    apiUrl: process.env.API_BASE_URL,
-    baseUrl: process.env.BASE_URL,
+    apiBaseUrl: process.env.API_BASE_URL,
     isDemo: process.env.IS_DEMO,
     apiKey: process.env.API_KEY,
     baseStorageUrl: process.env.STORAGE_BASE_URL,
     paypalClient: process.env.PAYPAL_CLIENT_ID,
     paypalSecret: process.env.PAYPAL_SECRET,
     googleClientId: process.env.GOOGLE_CLIENT_ID,
+    tinyMCEKey: process.env.TINY_MCE_KEY,
   },
   // mode: 'spa',
   router: {
@@ -20,11 +20,18 @@ export default {
     linkExactActiveClass: 'active',
     middleware: ['auth'],
     extendRoutes(routes, resolve) {
-      routes.push({
-        name: 'custom',
-        path: '*',
-        component: resolve(__dirname, 'pages/404.vue'),
-      })
+      routes.push(
+        {
+          name: 'custom',
+          path: '*',
+          component: resolve(__dirname, 'pages/404.vue'),
+        },
+        {
+          name: 'user-questions-default',
+          path: '/user-questions',
+          component: resolve(__dirname, 'pages/user-questions/index.vue'),
+        }
+      )
     },
   },
   meta: {
@@ -147,8 +154,9 @@ export default {
     ],
     script: [
       {
-        src: `https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}&vault=true&intent=subscription`,
+        src: `https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}&vault=true`,
         body: true,
+        'data-sdk-integration-source': 'button-factory',
       },
     ],
   },
@@ -166,10 +174,15 @@ export default {
     { src: '~/plugins/dashboard/world-map', ssr: false },
     '~/plugins/dashboard/JsonApi.js',
     '~/plugins/isDemo.js',
+    '~/plugins/testPlugin.js',
     '~/plugins/app.js',
+    '~/plugins/auth.js',
     '~/plugins/vue-placeholders.js',
+    { src: '~/plugins/sanitize.js', ssr: false },
     '~/plugins/modal.js',
     '~/plugins/vue-observe-visibility.client.js',
+    { src: '~/plugins/notifications-ssr', ssr: true },
+    { src: '~/plugins/notifications-client', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -182,6 +195,7 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/svg',
+    '@nuxtjs/color-mode',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -192,6 +206,7 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/auth-next',
     '@nuxtjs/toast',
+    'vue-social-sharing/nuxt',
   ],
 
   /*
@@ -219,7 +234,7 @@ export default {
         },
         endpoints: {
           login: { url: '/auth/login', method: 'post' },
-          logout: { url: '/logout', method: 'post' },
+          logout: { url: '/auth/logout', method: 'post' },
           user: { url: '/users/profile', method: 'get' },
           refresh: { url: '/auth/refresh', method: 'post' },
         },
@@ -250,7 +265,7 @@ export default {
     redirect: {
       login: '/login',
       register: '/register',
-      logout: '/',
+      logout: '/login',
       callback: '/login',
       home: '/dashboard',
     },

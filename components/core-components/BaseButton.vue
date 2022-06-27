@@ -3,13 +3,13 @@
     :is="tag"
     :type="tag === 'button' ? nativeType : ''"
     :disabled="disabled || loading"
-    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded uppercase"
+    class="bg-color-secondary hover:bg-green-700 text-on-secondary font-bold py-2 px-4 rounded capitalize my-2"
     :class="[
-      { rounded: round },
+      { 'rounded-full': round },
       { 'bg-transparent': transparent },
       { border: border },
       { block: block },
-      { [`w-${width}`]: width },
+      { [`${width}`]: width },
       { [`h-${height}`]: height },
       { [`hover:text-${hoverText}`]: hoverText },
       { disabled: disabled && tag !== 'button' },

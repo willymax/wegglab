@@ -1,54 +1,40 @@
 <template>
   <article
-    class="hover:bg-gray-100 bg-white transition duration-350 ease-in-out rounded-box overflow-hidden shadow-lg m-2"
+    class="dark:hover:bg-gray-500 bg-surface hover:bg-gray-50 transition duration-350 ease-in-out rounded-box overflow-hidden shadow-lg m-2"
   >
-    <div class="flex flex-shrink-0 p-4 pb-0">
-      <a href="#" class="flex-shrink-0 group block">
-        <div class="flex items-center">
-          <div>
-            <base-avatar
-              :user-avatar="details.user.avatar"
-              dimensions-classes="h-10 w-10"
-              img-classes="rounded-full"
-            ></base-avatar>
-          </div>
-          <div class="ml-3">
-            <p class="text-base leading-6 font-medium">
-              {{ details.user ? details.user.first_name : '' }}
-              <span
-                class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150"
-              >
-                {{ details.user ? details.user.username : '' }}
-              </span>
-            </p>
-            <p>
-              <span
-                class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150"
-              >
-                {{ $processTime(details.createdAt) }}
-              </span>
-            </p>
-          </div>
-        </div>
-      </a>
+    <div class="p-4 flex justify-between items-center">
+      <answer-user
+        :user="details.user"
+        :timestamp="details.createdAt"
+        :resource-link="`/questions/${details.slug}`"
+      ></answer-user>
+      <p
+        class="text-sm lowercase bg-color-secondary text-on-secondary p-2 rounded-lg border"
+      >
+        {{ getStatusToShow(details.status) }}
+      </p>
     </div>
 
-    <div class="pl-16">
-      <nuxt-link :to="`/questions/${details.slug}`">
-        <h1 class="text-xl font-bold">{{ details.title }}</h1>
+    <div class="pl-12">
+      <nuxt-link :to="`/questions/${details.slug}`" class="hover:underline">
+        <h1 class="text-xl font-bold dark:text-white">
+          {{ details.title | truncate(540, '...') }}
+        </h1>
       </nuxt-link>
       <div class="tags">
         <nuxt-link
-          v-for="tag in details.tag_list"
+          v-for="tag in details.tags"
           :key="tag"
-          :to="{ name: 't-tag', params: { tag } }"
+          :to="{ name: 'questions-tagged-tag', params: { tag } }"
           class="tag"
         >
           #{{ tag }}
         </nuxt-link>
       </div>
-
-      <div class="flex items-center py-4">
+      <div>
+        <p class="text-sm">{{ details.numberOfAnswers }} Answers</p>
+      </div>
+      <div class="flex items-center py-4 hidden">
         <div
           class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out"
         >
@@ -105,10 +91,11 @@
 </template>
 
 <script>
+import AnswerUser from '../answers/AnswerUser.vue'
 import BaseAvatar from '../core-components/BaseAvatar.vue'
 export default {
   name: 'Question',
-  components: { BaseAvatar },
+  components: { BaseAvatar, AnswerUser },
   props: {
     details: {
       type: Object,
@@ -120,6 +107,14 @@ export default {
   methods: {
     getQuestionUrl(slug) {
       //
+    },
+    getStatusToShow(status) {
+      if (status === 'ASSIGNED') {
+        if (!this.$auth.loggedIn || this.$auth.user.role === 'student') {
+          return 'unanswered'
+        }
+      }
+      return status
     },
   },
 }

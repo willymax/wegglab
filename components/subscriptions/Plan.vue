@@ -1,14 +1,6 @@
 <template>
   <div
-    class="
-      flex flex-col
-      rounded-lg
-      border-2
-      shadow-lg
-      relative
-      cursor-pointer
-      hover:shadow-2xl
-    "
+    class="flex flex-col rounded-lg border-2 shadow-lg relative cursor-pointer hover:shadow-2xl bg-white"
   >
     <div class="w-full px-4 py-6 rounded-t-lg card-section-1">
       <p class="text-3xl font-bold group-hover:text-white text-blue-500">
@@ -21,56 +13,32 @@
     </div>
     <hr class="w-1" />
     <div
-      class="
-        flex flex-col
-        items-center
-        justify-center
-        w-full
-        h-full
-        py-4
-        rounded-b-lg
-      "
+      class="flex flex-col items-center justify-center w-full h-full py-4 rounded-b-lg"
     >
       <div class="w-5/6">
         <ul>
           <li>
             <a
-              class="
-                block
-                px-5
-                py-3
-                rounded-lg
-                text-gray-900
-                hover:bg-gray-200
-                focus:bg-indigo-500 focus:text-white
-                outline-none
-                cursor-pointer
-              "
+              class="block px-5 py-3 rounded-lg text-gray-900 hover:bg-gray-200 focus:bg-indigo-500 focus:text-white outline-none cursor-pointer"
               ><span><i class="fas fa-check-circle"></i></span> Menu Item</a
             >
           </li>
         </ul>
       </div>
       <div
-        class="
-          w-5/6
-          py-2
-          mt-2
-          font-semibold
-          text-center
-          uppercase
-          border border-transparent
-          rounded
-          text-blue-500
-        "
+        class="w-5/6 py-2 mt-2 font-semibold text-center uppercase border border-transparent rounded text-blue-500"
       >
-        <base-button @click="show = !show">Start Plan</base-button>
+        <base-button width="w-full" :round="true" @click="show = !show"
+          >Start Plan</base-button
+        >
       </div>
     </div>
-    <app-modal v-if="show" :show.sync="show">
+    <app-modal :show.sync="show">
       <Checkout :price="price" :plan-id="planId" :name="name"></Checkout>
       <template #footer>
-        <base-button @click="show = !show">Close Dialog</base-button>
+        <base-button width="md:w-64 w-full" @click="show = !show"
+          >Close Dialog</base-button
+        >
       </template>
     </app-modal>
   </div>

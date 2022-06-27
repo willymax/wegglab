@@ -1,8 +1,5 @@
 <template>
   <div id="paypal-button-container" ref="paypalButtonContainer"></div>
-  <!-- <div>
-    <base-button @click="createBillingAgreement()">Subscribe</base-button>
-  </div> -->
 </template>
 
 <script>
@@ -143,9 +140,8 @@ export default {
               })
             },
             onApprove(data, actions) {
-              // subscriptions/subscribeUser
               that.$axios
-                .post('/users/subscribeUser', {
+                .post('/subscriptions', {
                   subscription_id: data.subscriptionID,
                   paypal_plan_id: `${that.planId}`,
                   // status: data.status,
@@ -154,7 +150,7 @@ export default {
                 .then((res) => {
                   // Object.assign(target, source)
                   that.$auth.setUser(
-                    Object.assign(that.$auth.user, res.data.data)
+                    Object.assign({ ...that.$auth.user }, res.data.data)
                   )
                   that.$router.back()
                 })

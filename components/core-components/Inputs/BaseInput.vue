@@ -7,7 +7,12 @@
   >
     <div :class="{ 'is-invalid': validated && invalid }">
       <slot name="label">
-        <label v-if="label" :class="labelClasses">
+        <label
+          v-if="label"
+          :for="id"
+          :class="labelClasses"
+          class="text-gray-600 dark:text-gray-200 block mb-2 text-sm font-medium"
+        >
           {{ label }}
         </label>
       </slot>
@@ -33,11 +38,12 @@
         </div>
         <slot v-bind="slotData">
           <input
-            :type="type"
+            :id="id"
+            :type="show ? 'text' : type === 'password' ? 'password' : type"
             v-bind="$attrs"
             :valid="valid"
             :required="required"
-            class="flex-shrink flex-grow flex-auto leading-normal block px-3 py-1.5 rounded rounded-l-none text-gray-700 bg-white border border-gray-300 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500"
+            class="text-base flex-shrink flex-grow flex-auto leading-normal block px-3 py-1.5 rounded rounded-l-none text-gray-700 bg-white border border-gray-300 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500"
             :class="[
               { 'is-valid': valid && validated && successMessage },
               { 'is-invalid': invalid && validated },
@@ -53,6 +59,20 @@
             </slot>
           </span>
         </div>
+        <img
+          v-if="type === 'password'"
+          class="w-5 h-5"
+          src="~assets/svgs/visibility_fill.svg"
+          :class="{ hidden: !show, block: show }"
+          @click="show = !show"
+        />
+        <img
+          v-if="type === 'password'"
+          class="w-5 h-5"
+          src="~assets/svgs/visibility_off.svg"
+          :class="{ block: !show, hidden: show }"
+          @click="show = !show"
+        />
         <slot name="infoBlock"></slot>
       </div>
       <slot name="success">
@@ -61,9 +81,9 @@
         </div>
       </slot>
       <slot name="error">
-        <div v-if="errors[0]" class="text-error" style="display: block">
-          {{ errors[0] }}
-        </div>
+        <span v-if="errors[0]">
+          <small class="text-error" style="display: block" v-text="errors[0]" />
+        </span>
       </slot>
     </div>
   </validation-provider>
@@ -104,7 +124,7 @@ export default {
     labelClasses: {
       type: String,
       description: 'Input label css classes',
-      default: 'block mb-2 text-sm font-bold text-gray-700',
+      default: '',
     },
     inputClasses: {
       type: String,
@@ -131,6 +151,11 @@ export default {
       default: '',
       description: 'Prepend icon (left)',
     },
+    id: {
+      type: String,
+      default: null,
+      description: 'The id of the input',
+    },
     rules: {
       type: [String, Array, Object],
       description: 'Vee validate validation rules',
@@ -145,6 +170,7 @@ export default {
   data() {
     return {
       focused: false,
+      show: false,
     }
   },
   computed: {

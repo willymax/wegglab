@@ -1,7 +1,7 @@
 import qs from 'qs'
 import Jsona from 'jsona'
 
-const url = process.env.apiUrl
+const url = process.env.apiBaseUrl
 const jsona = new Jsona()
 
 function list(params, axios) {

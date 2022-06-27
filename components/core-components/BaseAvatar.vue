@@ -1,10 +1,10 @@
 <template>
-  <div :class="marginTop">
-    <div class="md rounded-full relative avatar" :class="dimensionsClasses">
+  <client-only :class="marginTop">
+    <div class="relative" :class="dimensionsClasses">
       <img
         ref="avatar"
         :class="[imgClasses, dimensionsClasses]"
-        class="h-10 w-10 md rounded-full relative"
+        class="rounded-full border border-gray-100 shadow-sm"
         :src="$getImageUrl(userAvatar) || require('~/assets/img/avatar.png')"
         alt=""
         @load="imageLoaded"
@@ -17,7 +17,7 @@
         <i class="fas fa-circle-notch fa-spin"></i>
       </span>
     </div>
-  </div>
+  </client-only>
 </template>
 
 <script>
@@ -39,7 +39,7 @@ export default {
     },
     dimensionsClasses: {
       type: String,
-      default: '',
+      default: 'w-16 h-16',
       description: 'Input css classes',
     },
   },

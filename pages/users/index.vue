@@ -46,21 +46,84 @@
             @sort-change="sortChange"
           >
             <el-table-column
+              label="Id"
+              min-width="220px"
+              prop="id"
+              sortable="custom"
+            >
+              <template slot-scope="scope">
+                <nuxt-link
+                  :to="`/users/${scope.row.id}`"
+                  class="underline cursor-pointer"
+                  >{{ scope.row.id }}</nuxt-link
+                >
+              </template>
+            </el-table-column>
+
+            <el-table-column
               label="First Name"
-              min-width="310px"
+              min-width="150px"
               prop="first_name"
               sortable="custom"
             />
             <el-table-column
               label="Last Name"
-              min-width="310px"
+              min-width="150px"
               prop="last_name"
               sortable="custom"
             />
             <el-table-column
+              label="Role"
+              min-width="150px"
+              prop="role"
+              sortable="custom"
+            />
+            <el-table-column
               label="Email"
-              min-width="310px"
+              min-width="150px"
               prop="email"
+              sortable="custom"
+            />
+            <el-table-column
+              label="Account Status"
+              min-width="150px"
+              prop="email"
+              sortable="custom"
+            />
+            <el-table-column
+              label="Total Earning"
+              min-width="150px"
+              prop="earning.cancelled"
+              sortable="custom"
+            />
+            <el-table-column
+              label="Pending Clearance"
+              min-width="150px"
+              prop="earning.pendingClearance"
+              sortable="custom"
+            />
+            <el-table-column
+              label="Cleared"
+              min-width="150px"
+              prop="earning.cleared"
+              sortable="custom"
+            />
+            <el-table-column
+              label="Withdrawn"
+              min-width="150px"
+              prop="earning.withdrawn"
+              sortable="custom"
+            />
+            <el-table-column
+              label="Used For Purchase"
+              min-width="150px"
+              prop="earning.usedForPurchase"
+              sortable="custom"
+            />
+            <el-table-column
+              label="Cancelled"
+              min-width="150px"
+              prop="earning.cancelled"
               sortable="custom"
             />
             <el-table-column
@@ -191,7 +254,6 @@ export default {
       }
     },
   },
-
   created() {
     this.getItems()
   },
@@ -203,18 +265,19 @@ export default {
     getItems() {
       const that = this
       this.$axios
-        .get('users', {
+        .get(`users`, {
           params: {
             perPage: this.pagination.perPage,
             page: this.pagination.currentPage,
+            role: this.$route.query.type || null,
           },
         })
         .then((response) => {
           // handle success
           that.users = response.data.data
-          that.pagination.currentPage = response.data.paginator.current_page
-          that.pagination.perPage = parseInt(response.data.paginator.per_page)
-          that.total = response.data.paginator.total_count
+          that.pagination.currentPage = response.data.paginator.currentPage
+          that.pagination.perPage = parseInt(response.data.paginator.perPage)
+          that.total = response.data.paginator.totalCount
         })
         .catch((error) => {
           // handle error

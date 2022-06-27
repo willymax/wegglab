@@ -6,7 +6,6 @@
 import Card from '~/components/core-components/Cards/Card.vue'
 export default {
   components: { Card },
-  layout: 'AccountSettings',
 }
 </script>
 

@@ -1,9 +1,9 @@
 <template>
   <div>
     <h3></h3>
-    <div v-if="$fetchState.pending">
+    <client-only v-if="$fetchState.pending">
       <content-loading></content-loading>
-    </div>
+    </client-only>
     <template v-else-if="$fetchState.error">
       <p>{{ $fetchState.error.message }}</p>
     </template>
@@ -47,7 +47,6 @@ import ContentLoading from '~/components/core-components/ContentLoading.vue'
 import Plans from '~/components/subscriptions/Plans.vue'
 export default {
   components: { Plans, ContentLoading, BaseLabel, BaseButton },
-  Cardayout: 'AccountSettings',
   data() {
     return {
       subscription: {},
@@ -71,7 +70,6 @@ export default {
         }
       ).then((res) => res.json())
       this.subscription = response
-      console.log('this.subscription', this.subscription)
       const planResponse = await fetch(
         `https://api.sandbox.paypal.com/v1/billing/plans/${this.user.subscription.paypal_plan_id}`,
         {
@@ -82,7 +80,6 @@ export default {
           },
         }
       ).then((res) => res.json())
-      console.log('planResponse', planResponse)
       this.plan = planResponse
     }
   },
@@ -98,7 +95,7 @@ export default {
     },
     subscribed() {
       return this.user.subscription
-        ? this.user.subscription.status === 'Active'
+        ? this.user.subscription.status === 'ACTIVE'
         : false
     },
     price() {
@@ -120,6 +117,7 @@ export default {
   methods: {
     async cancelSubscription() {
       try {
+        const that = this
         const res = await this.$store.dispatch('paypal/getAccessToken')
         const accessToken = res.access_token
         await fetch(`${this.cancellationLink}`, {
@@ -128,11 +126,24 @@ export default {
             Authorization: `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
           },
+        }).then((res) => {
+          this.subscription.status = 'CANCELLED'
+          this.$axios
+            .patch('subscriptions/updateSubscription?status=CANCELLED')
+            .then((response) => {
+              that.$auth.setUser(
+                Object.assign(
+                  { ...this.$auth.user },
+                  {
+                    subscription: response.subscription,
+                  }
+                )
+              )
+            })
+            .catch((error) => {
+              console.log(error)
+            })
         })
-          .then((res) => {})
-          .then((res) => {
-            this.subscription.status = 'CANCELLED'
-          })
       } catch (error) {}
     },
     async cancelSubscriptionOnWegglab() {
