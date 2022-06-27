@@ -50,6 +50,9 @@ export default {
 
     this.user = res.data.data
   },
+  fetchOnServer: false,
+  // multiple components can return the same `fetchKey` and Nuxt will track them both separately
+  fetchKey: 'single-user',
   computed: {
     ...mapState('questions', {
       questions: (state) => state.questions,
