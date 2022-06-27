@@ -35,13 +35,13 @@
       </h2>
     </div>
     <div
-      class="relative grid gap-6 row-gap-5 mb-8 md:row-gap-8 lg:grid-cols-4 sm:grid-cols-2"
+      class="relative grid gap-4 row-gap-5 mb-8 md:row-gap-8 lg:grid-cols-6 sm:grid-cols-2"
     >
-      <div
+      <!-- <div
         class="absolute inset-0 flex items-center justify-center sm:hidden lg:flex"
       >
         <div class="w-px h-full bg-gray-300 lg:w-full lg:h-px"></div>
-      </div>
+      </div> -->
       <div
         class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2"
       >
@@ -82,6 +82,30 @@
         class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2"
       >
         <div class="flex items-center justify-between mb-2">
+          <p class="text-lg font-bold leading-5">Used for Purchases</p>
+        </div>
+        <p
+          class="flex items-center justify-center w-2/3 h-10 font-bold rounded text-deep-purple-accent-400"
+        >
+          $ {{ earning.usedForPurchases }}
+        </p>
+      </div>
+      <div
+        class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2"
+      >
+        <div class="flex items-center justify-between mb-2">
+          <p class="text-lg font-bold leading-5">Withdrawn</p>
+        </div>
+        <p
+          class="flex items-center justify-center w-2/3 h-10 font-bold rounded text-deep-purple-accent-400"
+        >
+          $ {{ earning.withdrawn }}
+        </p>
+      </div>
+      <div
+        class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2"
+      >
+        <div class="flex items-center justify-between mb-2">
           <p class="text-lg font-bold leading-5">Total Earning</p>
         </div>
         <p
@@ -91,17 +115,59 @@
         </p>
       </div>
     </div>
-    <base-table resource="payments">
-      <template #custom-columns> </template>
-      <template #actions> </template
+    <base-table resource="payments" table-title="Payments" :hide-actions="true">
+      <template #customColumns>
+        <el-table-column
+          key="id"
+          label="Id"
+          min-width="100px"
+          prop="_id"
+        ></el-table-column>
+        <el-table-column
+          key="createdAt"
+          label="Date"
+          min-width="100px"
+          prop="createdAt"
+          :sortable="true"
+        ></el-table-column>
+        <el-table-column
+          key="description"
+          label="Description"
+          min-width="200px"
+          prop="description"
+        >
+          <template slot-scope="scope">
+            <span>{{ scope.row.description }}(</span>
+            <span
+              ><nuxt-link
+                :to="`/questions/${scope.row.question._id}`"
+                class="underline cursor-pointer"
+                >question</nuxt-link
+              ></span
+            ><span>)</span>
+          </template></el-table-column
+        >
+        <el-table-column
+          key="amount"
+          label="Amount"
+          min-width="50px"
+          align="right"
+          prop="amount"
+          ><template slot-scope="scope">
+            <span>${{ scope.row.amount }}</span>
+          </template></el-table-column
+        >
+      </template>
+      <template #actions></template
     ></base-table>
   </div>
 </template>
 
 <script>
+import { TableColumn } from 'element-ui'
 import BaseTable from '~/components/tables/BaseTable.vue'
 export default {
-  components: { BaseTable },
+  components: { BaseTable, [TableColumn.name]: TableColumn },
   layout: 'ResponsiveDashboard',
   data() {
     return {

@@ -3,7 +3,7 @@
     <base-table
       :items="orders"
       :columns="columns"
-      table-title="orders List"
+      table-title="List of Orders"
       resource="orders"
     >
       <template #actions>

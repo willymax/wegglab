@@ -6,7 +6,7 @@
       to="#"
       class="flex items-center p-2 text-color-secondary transition-colors rounded-md dark:text-light hover:bg-green-100 dark:hover:bg-gray-500"
       :class="{
-        'bg-green-100 dark:bg-gray-500': isActive || open,
+        'bg-green-100 dark:bg-gray-500': (isActive || open) && !alwaysOpen,
         'pointer-events-none': menuDisabled,
       }"
       role="button"
@@ -66,7 +66,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    isOpen: {
+    alwaysOpen: {
       type: Boolean,
       default: false,
     },
@@ -78,12 +78,12 @@ export default {
     }
   },
   watch: {
-    isOpen(newValue, oldValue) {
+    alwaysOpen(newValue, oldValue) {
       this.open = newValue
     },
   },
   mounted() {
-    this.open = this.isOpen
+    this.open = this.alwaysOpen
   },
   methods: {},
 }

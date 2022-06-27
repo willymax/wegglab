@@ -1,5 +1,5 @@
 <template>
-  <base-nav
+  <base-header
     container-classes="container-fluid"
     class="navbar-top border-bottom navbar-expand"
     :class="{ 'bg-success navbar-dark': type === 'default' }"
@@ -265,17 +265,17 @@
         </div>
       </base-dropdown>
     </ul>
-  </base-nav>
+  </base-header>
 </template>
 <script>
 import { CollapseTransition } from 'vue2-transitions'
 import { pick, merge } from 'lodash'
-import BaseNav from '@/components/core-components/Navbar/BaseNav.vue'
+import BaseHeader from '@/components/header/BaseHeader.vue'
 
 export default {
   components: {
     CollapseTransition,
-    BaseNav,
+    BaseHeader,
   },
   props: {
     type: {

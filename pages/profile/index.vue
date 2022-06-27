@@ -74,7 +74,6 @@ export default {
     BaseLabel,
   },
   mixins: [formMixin],
-  layout: 'AccountSettings',
   data() {
     return {
       FILE: {},

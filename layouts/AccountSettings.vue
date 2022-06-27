@@ -1,8 +1,7 @@
 <template>
   <div class="h-screen">
-    <notifications></notifications>
     <!-- <base-nav></base-nav> -->
-    <nav-bar></nav-bar>
+    <profile-nav-bar></profile-nav-bar>
     <div class="h-screen container mx-auto md:px-10">
       <div class="rounded-lg shadow bg-base-200 drawer drawer-mobile h-screen">
         <main role="main" class="flex flex-col drawer-content">
@@ -39,7 +38,7 @@ import DashboardContent from '~/components/layouts/argon/Content.vue'
 import Logout from '~/components/widgets/Logout.vue'
 import SideBarMenu from '~/components/layouts/argon/SideBarMenu.vue'
 import MenuItem from '~/components/layouts/argon/MenuItem.vue'
-import NavBar from '~/components/settings/NavBar.vue'
+import ProfileNavBar from '~/components/settings/ProfileNavBar.vue'
 function hasElement(className) {
   return document.getElementsByClassName(className).length > 0
 }
@@ -63,9 +62,9 @@ export default {
     Logout,
     SideBarMenu,
     MenuItem,
-    NavBar,
+    ProfileNavBar,
   },
-  layout: 'ResponsiveDashboard',
+  layout: 'GuestLayout',
   mounted() {
     this.initScrollbar(), this.$store.dispatch('profile/me')
   },

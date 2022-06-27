@@ -9,8 +9,7 @@ import BaseDropdown from './BaseDropdown.vue'
 
 import Card from './Cards/Card.vue'
 import StatsCard from './Cards/StatsCard.vue'
-import BaseNav from './Navbar/BaseNav'
-import NavbarToggleButton from './Navbar/NavbarToggleButton'
+import NavbarToggleButton from './Header/NavbarToggleButton'
 
 import Breadcrumb from './Breadcrumb/Breadcrumb.vue'
 import BreadcrumbItem from './Breadcrumb/BreadcrumbItem.vue'
@@ -36,7 +35,6 @@ export default {
   StatsCard,
   BaseDropdown,
   SidebarPlugin,
-  BaseNav,
   NavbarToggleButton,
   Breadcrumb,
   BreadcrumbItem,

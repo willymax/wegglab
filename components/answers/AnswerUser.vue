@@ -23,8 +23,11 @@
           <span
             class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150"
           >
-            <nuxt-link :to="resourceLink" class="flex-shrink-0 group block">
-              <span>{{ $processTime(timestamp) }}</span>
+            <nuxt-link
+              :to="`/users/${user.id}`"
+              class="flex-shrink-0 group block"
+            >
+              {{ $processTime(timestamp) }}
             </nuxt-link>
           </span>
         </p>

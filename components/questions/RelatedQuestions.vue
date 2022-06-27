@@ -32,7 +32,7 @@ export default {
   methods: {
     async loadRelatedQuestions(question) {
       const res = await this.$axios.get(
-        `questions?search=${question.title}&perPage=10`
+        `questions?search=${question.title}&perPage=10&except=${question._id}`
       )
       this.questions = this.questions.concat(res.data.data)
     },

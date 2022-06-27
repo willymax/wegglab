@@ -3,7 +3,7 @@
   <div class="main-container relative">
     <notifications></notifications>
     <div class="flex flex-col bg-background font-roboto">
-      <base-nav></base-nav>
+      <base-header></base-header>
       <div class="main-content bg-gray-100 dark:bg-gray-800">
         <nuxt></nuxt>
       </div>
@@ -11,11 +11,11 @@
   </div>
 </template>
 <script>
-import BaseNav from '~/components/core-components/Navbar/BaseNav.vue'
+import BaseHeader from '~/components/header/BaseHeader.vue'
 
 export default {
   components: {
-    BaseNav,
+    BaseHeader,
   },
   props: {
     backgroundColor: {

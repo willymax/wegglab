@@ -11,7 +11,7 @@
             <div class="col-6">
               <h3 class="mb-0">{{ tableTitle }}</h3>
             </div>
-            <div class="col-6 text-right">
+            <div v-if="showAddButton" class="col-6 text-right">
               <base-button type="primary" icon size="sm" @click="onProFeature">
                 <span class="btn-inner--icon"
                   ><i class="fas fa-user-edit"></i
@@ -64,8 +64,12 @@
                 </router-link>
               </template> -->
             </el-table-column>
-            <slot name="custom-columns"></slot>
-            <el-table-column min-width="180px" align="center">
+            <slot name="customColumns"></slot>
+            <el-table-column
+              v-if="!hideActions"
+              min-width="180px"
+              align="center"
+            >
               <template slot-scope="scope">
                 <div class="table-actions">
                   <el-tooltip content="Edit" placement="top">
@@ -195,11 +199,10 @@ import {
   Button,
 } from 'element-ui'
 import { integer } from 'vee-validate/dist/rules'
-import { BasePagination } from '@/components/core-components'
+import BasePagination from '../core-components/BasePagination.vue'
 
 export default {
   components: {
-    BasePagination,
     [Tooltip.name]: Tooltip,
     [Table.name]: Table,
     [TableColumn.name]: TableColumn,
@@ -209,6 +212,7 @@ export default {
     [Select.name]: Select,
     [Option.name]: Option,
     [Button.name]: Button,
+    BasePagination,
   },
   layout: 'ResponsiveDashboard',
   props: {
@@ -219,6 +223,14 @@ export default {
       },
     },
     paginated: {
+      type: Boolean,
+      default: true,
+    },
+    showAddButton: {
+      type: Boolean,
+      default: false,
+    },
+    hideActions: {
       type: Boolean,
       default: false,
     },
@@ -315,12 +327,13 @@ export default {
         .then(function (response) {
           // handle success
           that.items = response.data.data
-          that.tablePaginations.currentPage =
+          that.tablePaginations.currentPage = parseInt(
             response.data.paginator.currentPage
+          )
           that.tablePaginations.perPage = parseInt(
             response.data.paginator.perPage
           )
-          that.total = response.data.paginator.totalCount
+          that.total = parseInt(response.data.paginator.totalCount)
         })
         .catch(function (error) {
           // handle error

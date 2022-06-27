@@ -1,9 +1,9 @@
 <template>
   <div
-    class="min-h-screen md:flex flex-row flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800"
+    class="min-h-screen md:flex flex-row flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800 w-full mx-auto"
   >
     <div
-      class="md:flex flex-col top-0 left-0 w-3/12 bg-white h-full border-r hidden"
+      class="md:flex flex-col top-0 left-0 md:w-3/12 w-full bg-white h-full border-r hidden"
     >
       <div class="overflow-y-auto overflow-x-hidden flex-grow">
         <ul class="flex flex-col py-4 space-y-1">
@@ -114,7 +114,7 @@
           </li>
           <li>
             <Nuxt-Link
-              to="/user-questions/4"
+              to="/user-questions/5"
               class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
             >
               <span class="inline-flex justify-center items-center ml-4">
@@ -192,7 +192,7 @@ import DashboardContent from '~/components/layouts/argon/Content.vue'
 import Logout from '~/components/widgets/Logout.vue'
 import SideBarMenu from '~/components/layouts/argon/SideBarMenu.vue'
 import MenuItem from '~/components/layouts/argon/MenuItem.vue'
-import NavBar from '~/components/settings/NavBar.vue'
+import ProfileNavBar from '~/components/settings/ProfileNavBar.vue'
 //
 function hasElement(className) {
   return document.getElementsByClassName(className).length > 0
@@ -217,9 +217,9 @@ export default {
     Logout,
     SideBarMenu,
     MenuItem,
-    NavBar,
+    ProfileNavBar,
   },
-  layout: 'ResponsiveDashboard',
+  layout: 'ResponsiveDashboardWithoutSideBar',
   mounted() {
     this.initScrollbar(), this.$store.dispatch('profile/me')
   },

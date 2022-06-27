@@ -5,54 +5,13 @@
     class="flex-1 px-2 py-6 space-y-2 overflow-y-hidden hover:overflow-y-auto text-base-content"
   >
     <div>
-      <template v-if="$auth.loggedIn">
-        <side-bar-menu-link v-if="$auth.user.role === 'admin'">
-          <template #link-icon>
-            <img class="w-5 h-5" src="~assets/wallet.svg" />
-          </template>
-          Subscriptions
-          <template #menus>
-            <menu-item to="/plans">List Plans</menu-item>
-            <menu-item to="/products">List Products</menu-item>
-            <menu-item to="/plans/create">Create Plan</menu-item>
-            <menu-item to="/products/create">Create Product</menu-item>
-            <menu-item to="/subscriptions/plans">Subscribe</menu-item>
-            <menu-item to="/subscriptions">Subscriptions</menu-item>
-          </template>
-        </side-bar-menu-link>
-        <side-bar-menu-link v-if="$auth.user.role === 'admin'">
-          <template #link-icon>
-            <img class="w-5 h-5" src="~assets/wallet.svg" />
-          </template>
-          Orders
-          <template #menus>
-            <menu-item to="/orders">Orders</menu-item>
-            <menu-item to="/products">List Products</menu-item>
-            <menu-item to="/plans/create">Create Plan</menu-item>
-            <menu-item to="/products/create">Create Product</menu-item>
-            <menu-item to="/subscriptions/plans">Subscribe</menu-item>
-            <menu-item to="/subscriptions">Subscriptions</menu-item>
-          </template>
-        </side-bar-menu-link>
-        <side-bar-menu-link v-if="$auth.user.role === 'admin'">
-          <template #link-icon>
-            <img class="w-5 h-5" src="~assets/users.svg" />
-          </template>
-          Users
-          <template #menus>
-            <menu-item to="/users">Users (All for now)</menu-item>
-            <menu-item to="/users?type=expert">Experts</menu-item>
-            <menu-item to="/users?type=student">Students</menu-item>
-          </template>
-        </side-bar-menu-link>
-      </template>
       <menu-item to="/">
         <template #link-icon>
           <img class="w-5 h-5 fill-color inline" src="~assets/wallet.svg" />
         </template>
         Questions</menu-item
       >
-      <side-bar-menu-link :menu-disabled="true" :is-open="true">
+      <side-bar-menu-link :menu-disabled="true" :always-open="true">
         <template #link-icon>
           <img class="w-5 h-5 inline" src="~assets/book.svg" />
         </template>
@@ -70,6 +29,42 @@
           >
         </template>
       </side-bar-menu-link>
+      <template v-if="$auth.loggedIn">
+        <!-- <side-bar-menu-link v-if="$auth.user.role === 'admin'">
+          <template #link-icon>
+            <img class="w-5 h-5" src="~assets/wallet.svg" />
+          </template>
+          Subscriptions
+          <template #menus>
+            <menu-item to="/plans">List Plans</menu-item>
+            <menu-item to="/products">List Products</menu-item>
+            <menu-item to="/plans/create">Create Plan</menu-item>
+            <menu-item to="/products/create">Create Product</menu-item>
+            <menu-item to="/subscriptions/plans">Subscribe</menu-item>
+            <menu-item to="/subscriptions">Subscriptions</menu-item>
+          </template>
+        </side-bar-menu-link> -->
+        <side-bar-menu-link v-if="$auth.user.role === 'admin'">
+          <template #link-icon>
+            <img class="w-5 h-5" src="~assets/wallet.svg" />
+          </template>
+          Orders
+          <template #menus>
+            <menu-item to="/orders">Orders</menu-item>
+          </template>
+        </side-bar-menu-link>
+        <side-bar-menu-link v-if="$auth.user.role === 'admin'">
+          <template #link-icon>
+            <img class="w-5 h-5" src="~assets/users.svg" />
+          </template>
+          Users
+          <template #menus>
+            <menu-item to="/users">Users (All for now)</menu-item>
+            <menu-item to="/users?type=expert">Experts</menu-item>
+            <menu-item to="/users?type=student">Students</menu-item>
+          </template>
+        </side-bar-menu-link>
+      </template>
     </div>
     <!-- Test Sidebar Menu links -->
     <slot></slot>
