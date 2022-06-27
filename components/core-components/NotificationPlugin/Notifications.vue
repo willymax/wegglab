@@ -41,7 +41,7 @@ export default {
       this.$notifications.settings.overlap = newVal
     },
   },
-  created() {
+  mounted() {
     this.$notifications.settings.overlap = this.overlap
   },
   methods: {

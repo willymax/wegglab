@@ -77,7 +77,7 @@ export default {
       return this.$sanitizeHtml(this.question.body)
     },
   },
-  created() {
+  mounted() {
     const interval = 1000
     const eventTime = moment(this.question.deadline).unix() // Timestamp - Sun, 21 Apr 2013 13:00:00 GMT
     const timer = setInterval(() => {

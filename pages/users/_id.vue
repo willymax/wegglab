@@ -58,7 +58,7 @@ export default {
       questions: (state) => state.questions,
     }),
   },
-  created() {
+  mounted() {
     // this.getProfile()
   },
 

@@ -113,7 +113,7 @@ export default {
       return this.$store.getters['questions/GET_GUEST_QUESTION'] || {}
     },
   },
-  created() {
+  mounted() {
     this.input.title = this.GUEST_QUESTION.title
     this.input.body = this.GUEST_QUESTION.body
     this.input.subject = this.GUEST_QUESTION.subject
