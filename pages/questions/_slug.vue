@@ -71,7 +71,42 @@ export default {
 
     await this.$store.dispatch('questions/SET_CURRENT_QUESTION', question)
   },
-  fetchOnServer: false,
+  head() {
+    return {
+      title: this.question.title,
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.question.title,
+        },
+        {
+          hid: 'og:title',
+          name: 'og:title',
+          content: this.question.title,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: `/${this.question.image}`,
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: this.question.description,
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: `https://langvad.dev/blog/${this.question.slug}`,
+        },
+      ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    }
+  },
+  fetchOnServer: true,
   // multiple components can return the same `fetchKey` and Nuxt will track them both separately
   fetchKey: 'get-question',
   computed: {

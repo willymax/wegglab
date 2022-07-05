@@ -50,6 +50,7 @@
         </ul>
       </div>
     </div>
+    <div>meta {{ $nuxt.$route }}</div>
     <div class="flex flex-row-reverse">
       <question-share></question-share>
     </div>
@@ -110,7 +111,6 @@ export default {
         })(duration.seconds())
     }, interval)
   },
-  mounted() {},
   methods: {
     attachmentISImage(fileType) {
       return fileType != null

@@ -28,7 +28,7 @@ export default {
         description:
           'This week, I’d like to introduce you to "Vite", which means "Fast". It’s a brand new development setup created by Evan You.',
         quote: "The hot reload is so fast it's near instant. - Evan You",
-        hashtags: 'vuejs,vite,javascript',
+        hashtags: 'wegglab,vite,javascript',
         twitterUser: 'youyuxi',
       },
       networks: [
