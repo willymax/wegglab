@@ -298,12 +298,8 @@ export default {
       }
     },
   },
-
-  created() {
-    this.getItems()
-  },
   mounted() {
-    // this.getitems()
+    this.getItems()
   },
 
   methods: {

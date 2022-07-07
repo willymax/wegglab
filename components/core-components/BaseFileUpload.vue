@@ -134,7 +134,7 @@ export default {
       deep: true,
     },
   },
-  created() {
+  mounted() {
     this.FILES = this.GUEST_QUESTION?.fileUploadDetails?.FILES || {}
     this.objectList = this.GUEST_QUESTION?.fileUploadDetails?.objectList || []
   },

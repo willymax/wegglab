@@ -71,12 +71,15 @@ export default {
 
     await this.$store.dispatch('questions/SET_CURRENT_QUESTION', question)
   },
+  fetchOnServer: false,
+  // multiple components can return the same `fetchKey` and Nuxt will track them both separately
+  fetchKey: 'get-question',
   computed: {
     question() {
       return this.$store.getters['questions/GET_CURRENT_QUESTION']
     },
   },
-  created() {
+  mounted() {
     this.$nuxt.$on('paymentReceived', ($event) => {
       location.reload(true)
     })

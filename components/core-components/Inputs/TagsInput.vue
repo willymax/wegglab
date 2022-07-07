@@ -57,7 +57,7 @@ export default {
       inputValue: '',
     }
   },
-  created() {
+  mounted() {
     this.$watch(
       'value',
       (newVal) => {
