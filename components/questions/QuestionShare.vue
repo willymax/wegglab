@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       sharing: {
-        url: 'https://news.vuejs.org/issues/180',
+        url: `${this.$config.baseURL}${this.$route.path}`,
         title:
           'Say hi to Vite! A brand new, extremely fast development setup for Vue.',
         description:

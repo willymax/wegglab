@@ -50,7 +50,7 @@
         </ul>
       </div>
     </div>
-    <div>meta {{ $nuxt.$route }}</div>
+    <!-- <div>meta {{ $meta().getOptions() }}</div> -->
     <div class="flex flex-row-reverse">
       <question-share></question-share>
     </div>

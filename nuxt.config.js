@@ -4,6 +4,9 @@
 // console.log('ENV', process.env.NODE_ENV)
 
 export default {
+  publicRuntimeConfig: {
+    baseURL: process.env.BASE_URL || 'https://nuxtjs.org',
+  },
   env: {
     apiBaseUrl: process.env.API_BASE_URL,
     isDemo: process.env.IS_DEMO,
@@ -13,6 +16,7 @@ export default {
     paypalSecret: process.env.PAYPAL_SECRET,
     googleClientId: process.env.GOOGLE_CLIENT_ID,
     tinyMCEKey: process.env.TINY_MCE_KEY,
+    baseURL: 'process.env.BASE_URL',
   },
   // mode: 'spa',
   router: {
