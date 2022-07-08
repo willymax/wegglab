@@ -119,10 +119,11 @@ export default {
       this.loading = true
       try {
         await this.$auth.logout()
-        this.$notify({
-          type: 'success',
-          text: 'You have logged out successfully.',
-        })
+        this.$router.push('/login')
+        // this.$notify({
+        //   type: 'success',
+        //   text: 'You have logged out successfully.',
+        // })
       } catch (error) {
         this.loading = false
         this.$toast.error(error.message)
