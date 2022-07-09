@@ -1,188 +1,128 @@
 <template>
   <div class="container mt-5">
-    <div>
-      <card
-        class="no-border-card"
-        body-classes="px-0 pb-1"
-        footer-classes="pb-2"
-      >
-        <template slot="header">
-          <div class="row">
-            <div class="col-6">
-              <h3 class="mb-0">Users List</h3>
-            </div>
-            <div class="col-6 text-right">
-              <base-button type="primary" icon size="sm" @click="onProFeature">
-                <span class="btn-inner--icon"
-                  ><i class="fas fa-user-edit"></i
-                ></span>
-                <span class="btn-inner--text">Add User</span>
-              </base-button>
-            </div>
-          </div>
-        </template>
-        <div>
-          <div
-            class="col-12 d-flex justify-content-center justify-content-sm-between flex-wrap mb-4"
-          >
-            <el-select
-              v-model="pagination.perPage"
-              class="select-primary pagination-select"
-              placeholder="Per page"
-            >
-              <el-option
-                v-for="item in pagination.perPageOptions"
-                :key="item"
-                class="select-primary"
-                :label="item"
-                :value="item"
-              />
-            </el-select>
-          </div>
-          <el-table
-            class="table-responsive align-items-center table-flush"
-            header-row-class-name="thead-light"
-            :data="users"
-            @sort-change="sortChange"
-          >
-            <el-table-column
-              label="Id"
-              min-width="220px"
-              prop="id"
-              sortable="custom"
-            >
-              <template slot-scope="scope">
-                <nuxt-link
-                  :to="`/users/${scope.row.id}`"
-                  class="underline cursor-pointer"
-                  >{{ scope.row.id }}</nuxt-link
-                >
-              </template>
-            </el-table-column>
-
-            <el-table-column
-              label="First Name"
-              min-width="150px"
-              prop="first_name"
-              sortable="custom"
-            />
-            <el-table-column
-              label="Last Name"
-              min-width="150px"
-              prop="last_name"
-              sortable="custom"
-            />
-            <el-table-column
-              label="Role"
-              min-width="150px"
-              prop="role"
-              sortable="custom"
-            />
-            <el-table-column
-              label="Email"
-              min-width="150px"
-              prop="email"
-              sortable="custom"
-            />
-            <el-table-column
-              label="Account Status"
-              min-width="150px"
-              prop="email"
-              sortable="custom"
-            />
-            <el-table-column
-              label="Total Earning"
-              min-width="150px"
-              prop="earning.cancelled"
-              sortable="custom"
-            />
-            <el-table-column
-              label="Pending Clearance"
-              min-width="150px"
-              prop="earning.pendingClearance"
-              sortable="custom"
-            />
-            <el-table-column
-              label="Cleared"
-              min-width="150px"
-              prop="earning.cleared"
-              sortable="custom"
-            />
-            <el-table-column
-              label="Withdrawn"
-              min-width="150px"
-              prop="earning.withdrawn"
-              sortable="custom"
-            />
-            <el-table-column
-              label="Used For Purchase"
-              min-width="150px"
-              prop="earning.usedForPurchase"
-              sortable="custom"
-            />
-            <el-table-column
-              label="Cancelled"
-              min-width="150px"
-              prop="earning.cancelled"
-              sortable="custom"
-            />
-            <el-table-column
-              label="Created At"
-              prop="createdAt"
-              min-width="140px"
-              sortable="custom"
-            />
-            <el-table-column min-width="180px" align="center">
-              <div class="table-actions">
-                <el-tooltip content="Edit" placement="top">
-                  <a
-                    type="text"
-                    class="table-action"
-                    data-toggle="tooltip"
-                    style="cursor: pointer"
-                    @click="onProFeature"
-                  >
-                    <i class="fas fa-user-edit"></i>
-                  </a>
-                </el-tooltip>
-
-                <el-tooltip content="Delete" placement="top">
-                  <a
-                    type="text"
-                    class="table-action table-action-delete"
-                    data-toggle="tooltip"
-                    style="cursor: pointer"
-                    @click="onProFeature"
-                  >
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </el-tooltip>
-              </div>
-            </el-table-column>
-          </el-table>
-        </div>
-        <div
-          slot="footer"
-          class="flex flex-row justify-center sm:justify-between flex-wrap"
+    <base-table
+      :resource="resource"
+      :params="params"
+      table-title="User List"
+      :hide-actions="true"
+    >
+      <template #customColumns>
+        <el-table-column
+          label="Id"
+          min-width="220px"
+          prop="id"
+          sortable="custom"
         >
-          <div class="">
-            <p class="card-category">
-              Showing {{ from + 1 }} to {{ to }} of {{ total }} entries
+          <template slot-scope="scope">
+            <nuxt-link
+              :to="`/users/${scope.row._id}`"
+              class="underline cursor-pointer"
+              >{{ scope.row._id }}</nuxt-link
+            >
+          </template>
+        </el-table-column>
 
-              <span v-if="selectedRows.length">
-                &nbsp; &nbsp; {{ selectedRows.length }} rows selected
-              </span>
-            </p>
+        <el-table-column
+          label="First Name"
+          min-width="150px"
+          prop="first_name"
+          sortable="custom"
+        />
+        <el-table-column
+          label="Last Name"
+          min-width="150px"
+          prop="last_name"
+          sortable="custom"
+        />
+        <el-table-column
+          label="Role"
+          min-width="150px"
+          prop="role"
+          sortable="custom"
+        />
+        <el-table-column
+          label="Email"
+          min-width="150px"
+          prop="email"
+          sortable="custom"
+        />
+        <el-table-column
+          label="Account Status"
+          min-width="150px"
+          prop="accountStatus"
+          sortable="custom"
+        />
+        <el-table-column
+          label="Total Earning"
+          min-width="150px"
+          prop="earning.cancelled"
+          sortable="custom"
+        />
+        <el-table-column
+          label="Pending Clearance"
+          min-width="150px"
+          prop="earning.pendingClearance"
+          sortable="custom"
+        />
+        <el-table-column
+          label="Cleared"
+          min-width="150px"
+          prop="earning.cleared"
+          sortable="custom"
+        />
+        <el-table-column
+          label="Withdrawn"
+          min-width="150px"
+          prop="earning.withdrawn"
+          sortable="custom"
+        />
+        <el-table-column
+          label="Used For Purchase"
+          min-width="150px"
+          prop="earning.usedForPurchase"
+          sortable="custom"
+        />
+        <el-table-column
+          label="Cancelled"
+          min-width="150px"
+          prop="earning.cancelled"
+          sortable="custom"
+        />
+        <el-table-column
+          label="Created At"
+          prop="createdAt"
+          min-width="140px"
+          sortable="custom"
+        />
+        <el-table-column min-width="180px" align="center">
+          <div class="table-actions">
+            <el-tooltip content="Edit" placement="top">
+              <a
+                type="text"
+                class="table-action"
+                data-toggle="tooltip"
+                style="cursor: pointer"
+                @click="onProFeature"
+              >
+                <i class="fas fa-user-edit"></i>
+              </a>
+            </el-tooltip>
+
+            <el-tooltip content="Delete" placement="top">
+              <a
+                type="text"
+                class="table-action table-action-delete"
+                data-toggle="tooltip"
+                style="cursor: pointer"
+                @click="onProFeature"
+              >
+                <i class="fas fa-trash"></i>
+              </a>
+            </el-tooltip>
           </div>
-          <base-pagination
-            v-model="pagination.currentPage"
-            class="pagination-no-border"
-            :per-page="pagination.perPage"
-            :total="total"
-          />
-        </div>
-      </card>
-    </div>
+        </el-table-column>
+      </template>
+    </base-table>
   </div>
 </template>
 <script>
@@ -198,6 +138,7 @@ import {
   Button,
 } from 'element-ui'
 import { BasePagination } from '@/components/core-components'
+import BaseTable from '~/components/tables/BaseTable.vue'
 
 export default {
   components: {
@@ -211,6 +152,7 @@ export default {
     [Select.name]: Select,
     [Option.name]: Option,
     [Button.name]: Button,
+    BaseTable,
   },
   layout: 'ResponsiveDashboard',
 
@@ -241,6 +183,14 @@ export default {
       }
       return highBound
     },
+    resource() {
+      return 'users'
+    },
+    params() {
+      return {
+        role: this.$route.query.type || null,
+      }
+    },
   },
   watch: {
     'pagination.currentPage'(newValue, oldValue) {
@@ -266,7 +216,6 @@ export default {
           params: {
             perPage: this.pagination.perPage,
             page: this.pagination.currentPage,
-            role: this.$route.query.type || null,
           },
         })
         .then((response) => {
