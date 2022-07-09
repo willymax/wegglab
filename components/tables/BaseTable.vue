@@ -313,12 +313,14 @@ export default {
       //   page: this.tablePaginations.currentPage,
       // })
       const that = this
+      let queryParams = {
+        perPage: this.tablePaginations.perPage,
+        page: this.tablePaginations.currentPage,
+      }
+      queryParams = { ...queryParams, ...this.params }
       this.$axios
         .get(`${this.resource}`, {
-          params: {
-            perPage: this.tablePaginations.perPage,
-            page: this.tablePaginations.currentPage,
-          },
+          params: queryParams,
         })
         .then(function (response) {
           // handle success
