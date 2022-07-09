@@ -1,7 +1,6 @@
 <template>
   <div class="md:flex flex-row">
     <div>
-      <h2 class="bold blur-lg">Personal info</h2>
       <p>Tell us about yourself</p>
     </div>
     <div class="flex-1">

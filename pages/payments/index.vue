@@ -122,6 +122,9 @@
         </div>
       </div>
     </div>
+    <div>
+      <base-button @click="linkPaypal()">Add Withdrawal Method</base-button>
+    </div>
     <base-table resource="payments" table-title="Payments" :hide-actions="true">
       <template #customColumns>
         <el-table-column
@@ -144,16 +147,15 @@
           prop="description"
         >
           <template slot-scope="scope">
-            <span>{{ scope.row.description }}(</span>
-            <span
-              ><nuxt-link
+            <span>{{ scope.row.description }}</span>
+            <span v-if="scope.row.question"
+              >(<nuxt-link
                 :to="`/questions/${scope.row.question._id}`"
                 class="underline cursor-pointer"
                 >question</nuxt-link
-              ></span
-            ><span>)</span>
-          </template></el-table-column
-        >
+              >)</span
+            ><span></span> </template
+        ></el-table-column>
         <el-table-column
           key="amount"
           label="Amount"
@@ -161,30 +163,80 @@
           align="right"
           prop="amount"
           ><template slot-scope="scope">
-            <span>${{ scope.row.amount }}</span>
+            <span
+              v-if="
+                scope.row.paymentType === 'REFUND' ||
+                scope.row.paymentType === 'WITHDRAWAL' ||
+                scope.row.paymentType === 'PAYED'
+              "
+              class="text-red-500"
+              >-${{ scope.row.amount }}</span
+            >
+            <span v-else> ${{ scope.row.amount }} </span>
           </template></el-table-column
         >
       </template>
       <template #actions></template
     ></base-table>
+    <app-modal :show.sync="showLinkPaypal">
+      <h2>Add Your Paypal Email</h2>
+      <base-input
+        v-model="paypalEmail"
+        alternative
+        class="mb-3"
+        placeholder="Paypal Email"
+        name="paypalEmail"
+        label="Paypal Email"
+      ></base-input>
+      <base-input
+        v-model="paypalEmailConfirmation"
+        alternative
+        class="mb-3"
+        placeholder="Paypal Email"
+        name="paypalEmailConfirmation"
+        label="Paypal Email Confirmation"
+      ></base-input>
+      <template #footer>
+        <base-button width="md:w-64 w-full" @click="addPaypalEmail()"
+          >Add Paypal</base-button
+        >
+      </template>
+    </app-modal>
   </div>
 </template>
 
 <script>
 import { TableColumn } from 'element-ui'
 import BaseTable from '~/components/tables/BaseTable.vue'
+import BaseButton from '~/components/core-components/BaseButton.vue'
 export default {
-  components: { BaseTable, [TableColumn.name]: TableColumn },
+  components: { BaseTable, [TableColumn.name]: TableColumn, BaseButton },
   layout: 'ResponsiveDashboard',
   data() {
     return {
       earning: {},
+      showLinkPaypal: false,
+      paypalEmail: null,
+      paypalEmailConfirmation: null,
     }
   },
   mounted() {
     this.loadEarnings()
   },
   methods: {
+    linkPaypal() {
+      this.showLinkPaypal = true
+    },
+    async addPaypalEmail() {
+      await this.$axios
+        .post(`users/addPaypalEmail`, {
+          paypalEmail: this.paypalEmail,
+          paypalEmailConfirmation: this.paypalEmailConfirmation,
+        })
+        .then((response) => {
+          this.showLinkPaypal = false
+        })
+    },
     loadEarnings() {
       //
       this.$axios

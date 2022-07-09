@@ -53,6 +53,12 @@
           sortable="custom"
         />
         <el-table-column
+          label="Paypal Email"
+          min-width="150px"
+          prop="paypalEmail"
+          sortable="custom"
+        />
+        <el-table-column
           label="Total Earning"
           min-width="150px"
           prop="earning.cancelled"
@@ -94,35 +100,68 @@
           min-width="140px"
           sortable="custom"
         />
-        <el-table-column min-width="180px" align="center">
-          <div class="table-actions">
-            <el-tooltip content="Edit" placement="top">
-              <a
-                type="text"
-                class="table-action"
-                data-toggle="tooltip"
-                style="cursor: pointer"
-                @click="onProFeature"
-              >
-                <i class="fas fa-user-edit"></i>
-              </a>
-            </el-tooltip>
+        <el-table-column
+          min-width="180px"
+          align="center"
+          fixed="right"
+          label="Operations"
+        >
+          <template slot-scope="scope">
+            <div class="table-actions">
+              <el-tooltip content="Edit" placement="top">
+                <a
+                  type="text"
+                  class="table-action"
+                  data-toggle="tooltip"
+                  style="cursor: pointer"
+                  @click="onProFeature"
+                >
+                  <i class="fas fa-user-edit"></i>
+                </a>
+              </el-tooltip>
 
-            <el-tooltip content="Delete" placement="top">
-              <a
-                type="text"
-                class="table-action table-action-delete"
-                data-toggle="tooltip"
-                style="cursor: pointer"
-                @click="onProFeature"
-              >
-                <i class="fas fa-trash"></i>
-              </a>
-            </el-tooltip>
-          </div>
+              <el-tooltip content="Delete" placement="top">
+                <a
+                  type="text"
+                  class="table-action table-action-delete"
+                  data-toggle="tooltip"
+                  style="cursor: pointer"
+                  @click="onProFeature"
+                >
+                  <i class="fas fa-trash"></i>
+                </a>
+              </el-tooltip>
+
+              <el-tooltip content="Pay Expert" placement="top">
+                <base-button @click="initiatePayment(scope.row)"
+                  >Pay Expert</base-button
+                >
+              </el-tooltip>
+            </div>
+          </template>
         </el-table-column>
       </template>
     </base-table>
+    <app-modal :show.sync="showPayDialog">
+      <p>
+        Pay Expert: {{ selectedUser.first_name }} {{ selectedUser.last_name }}
+      </p>
+      <p>Total Amount Cleared: {{ selectedUser.earning.cleared }}</p>
+      <p>PayPal Email: {{ selectedUser.paypalEmail }}</p>
+      <base-input
+        v-model="amountToPay"
+        alternative
+        class="mb-3"
+        placeholder="Amount"
+        name="Amout"
+        label="Enter the Amout"
+      ></base-input>
+      <template #footer>
+        <base-button width="md:w-64 w-full" @click="payExpert()"
+          >Pay Expert</base-button
+        >
+      </template>
+    </app-modal>
   </div>
 </template>
 <script>
@@ -139,6 +178,7 @@ import {
 } from 'element-ui'
 import { BasePagination } from '@/components/core-components'
 import BaseTable from '~/components/tables/BaseTable.vue'
+import BaseInput from '~/components/core-components/Inputs/BaseInput.vue'
 
 export default {
   components: {
@@ -153,12 +193,18 @@ export default {
     [Option.name]: Option,
     [Button.name]: Button,
     BaseTable,
+    BaseInput,
   },
   layout: 'ResponsiveDashboard',
 
   data() {
     return {
+      showPayDialog: false,
+      amountToPay: null,
       selectedRows: [],
+      selectedUser: {
+        earning: {},
+      },
       users: [],
       sort: 'createdAt',
 
@@ -209,6 +255,22 @@ export default {
   },
 
   methods: {
+    initiatePayment(user) {
+      this.selectedUser = user
+      this.showPayDialog = true
+      //
+    },
+    async payExpert(user) {
+      await this.$axios.post('payments/payExpert', {
+        userId: this.selectedUser._id,
+        amount: this.amountToPay,
+      })
+      this.showPayDialog = false
+      this.$notify({
+        type: 'success',
+        text: 'Withdrawal sent. Make payment via Paypal.',
+      })
+    },
     getItems() {
       const that = this
       this.$axios
