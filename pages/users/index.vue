@@ -202,34 +202,12 @@ export default {
       showPayDialog: false,
       amountToPay: null,
       selectedRowIndex: -1,
-      selectedRows: [],
       selectedUser: {
         earning: {},
       },
-      users: [],
-      sort: 'createdAt',
-
-      pagination: {
-        perPage: 5,
-        currentPage: 1,
-        perPageOptions: [5, 10, 25, 50],
-      },
-
-      total: 1,
     }
   },
   computed: {
-    from() {
-      return this.pagination.perPage * (this.pagination.currentPage - 1)
-    },
-
-    to() {
-      let highBound = this.from + this.pagination.perPage
-      if (this.total < highBound) {
-        highBound = this.total
-      }
-      return highBound
-    },
     resource() {
       return 'users'
     },
@@ -240,19 +218,7 @@ export default {
     },
   },
   watch: {
-    'pagination.currentPage'(newValue, oldValue) {
-      if (newValue !== oldValue) {
-        this.getItems()
-      }
-    },
-    'pagination.perPage'(newValue, oldValue) {
-      if (newValue !== oldValue) {
-        this.getItems()
-      }
-    },
-  },
-  mounted() {
-    this.getItems()
+    //
   },
 
   methods: {
@@ -260,57 +226,17 @@ export default {
       this.selectedUser = user
       this.selectedRowIndex = index
       this.showPayDialog = true
-      //
     },
     async payExpert(user) {
       const response = await this.$axios.post('payments/payExpert', {
         userId: this.selectedUser._id,
         amount: this.amountToPay,
       })
-
       this.showPayDialog = false
       this.$notify({
         type: 'success',
         text: 'Withdrawal sent. Make payment via Paypal.',
       })
-    },
-    getItems() {
-      const that = this
-      this.$axios
-        .get(`users`, {
-          params: {
-            perPage: this.pagination.perPage,
-            page: this.pagination.currentPage,
-          },
-        })
-        .then((response) => {
-          // handle success
-          that.users = response.data.data
-          that.pagination.currentPage = response.data.paginator.currentPage
-          that.pagination.perPage = parseInt(response.data.paginator.perPage)
-          that.total = response.data.paginator.totalCount
-        })
-        .catch((error) => {
-          // handle error
-          this.$toast.error(error.message)
-        })
-        .then(function () {
-          // always executed
-        })
-    },
-    onProFeature() {
-      this.$notify({
-        type: 'danger',
-        message: 'This is a PRO feature.',
-      })
-    },
-    sortChange({ prop, order }) {
-      if (order === 'descending') {
-        this.sort = `-${prop}`
-      } else {
-        this.sort = `${prop}`
-      }
-      this.getItems()
     },
   },
 }
