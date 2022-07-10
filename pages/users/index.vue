@@ -133,7 +133,7 @@
               </el-tooltip>
 
               <el-tooltip content="Pay Expert" placement="top">
-                <base-button @click="initiatePayment(scope.row)"
+                <base-button @click="initiatePayment(scope.row, scope.$index)"
                   >Pay Expert</base-button
                 >
               </el-tooltip>
@@ -201,6 +201,7 @@ export default {
     return {
       showPayDialog: false,
       amountToPay: null,
+      selectedRowIndex: -1,
       selectedRows: [],
       selectedUser: {
         earning: {},
@@ -255,16 +256,18 @@ export default {
   },
 
   methods: {
-    initiatePayment(user) {
+    initiatePayment(user, index) {
       this.selectedUser = user
+      this.selectedRowIndex = index
       this.showPayDialog = true
       //
     },
     async payExpert(user) {
-      await this.$axios.post('payments/payExpert', {
+      const response = await this.$axios.post('payments/payExpert', {
         userId: this.selectedUser._id,
         amount: this.amountToPay,
       })
+
       this.showPayDialog = false
       this.$notify({
         type: 'success',
