@@ -82,6 +82,8 @@ export default ({ app, route, $axios, $toast, redirect, store }, inject) => {
         'searchreplace visualblocks code fullscreen',
         'insertdatetime media table paste code help wordcount',
       ],
+      contextmenu:
+        'paste | link image inserttable | cell row column deletetable',
       toolbar:
         'undo redo | formatselect | image code | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
       height: 400,

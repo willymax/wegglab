@@ -1,7 +1,7 @@
 <template>
   <div>
     <answers></answers>
-    <post-answer v-if="canAnswerTheQuestion" class="m-4"></post-answer>
+    <post-answer v-show="canAnswerTheQuestion" class="m-4"></post-answer>
     <add-answers v-if="showPostAnswer" class="m-4">Post Answer</add-answers>
   </div>
 </template>

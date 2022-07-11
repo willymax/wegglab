@@ -4,6 +4,12 @@
     <div class="header">
       <div class="container"></div>
     </div>
+    <base-banner v-if="GUEST_QUESTION">
+      <template #message> Login or signup before proceeding </template>
+      <template #learn-more>
+        <p></p>
+      </template>
+    </base-banner>
     <!-- Page content -->
     <div class="container p-10">
       <div
@@ -140,6 +146,7 @@ import GoogleButton from '~/components/buttons/GoogleButton.vue'
 import FacebookButton from '~/components/buttons/FacebookButton.vue'
 import TwitterButton from '~/components/buttons/TwitterButton.vue'
 import Notification from '~/components/core-components/NotificationPlugin/Notification.vue'
+import BaseBanner from '~/components/core-components/BaseBanner.vue'
 export default {
   components: {
     ValidationError,
@@ -148,6 +155,7 @@ export default {
     FacebookButton,
     TwitterButton,
     Notification,
+    BaseBanner,
   },
   mixins: [formMixin],
   layout: 'AuthLayout',
