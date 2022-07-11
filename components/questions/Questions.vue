@@ -123,7 +123,6 @@ export default {
     }
   },
   async fetch() {
-    console.log('fetching fetch')
     let queryParams = `&bookmarked=${this.bookmarked}&assignedToMe=${this.assignedToMe}&purchased=${this.purchased}`
     if (this.userId) {
       queryParams = queryParams + `&userId=${this.userId}`
@@ -135,7 +134,7 @@ export default {
       queryParams = queryParams + `&search=${this.$route.query.search}`
     }
     const res = await this.$axios.get(
-      `questions?page=${this.paginator.currentPage}&perPage=${this.paginator.perPage}${queryParams}`
+      `questions?currentPage=${this.paginator.currentPage}&perPage=${this.paginator.perPage}${queryParams}`
     )
     this.paginator = { ...res.data.paginator }
     this.questions = this.questions.concat(res.data.data)
