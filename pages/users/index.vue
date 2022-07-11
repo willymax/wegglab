@@ -114,7 +114,7 @@
                   class="table-action"
                   data-toggle="tooltip"
                   style="cursor: pointer"
-                  @click="onProFeature"
+                  @click="editUser"
                 >
                   <i class="fas fa-user-edit"></i>
                 </a>
@@ -126,7 +126,7 @@
                   class="table-action table-action-delete"
                   data-toggle="tooltip"
                   style="cursor: pointer"
-                  @click="onProFeature"
+                  @click="deleteUser"
                 >
                   <i class="fas fa-trash"></i>
                 </a>
@@ -222,6 +222,8 @@ export default {
   },
 
   methods: {
+    editUser() {},
+    deleteUser() {},
     initiatePayment(user, index) {
       this.selectedUser = user
       this.selectedRowIndex = index

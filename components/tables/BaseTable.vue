@@ -247,7 +247,7 @@ export default {
       type: Object,
       default() {
         return {
-          perPage: 5,
+          perPage: 20,
           currentPage: 1,
           perPageOptions: [5, 10, 25, 50],
         }
@@ -294,6 +294,7 @@ export default {
     },
     'tablePaginations.perPage'(newValue, oldValue) {
       if (newValue !== oldValue) {
+        this.tablePaginations.currentPage = 1
         this.getItems()
       }
     },
@@ -315,7 +316,7 @@ export default {
       const that = this
       let queryParams = {
         perPage: this.tablePaginations.perPage,
-        page: this.tablePaginations.currentPage,
+        currentPage: this.tablePaginations.currentPage,
       }
       queryParams = { ...queryParams, ...this.params }
       this.$axios
@@ -324,6 +325,9 @@ export default {
         })
         .then(function (response) {
           // handle success
+          //  perPage: 5, currentPage: 1
+          // page: 1,, totalPages: 1, totalCount: 4
+          // currentPage
           that.items = response.data.data
           that.tablePaginations.currentPage = parseInt(
             response.data.paginator.currentPage

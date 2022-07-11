@@ -39,7 +39,6 @@ export default {
             if (that.$auth.loggedIn) {
               return actions.resolve()
             } else {
-              console.log('redirect: this.$route.path ' + actions)
               // to be changed in future
 
               return actions.reject().then((res) => {
