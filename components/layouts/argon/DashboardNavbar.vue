@@ -231,13 +231,15 @@
       >
         <a slot="title-container" href="#" class="nav-link pr-0" @click.prevent>
           <div class="media align-items-center">
-            <span
-              class="avatar avatar-sm rounded-circle avatar-image"
-              :style="{
-                'background-image': `url('${profileImage}')`,
-              }"
-            >
-            </span>
+            <client-only
+              ><span
+                class="avatar avatar-sm rounded-circle avatar-image"
+                :style="{
+                  'background-image': `url('${profileImage}')`,
+                }"
+              >
+              </span
+            ></client-only>
             <div class="media-body ml-2 d-none d-lg-block">
               <span class="mb-0 text-sm font-weight-bold">{{
                 $auth.user.first_name
