@@ -78,42 +78,55 @@ export default {
       return this.$sanitizeHtml(this.question.body)
     },
   },
-  mounted() {
-    const interval = 1000
-    const eventTime = moment(this.question.deadline).unix() // Timestamp - Sun, 21 Apr 2013 13:00:00 GMT
-    const timer = setInterval(() => {
-      const currentTime = moment().unix() // Timestamp - Sun, 21 Apr 2013 12:30:00 GMT
-      let diffTime = eventTime - currentTime
-      if (diffTime <= 0) {
-        clearInterval(timer)
-        diffTime = 0
+  watch: {
+    question(newValue, oldValue) {
+      console.log('the question has changed')
+      if (newValue && newValue.deadline) {
+        this.calculateTimeLeft()
       }
-      let duration = moment.duration(diffTime * 1000, 'milliseconds')
-      duration = moment.duration(duration - interval, 'milliseconds')
-      this.timeLeft =
-        ((hours) => {
-          let s = hours + ''
-          while (s.length < 2) s = '0' + s
-          return s
-        })(duration.hours()) +
-        ':' +
-        ((minutes) => {
-          let s = minutes + ''
-          while (s.length < 2) s = '0' + s
-          return s
-        })(duration.minutes()) +
-        ':' +
-        ((seconds) => {
-          if (seconds < 0) seconds = 0
-          let s = seconds + ''
-          while (s.length < 2) s = '0' + s
-          return s
-        })(duration.seconds())
-    }, interval)
+    },
+  },
+  mounted() {
+    this.calculateTimeLeft()
   },
   methods: {
     attachmentISImage(fileType) {
       return fileType != null
+    },
+    calculateTimeLeft() {
+      if (this.question.deadline) {
+        const interval = 1000
+        const eventTime = moment(this.question.deadline).unix() // Timestamp - Sun, 21 Apr 2013 13:00:00 GMT
+        const timer = setInterval(() => {
+          const currentTime = moment().unix() // Timestamp - Sun, 21 Apr 2013 12:30:00 GMT
+          let diffTime = eventTime - currentTime
+          if (diffTime <= 0) {
+            clearInterval(timer)
+            diffTime = 0
+          }
+          let duration = moment.duration(diffTime * 1000, 'milliseconds')
+          duration = moment.duration(duration - interval, 'milliseconds')
+          this.timeLeft =
+            ((hours) => {
+              let s = hours + ''
+              while (s.length < 2) s = '0' + s
+              return s
+            })(duration.hours()) +
+            ':' +
+            ((minutes) => {
+              let s = minutes + ''
+              while (s.length < 2) s = '0' + s
+              return s
+            })(duration.minutes()) +
+            ':' +
+            ((seconds) => {
+              if (seconds < 0) seconds = 0
+              let s = seconds + ''
+              while (s.length < 2) s = '0' + s
+              return s
+            })(duration.seconds())
+        }, interval)
+      }
     },
   },
 }

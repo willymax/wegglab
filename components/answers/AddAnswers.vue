@@ -6,7 +6,7 @@
     >
       <slot></slot>
     </button>
-    <app-modal :show.sync="show">
+    <app-modal :show.sync="show" @bodyStyleUpdated="bodyStyleUpdated">
       <PostAnswerWarning></PostAnswerWarning>
       <template #footer>
         <base-button width="md:w-64 w-full" @click="showPostAnswerForm()"
@@ -29,6 +29,7 @@ export default {
   data() {
     return {
       show: false,
+      assignmentParams: null,
     }
   },
   computed: {
@@ -40,6 +41,19 @@ export default {
     },
   },
   methods: {
+    async bodyStyleUpdated(args) {
+      if (
+        typeof args['overflow-hidden'] !== 'undefined' &&
+        !args['overflow-hidden']
+      ) {
+        if (this.assignmentParams) {
+          await this.$store.dispatch('questions/SET_CURRENT_QUESTION', {
+            ...this.question,
+            ...this.assignmentParams,
+          })
+        }
+      }
+    },
     handleClick(evt) {
       this.show = true
     },
@@ -48,10 +62,8 @@ export default {
         const response = await this.$axios.post(
           `/questions/assignQuestion/?questionId=${this.question._id}`
         )
-        await this.$store.dispatch('questions/SET_CURRENT_QUESTION', {
-          ...this.question,
-          ...response.data,
-        })
+        this.assignmentParams = response.data
+        this.show = false
       } catch (error) {
         if (error.response) {
           if (error.response.status === 404) {
@@ -66,14 +78,13 @@ export default {
         }
       }
 
-      if (!this.$auth.loggedIn) {
-        // If not authenticated, add a path where to redirect after login.
-        this.$router.push({
-          name: 'login',
-          query: { redirect: this.$route.path },
-        })
-      }
-      this.show = !this.show
+      // if (!this.$auth.loggedIn) {
+      //   // If not authenticated, add a path where to redirect after login.
+      //   this.$router.push({
+      //     name: 'login',
+      //     query: { redirect: this.$route.path },
+      //   })
+      // }
       // this.$store.dispatch('answers/updateAddingAnswer', !this.addingAnswer)
     },
   },

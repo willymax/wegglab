@@ -139,6 +139,7 @@ export default {
         // Enable scroll
         body.classList.remove('overflow-hidden')
       }
+      this.$emit('bodyStyleUpdated', { 'overflow-hidden': newValue })
     },
   },
   methods: {
