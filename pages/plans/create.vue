@@ -200,8 +200,8 @@ export default {
               this.$toast.error(err.message)
             })
         })
-        .catch((err) => {
-          console.log(err)
+        .catch(() => {
+          // console.log(err)
         })
     },
     async getProducts() {

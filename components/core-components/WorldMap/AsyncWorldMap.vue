@@ -8,7 +8,7 @@
       If the component is not loaded within 200ms, we display a loading component in the meanwhile.
       This way, we don't bloat the main bundle with 2 unnecessary libs that we only need for this page :)
    */
-import { LoadingPanel } from '@/components/core-components'
+import LoadingPanel from '@/components/core-components/LoadingPanel'
 const WorldMap = () => ({
   component: import('./WorldMap.vue'),
   loading: LoadingPanel,

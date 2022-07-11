@@ -136,6 +136,16 @@ export default ({ app, route, $axios, $toast, redirect, store }, inject) => {
   inject('log', (message, ...params) => {
     // console.log(message, params)
   })
+  inject('retryingScript', async (func, attempts) => {
+    for (let attempt = 1; attempt <= attempts; attempt++) {
+      try {
+        return await func()
+      } catch (ex) {
+        // console.warn(`Failed in attempt ${attempt}`)
+      }
+    }
+    // throw new Error(`Failed after ${attempts} attempts`)
+  })
   inject('processTime', (datetimestamp) => {
     const theDate = new Date(datetimestamp)
     const month = [

@@ -139,19 +139,34 @@ export default {
               })
           },
 
-          onError(err) {
-            console.log(err)
+          onError() {
+            // console.log(err)
           },
         })
         .render('#paypal-button-container')
     },
     initPayPalButton() {
-      const script = document.createElement('script')
-      script.src = `https://www.paypal.com/sdk/js?client-id=${this.$config.paypalClient}&vault=true`
-      script.addEventListener('load', (theScript) => {
-        this.loadButtons()
+      // const script = document.createElement('script')
+      // script.src = script.addEventListener('load', (theScript) => {})
+      console.log('this.$config.paypalClient', this.$config.paypalClient)
+
+      const url = `https://www.paypal.com/sdk/js?client-id=${this.$config.paypalClient}&vault=true`
+      this.$retryingScript(() => this.getScript(url), 3)
+    },
+    getScript(url) {
+      return new Promise((resolve, reject) => {
+        const element = document.createElement('script')
+        element.src = url
+        element.type = 'text/javascript'
+        element.async = true
+        element.defer = true
+        element.onload = () => {
+          this.loadButtons()
+          resolve()
+        }
+        element.onerror = () => reject(new Error('failed to load'))
+        document.body.appendChild(element)
       })
-      document.body.appendChild(script)
     },
   },
 }

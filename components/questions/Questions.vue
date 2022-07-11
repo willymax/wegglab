@@ -69,7 +69,7 @@
 import BaseButton from '../core-components/BaseButton.vue'
 import BaseInput from '../core-components/Inputs/BaseInput.vue'
 import Question from '~/components/questions/Question.vue'
-import { BasePagination } from '@/components/core-components'
+import BasePagination from '@/components/core-components/BasePagination'
 import WithRightSideBar from '~/components/Dashboard/WithRightSideBar.vue'
 // import questionsMixin from '@/mixins/pagination-mixin'
 export default {

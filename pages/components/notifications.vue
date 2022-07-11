@@ -249,7 +249,8 @@
 <script>
 import swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.css'
-import { Modal, BaseAlert } from '@/components/core-components'
+import Modal from '@/components/core-components/Modal'
+import BaseAlert from '@/components/core-components/BaseAlert'
 import RouteBreadcrumb from '@/components/core-components/Breadcrumb/RouteBreadcrumb'
 import BaseHeader from '@/components/core-components/BaseHeader'
 export default {

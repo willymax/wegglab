@@ -176,7 +176,7 @@ import {
   Option,
   Button,
 } from 'element-ui'
-import { BasePagination } from '@/components/core-components'
+import BasePagination from '@/components/core-components/BasePagination'
 import BaseTable from '~/components/tables/BaseTable.vue'
 import BaseInput from '~/components/core-components/Inputs/BaseInput.vue'
 

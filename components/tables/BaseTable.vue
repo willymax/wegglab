@@ -337,9 +337,9 @@ export default {
           )
           that.total = parseInt(response.data.paginator.totalCount)
         })
-        .catch(function (error) {
+        .catch(function () {
           // handle error
-          console.log(error)
+          // console.log(error)
         })
         .then(function () {
           // always executed
