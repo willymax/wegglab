@@ -10,6 +10,12 @@
         <p></p>
       </template>
     </base-banner>
+    <base-banner v-if="getterHasFlashMessage">
+      <template #message> {{ getterFlashMessage }} </template>
+      <template #learn-more>
+        <p></p>
+      </template>
+    </base-banner>
     <!-- Page content -->
     <div class="container p-10">
       <div
@@ -139,6 +145,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import ValidationError from '~/components/ValidationError.vue'
 import AuthLayout from '~/layouts/AuthLayout.vue'
 import formMixin from '@/mixins/form-mixin'
@@ -179,6 +186,10 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('flashmessages', [
+      'getterFlashMessage',
+      'getterHasFlashMessage',
+    ]),
     GUEST_QUESTION() {
       return this.$store.getters['questions/GET_GUEST_QUESTION']
     },

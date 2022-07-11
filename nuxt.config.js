@@ -6,6 +6,7 @@
 export default {
   publicRuntimeConfig: {
     baseURL: process.env.BASE_URL || 'https://nuxtjs.org',
+    paypalClient: process.env.PAYPAL_CLIENT_ID,
   },
   env: {
     apiBaseUrl: process.env.API_BASE_URL,
@@ -157,11 +158,12 @@ export default {
       },
     ],
     script: [
-      {
-        src: `https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}&vault=true`,
-        body: true,
-        'data-sdk-integration-source': 'button-factory',
-      },
+      // {
+      //   src: `https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}&vault=true`,
+      //   body: false,
+      //   defer: true,
+      //   'data-sdk-integration-source': 'button-factory',
+      // },
     ],
   },
   /*

@@ -18,7 +18,7 @@
             </svg>
           </span>
           <p class="ml-3 font-medium text-white truncate">
-            <span class="md:hidden"> We announced a new product! </span>
+            <span class="md:hidden"> <slot name="message"></slot> </span>
             <span class="hidden md:inline">
               <slot name="message"></slot>
             </span>

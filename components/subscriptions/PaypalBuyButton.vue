@@ -19,13 +19,26 @@ export default {
       return this.$store.getters['questions/GET_CURRENT_QUESTION']
     },
   },
+  beforeUnmount() {
+    // resetting all pay-pal related properties
+    Object.keys(window).forEach((key) => {
+      if (/paypal|zoid|post_robot/.test(key)) {
+        delete window[key]
+      }
+    })
+
+    document
+      .querySelectorAll('script[src*="www.paypal.com/sdk"]')
+      .forEach((node) => node.remove())
+  },
   mounted() {
-    this.initPayPalButton()
+    this.$nextTick(() => {
+      this.initPayPalButton()
+    })
   },
   methods: {
-    initPayPalButton() {
+    loadButtons() {
       const that = this
-      let orderId
       // eslint-disable-next-line no-undef
       paypal
         .Buttons({
@@ -40,12 +53,18 @@ export default {
               return actions.resolve()
             } else {
               // to be changed in future
-
               return actions.reject().then((res) => {
-                that.$router.push({
-                  name: 'login',
-                  query: { redirect: that.$route.path },
-                })
+                that.$store
+                  .dispatch(
+                    'flashmessages/updateActionFlashMessage',
+                    'Please login first to proceed'
+                  )
+                  .then(() => {
+                    that.$router.push({
+                      name: 'login',
+                      query: { redirect: that.$route.path },
+                    })
+                  })
               })
             }
           },
@@ -125,6 +144,14 @@ export default {
           },
         })
         .render('#paypal-button-container')
+    },
+    initPayPalButton() {
+      const script = document.createElement('script')
+      script.src = `https://www.paypal.com/sdk/js?client-id=${this.$config.paypalClient}&vault=true`
+      script.addEventListener('load', (theScript) => {
+        this.loadButtons()
+      })
+      document.body.appendChild(script)
     },
   },
 }

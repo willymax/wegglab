@@ -80,7 +80,6 @@ export default {
   },
   watch: {
     question(newValue, oldValue) {
-      console.log('the question has changed')
       if (newValue && newValue.deadline) {
         this.calculateTimeLeft()
       }

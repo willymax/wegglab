@@ -187,7 +187,6 @@ export default {
         theData
       )
         .then((data) => {
-          console.log('plan data is ', data)
           this.$axios
             .post('/subscription-plans', {
               id: data.id,
