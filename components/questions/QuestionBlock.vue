@@ -87,7 +87,9 @@ export default {
     },
   },
   mounted() {
-    this.calculateTimeLeft()
+    this.$nextTick(() => {
+      this.calculateTimeLeft()
+    })
   },
   methods: {
     attachmentISImage(fileType) {

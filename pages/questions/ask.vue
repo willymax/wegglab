@@ -58,6 +58,7 @@
 <script>
 import Editor from '@tinymce/tinymce-vue'
 import Multiselect from 'vue-multiselect'
+import { mapGetters } from 'vuex'
 import BaseButton from '~/components/core-components/BaseButton.vue'
 import BaseFileUpload from '~/components/core-components/BaseFileUpload.vue'
 import formMixin from '@/mixins/form-mixin'
@@ -114,11 +115,13 @@ export default {
     },
   },
   mounted() {
-    this.input.title = this.GUEST_QUESTION.title
-    this.input.body = this.GUEST_QUESTION.body
-    this.input.subject = this.GUEST_QUESTION.subject
-    this.input.tags = this.GUEST_QUESTION.tags || []
-    this.fileUploadDetails = this.GUEST_QUESTION?.fileUploadDetails || {}
+    this.$nextTick(() => {
+      this.input.title = this.GUEST_QUESTION.title
+      this.input.body = this.GUEST_QUESTION.body
+      this.input.subject = this.GUEST_QUESTION.subject
+      this.input.tags = this.GUEST_QUESTION.tags || []
+      this.fileUploadDetails = this.GUEST_QUESTION?.fileUploadDetails || {}
+    })
   },
   methods: {
     addTag(newTag) {

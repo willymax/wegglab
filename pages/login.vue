@@ -216,7 +216,6 @@ export default {
           data: this.form.data.attributes,
         })
         .then((response) => {
-          console.log('setTimeout')
           this.$notify({
             type: 'success',
             title: "You're in",
